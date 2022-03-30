@@ -1,0 +1,8 @@
+{
+  "name": "@components/CarouselItems",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react-items-carousel": "latest"
+  }
+}

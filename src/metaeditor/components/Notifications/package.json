@@ -1,0 +1,8 @@
+{
+  "name": "@components/Notistack",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "notistack": "^2.0.3"
+  }
+}
