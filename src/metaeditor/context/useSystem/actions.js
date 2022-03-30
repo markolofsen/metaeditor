@@ -38,27 +38,31 @@ const actions = () => {
 
     async checkUpdates() {
       if (state.versionsData) return
+
       const versionsData = await MetaData.checkUpdates()
-      dispatch({ versionsData })
 
-      const getContent = () => {
-        return (
-          <div>
-            <Button sx={{ mb: 1 }} color="inherit" variant="outlined" size="small" onClick={() => {
-              window.open(versionsData.readmeUrl)
-              notify.closeByKey('upgrade')
-            }}>Upgrade MetaEditor</Button>
+      if (versionsData) {
+        dispatch({ versionsData })
+
+        const getContent = () => {
+          return (
             <div>
-              <small>From v{versionsData.current} to v.{versionsData.release}</small>
+              <Button sx={{ mb: 1 }} color="inherit" variant="outlined" size="small" onClick={() => {
+                window.open(versionsData.readmeUrl)
+                notify.closeByKey('upgrade')
+              }}>Upgrade MetaEditor</Button>
+              <div>
+                <small>From v{versionsData.current} to v.{versionsData.release}</small>
+              </div>
             </div>
-          </div>
-        )
-      }
+          )
+        }
 
-      if (versionsData.status < 0) {
-        setTimeout(() => {
-          notify.info(getContent(), { key: 'upgrade', persist: true })
-        }, 1000 * 2)
+        if (versionsData.status < 0) {
+          setTimeout(() => {
+            notify.info(getContent(), { key: 'upgrade', persist: true })
+          }, 1000 * 2)
+        }
       }
 
     }

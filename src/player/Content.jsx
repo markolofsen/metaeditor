@@ -26,7 +26,7 @@ import MetaBar from './layouts/MetaBar/'
 import { useConnection } from 'metaeditor/context/';
 
 // config
-const videoUrl = env.staticUrl('videos', 'intro.mp4')
+const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
 const logoUrl = env.staticUrl('player', 'logo_ue.svg')
 
 

@@ -1,7 +1,7 @@
 {
   "name": "metaeditor",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.8",
   "homepage": "https://metaeditor.io",
   "engines": {
     "npm": ">=8.1.2",

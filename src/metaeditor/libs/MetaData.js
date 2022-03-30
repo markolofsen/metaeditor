@@ -40,7 +40,7 @@ const MetaData = new class {
             if (res.status === 200) {
                 // window.open(this.githubPackageUrl)
 
-                const releaseVersion = res.body.dependencies['metaeditor']
+                const releaseVersion = res.body.version
                 if (!releaseVersion || releaseVersion === 'latest') return
 
                 const { current, release, status } = compareVerions(packageJson.version, releaseVersion)
