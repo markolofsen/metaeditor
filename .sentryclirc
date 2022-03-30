@@ -1,0 +1,9 @@
+[defaults]
+dsn=https://1d9f21416da74ef1ae425b49c6c9f738@o1071985.ingest.sentry.io/6069970
+url=https://sentry.io/
+org=unrealos
+project=unrealos
+server_init_path=.next/server/sentry/initServerSDK.js
+
+[auth]
+token=21ab2f6aa6124c5ea0bef8afbbe11ad049cca7f991c84171ac7f7c9b452ea8b9
