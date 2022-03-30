@@ -38,7 +38,8 @@
     "next": "^12.1.0",
     "next-pwa": "^5.4.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "metaeditor": "^1.0.9"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.0",
