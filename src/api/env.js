@@ -15,7 +15,7 @@ const ConfigClass = new class {
 
 	get streaming() {
 		return {
-			'apiUrl': `https://unrealos.com/api/streamsweb/access/car-2/`
+			'apiUrl': `https://api.metaeditor.io/api/streams_provider/access/car-2/`
 		}
 	}
 

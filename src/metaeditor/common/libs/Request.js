@@ -15,10 +15,17 @@ import * as React from 'react';
 const Request = new class {
 
   async request(method, url, params = {}) {
+
     let options = {
       method,
       mode: 'cors',
-      // headers: { 'Content-Type': 'application/json' },
+
+      headers: new Headers({
+        'Origin': '',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': undefined,
+      }),
     }
 
     // body preparations
