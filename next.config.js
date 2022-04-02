@@ -39,11 +39,12 @@ const withEnv = (phase) => {
 	let env = {
 		...node_variables,
 		isDev,
-		version: packageJson.version,
+		VERSION: packageJson.version,
+		PUBLIC_URL: process.env.PUBLIC_URL,
+		API_URL: process.env.API_URL,
 	}
 
 	if (isProd) {
-		env.PUBLIC_URL = packageJson.homepage
 		env.assetPrefix = './'
 	}
 
@@ -57,7 +58,7 @@ const withEnv = (phase) => {
 
 function moduleExports(phase) {
 	let res = {
-		...withEnv(phase),
+		env: withEnv(phase),
 		trailingSlash: false,
 		// pagesPaths: ['src/pages', 'src/pages2'],
 

@@ -4,26 +4,22 @@ import packageJson from '../../package.json'
 const ConfigClass = new class {
 	constructor() {
 
+		this.PUBLIC_URL = process.env.PUBLIC_URL
+		this.API_URL = process.env.API_URL
+
 		const isDev = process.env.isDev || process.env.NODE_ENV !== 'production'
 		this.isDev = isDev
 		this.isProd = !isDev
 
 		this.staticPath = (...v) => `/static/${v.join('/')}`
-		this.staticUrl = (...v) => this.config.web_host + this.staticPath(...v)
-		this.apiPath = (...v) => `${this.config.api_host}/api/${this.namespace}/${v.join('/')}`
-	}
-
-	get streaming() {
-		return {
-			'apiUrl': `https://api.metaeditor.io/api/streams_provider/access/car-2/`
-		}
+		this.staticUrl = (...v) => this.PUBLIC_URL + this.staticPath(...v)
 	}
 
 	get data() {
 		let res = {
 			siteLogoName: 'MetaEditor',
 			defaultTitle: 'MetaEditor',
-			host: 'ps.metaeditor.io',
+			host: this.PUBLIC_URL.split('://')[1],
 
 			/**
 			 * For github-pages set host like in example:
@@ -67,22 +63,6 @@ const ConfigClass = new class {
 					SITE: { 'group[12345][1]': "1" }
 				}
 			}
-		}
-
-		return res;
-	}
-
-	get config() {
-
-		let res = {
-			web_host: 'https://' + this.data.host,
-			api_host: 'https://' + this.data.host,
-		}
-
-		if (this.isDev) {
-			const host_ip = '127.0.0.1'
-			res.web_host = `http://${host_ip}:3000`
-			res.api_host = `https://${host_ip}:8000`
 		}
 
 		return res;

@@ -3,6 +3,9 @@ import React from "react"
 // libs
 import { Request } from '../../common/libs/'
 
+// config
+import { config } from '../../@core/settings/'
+
 
 const actions = () => {
   const refInterval = React.useRef(null)
@@ -47,7 +50,11 @@ const actions = () => {
     constructor() {
       this.MIN_SECONDS_TO_KILL = 100
       this.state = state
-      this.apiUrl = false
+      this.buildId = false
+    }
+
+    get apiUrl() {
+      return config.getStreamAccessUrl(this.buildId)
     }
 
     get request() {
@@ -77,9 +84,8 @@ const actions = () => {
       dispatch({ loaded: true, status: 'localhost', host, port })
     }
 
-    async onRequestStream(apiUrl) {
-
-      this.apiUrl = apiUrl
+    async onRequestStream(buildId) {
+      this.buildId = buildId
 
       handleStop()
 

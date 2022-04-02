@@ -6,6 +6,7 @@ import { env } from 'api/'
 
 // hooks
 import { useNotifyController } from 'metaeditor/controllers/'
+import { useRouter } from 'hooks/';
 
 // snippets
 import {
@@ -26,12 +27,14 @@ import MetaBar from './layouts/MetaBar/'
 import { useConnection } from 'metaeditor/context/';
 
 // config
+const defaultBuildId = 'car-2'
 const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
 const logoUrl = env.staticUrl('player', 'logo_ue.svg')
 
 
 
 function PlayerContent({ autoConnect, setServerData, ...props }) {
+  const router = useRouter()
   const connection = useConnection()
   const notifyController = useNotifyController()
 
@@ -39,11 +42,13 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
   React.useEffect(() => {
 
-    if (autoConnect) {
-      connection.onRequestStream(env.streaming.apiUrl)
+    if (router.isReady) {
+      if (autoConnect) {
+        connection.onRequestStream(router.query.build_id || defaultBuildId)
+      }
     }
 
-  }, [])
+  }, [router.isReady])
 
   /**
    * The component instance will be extended

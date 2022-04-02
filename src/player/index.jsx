@@ -75,7 +75,6 @@ function PixelWrapper({ autoConnect }) {
         port={serverData.port} >
 
         {(payload) => (
-
           <MetaEditorProvider>
             <ContextProvider>
               <PlayerContent

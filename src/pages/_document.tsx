@@ -14,7 +14,7 @@ const CONFIG = {
   TITLE: env.seo.title,
   APP_NAME: env.data.siteLogoName,
   APP_DESC: env.seo.description,
-  URL: env.config.web_host,
+  URL: env.PUBLIC_URL,
   OG_IMAGE: env.seo.og_image,
 }
 
