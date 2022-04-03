@@ -60,7 +60,7 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
   }, [router.isReady, router.query.session])
 
-  const hideContent = router.isReady && router.query?.view.toString() === '0'
+  const hideContent = router.isReady && router.query?.view?.toString() === '0'
 
 
   /**
