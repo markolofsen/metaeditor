@@ -4,7 +4,7 @@ import React from "react";
 import moment from "moment";
 
 
-function useCountdown(props) {
+function useCountdown() {
   const refInterval = React.useRef(null)
   const [value, setValue] = React.useState(0)
 
@@ -25,16 +25,18 @@ function useCountdown(props) {
       clearInterval(refInterval.current)
     }
 
-    start() {
-      if (typeof props.seconds !== 'number' || props.seconds < 0) return
+    start(seconds) {
+
+      if (typeof seconds !== 'number' || seconds < 0) return
+      if (refInterval.current) return
 
       const startTime = moment()
-      const targetTime = startTime.add(props.seconds, 'seconds')
+      const targetTime = startTime.add(seconds, 'seconds')
 
       clearInterval(refInterval.current)
       refInterval.current = setInterval(() => {
 
-        const totalSeconds = props.seconds
+        const totalSeconds = seconds
         const leftSeconds = moment.duration(targetTime.diff(moment())).asSeconds();
 
         const relDiff = (a, b) => Math.round(((a - b) / a) * 100)

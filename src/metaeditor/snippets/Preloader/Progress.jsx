@@ -24,23 +24,19 @@ function PreloaderProgress() {
 
   const secondsToStart = connection.state.seconds_to_start
 
-  const countdown = useCountdown({ seconds: secondsToStart })
+  const countdown = useCountdown()
 
   React.useEffect(() => {
 
     if (player.state.loaded) {
       countdown.stop()
     } else {
-      countdown.start()
+      countdown.start(secondsToStart)
     }
 
-  }, [player.state.loaded])
+  }, [secondsToStart, player.state.loaded])
 
-  if (player.state.loaded) {
-    return (<div />);
-  }
-
-  if (player.state.connected && player.state.loaded) {
+  if (player.state.loaded || (player.state.connected && player.state.loaded)) {
     return (<div />);
   }
 

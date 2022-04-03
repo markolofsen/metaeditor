@@ -40,15 +40,28 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
   const refCallbackProgress = React.useRef(null)
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
 
     if (router.isReady) {
+
       if (autoConnect) {
-        connection.onRequestStream(router.query.build_id || defaultBuildId)
+        if (router.query.session) {
+          connection.startSessionUuuid(router.query.session)
+        } else {
+          const session = await connection.getSessionUuid(router.query.build_id || defaultBuildId)
+
+          const newQuery = { ...router.query, session }
+          delete newQuery.build_id
+
+          router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
+        }
       }
     }
 
-  }, [router.isReady])
+  }, [router.isReady, router.query.session])
+
+  const hideContent = router.isReady && router.query?.view.toString() === '0'
+
 
   /**
    * The component instance will be extended
@@ -92,8 +105,13 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
       <KeyboardHelper />
 
       {/* Custom components */}
-      <MetaBar />
-      <Content />
+
+      {!hideContent && (
+        <>
+          <MetaBar />
+          <Content />
+        </>
+      )}
 
     </div>
   )

@@ -18,6 +18,7 @@ import { styled } from '../../common/styles/'
 
 // blocks
 import Progress from './Progress'
+import { Typography } from '@mui/material';
 
 
 const LogoDiv = styled.div(theme => ({
@@ -115,22 +116,19 @@ const VideoCover = styled.div(theme => ({
 function Preloader({ logoUrl, videoUrl }) {
   const player = usePlayer()
   const connection = useConnection()
+  const countdown = useCountdown()
 
   const secondsToStart = connection.state.seconds_to_start
-
-  const countdown = useCountdown({ seconds: secondsToStart })
 
   React.useEffect(() => {
 
     if (player.state.loaded) {
       countdown.stop()
     } else {
-      countdown.start()
+      countdown.start(secondsToStart)
     }
 
-  }, [player.state.loaded])
-
-
+  }, [secondsToStart, player.state.loaded])
 
   const renderInner = () => {
 
@@ -148,12 +146,40 @@ function Preloader({ logoUrl, videoUrl }) {
         );
       }
 
-      if (countdown.value === 0 || countdown.value >= 100) {
+      const getBar = () => {
+        const getQue = () => {
+          const que = connection.state.que
+          if (typeof que === 'number' && que > 0) {
+            return (
+              <Typography variant="h6" sx={{ mt: 3 }}>
+                You are number #{que} in line
+              </Typography>
+            )
+          }
+        }
+
+        if (countdown.value === 0 || countdown.value >= 100) {
+          return (
+            <>
+              <CircularProgress
+                color="inherit"
+                size={30} />
+              {getQue()}
+            </>
+          );
+        }
+
         return (
-          <CircularProgress
-            color="inherit"
-            size={30} />
-        );
+          <>
+            <div data-progress>
+              <Progress />
+            </div>
+
+            <div data-helpertext>
+              Loading 3D
+            </div>
+          </>
+        )
       }
 
       return (
@@ -165,13 +191,7 @@ function Preloader({ logoUrl, videoUrl }) {
             </LogoDiv>
           ) : ''}
 
-          <div data-progress>
-            <Progress />
-          </div>
-
-          <div data-helpertext>
-            Loading 3D
-          </div>
+          {getBar()}
 
         </ProgressBox>
       );

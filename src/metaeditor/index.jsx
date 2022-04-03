@@ -8,6 +8,13 @@ import NotificationsProvider from './components/Notifications/Provider';
 // hooks
 import { useUnload } from './common/hooks/';
 
+// metadata
+import packageJson from './package.json';
+const version = packageJson.version.split('.').slice(0, 2).join('.') + ' (beta)'
+export const MetaData = {
+    version,
+}
+
 
 const MetaEditorContext = React.forwardRef((props, ref) => {
 

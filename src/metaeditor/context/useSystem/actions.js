@@ -1,68 +1,74 @@
 import React from "react"
 
-// reducers
-import reducer from './reducer'
-
 // common
-import { MetaData } from '../../libs/'
+import CompareVersions from './CompareVersions'
 
 // hooks
 import { useNotify } from "../../common/hooks";
+import { useApi } from "../../@core/hooks";
 
 // material
 import Button from '@mui/material/Button';
 
+// package
+import packageJson from '../../package.json'
+
 
 const actions = () => {
+  const api = useApi()
   const notify = useNotify()
 
-  const [state, dispatch_] = React.useReducer(reducer.reducer, reducer.initialState);
+  const [state, setState] = React.useState({
+    metaeditor: null,
+  });
 
-  const dispatch = (payload) => dispatch_({
-    type: reducer.KEY.UPDATE,
-    payload,
-  })
+  const dispatch = (payload) => setState(c => ({ ...c, ...payload }))
 
   React.useEffect(() => {
 
-    cls.checkUpdates()
+    // Preload data from api
+    loadInfoData()
 
   }, [])
 
+
+  React.useEffect(() => cls.checkUpdates(), [state.metaeditor])
+
+  const loadInfoData = async () => {
+    if (state.metaeditor) return
+
+    const metaeditor = await api.getMetaeditorData()
+
+    if (metaeditor) {
+      dispatch({ metaeditor })
+    }
+  }
+
   const cls = new class {
 
-    updatesNotification() {
-      console.error('state', state)
-      notify.warning(JSON.stringify(state.versionsData), { key: undefined })
-    }
-
     async checkUpdates() {
-      if (state.versionsData) return
-
-      const versionsData = await MetaData.checkUpdates()
-
-      if (versionsData) {
-        dispatch({ versionsData })
-
-        const getContent = () => {
-          return (
+      const metaeditor = state.metaeditor
+      if (!metaeditor) return
+      const getContent = () => {
+        return (
+          <div>
+            <Button sx={{ mb: 1 }} color="inherit" variant="outlined" size="small" onClick={() => {
+              window.open(metaeditor.package.readmeUrl)
+              notify.closeByKey('upgrade')
+            }}>Upgrade MetaEditor</Button>
             <div>
-              <Button sx={{ mb: 1 }} color="inherit" variant="outlined" size="small" onClick={() => {
-                window.open(versionsData.readmeUrl)
-                notify.closeByKey('upgrade')
-              }}>Upgrade MetaEditor</Button>
-              <div>
-                <small>From v{versionsData.current} to v.{versionsData.release}</small>
-              </div>
+              <small>From v{packageJson.version} to v.{metaeditor.package.version}</small>
             </div>
-          )
-        }
+          </div>
+        )
+      }
 
-        if (versionsData.status < 0) {
-          setTimeout(() => {
-            notify.info(getContent(), { key: 'upgrade', persist: true })
-          }, 1000 * 2)
-        }
+      const { current, release, status } = CompareVersions(packageJson.version, metaeditor.package.version)
+
+      if (status < 0) {
+        setTimeout(() => {
+          notify.info(getContent(), { key: 'upgrade', persist: true })
+        }, 1000 * 2)
       }
 
     }

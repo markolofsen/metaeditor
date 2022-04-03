@@ -7,11 +7,11 @@ import { env } from 'api/'
 // hooks
 import { useMedia } from 'metaeditor/common/hooks/'
 
-// libs
-import { MetaData } from 'metaeditor/libs/'
+// data
+import { MetaData } from 'metaeditor'
 
 // context
-import { usePlayer } from 'metaeditor/context/';
+import { useSystem } from 'metaeditor/context/';
 import { useLayout } from 'player/context/';
 
 // styles
@@ -44,11 +44,7 @@ const pages = [
   ['Contacts', 'contacts'],
 ].map(([label, slug]) => ({ label, slug }));
 
-const settings = [
-  ...MetaData.demoMenu,
-  [false, false],
-  ['Logout', false],
-].map(([label, href]) => ({ label, href }));
+
 
 
 const AppBar = styled.custom(MuiAppBar, theme => ({
@@ -70,17 +66,10 @@ const MenuButton = styled.custom(MuiButton, theme => ({
   }
 }))
 
-const LibVersion = () => {
 
-  return (
-    <Box component="small" sx={{ ml: 1, opacity: .5, fontSize: 11 }}>
-      {MetaData.version}
-    </Box>
-  )
-}
 
 const ResponsiveAppBar = () => {
-  const player = usePlayer()
+  const system = useSystem()
   const layout = useLayout()
   const media = useMedia();
 
@@ -110,6 +99,22 @@ const ResponsiveAppBar = () => {
   }
 
   const isMenuSelected = item => item.slug === layout.state.current_menu
+
+  const LibVersion = () => {
+    return (
+      <Box component="small" sx={{ ml: 1, opacity: .5, fontSize: 11 }}>
+        {MetaData.version}
+      </Box>
+    )
+  }
+
+  const demoLinks = system.state.metaeditor?.links || []
+
+  const settings = [
+    ...demoLinks,
+    [false, false],
+    ['Logout', false],
+  ].map(([label, href]) => ({ label, href }));
 
   const renderAppBar = () => {
 

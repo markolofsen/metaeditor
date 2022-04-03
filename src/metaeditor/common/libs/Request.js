@@ -39,6 +39,7 @@ const Request = new class {
       const response = await fetch(url, options);
       const responseJson = await response.json();
       return {
+        ok: response.status === 200,
         status: response.status,
         body: responseJson,
       }
