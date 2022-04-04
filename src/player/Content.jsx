@@ -56,7 +56,10 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
             router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
           } else {
-            throw new Error(`session not found! ${session}`)
+            const errMsg = `session not found!`
+            console.error(errMsg)
+            alert(errMsg)
+            // throw new Error()
           }
 
         }

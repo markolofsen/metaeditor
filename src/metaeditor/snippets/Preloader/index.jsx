@@ -149,7 +149,7 @@ function Preloader({ logoUrl, videoUrl }) {
       const getBar = () => {
         const getQue = () => {
           const que = connection.state.que
-          if (typeof que === 'number' && que > 0) {
+          if (typeof que === 'number' && que > 1) {
             return (
               <Typography variant="h6" sx={{ mt: 3 }}>
                 You are number #{que} in line
