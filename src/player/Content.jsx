@@ -27,7 +27,7 @@ import MetaBar from './layouts/MetaBar/'
 import { useConnection } from 'metaeditor/context/';
 
 // config
-const defaultBuildId = 'car-2'
+const defaultBuildId = 'car-3'
 const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
 const logoUrl = env.staticUrl('player', 'logo_ue.svg')
 
@@ -50,10 +50,15 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
         } else {
           const session = await connection.getSessionUuid(router.query.build_id || defaultBuildId)
 
-          const newQuery = { ...router.query, session }
-          delete newQuery.build_id
+          if (session) {
+            const newQuery = { ...router.query, session }
+            delete newQuery.build_id
 
-          router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
+            router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
+          } else {
+            throw new Error(`session not found! ${session}`)
+          }
+
         }
       }
     }
