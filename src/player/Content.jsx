@@ -15,12 +15,13 @@ import {
   RippleClick,
   KeyboardHelper,
   DevBar,
-  WelcomeBar
 } from 'metaeditor/snippets/'
 
 // layouts
 import Content from './layouts/Content'
 import MetaBar from './layouts/MetaBar/'
+import WelcomeBar from './layouts/WelcomeBar/'
+
 
 
 // context
@@ -107,7 +108,7 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
       {/* MetaComponents */}
       <DevBar />
       <CallbackProgress ref={refCallbackProgress} />
-      <WelcomeBar config={env.credentials.MAILCHIMP} />
+      <WelcomeBar />
       <Preloader videoUrl={videoUrl} logoUrl={logoUrl} />
       <RippleClick />
       <KeyboardHelper />

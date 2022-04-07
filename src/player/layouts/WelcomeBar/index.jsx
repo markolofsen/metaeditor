@@ -2,22 +2,24 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useStorage, useParseUrl } from '../common/hooks/'
+import { useStorage, useParseUrl } from 'metaeditor/common/hooks/'
 
 // context
-import { useConnection } from '../context/';
+import { useConnection } from 'metaeditor/context/';
 
 // material
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 // components
-import CustomDialog from '../components/Dialog/'
-import MailchimpForm from '../components/MailchimpForm/'
+import CustomDialog from 'metaeditor/components/Dialog/'
 
 // snippets
-import PreloaderProgress from './Preloader/Progress'
+import PreloaderProgress from 'metaeditor/snippets/Preloader/Progress'
 
+// blocks
+import Form from './Form'
+import { AlternateEmail } from '@mui/icons-material';
 
 function CustomizedDialogs(props) {
   const connection = useConnection()
@@ -25,32 +27,35 @@ function CustomizedDialogs(props) {
   const refDialog = React.useRef(null)
 
   const storage = useStorage()
-  const storageKey = MailchimpForm.storageKey
+  const storageKey = 'welcome-bar'
 
   const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
 
     if (parseUrl.active && !parseUrl.query?.mode) {
+
       if (!mounted && connection.state.auto_connect === true) {
         handleOpen()
         setMounted(true)
       }
     }
 
-  }, [parseUrl.active])
+  }, [parseUrl.active, connection.state.auto_connect])
 
   const handleOpen = () => {
 
     const stored_data = storage.getItem(storageKey, 'local')
-    if (typeof stored_data !== 'object') {
+
+    if (stored_data !== 'success') {
       setTimeout(() => {
         refDialog.current.open()
       }, 1000 * 5)
     }
   }
 
-  const handleClose = () => {
+  const onSuccess = () => {
+    storage.setItem(storageKey, 'success', 'local')
     refDialog.current.close()
   }
 
@@ -78,15 +83,7 @@ function CustomizedDialogs(props) {
         </Typography>
 
 
-        <MailchimpForm
-          config={props.config}
-          onSuccess={() => {
-            handleClose()
-          }}
-          onError={err => {
-            console.error(err)
-            handleClose()
-          }} />
+        <Form onSuccess={onSuccess} />
 
       </Box>
     )

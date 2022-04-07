@@ -10,12 +10,12 @@ export default function useApi() {
   const cls = new class {
     constructor() { }
 
-    #urlBuilder(...args) {
-      return `${STREAM_API_URL}/api/` + args.join('/')
+    #urlBuilder(route) {
+      return `${STREAM_API_URL}/api/` + route
     }
 
     async startSessionUuuid(sessionUuid) {
-      const url = this.#urlBuilder('streams_provider', 'session', 'read', sessionUuid)
+      const url = this.#urlBuilder('streams_provider/session/read/' + sessionUuid)
 
       return await Request.GET(url).then(res => {
         if (res.ok) {
@@ -28,7 +28,7 @@ export default function useApi() {
     }
 
     async getSessionUuid(build_id) {
-      const url = this.#urlBuilder('streams_provider', 'session', 'create/')
+      const url = this.#urlBuilder('/streams_provider/session/create/')
 
       return await Request.POST(url, { build_id }).then(res => {
         if (res.ok) {
@@ -41,7 +41,7 @@ export default function useApi() {
     }
 
     async getMetaeditorData() {
-      const url = this.#urlBuilder('info', 'metaeditor/')
+      const url = this.#urlBuilder('/info/metaeditor/')
 
       return await Request.GET(url).then(res => {
         if (res.ok) {
@@ -51,6 +51,11 @@ export default function useApi() {
       }).catch(err => {
         throw new Error(err);
       })
+    }
+
+    sendFeedbackForm(body) {
+      const url = this.#urlBuilder('customers/feedbacks/form/')
+      return Request.POST(url, body)
     }
   }
 

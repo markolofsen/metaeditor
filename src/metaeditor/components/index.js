@@ -11,7 +11,6 @@ import { Card, CardItem } from './MetaDrawer/snippets/'
 import Dialog from './Dialog/'
 import DraggableObject from './DraggableObject/'
 import JsonEditor from './JsonEditor/'
-import MailchimpForm from './MailchimpForm/'
 import Slider from './Slider/'
 import SwipeableDrawer from './SwipeableDrawer/'
 
@@ -25,7 +24,6 @@ export {
     Dialog,
     DraggableObject,
     JsonEditor,
-    MailchimpForm,
     Slider,
     SwipeableDrawer,
 }
