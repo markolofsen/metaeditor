@@ -10,11 +10,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4110",
     "export": "next export -o build",
-    "collect": "yarn build && yarn export",
-    "static": "yarn collect && node .deploy/replacer.js -console && http-server ./build/ -o -p 3000",
-    "deploy": "yarn collect && node .deploy/index.js",
     "lint": "next lint",
     "test": "jest --watch --env=jsdom",
     "test:ci": "jest --ci"

@@ -40,5 +40,6 @@ package-lock.json
 
 
 # custom
+.deploy
 .pixel-streaming
 # metaeditor

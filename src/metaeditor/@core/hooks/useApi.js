@@ -28,7 +28,7 @@ export default function useApi() {
     }
 
     async getSessionUuid(build_id) {
-      const url = this.#urlBuilder('/streams_provider/session/create/')
+      const url = this.#urlBuilder('streams_provider/session/create/')
 
       return await Request.POST(url, { build_id }).then(res => {
         if (res.ok) {
@@ -41,7 +41,7 @@ export default function useApi() {
     }
 
     async getMetaeditorData() {
-      const url = this.#urlBuilder('/info/metaeditor/')
+      const url = this.#urlBuilder('info/metaeditor/')
 
       return await Request.GET(url).then(res => {
         if (res.ok) {
