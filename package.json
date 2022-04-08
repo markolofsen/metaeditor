@@ -10,9 +10,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start_": "next start -p 4110",
+    "start": "next start -p 4110",
     "export": "next export -o build",
-    "start": "yarn export && http-server build/ -p 4110",
+    "start_": "yarn export && http-server build/ -p 4110",
     "lint": "next lint",
     "test": "jest --watch --env=jsdom",
     "test:ci": "jest --ci"
