@@ -4,7 +4,7 @@
 
 module.exports = {
   apps: [{
-    name: 'new.unrealos.com',
+    name: 'ps.metaeditor.io',
     script: 'yarn',
     args: "start",
     // cwd: "/var/www/myapp/",
