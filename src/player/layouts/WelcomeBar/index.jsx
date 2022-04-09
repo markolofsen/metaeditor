@@ -97,7 +97,7 @@ function CustomizedDialogs(props) {
       defaultOpen={false}
       closeIcon
       showActions={false}
-      disableEscape
+      disableEscape={false}
     >
       {renderContet()}
     </CustomDialog>
