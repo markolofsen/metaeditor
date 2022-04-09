@@ -26,7 +26,7 @@ function Form(props) {
       ...values,
     }
 
-    const url = env.API_URL + '/api/customers/feedbacks/form/'
+    const url = env.API_URL + '/api/customers/metaeditor_request/form/'
     return await Request.POST(url, body)
   }
 
@@ -60,16 +60,6 @@ function Form(props) {
           InputProps={{
           }}
         />
-
-        {/* <Fields.FieldText
-          label="Your opinion"
-          name="text"
-          type="textarea"
-          required={false}
-          errors={errors}
-          InputProps={{
-          }}
-        /> */}
 
         <Button
           sx={{ mt: 2 }}
