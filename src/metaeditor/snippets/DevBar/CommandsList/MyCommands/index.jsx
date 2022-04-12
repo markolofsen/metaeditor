@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Icon from '@mui/material/Icon';
 import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
 
 // styles
 import { styled, alpha } from '../../../../common/styles/'
@@ -183,20 +184,23 @@ function MyCommands(props) {
 
             const status = getStatus()
             const buttonDisabled = status.value && status.value !== 'error'
+            const chipLabel = item.slug
+            const chipVariant = item.is_fake ? 'outlined' : 'filled'
 
             return (
               <ul key={index}>
                 <li data-li="content" onClick={() => {
                   // ...
                 }}>
-                  <ul>
-                    <li>
-                      {item.slug} {item.is_fake && ' (fake)'}
-                    </li>
-                    <li>
-                      {item.group?.name}
-                    </li>
-                  </ul>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    {item.icon ? (
+                      <Icon sx={{ mr: 1, fontSize: '2rem' }}>{item.icon}</Icon>
+                    ) : ''}
+                    <Chip
+                      size="small"
+                      variant={chipVariant}
+                      label={chipLabel} />
+                  </Box>
                   <ul data-list="right">
                     <li>
                       {item.name}
@@ -205,7 +209,7 @@ function MyCommands(props) {
                     </li>
                     {item.variant !== 'system' && (
                       <li>
-                        id:{item.id}
+                        {item.group?.name} // #{item.id}
                       </li>
                     )}
                   </ul>

@@ -39,14 +39,17 @@ function ConnectionForm(props) {
 
 
   React.useEffect(() => {
+
     if (connection.state.auto_connect === false) {
+      refDialog.current.open()
       openOnStart()
+    } else if (connection.state.auto_connect === true) {
+      refDialog.current.close()
     }
+
   }, [connection.state.auto_connect])
 
   const openOnStart = () => {
-
-    refDialog.current.open()
 
     // Restore local server data
     const stored_data = storage.getItem(STORAGE_KEY)
