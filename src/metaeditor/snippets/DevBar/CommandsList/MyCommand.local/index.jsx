@@ -21,6 +21,8 @@ import { styled, alpha } from '../../../../common/styles/'
 import useCommands from './useCommands'
 
 // blocks
+import CommandForm from './CommandForm'
+import ExportDialog from './ExportDialog'
 import CustomSwitcher from './CustomSwitcher'
 
 
@@ -90,12 +92,29 @@ const CommandList = styled.div(theme => ({
 function MyCommands(props) {
   const player = usePlayer()
 
+  const refCommandForm = React.useRef(null)
+  const refExportDialog = React.useRef(null)
+
   const commands = useCommands()
 
   const [show, setShow] = React.useState(true)
-  const [systemCommands, setSystemCommands] = React.useState(true)
+  const [cbEmulation, setCbEmulation] = React.useState(true)
+  const [showDefaults, setShowDefaults] = React.useState(true)
 
   const [verifiedCommands, setVerifiedCommands] = React.useState({})
+
+  const onAdd = (fields) => {
+    commands.addCommand(fields)
+    setShow(true)
+  }
+
+  const onUpdate = (fields) => {
+    commands.updateCommand(fields)
+  }
+
+  const onDelete = (fields) => {
+    commands.deleteCommand(fields)
+  }
 
   const handleEmit = async (item) => {
 
@@ -117,13 +136,13 @@ function MyCommands(props) {
     setStatus('await')
 
     await player.cmd.emit({
-      command: item.slug,
+      command: item.command,
       verification_id: undefined, //item.id,
-      initiator: item.is_fake && 'fake',
+      initiator: cbEmulation && 'fake',
       request: {
-        body: item.value
+        body: item.body
       },
-      fakeBody: item.is_fake ? item.value_fake_response : undefined,
+      fakeBody: cbEmulation ? item.fakeBody : undefined,
     }).then(res => {
 
       if (res) {
@@ -137,27 +156,31 @@ function MyCommands(props) {
 
   }
 
-  const { commandsList } = commands
+  const commands_list = commands.commandsList
 
   const renderList = () => {
 
-    if (commandsList.length === 0) {
+    if (commands_list.length === 0) {
       return (<div />);
     }
 
-    // let list = _.orderBy(commandsList, ['time', 'group'], ['asc', 'asc']);
-    let list = commandsList
-    if (!systemCommands) {
-      list = list.filter(item => item.variant !== 'system')
+    let list = _.orderBy(commands_list, ['time', 'group'], ['asc', 'asc']);
+    if (!showDefaults) {
+      list = list.filter(item => !item.default)
     }
 
     return (
       <div>
         <Box sx={{ my: 2 }}>
           <CustomSwitcher
-            label="System commands"
-            value={systemCommands}
-            onChange={setSystemCommands} />
+            label="Callback emulation"
+            value={cbEmulation}
+            onChange={setCbEmulation} />
+
+          <CustomSwitcher
+            label="Show defaults"
+            value={showDefaults}
+            onChange={setShowDefaults} />
         </Box>
 
         <CommandList>
@@ -186,15 +209,13 @@ function MyCommands(props) {
 
             return (
               <ul key={index}>
-                <li data-li="content" onClick={() => {
-                  // ...
-                }}>
+                <li data-li="content" onClick={() => refCommandForm.current.edit(item)}>
                   <ul>
                     <li>
-                      {item.slug} {item.is_fake && ' (fake)'}
+                      {item.command}
                     </li>
                     <li>
-                      {item.group?.name}
+                      {item.group}
                     </li>
                   </ul>
                   <ul data-list="right">
@@ -203,7 +224,7 @@ function MyCommands(props) {
                       <br />
                       {status.name}
                     </li>
-                    {item.variant !== 'system' && (
+                    {!item.default && (
                       <li>
                         id:{item.id}
                       </li>
@@ -221,7 +242,7 @@ function MyCommands(props) {
     )
   }
 
-  const myCommandCounter = commandsList.filter(item => item.variant !== 'system').length
+  const myCommandCounter = commands_list.filter(item => !item.default).length
 
   return (
     <div>
@@ -231,12 +252,29 @@ function MyCommands(props) {
         variant="outlined"
         color="inherit">
         <Button onClick={() => setShow(c => !c)}>My commands: {myCommandCounter}</Button>
-        <Button disabled sx={{ width: 120 }} onClick={() => {
-          ///...
+        <Button sx={{ width: 50 }} onClick={() => {
+          refCommandForm.current.addNew()
         }}>
-          Api Key
+          <Icon>add</Icon>
+        </Button>
+        <Button sx={{ width: 50 }} onClick={() => {
+          refExportDialog.current.open()
+        }}>
+          <Icon>cloud_upload</Icon>
         </Button>
       </ButtonGroup>
+
+      <ExportDialog
+        ref={refExportDialog}
+        onImport={commands.importData}
+        onExport={commands.exportData}
+      />
+
+      <CommandForm
+        ref={refCommandForm}
+        onAdd={onAdd}
+        onUpdate={onUpdate}
+        onDelete={onDelete} />
 
       <Collapse in={show}>
         {renderList()}

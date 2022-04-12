@@ -40,7 +40,8 @@ function ConnectionForm(props) {
 
 
   React.useEffect(() => {
-    if (parseUrl.active && parseUrl.query?.mode === 'dev') {
+    if (parseUrl.active && !connection.state.autoConnect) {
+      // if (parseUrl.active && parseUrl.query?.mode === 'dev') {
       openOnStart()
     }
   }, [parseUrl.active])

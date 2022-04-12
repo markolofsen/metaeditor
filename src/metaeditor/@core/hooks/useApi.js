@@ -57,6 +57,11 @@ export default function useApi() {
       const url = this.#urlBuilder('customers/feedbacks/form/')
       return Request.POST(url, body)
     }
+
+    getCommandsList() {
+      const url = this.#urlBuilder('projects/metaeditor/commands/list/')
+      return Request.GET(url)
+    }
   }
 
   return cls
