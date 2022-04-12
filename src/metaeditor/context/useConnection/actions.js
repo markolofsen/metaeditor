@@ -10,7 +10,7 @@ const actions = () => {
   const refKillInterval = React.useRef(null)
 
   const [state, setState] = React.useState({
-    auto_connect: false,
+    auto_connect: null,
     loaded: false,
 
     status: undefined,
@@ -49,6 +49,10 @@ const actions = () => {
       this.state = state
     }
 
+    setAutoConnect(auto_connect) {
+      dispatch({ auto_connect })
+    }
+
     initConnection() {
       window?.ps_init()
     }
@@ -68,8 +72,6 @@ const actions = () => {
 
     async startSessionUuuid(sessionUuid) {
       handleStop()
-
-      dispatch({ auto_connect: true })
 
       const requestLoop = async () => {
         const res = await api.startSessionUuuid(sessionUuid)

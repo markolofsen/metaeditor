@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // hooks
-import { useStorage, useParseUrl } from '../../../common/hooks/'
+import { useStorage } from '../../../common/hooks/'
 
 // context
 import { usePlayer, useConnection } from '../../../context/';
@@ -20,7 +20,6 @@ const STORAGE_KEY = 'DEV_SERVER_DATA'
 
 
 function ConnectionForm(props) {
-  const parseUrl = useParseUrl()
   const player = usePlayer()
   const connection = useConnection()
 
@@ -40,11 +39,10 @@ function ConnectionForm(props) {
 
 
   React.useEffect(() => {
-    if (parseUrl.active && !connection.state.autoConnect) {
-      // if (parseUrl.active && parseUrl.query?.mode === 'dev') {
+    if (connection.state.auto_connect === false) {
       openOnStart()
     }
-  }, [parseUrl.active])
+  }, [connection.state.auto_connect])
 
   const openOnStart = () => {
 
@@ -67,7 +65,7 @@ function ConnectionForm(props) {
 
   React.useEffect(() => {
 
-    if (!connection.state.autoConnect) {
+    if (!connection.state.auto_connect) {
       storage.setItem(STORAGE_KEY, connection.state)
     }
 
@@ -76,7 +74,7 @@ function ConnectionForm(props) {
   // Close dialog
   React.useEffect(() => {
 
-    if (!connection.state.autoConnect) {
+    if (!connection.state.auto_connect) {
       if (player.state.loaded) {
         refDialog.current.close()
       }

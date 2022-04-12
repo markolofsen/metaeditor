@@ -45,6 +45,8 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
     if (router.isReady) {
 
+      connection.setAutoConnect(autoConnect)
+
       if (autoConnect) {
         if (router.query.session) {
           connection.startSessionUuuid(router.query.session)
