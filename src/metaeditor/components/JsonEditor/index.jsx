@@ -45,14 +45,30 @@ const FormLabel = styled.custom(MuiFormLabel, theme => ({
 
 
 
-function JsonEditor({
-	content,
-	height,
-	viewOnly,
-	...props
-}) {
+function JsonEditor(props) {
 
-	const value = typeof content === 'string' ? JSON.parse(content) : content
+	const [value, setValue] = React.useState({})
+
+	React.useEffect(() => {
+
+		// Preparing initial value
+
+		switch (typeof props.content) {
+			case 'string':
+				try {
+					const newValue = JSON.parse(props.content)
+					setValue(newValue)
+				} catch (err) { }
+				break;
+			case 'object':
+				try {
+					const newValue = JSON.parse(JSON.stringify(props.content))
+					setValue(newValue)
+				} catch (err) { }
+				break;
+		}
+
+	}, [props.content])
 
 	const handleUpdate = ({ json, plainText, ...other }) => {
 		// console.warn('json', json);
@@ -83,13 +99,13 @@ function JsonEditor({
 				placeholder={value} // data to display
 				theme="dark_vscode_tribute"
 				locale={locale}
-				viewOnly={viewOnly}
+				viewOnly={props.viewOnly}
 				colors={{
 					background: 'transparent',
 					string: "#DAA520" // overrides theme colors with whatever color value you want
 				}}
 				width={'100%'}
-				height={height}
+				height={props.height}
 			/>
 		</RootDiv>
 
