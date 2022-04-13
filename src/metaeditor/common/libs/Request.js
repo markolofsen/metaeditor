@@ -25,7 +25,7 @@ const Request = new class {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': undefined,
-        ...params.headers,
+        ...params?.headers,
       },
     }
 
