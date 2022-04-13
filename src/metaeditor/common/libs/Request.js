@@ -14,31 +14,27 @@ import * as React from 'react';
 
 const Request = new class {
 
-  async request(method, url, params = {}) {
+  async request(method, url, getOptions = {}) {
 
     let options = {
       method,
       mode: 'cors',
-
-      headers: {
-        'Origin': '',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': undefined,
-        ...params?.headers,
-      },
+      ...getOptions,
     }
 
+    options.headers = new Headers({
+      ...options.headers,
+      'Origin': '',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    })
+
     // body preparations
-    if (method === 'POST' && params.body) {
-      try { options.body = JSON.stringify(params.body) } catch (err) {
+    if (method === 'POST' && options.body) {
+      try { options.body = JSON.stringify(options.body) } catch (err) {
         console.error('Request', { method, err })
       }
     }
-
-    // console.error('@@@options.headers', options.headers)
-
-    options.headers = new Headers(options.headers)
 
     try {
       const response = await fetch(url, options);
@@ -58,16 +54,16 @@ const Request = new class {
 
   }
 
-  async GET(url, { headers }) {
-    return await this.request('GET', url, { headers });
+  async GET(url, options) {
+    return await this.request('GET', url, options);
   }
 
-  async POST(url, body, { headers }) {
-    return await this.request('POST', url, { body, headers });
+  async POST(url, body, options) {
+    return await this.request('POST', url, { body, ...options });
   }
 
-  async DELETE(url, { headers }) {
-    return await this.request('DELETE', url, { headers });
+  async DELETE(url, options) {
+    return await this.request('DELETE', url, options);
   }
 }
 
