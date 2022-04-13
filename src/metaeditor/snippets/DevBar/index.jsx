@@ -49,12 +49,11 @@ function DevBar(props) {
   const [show, setShow] = React.useState(true)
   const [currentMenu, setCurrentMenu] = React.useState(false)
 
-  React.useEffect(() => {
-
-    setCurrentMenu('commands')
-    refSystemDialog.current?.open()
-
-  }, [])
+  // Test opening panel
+  // React.useEffect(() => {
+  //   setCurrentMenu('commands')
+  //   refSystemDialog.current?.open()
+  // }, [])
 
   useHotkeys('ctrl+r', async (e, ke) => {
     if (!e.repeat) {
