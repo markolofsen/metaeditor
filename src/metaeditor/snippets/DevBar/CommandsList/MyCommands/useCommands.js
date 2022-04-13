@@ -1,84 +1,76 @@
-import * as React from 'react';
+import React from 'react'
 
-// libs
-import moment from 'moment'
-
-// hooks
-import { useStorage } from '../../../../common/hooks/'
-import { useApi } from '../../../../@core/hooks/'
-
-import defaultCommands from './defaultCommands'
-
-
-// const defaultCommands = [
-//   // command, name, json
-//   ['system_sound', 'Sound: on', { enabled: true }],
-//   ['system_sound', 'Sound: off', { enabled: false }],
-// ].map(([command, name, jsonRequest], id) => ({
-//   id: `default=${id}`,
-//   group: 'Defaults',
-//   command,
-//   name,
-//   jsonRequest,
-//   jsonResponse: jsonRequest,
-//   default: true,
-// }))
+// context
+import { usePlayer } from '../../../../context/';
 
 
 
-function useCommands() {
-  const api = useApi()
-  const [commandsList, setCommandsList] = React.useState([])
+export default function useCommands() {
+  const player = usePlayer()
 
-  React.useEffect(() => {
-    // if (commandsList === false) {
-    onLoad()
-    // }
-  }, [])
+  const [verifiedCommands, setVerifiedCommands] = React.useState({})
 
 
-  const onLoad = async () => {
-    await api.getCommandsList().then(res => {
+  const cls = new class {
+    async handleEmit(item) {
 
-      if (res.ok) {
-        // for (let item of res.body) {
-        //   addCommand(item.)
-        // }
-        console.error('@@@res', res.body)
-        setCommandsList(res.body)
+      // console.error('@@@@@item', item, index)
+
+      // const generateRandomIntegerInRange = (min, max) => {
+      //   return Math.floor(Math.random() * (max - min + 1)) + min;
+      // }
+
+      // const verification_id = item.id + generateRandomIntegerInRange(1000, 10000)
+
+      const setStatus = (status) => {
+        setVerifiedCommands(c => {
+          c[item.id] = status
+          return c
+        })
       }
-    })
+
+      setStatus('await')
+
+      await player.cmd.emit({
+        command: item.slug,
+        verification_id: undefined, //item.id,
+        initiator: item.is_fake && 'fake',
+        request: {
+          body: item.value
+        },
+        fakeBody: item.is_fake ? item.value_fake_response : undefined,
+      }).then(res => {
+
+        if (res) {
+          setStatus('success')
+          setTimeout(() => setStatus(undefined), 1000)
+        } else {
+          setStatus('error')
+        }
+
+      })
+
+    }
+
+
+    getCommandStatus(item) {
+
+      let [value, icon] = [undefined, 'play_arrow']
+
+      if (verifiedCommands.hasOwnProperty(item.id)) {
+        value = verifiedCommands[item.id]
+        if (value === 'await') {
+          icon = 'hourglass_full'
+        } else if (value === 'success') {
+          icon = 'check'
+        } else if (value === 'error') {
+          icon = 'error'
+        }
+      }
+
+      return { value, icon }
+    }
   }
 
-  // const addCommand = (command, update = true) => {
-
-  //   try {
-
-  //     if (!command?.id) {
-  //       window.ps_command_id = window?.ps_command_id + 1 || commandsList.length + 1
-  //       command.id = `command=${window.ps_command_id}`
-  //     }
-
-  //     setCommandsList(c => ([
-  //       command,
-  //       ...c,
-  //     ]))
-
-  //   } catch (err) {
-  //     console.error(err);
-
-  //     return false
-  //   }
-
-  //   return true
-
-  // }
-
-
-  return {
-    commandsList,
-  };
-
+  return cls
 }
-
-export default useCommands

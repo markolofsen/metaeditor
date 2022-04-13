@@ -4,7 +4,7 @@ import React from "react"
 import CompareVersions from './CompareVersions'
 
 // hooks
-import { useNotify } from "../../common/hooks";
+import { useNotify, useStorage } from "../../common/hooks";
 import { useApi } from "../../@core/hooks";
 
 // material
@@ -14,9 +14,11 @@ import Button from '@mui/material/Button';
 import packageJson from '../../package.json'
 
 
+
 const actions = () => {
   const api = useApi()
   const notify = useNotify()
+  const storage = useStorage()
 
   const [state, setState] = React.useState({
     metaeditor: null,
@@ -24,27 +26,29 @@ const actions = () => {
 
   const dispatch = (payload) => setState(c => ({ ...c, ...payload }))
 
+
+  React.useEffect(() => cls.checkUpdates(), [state.metaeditor])
+
+
   React.useEffect(() => {
 
     // Preload data from api
-    loadInfoData()
+    if (!state.state) {
+      cls.loadData()
+    }
 
   }, [])
 
 
-  React.useEffect(() => cls.checkUpdates(), [state.metaeditor])
-
-  const loadInfoData = async () => {
-    if (state.metaeditor) return
-
-    const metaeditor = await api.getMetaeditorData()
-
-    if (metaeditor) {
-      dispatch({ metaeditor })
-    }
-  }
-
   const cls = new class {
+
+    async loadData() {
+      await api.getMetaeditorData(clsApi.apiKey).then(res => {
+        if (res.ok) {
+          dispatch({ metaeditor: res.body })
+        }
+      })
+    }
 
     async checkUpdates() {
       const metaeditor = state.metaeditor
@@ -72,11 +76,36 @@ const actions = () => {
       }
 
     }
+
+  }
+
+  const clsApi = new class {
+
+    constructor() {
+      this.storageKey = 'metaeditor-project-api-key'
+    }
+
+    get apiKey() {
+      const key = storage.getItem(this.storageKey, 'local')
+      if (key) return key
+      return undefined
+    }
+
+    setApiKey(key) {
+      storage.setItem(this.storageKey, key, 'local')
+      this.refreshData()
+    }
+
+    refreshData() {
+      dispatch({ metaeditor: null })
+      cls.loadData()
+    }
   }
 
   return {
     state,
     cls,
+    clsApi,
   }
 };
 

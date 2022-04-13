@@ -49,6 +49,13 @@ function DevBar(props) {
   const [show, setShow] = React.useState(true)
   const [currentMenu, setCurrentMenu] = React.useState(false)
 
+  React.useEffect(() => {
+
+    setCurrentMenu('commands')
+    refSystemDialog.current?.open()
+
+  }, [])
+
   useHotkeys('ctrl+r', async (e, ke) => {
     if (!e.repeat) {
       if (confirm('Do you want to restart the streaming server?')) {

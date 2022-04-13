@@ -20,12 +20,13 @@ const Request = new class {
       method,
       mode: 'cors',
 
-      headers: new Headers({
+      headers: {
         'Origin': '',
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': undefined,
-      }),
+        ...params.headers,
+      },
     }
 
     // body preparations
@@ -34,6 +35,10 @@ const Request = new class {
         console.error('Request', { method, err })
       }
     }
+
+    // console.error('@@@options.headers', options.headers)
+
+    options.headers = new Headers(options.headers)
 
     try {
       const response = await fetch(url, options);
@@ -53,16 +58,16 @@ const Request = new class {
 
   }
 
-  async GET(url) {
-    return await this.request('GET', url);
+  async GET(url, { headers }) {
+    return await this.request('GET', url, { headers });
   }
 
-  async POST(url, body) {
-    return await this.request('POST', url, { body });
+  async POST(url, body, { headers }) {
+    return await this.request('POST', url, { body, headers });
   }
 
-  async DELETE(url) {
-    return await this.request('DELETE', url);
+  async DELETE(url, { headers }) {
+    return await this.request('DELETE', url, { headers });
   }
 }
 

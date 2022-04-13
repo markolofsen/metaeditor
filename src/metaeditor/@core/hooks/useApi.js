@@ -40,17 +40,12 @@ export default function useApi() {
       })
     }
 
-    async getMetaeditorData() {
+    async getMetaeditorData(apiKey) {
       const url = this.#urlBuilder('info/metaeditor/')
-
-      return await Request.GET(url).then(res => {
-        if (res.ok) {
-          return res.body
-        }
-        return false
-      }).catch(err => {
-        throw new Error(err);
-      })
+      const headers = {
+        'x-metaeditor-apikey': apiKey,
+      }
+      return await Request.GET(url, { headers })
     }
 
     sendFeedbackForm(body) {
