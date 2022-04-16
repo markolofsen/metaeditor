@@ -25,15 +25,14 @@ export default function useAutoConnect() {
 
       const devUrl = parseUrl(process.env.DEV_URL)
       const currentUrl = parseUrl(document.location.href)
-      // const currentUrl = parseUrl('https://ps-local.metaeditor.io/')
 
       const isDevUrl = currentUrl.hostname === devUrl.hostname
       const isLocalhost = currentUrl.query?.localhost == 'true'
 
-      if (isDevUrl && currentUrl.protocol == 'https:') {
-        const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
-        document.location.href = buildUrl
-      }
+      // if (isDevUrl && currentUrl.protocol == 'https:') {
+      //   const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
+      //   document.location.href = buildUrl
+      // }
 
       if (isDevUrl || isLocalhost) {
         setAutoConnect(false)
