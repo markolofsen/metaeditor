@@ -6,7 +6,7 @@ import Player from 'player/'
 const Home = () => {
 
   return (
-    <Player autoConnect={true} />
+    <Player />
   )
 
 };
