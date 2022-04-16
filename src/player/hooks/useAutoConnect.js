@@ -30,13 +30,13 @@ export default function useAutoConnect() {
       const isDevUrl = currentUrl.hostname === devUrl.hostname
       const isLocalhost = currentUrl.query?.localhost == 'true'
 
+      if (isDevUrl && currentUrl.protocol == 'https:') {
+        const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
+        document.location.href = buildUrl
+      }
+
       if (isDevUrl || isLocalhost) {
-        if (currentUrl.protocol == 'https:') {
-          const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
-          document.location.href = buildUrl
-        } else {
-          setAutoConnect(false)
-        }
+        setAutoConnect(false)
       } else {
         setAutoConnect(true)
       }
