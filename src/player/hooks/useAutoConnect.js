@@ -20,17 +20,25 @@ export default function useAutoConnect() {
       const parseUrl = (str) => url.parse(str, true, false)
 
       /**
-       * Redirect to http if .../localhost=true
+       * Redirect to http if .../localhost=true or is dev domain
        */
+
+      const devUrl = parseUrl(process.env.DEV_URL)
       const currentUrl = parseUrl(document.location.href)
+      // const currentUrl = parseUrl('https://ps-local.metaeditor.io/')
 
+      const isDevUrl = currentUrl.hostname === devUrl.hostname
       const isLocalhost = currentUrl.query?.localhost == 'true'
-      if (currentUrl.protocol == 'https:' && isLocalhost) {
-        const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
-        document.location.href = buildUrl
 
+      if (isDevUrl || isLocalhost) {
+        if (currentUrl.protocol == 'https:') {
+          const buildUrl = url.format({ ...currentUrl, protocol: 'http' })
+          document.location.href = buildUrl
+        } else {
+          setAutoConnect(false)
+        }
       } else {
-        setAutoConnect(isLocalhost ? false : true)
+        setAutoConnect(true)
       }
 
     }

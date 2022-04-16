@@ -41,6 +41,7 @@ const withEnv = (phase) => {
 		isDev,
 		VERSION: packageJson.version,
 		PUBLIC_URL: process.env.PUBLIC_URL,
+		DEV_URL: process.env.DEV_URL,
 		API_URL: process.env.API_URL,
 	}
 
