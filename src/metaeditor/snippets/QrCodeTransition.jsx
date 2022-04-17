@@ -56,7 +56,7 @@ function QrCodeTransition() {
   const media = useMedia()
   const player = usePlayer()
 
-  const [overlay, setOverlay] = React.useState(true)
+  const [overlay, setOverlay] = React.useState(false)
   const [hover, setHover] = React.useState(false)
   const [show, setShow] = React.useState(true)
   const [value, setValue] = React.useState(false)
