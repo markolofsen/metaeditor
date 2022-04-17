@@ -7,6 +7,7 @@ import KeyboardHelper from './KeyboardHelper'
 import DevBar from './DevBar/'
 import BackPreloader from './BackPreloader'
 import SignalQuality from './SignalQuality'
+import QrCodeTransition from './QrCodeTransition'
 
 export {
     Preloader,
@@ -16,4 +17,5 @@ export {
     DevBar,
     BackPreloader,
     SignalQuality,
+    QrCodeTransition,
 }

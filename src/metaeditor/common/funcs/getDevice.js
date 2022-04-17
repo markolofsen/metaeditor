@@ -2,16 +2,15 @@
 https://www.npmjs.com/package/react-device-detect
 
 // hooks
-import {useDevice} from 'hooks/'
+import {getDevice} from 'hooks/'
 
 function demo() {
-	const device = useDevice();
 
 	return (
 		<div>
-			{device.isMobile && 'isMobile'}
+			{getDevice.isMobile && 'isMobile'}
 			<br />
-			{device.isDesktop && 'isDesktop'}
+			{getDevice.isDesktop && 'isDesktop'}
 		</div>
 	)
 }
@@ -24,7 +23,7 @@ import * as React from 'react';
 // import * as detect from 'react-device-detect';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
-export {
+export default {
 	BrowserView,
 	MobileView,
 	isBrowser,

@@ -27,7 +27,7 @@ export default function useAutoConnect() {
       const currentUrl = parseUrl(document.location.href)
 
       const isDevUrl = currentUrl.hostname === devUrl.hostname
-      const isLocalhost = currentUrl.query?.localhost == 'true'
+      const isLocalhost = currentUrl.query?.localhost == 'true' || ['127.0.0.1', 'localhost'].includes(currentUrl.hostname)
 
       // if (isDevUrl && currentUrl.protocol == 'https:') {
       //   const buildUrl = url.format({ ...currentUrl, protocol: 'http' })

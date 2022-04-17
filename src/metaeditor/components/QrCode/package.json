@@ -1,0 +1,9 @@
+{
+  "name": "@components/QrCode",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react-qr-code": "^2.0.5"
+  },
+  "devDependencies": {}
+}

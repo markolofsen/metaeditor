@@ -13,6 +13,7 @@ import DraggableObject from './DraggableObject/'
 import JsonEditor from './JsonEditor/'
 import Slider from './Slider/'
 import SwipeableDrawer from './SwipeableDrawer/'
+import QrCode from './QrCode/'
 
 
 
@@ -26,4 +27,5 @@ export {
     JsonEditor,
     Slider,
     SwipeableDrawer,
+    QrCode,
 }

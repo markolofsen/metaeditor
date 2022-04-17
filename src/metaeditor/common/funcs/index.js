@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import * as getDevice from './getDevice'
+import getDevice from './getDevice'
 
 
 export {
