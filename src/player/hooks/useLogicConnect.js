@@ -51,5 +51,5 @@ export default function useLogicConnect() {
 
   }, [router.isReady])
 
-  return { params }
+  return params
 }
