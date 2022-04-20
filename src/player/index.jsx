@@ -32,14 +32,14 @@ const RootDiv = styled.div(theme => ({
 const isDev = env.isDev
 
 function PixelWrapper() {
-  const { autoConnect } = useLogicConnect()
+  const { logicLoaded, autoConnect } = useLogicConnect()
 
   const refMetaEditor = React.useRef(null)
   const refContent = React.useRef(null)
 
   const [serverData, setServerData] = React.useState({ host: undefined, port: undefined })
 
-  if (autoConnect === null) {
+  if (!logicLoaded) {
     return (<div />)
   }
 

@@ -11,6 +11,7 @@ export default function useLogicConnect() {
   const router = useRouter()
 
   const [params, setParmas] = React.useState({
+    logicLoaded: false,
     autoConnect: false,
     isDevUrl: true,
     isLocalhost: true,
@@ -44,7 +45,7 @@ export default function useLogicConnect() {
       // Hide interface if...
       const showInterface = (router.query?.view?.toString() === '0' || isDevUrl) ? false : true
 
-      setParmas({ autoConnect, isDevUrl, isLocalhost, showInterface })
+      setParmas({ logicLoaded: true, autoConnect, isDevUrl, isLocalhost, showInterface })
 
     }
 
