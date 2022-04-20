@@ -43,3 +43,4 @@ package-lock.json
 .deploy
 .pixel-streaming
 # metaeditor
+ecosystem.config.js
