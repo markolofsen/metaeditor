@@ -5,10 +5,9 @@ import env from '../api/env'
 
 // next
 import Head from "next/head";
-import { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { CacheProvider, EmotionCache } from "@emotion/react";
+import { CacheProvider } from "@emotion/react";
 import theme from "../mui-theme/";
 import createEmotionCache from "../mui-theme/createEmotionCache";
 
@@ -19,12 +18,7 @@ import { useAnalytics } from '../hooks/'
 const clientSideEmotionCache = createEmotionCache();
 
 
-
-interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
-
-const App = (props: MyAppProps) => {
+const App = (props) => {
 
   // Use Google Analytics
   useAnalytics(env.credentials.GOOGLE_TAG_ID);

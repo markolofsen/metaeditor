@@ -1,8 +1,10 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 // api
 import { env } from 'api/'
+
+// hooks
+import { useAutoConnect } from './hooks/';
 
 // components
 import MetaEditor from 'metaeditor/';
@@ -29,11 +31,17 @@ const RootDiv = styled.div(theme => ({
 
 const isDev = env.isDev
 
-function PixelWrapper({ autoConnect }) {
+function PixelWrapper() {
+  const autoConnect = useAutoConnect()
+
   const refMetaEditor = React.useRef(null)
   const refContent = React.useRef(null)
 
   const [serverData, setServerData] = React.useState({ host: undefined, port: undefined })
+
+  if (autoConnect === null) {
+    return (<div />)
+  }
 
   return (
     <RootDiv>
@@ -75,7 +83,6 @@ function PixelWrapper({ autoConnect }) {
         port={serverData.port} >
 
         {(payload) => (
-
           <MetaEditorProvider>
             <ContextProvider>
               <PlayerContent
@@ -91,12 +98,5 @@ function PixelWrapper({ autoConnect }) {
   )
 }
 
-PixelWrapper.propTypes = {
-  autoConnect: PropTypes.bool,
-};
-
-PixelWrapper.defaultProps = {
-  autoConnect: false,
-};
 
 export default PixelWrapper

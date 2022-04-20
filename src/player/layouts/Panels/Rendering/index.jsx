@@ -75,16 +75,13 @@ const ToggleButtonGroup = styled.custom(MuiToggleButtonGroup, theme => ({
 const ActionsContainer = styled.div(theme => ({
   display: 'flex',
   flexWrap: 'wrap',
+  flexDirection: 'row',
+  gap: theme.spacing(2),
   paddingTop: theme.spacing(3),
-  margin: theme.spacing(0, -1),
-  '& > button': {
 
+  '& > button': {
     [theme.breakpoints.down('md')]: {
       flex: 1,
-      margin: theme.spacing(1),
-    },
-    [theme.breakpoints.up('md')]: {
-      marginRight: theme.spacing(2),
     },
   },
 }))

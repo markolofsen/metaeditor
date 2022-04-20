@@ -6,6 +6,7 @@ import { env } from 'api/'
 
 // hooks
 import { useNotifyController } from 'metaeditor/controllers/'
+import { useRouter } from 'hooks/';
 
 // snippets
 import {
@@ -14,36 +15,65 @@ import {
   RippleClick,
   KeyboardHelper,
   DevBar,
-  WelcomeBar
+  QrCodeTransition,
 } from 'metaeditor/snippets/'
 
 // layouts
 import Content from './layouts/Content'
 import MetaBar from './layouts/MetaBar/'
+import WelcomeBar from './layouts/WelcomeBar/'
+
 
 
 // context
 import { useConnection } from 'metaeditor/context/';
 
 // config
+const defaultBuildId = 'car11'
 const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
 const logoUrl = env.staticUrl('player', 'logo_ue.svg')
 
 
 
 function PlayerContent({ autoConnect, setServerData, ...props }) {
+  const router = useRouter()
   const connection = useConnection()
   const notifyController = useNotifyController()
 
   const refCallbackProgress = React.useRef(null)
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
 
-    if (autoConnect) {
-      connection.onRequestStream(env.streaming.apiUrl)
+    if (router.isReady) {
+
+      connection.setAutoConnect(autoConnect)
+
+      if (autoConnect) {
+        if (router.query.session) {
+          connection.startSessionUuuid(router.query.session)
+        } else {
+          const session = await connection.getSessionUuid(router.query.build_id || defaultBuildId)
+
+          if (session) {
+            const newQuery = { ...router.query, session }
+            delete newQuery.build_id
+
+            router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
+          } else {
+            const errMsg = `session not found!`
+            console.error(errMsg)
+            alert(errMsg)
+            // throw new Error()
+          }
+
+        }
+      }
     }
 
-  }, [])
+  }, [router.isReady, router.query.session])
+
+  const hideContent = router.isReady && router.query?.view?.toString() === '0'
+
 
   /**
    * The component instance will be extended
@@ -81,14 +111,20 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
       {/* MetaComponents */}
       <DevBar />
       <CallbackProgress ref={refCallbackProgress} />
-      <WelcomeBar config={env.credentials.MAILCHIMP} />
+      <WelcomeBar />
       <Preloader videoUrl={videoUrl} logoUrl={logoUrl} />
       <RippleClick />
       <KeyboardHelper />
+      <QrCodeTransition />
 
       {/* Custom components */}
-      <MetaBar />
-      <Content />
+
+      {!hideContent && (
+        <>
+          <MetaBar />
+          <Content />
+        </>
+      )}
 
     </div>
   )

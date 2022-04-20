@@ -1,0 +1,18 @@
+{
+  "name": "@components/formik",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "formik": "latest",
+    "formik-mui": "latest",
+    "formik-mui-lab": "latest",
+    "react-phone-number-input": "latest",
+    "react-number-format": "latest",
+    "react-color-palette": "latest",
+    "react-device-detect": "latest",
+    "autosuggest-highlight": "latest",
+    "react-input-mask": "latest",
+    "date-fns": "latest"
+  },
+  "devDependencies": {}
+}
