@@ -53,6 +53,7 @@ function ConnectionForm(props) {
 
     // Restore local server data
     const stored_data = storage.getItem(STORAGE_KEY)
+
     if (stored_data) {
       const payload = {
         host: stored_data?.host,
@@ -66,13 +67,6 @@ function ConnectionForm(props) {
 
   }
 
-  React.useEffect(() => {
-
-    if (!connection.state.auto_connect) {
-      storage.setItem(STORAGE_KEY, connection.state)
-    }
-
-  }, [connection.state])
 
   // Close dialog
   React.useEffect(() => {
@@ -117,6 +111,7 @@ function ConnectionForm(props) {
 
         // initConnection()
         connection.initConnection()
+        storage.setItem(STORAGE_KEY, connection.state)
       }}>
 
         <Box sx={{ flexGrow: 1, pt: 2, pb: 3 }}>
@@ -133,6 +128,7 @@ function ConnectionForm(props) {
                 value={connection.state.host}
                 onChange={handleInput('host')}
                 helperText={setDefault()}
+                inputProps={{ tabIndex: 1 }}
               />
 
             </Grid>
@@ -145,7 +141,8 @@ function ConnectionForm(props) {
                 type="number"
                 placeholder="80"
                 value={connection.state.port}
-                onChange={handleInput('port')} />
+                onChange={handleInput('port')}
+                inputProps={{ tabIndex: 2 }} />
 
             </Grid>
           </Grid>
