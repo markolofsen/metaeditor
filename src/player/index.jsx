@@ -4,7 +4,7 @@ import * as React from 'react';
 import { env } from 'api/'
 
 // hooks
-import { useAutoConnect } from './hooks/';
+import { useLogicConnect } from './hooks/';
 
 // components
 import MetaEditor from 'metaeditor/';
@@ -32,7 +32,7 @@ const RootDiv = styled.div(theme => ({
 const isDev = env.isDev
 
 function PixelWrapper() {
-  const autoConnect = useAutoConnect()
+  const { autoConnect } = useLogicConnect()
 
   const refMetaEditor = React.useRef(null)
   const refContent = React.useRef(null)

@@ -8,6 +8,9 @@ import { env } from 'api/'
 import { useNotifyController } from 'metaeditor/controllers/'
 import { useRouter } from 'hooks/';
 
+// hooks: player
+import { useLogicConnect } from './hooks/';
+
 // snippets
 import {
   Preloader,
@@ -39,6 +42,7 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
   const router = useRouter()
   const connection = useConnection()
   const notifyController = useNotifyController()
+  const { showInterface } = useLogicConnect()
 
   const refCallbackProgress = React.useRef(null)
 
@@ -71,9 +75,6 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
     }
 
   }, [router.isReady, router.query.session])
-
-  const hideContent = router.isReady && router.query?.view?.toString() === '0'
-
 
   /**
    * The component instance will be extended
@@ -119,7 +120,7 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
       {/* Custom components */}
 
-      {!hideContent && (
+      {showInterface && (
         <>
           <MetaBar />
           <Content />

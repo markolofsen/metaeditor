@@ -19,7 +19,7 @@ import PreloaderProgress from 'metaeditor/snippets/Preloader/Progress'
 
 // blocks
 import Form from './Form'
-import { AlternateEmail } from '@mui/icons-material';
+
 
 function CustomizedDialogs(props) {
   const connection = useConnection()

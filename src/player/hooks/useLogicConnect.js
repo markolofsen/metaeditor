@@ -7,11 +7,15 @@ import { useRouter } from 'next/router';
 import url from 'url'
 
 
-export default function useAutoConnect() {
+export default function useLogicConnect() {
   const router = useRouter()
 
-  const [autoConnect, setAutoConnect] = React.useState(null)
-
+  const [params, setParmas] = React.useState({
+    autoConnect: false,
+    isDevUrl: true,
+    isLocalhost: true,
+    showInterface: false,
+  })
 
   React.useEffect(() => {
 
@@ -23,7 +27,8 @@ export default function useAutoConnect() {
        * Redirect to http if .../localhost=true or is dev domain
        */
 
-      const devUrl = parseUrl(process.env.DEV_URL)
+      // const devUrl = parseUrl(process.env.DEV_URL)
+      const devUrl = parseUrl(document.location.href)
       const currentUrl = parseUrl(document.location.href)
 
       const isDevUrl = currentUrl.hostname === devUrl.hostname
@@ -34,15 +39,16 @@ export default function useAutoConnect() {
       //   document.location.href = buildUrl
       // }
 
-      if (isDevUrl || isLocalhost) {
-        setAutoConnect(false)
-      } else {
-        setAutoConnect(true)
-      }
+      const autoConnect = (isDevUrl || isLocalhost) ? false : true
+
+      // Hide interface if...
+      const showInterface = (router.query?.view?.toString() === '0' || isDevUrl) ? false : true
+
+      setParmas({ autoConnect, isDevUrl, isLocalhost, showInterface })
 
     }
 
   }, [router.isReady])
 
-  return autoConnect
+  return { params }
 }

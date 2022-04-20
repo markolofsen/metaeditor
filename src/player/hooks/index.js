@@ -1,7 +1,7 @@
 import withIntro from './withIntro'
-import useAutoConnect from './useAutoConnect'
+import useLogicConnect from './useLogicConnect'
 
 export {
     withIntro,
-    useAutoConnect,
+    useLogicConnect,
 }
