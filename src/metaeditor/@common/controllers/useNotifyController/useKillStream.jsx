@@ -6,10 +6,10 @@ import moment from 'moment'
 
 // hooks
 import { useCountdown } from 'metalib/common/hooks/'
-import { useNotify } from "../../@common/hooks/";
+import { useNotify } from "../../hooks/";
 
 // context
-import { usePlayer, useConnection } from '../../context/';
+import { usePlayer, useConnection } from '../../../context/';
 
 
 function useKillStream(props) {

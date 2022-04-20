@@ -5,7 +5,7 @@ import moment from 'moment'
 
 // hooks
 import { useStorage } from 'metalib/common/hooks/'
-import { useApi } from '../../../../@core/hooks/'
+import { useApi } from '../../../../@common/hooks/'
 
 import defaultCommands from './defaultCommands'
 

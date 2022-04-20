@@ -4,9 +4,9 @@ import React from "react"
 import CompareVersions from './CompareVersions'
 
 // hooks
+import { useApi } from "../../@common/hooks";
 import { useNotify } from "../../@common/hooks/";
 import { useStorage } from "metalib/common/hooks";
-import { useApi } from "../../@core/hooks";
 
 // material
 import Button from '@mui/material/Button';

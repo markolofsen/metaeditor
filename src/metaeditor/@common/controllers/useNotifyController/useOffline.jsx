@@ -4,7 +4,7 @@ import React from "react";
 import useOnlineStatus from 'react-online-hook';
 
 // hooks
-import { useNotify } from '../../@common/hooks/'
+import { useNotify } from '../../hooks/'
 
 function useOffline() {
   const notify = useNotify()

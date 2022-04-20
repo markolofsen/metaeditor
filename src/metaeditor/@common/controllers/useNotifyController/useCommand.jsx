@@ -4,10 +4,10 @@ import React from "react";
 import { styled } from 'metalib/styles/'
 
 // hooks
-import { useNotify } from "../../@common/hooks/";
+import { useNotify } from "../../hooks/";
 
 // components
-import JsonEditor from '../../components/JsonEditor/'
+import JsonEditor from '../../../components/JsonEditor/'
 
 // libs
 // import moment from 'moment'

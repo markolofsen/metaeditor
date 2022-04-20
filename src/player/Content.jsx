@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { env } from 'api/'
 
 // hooks
-import { useNotifyController } from 'metaeditor/controllers/'
+import { useNotifyController } from 'metaeditor/@common/controllers/'
 import { useRouter } from 'hooks/';
 
 // hooks: player

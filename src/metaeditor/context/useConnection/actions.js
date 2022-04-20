@@ -1,7 +1,7 @@
 import React from "react"
 
-// @core
-import { useApi } from '../../@core/hooks/'
+// @common
+import { useApi } from '../../@common/hooks/'
 
 
 const actions = () => {
