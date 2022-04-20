@@ -3,12 +3,13 @@ import { env } from 'api/'
 
 // material
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 
 // components
-import { Formik, Fields } from 'components/Formik/'
+import { Formik, Fields } from 'metalib/components/Formik/'
 
 // api
-import { Request } from 'metaeditor/common/libs/'
+import { Request } from 'metalib/common/libs/'
 
 
 
@@ -37,7 +38,7 @@ function Form(props) {
   const renderFields = ({ errors, submitForm, isSubmitting, values, ...payload }) => {
 
     return (
-      <div>
+      <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: theme => theme.spacing(2) }}>
 
         <Fields.FieldText
           label="Name"
@@ -74,7 +75,7 @@ function Form(props) {
           Send!
         </Button>
 
-      </div>
+      </Box>
     )
   }
 

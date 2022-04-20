@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // styles
-import { styled } from '../../../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // context
 import { useSystem } from '../../../../context/'

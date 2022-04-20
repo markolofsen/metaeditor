@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 
 // styles
-import { styled } from '../../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 const RootDiv = styled.custom(Box, theme => ({
   borderRadius: theme.shape.borderRadius,

@@ -1,12 +1,11 @@
 import React from "react"
 
 // hooks
-import { useSound } from "metaeditor/common/hooks/";
+import { useSound } from "metalib/common/hooks/";
+
 
 // api
 import { env } from 'api/'
-
-
 
 // context
 import { usePlayer } from 'metaeditor/context/';

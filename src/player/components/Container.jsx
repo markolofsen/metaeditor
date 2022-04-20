@@ -4,7 +4,7 @@ import * as React from 'react';
 import Container from '@mui/material/Container';
 
 // material
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 // import AppBar from '@mui/material/AppBar';
 
 

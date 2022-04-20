@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { usePlayer } from '../../../context/';
 
 // styles
-import { styled } from '../../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // blocks
 import MyCommands from './MyCommands/'

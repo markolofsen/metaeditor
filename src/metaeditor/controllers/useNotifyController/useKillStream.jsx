@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment'
 
 // hooks
-import { useNotify, useCountdown } from '../../common/hooks/'
+import { useCountdown } from 'metalib/common/hooks/'
+import { useNotify } from "../../@common/hooks/";
 
 // context
 import { usePlayer, useConnection } from '../../context/';

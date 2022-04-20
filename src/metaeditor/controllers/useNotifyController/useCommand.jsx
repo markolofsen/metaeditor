@@ -1,11 +1,10 @@
 import React from "react";
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // hooks
-import { useNotify } from '../../common/hooks/'
-
+import { useNotify } from "../../@common/hooks/";
 
 // components
 import JsonEditor from '../../components/JsonEditor/'

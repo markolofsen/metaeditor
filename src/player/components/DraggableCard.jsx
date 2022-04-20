@@ -2,13 +2,13 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useHotkeys } from 'metaeditor/common/hooks/'
+import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
 import { useLayout } from '../context/'
 
 // material
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 

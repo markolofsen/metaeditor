@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useStorage, useParseUrl } from 'metaeditor/common/hooks/'
+import { useStorage, useParseUrl } from 'metalib/common/hooks/'
 
 // context
 import { useConnection } from 'metaeditor/context/';

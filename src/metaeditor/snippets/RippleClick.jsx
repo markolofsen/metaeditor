@@ -4,7 +4,7 @@ import React from "react";
 import { usePlayer } from '../context/';
 
 // styles
-import { makeStyles } from '../common/styles/'
+import { makeStyles } from 'metalib/styles/'
 
 
 const useStyles = makeStyles((theme) => ({

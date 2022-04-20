@@ -32,7 +32,16 @@ export default function useLogicConnect() {
       const currentUrl = parseUrl(document.location.href)
 
       const isDevUrl = currentUrl.hostname === devUrl.hostname
-      const isLocalhost = currentUrl.query?.localhost == 'true' || ['127.0.0.1', 'localhost'].includes(currentUrl.hostname)
+      let isLocalhost = ['127.0.0.1', 'localhost'].includes(currentUrl.hostname)
+
+      switch (currentUrl.query?.localhost) {
+        case 'true':
+          isLocalhost = true
+          break
+        case 'false':
+          isLocalhost = false
+          break
+      }
 
       // if (isDevUrl && currentUrl.protocol == 'https:') {
       //   const buildUrl = url.format({ ...currentUrl, protocol: 'http' })

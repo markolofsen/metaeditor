@@ -4,7 +4,7 @@ import * as React from 'react';
 import moment from 'moment'
 
 // hooks
-import { useStorage } from '../../../../common/hooks/'
+import { useStorage } from 'metalib/common/hooks/'
 import { useApi } from '../../../../@core/hooks/'
 
 import defaultCommands from './defaultCommands'

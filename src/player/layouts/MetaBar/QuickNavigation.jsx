@@ -4,7 +4,7 @@ import * as React from 'react';
 import { usePlayer } from 'metaeditor/context/';
 
 // hooks
-import { useMedia } from 'metaeditor/common/hooks/'
+import { useMedia } from 'metalib/common/hooks/'
 
 // material
 import Icon from '@mui/material/Icon';
@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import Portal from '@mui/material/Portal';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // components
 import Button from './components/Button';

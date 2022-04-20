@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 // hooks
-import { useMedia } from '../common/hooks/';
-import { getDevice } from '../common/funcs/';
+import { useMedia } from 'metalib/common/hooks/';
+import { getDevice } from 'metalib/common/funcs/';
 
 // context
 import { usePlayer } from '../context/';
 
 // styles
-import { styled } from '../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import Icon from '@mui/material/Icon';

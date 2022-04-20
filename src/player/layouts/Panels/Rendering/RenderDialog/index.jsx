@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // components
 import { Dialog } from 'metaeditor/components/'

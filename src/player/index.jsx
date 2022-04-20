@@ -14,7 +14,7 @@ import MetaEditorProvider from 'metaeditor/context/';
 import ContextProvider from './context/';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // content
 import PlayerContent from './Content'

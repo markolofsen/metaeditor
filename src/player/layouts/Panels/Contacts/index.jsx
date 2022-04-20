@@ -4,10 +4,10 @@ import * as React from 'react';
 import { env } from 'api/'
 
 // hooks
-import { useMedia } from 'metaeditor/common/hooks/'
+import { useMedia } from 'metalib/common/hooks/'
 
 // material
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 import Button from '@mui/material/Button';
 
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { env } from 'api/'
 
 // hooks
-import { useMedia } from 'metaeditor/common/hooks/'
+import { useMedia } from 'metalib/common/hooks/'
 
 // data
 import { MetaData } from 'metaeditor'
@@ -15,7 +15,7 @@ import { useSystem } from 'metaeditor/context/';
 import { useLayout } from 'player/context/';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import MuiAppBar from '@mui/material/AppBar';

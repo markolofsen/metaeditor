@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useMedia } from '../../common/hooks/';
+import { useMedia } from 'metalib/common/hooks/';
 
 // context
 import { usePlayer, useConnection } from '../../context/';
@@ -22,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Icon from '@mui/material/Icon';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // blocks
 import ConnectionForm from './StateConnection/ConnectionForm'

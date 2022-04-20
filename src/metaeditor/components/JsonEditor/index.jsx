@@ -19,7 +19,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import MuiFormLabel from '@mui/material/FormLabel';

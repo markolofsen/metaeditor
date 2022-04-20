@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useMedia } from '../../common/hooks/';
+import { useMedia } from 'metalib/common/hooks/';
 
 // material
 import MuiDrawer from '@mui/material/Drawer';
@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // blocks
 import DrawerHeader from './DrawerHeader'

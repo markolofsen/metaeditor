@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // styles
-import { styled } from '../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import CircularProgress from '@mui/material/CircularProgress';

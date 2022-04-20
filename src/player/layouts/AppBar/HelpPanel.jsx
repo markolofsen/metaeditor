@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { env } from 'api/'
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import Icon from '@mui/material/Icon';

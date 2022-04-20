@@ -1,7 +1,7 @@
 import React from "react";
 
 // hooks
-import { useHotkeys } from 'metaeditor/common/hooks/'
+import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
 import { usePlayer } from 'metaeditor/context/';

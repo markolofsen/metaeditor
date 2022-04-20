@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { usePlayer, useConnection } from '../../context/';
 
 // hooks
-import { useCountdown } from '../../common/hooks/'
+import { useCountdown } from 'metalib/common/hooks/'
 
 // material
 import MuiBox from '@mui/material/Box';
@@ -14,7 +14,7 @@ import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // blocks
 import Progress from './Progress'

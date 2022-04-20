@@ -4,13 +4,13 @@ import * as React from 'react';
 import { usePlayer, useConnection } from '../../context/';
 
 // hooks
-import { useCountdown } from '../../common/hooks/'
+import { useCountdown } from 'metalib/common/hooks/'
 
 // material
 import MuiLinearProgress from '@mui/material/LinearProgress';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 
 const LinearProgress = styled.custom(MuiLinearProgress, theme => ({

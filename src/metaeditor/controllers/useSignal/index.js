@@ -1,7 +1,7 @@
 import React from "react";
 
 // hooks
-import { helpers } from '../../common/'
+import { format } from 'metalib/common/helpers/'
 
 // context
 import { usePlayer } from '../../context/';
@@ -23,12 +23,12 @@ function useSignal(props) {
 		}
 	}
 
-	const bitrate_hint = helpers.format.formatNumber(bitrate, {
+	const bitrate_hint = format.formatNumber(bitrate, {
 		decimal: 0,
 		separator: '.',
 	})
 
-	const received_hint = helpers.format.formatBytes(bytesReceived)
+	const received_hint = format.formatBytes(bytesReceived)
 
 	return {
 		strength: getStrength(),

@@ -3,7 +3,7 @@ import * as React from 'react';
 // import { makeStyles } from '@mui/styles';
 
 // styles
-import { makeStyles } from '../../common/styles/'
+import { makeStyles } from 'metalib/styles/'
 
 // components
 import { SnackbarProvider } from 'notistack';

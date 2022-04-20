@@ -10,7 +10,7 @@ import MuiToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Button from '@mui/material/Button';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // blocks
 import RenderDialog from './RenderDialog/'

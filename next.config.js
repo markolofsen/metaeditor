@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPWA = require("next-pwa");
 const { withSentryConfig } = require('@sentry/nextjs')
+const { withGlobalCss } = require('next-global-css')
+
+const withCssConfig = withGlobalCss()
 
 // in next.config.js
 const packageJson = require("./package.json");
@@ -126,7 +129,7 @@ function moduleExports(phase) {
 	})
 
 
-	return res;
+	return withCssConfig(res);
 };
 
 const SentryWebpackPluginOptions = {

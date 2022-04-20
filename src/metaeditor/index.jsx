@@ -6,7 +6,7 @@ import { PixelStreaming } from './components/';
 import NotificationsProvider from './components/Notifications/Provider';
 
 // hooks
-import { useUnload } from './common/hooks/';
+import { useUnload } from 'metalib/common/hooks/';
 
 // metadata
 import packageJson from './package.json';

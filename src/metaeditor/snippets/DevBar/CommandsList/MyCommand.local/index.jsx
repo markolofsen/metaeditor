@@ -15,7 +15,7 @@ import Icon from '@mui/material/Icon';
 import Box from '@mui/material/Box';
 
 // styles
-import { styled, alpha } from '../../../../common/styles/'
+import { styled, alpha } from 'metalib/styles/'
 
 // hooks
 import useCommands from './useCommands'

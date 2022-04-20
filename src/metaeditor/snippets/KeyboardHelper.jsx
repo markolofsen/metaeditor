@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 // hooks
-import { useMedia, useHotkeys } from '../common/hooks/'
-import { isBrowser, isMobile } from '../common/funcs/getDevice'
+import { useMedia, useHotkeys } from 'metalib/common/hooks/'
+import { isBrowser, isMobile } from 'metalib/common/funcs/getDevice'
 
 // context
 import { usePlayer } from '../context/';
 
 // styles
-import { styled } from '../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import Icon from '@mui/material/Icon';

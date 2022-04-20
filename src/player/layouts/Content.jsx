@@ -2,14 +2,14 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useContainerDimensions } from 'metaeditor/common/hooks/'
+import { useContainerDimensions } from 'metalib/common/hooks/'
 
 // context
 import { usePlayer } from 'metaeditor/context/';
 import { useLayout } from 'player/context/';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import Collapse from '@mui/material/Collapse';

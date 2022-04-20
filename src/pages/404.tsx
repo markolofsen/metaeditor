@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 
 // material
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 import { Button, Typography } from '@mui/material';
 
 // layouts

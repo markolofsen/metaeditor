@@ -9,7 +9,7 @@ import { useSignal } from '../controllers/'
 import SignalIcon from '../controllers/useSignal/SignalIcon'
 
 // material
-import { styled } from '../common/styles/'
+import { styled } from 'metalib/styles/'
 // import IconButton from '@mui/material/IconButton';
 
 // components

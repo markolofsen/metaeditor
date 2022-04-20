@@ -4,7 +4,7 @@ import * as React from 'react';
 import Portal from '@mui/material/Portal';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // block
 import FullscreenButton from './FullscreenButton/'

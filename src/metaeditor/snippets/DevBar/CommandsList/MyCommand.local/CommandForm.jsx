@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 // styles
-import { styled } from '../../../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // components
 import JsonEditor from '../../../../components/JsonEditor/'

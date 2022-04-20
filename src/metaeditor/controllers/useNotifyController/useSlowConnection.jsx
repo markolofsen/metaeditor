@@ -7,7 +7,7 @@ import { usePlayer } from '../../context/'
 import useSignal from '../useSignal/'
 
 // hooks
-import { useNotify } from '../../common/hooks/'
+import { useNotify } from '../../@common/hooks/'
 
 
 

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // components
 import { CarouselItems } from 'metaeditor/components/'

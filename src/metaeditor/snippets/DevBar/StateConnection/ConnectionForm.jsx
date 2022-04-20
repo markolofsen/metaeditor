@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // hooks
-import { useStorage } from '../../../common/hooks/'
+import { useStorage } from 'metalib/common/hooks/'
 
 // context
 import { usePlayer, useConnection } from '../../../context/';

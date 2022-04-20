@@ -1,6 +1,6 @@
 
 // libs
-import { Request } from '../../common/libs/'
+import { Request } from 'metalib/common/libs/'
 
 const STREAM_API_URL = process.env.API_URL || `https://api.metaeditor.io`
 

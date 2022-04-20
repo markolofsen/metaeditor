@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import MuiButton from '@mui/material/Button';

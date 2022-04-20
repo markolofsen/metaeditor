@@ -34,10 +34,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useMedia } from '../../common/hooks/';
+import { useMedia } from 'metalib/common/hooks/';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import IconButton from '@mui/material/IconButton';

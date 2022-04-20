@@ -7,7 +7,7 @@ import { env } from 'api/'
 import { useLayout } from 'player/context/';
 
 // styles
-import { styled } from 'metaeditor/common/styles/'
+import { styled } from 'metalib/styles/'
 
 // player components
 import CarouselItems from 'player/components/CarouselItems'

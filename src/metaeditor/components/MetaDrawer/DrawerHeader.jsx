@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 
 const DialogTitle = styled.custom(MuiDialogTitle, theme => ({

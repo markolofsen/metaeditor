@@ -4,7 +4,8 @@ import React from "react"
 import CompareVersions from './CompareVersions'
 
 // hooks
-import { useNotify, useStorage } from "../../common/hooks";
+import { useNotify } from "../../@common/hooks/";
+import { useStorage } from "metalib/common/hooks";
 import { useApi } from "../../@core/hooks";
 
 // material

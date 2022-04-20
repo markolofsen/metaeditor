@@ -10,7 +10,7 @@ import { usePlayer } from 'metaeditor/context/';
 import reducer from './reducer'
 
 // hooks
-import { useSound } from 'metaeditor/common/hooks/'
+import { useSound } from 'metalib/common/hooks/'
 import { withIntro } from 'player/hooks/'
 
 

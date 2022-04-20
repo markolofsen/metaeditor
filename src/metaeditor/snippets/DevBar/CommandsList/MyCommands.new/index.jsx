@@ -16,7 +16,7 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 
 // styles
-import { styled, alpha } from '../../../../common/styles/'
+import { styled, alpha } from 'metalib/styles/'
 
 // hooks
 import useCommands from './useCommands'

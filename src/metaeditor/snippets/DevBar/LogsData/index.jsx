@@ -4,7 +4,7 @@ import * as React from 'react';
 import { usePlayer } from '../../../context/';
 
 // styles
-import { styled } from '../../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import MuiToggleButton from '@mui/material/ToggleButton';

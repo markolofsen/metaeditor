@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 // hooks
-import { useHotkeys } from '../../common/hooks/'
+import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
 import { useConnection, useSystem } from '../../context/';
 
 // styles
-import { styled } from '../../common/styles/'
+import { styled } from 'metalib/styles/'
 
 // material
 import Box from '@mui/material/Box';
