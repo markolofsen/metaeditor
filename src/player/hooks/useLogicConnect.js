@@ -28,8 +28,7 @@ export default function useLogicConnect() {
        * Redirect to http if .../localhost=true or is dev domain
        */
 
-      // const devUrl = parseUrl(process.env.DEV_URL)
-      const devUrl = parseUrl(document.location.href)
+      const devUrl = parseUrl(process.env.DEV_URL)
       const currentUrl = parseUrl(document.location.href)
 
       const isDevUrl = currentUrl.hostname === devUrl.hostname
