@@ -23,7 +23,7 @@ import * as React from 'react';
 // import * as detect from 'react-device-detect';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
-export default {
+export {
 	BrowserView,
 	MobileView,
 	isBrowser,
