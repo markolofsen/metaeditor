@@ -38,7 +38,7 @@ function Form(props) {
   const renderFields = ({ errors, submitForm, isSubmitting, values, ...payload }) => {
 
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', rowGap: theme => theme.spacing(2) }}>
+      <>
 
         <Fields.FieldText
           label="Name"
@@ -75,7 +75,7 @@ function Form(props) {
           Send!
         </Button>
 
-      </Box>
+      </>
     )
   }
 
