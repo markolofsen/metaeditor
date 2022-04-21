@@ -33,7 +33,7 @@ const AppBar = styled.custom(MuiAppBar, theme => ({
   width: 'max-content',
 }))
 
-const MenuDesktop = styled.custom(Box, theme => ({
+const MenuDesktop = styled.ul(theme => ({
   // sx={{ display: { xs: 'none', sm: 'flex' } }
 
   '& > *': {
@@ -55,7 +55,7 @@ const ResponsiveAppBar = (props) => {
   const player = usePlayer()
   const connection = useConnection()
 
-  const { state, cls } = player
+  const { state, cls, connector } = player
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -75,13 +75,13 @@ const ResponsiveAppBar = (props) => {
       disabled: false,
     }
 
-    const isStreamDisabled = !state.loaded && state.closed?.code !== 1005
+    // const isStreamDisabled = !state.loaded && state.closed?.code !== 1005
 
     switch (slug) {
       case 'play':
         res.icon = state.loaded ? 'pause' : 'play_arrow'
         res.onClick = () => {
-          cls?.playStop()
+          connector.switchConnection()
         }
         // res.disabled = isStreamDisabled
         break;

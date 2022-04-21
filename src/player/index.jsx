@@ -76,11 +76,14 @@ function PixelWrapper() {
         onProgress={(payload) => {
           // console.warn('progress', payload);
         }}
-        autoConnect={autoConnect}
+        settings={{
+          volume: 1,
+          connectOnStart: false,
+          host: serverData.host,
+          port: serverData.port
+        }}
         quality={1}
-        isDev={isDev}
-        host={serverData.host}
-        port={serverData.port} >
+        isDev={isDev} >
 
         {(payload) => (
           <MetaEditorProvider>

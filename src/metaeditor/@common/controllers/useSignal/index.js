@@ -23,12 +23,12 @@ function useSignal(props) {
 		}
 	}
 
-	const bitrate_hint = format.formatNumber(bitrate, {
+	const bitrate_hint = format.number(bitrate, {
 		decimal: 0,
 		separator: '.',
 	})
 
-	const received_hint = format.formatBytes(bytesReceived)
+	const received_hint = format.bytes(bytesReceived)
 
 	return {
 		strength: getStrength(),

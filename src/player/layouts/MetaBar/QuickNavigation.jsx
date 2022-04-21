@@ -19,7 +19,7 @@ import Portal from '@mui/material/Portal';
 import { styled } from 'metalib/styles/'
 
 // components
-import Button from './components/Button';
+import Button from 'metaeditor/snippets/DevBar/Actions/Button';
 
 
 const RootDiv = styled.div(theme => ({
@@ -104,8 +104,8 @@ function MobileVersion() {
       <Button
         onClick={handleClick}
         // disabled={isDisabled}
-        tooltip="Quick navigation">
-        <Icon>keyboard_double_arrow_down</Icon>
+        tooltip="Quick view">
+        <Icon>search</Icon>
       </Button>
       <Menu
         anchorEl={anchorEl}

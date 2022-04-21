@@ -53,10 +53,6 @@ const actions = () => {
       dispatch({ auto_connect })
     }
 
-    initConnection() {
-      window?.ps_init()
-    }
-
     handleConnection({ host, port }) {
       if (host) {
         dispatch({ host })
@@ -82,7 +78,6 @@ const actions = () => {
         if (res?.status === 'active') {
           clearInterval(refInterval.current)
           this.onTimeToKill()
-          this.initConnection()
         }
       }
 

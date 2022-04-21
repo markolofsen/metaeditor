@@ -37,6 +37,9 @@ const actions = () => {
     get cls() {
       return PS.cls;
     }
+    get connector() {
+      return PS.connector;
+    }
     get cmd() {
       return commands;
     }

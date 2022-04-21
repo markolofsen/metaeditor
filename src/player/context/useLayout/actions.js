@@ -41,7 +41,7 @@ const actions = () => {
 
     get sounds() {
       const play = obj => {
-        if (player.state.volume) {
+        if (player.state.settings.volume) {
           obj.play()
         }
       }

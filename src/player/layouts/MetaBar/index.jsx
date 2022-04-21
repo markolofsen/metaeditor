@@ -3,31 +3,26 @@ import * as React from 'react';
 // material
 import Portal from '@mui/material/Portal';
 
-// styles
-import { styled } from 'metalib/styles/'
-
 // block
-import FullscreenButton from './FullscreenButton/'
-import VolumeButton from './VolumeButton'
 import QuickNavigation from './QuickNavigation'
 
-const RootDiv = styled.div((theme) => ({
-  display: 'flex',
-  '& > *': {
-    marginRight: theme.spacing(1),
-    pointerEvents: 'all',
-  }
-}))
+// snippets
+import {
+  KeyboardHelper,
+  QrCodeTransition,
+} from 'metaeditor/snippets/'
 
 function PublicBar() {
   return (
-    <Portal container={document.getElementById('metaeditor-toolbar')}>
-      <RootDiv>
-        <FullscreenButton />
-        <VolumeButton />
+    <div>
+      <Portal container={document.getElementById('metaeditor-toolbar-left')}>
         <QuickNavigation />
-      </RootDiv>
-    </Portal>
+      </Portal>
+      <Portal container={document.getElementById('metaeditor-toolbar-right')}>
+        <KeyboardHelper />
+        <QrCodeTransition />
+      </Portal>
+    </div>
   )
 }
 

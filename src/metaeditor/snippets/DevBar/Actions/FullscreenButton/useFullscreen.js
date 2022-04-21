@@ -4,7 +4,7 @@ import React from "react";
 import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
-import { usePlayer } from 'metaeditor/context/';
+import { usePlayer } from '../../../../context/';
 
 
 function useFullscreen() {

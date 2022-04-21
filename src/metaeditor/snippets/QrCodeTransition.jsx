@@ -22,10 +22,6 @@ import { QrCode } from '../components/'
 
 
 const RootDiv = styled.div(theme => ({
-  position: 'absolute',
-  top: theme.spacing(2),
-  right: theme.spacing(2),
-  zIndex: theme.zIndex.appBar,
   padding: theme.spacing(1),
   backgroundColor: '#fff',
   borderRadius: theme.shape.borderRadius,
@@ -108,7 +104,7 @@ function QrCodeTransition() {
           <QrCode
             bgColor="#ffffff"
             fgColor="#000000"
-            size={60}
+            size={40}
             value={value}
           />
         </div>

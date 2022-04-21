@@ -1,9 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-// hooks
-import { useContainerDimensions } from 'metalib/common/hooks/'
-
 // context
 import { usePlayer } from 'metaeditor/context/';
 import { useLayout } from 'player/context/';
@@ -18,6 +15,7 @@ import Collapse from '@mui/material/Collapse';
 import AppBar from './AppBar'
 import Panels from './Panels/'
 import ContentDrawer from './ContentDrawer/'
+import CallbacksDemo from './CallbacksDemo'
 
 // player components
 import DraggableCard from 'player/components/DraggableCard'
@@ -72,13 +70,11 @@ function Content(props) {
   const player = usePlayer()
   const layout = useLayout()
 
-  const contentRef = React.useRef(null);
-  const contentDimension = useContainerDimensions(contentRef);
-
   const uiVisibleAll = player.state.mouse_moving
   const uiVisible = layout.state.ui_visible
 
   // const showDrawer = !uiVisibleAll && uiVisible
+
 
   return (
     <RootDiv data-layout-visible={uiVisibleAll}>
@@ -86,10 +82,12 @@ function Content(props) {
       <ContentDrawer show={uiVisible} />
 
       <RootList>
-        <li data-li="content" ref={contentRef}>
+        <li data-li="content">
           <DraggableCard />
         </li>
         <li>
+          <CallbacksDemo />
+
           <ul data-list="bottom">
             <li data-li="panels">
 

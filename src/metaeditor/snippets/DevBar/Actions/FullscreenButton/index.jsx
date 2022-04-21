@@ -7,7 +7,7 @@ import useFullscreen from './useFullscreen'
 import Icon from '@mui/material/Icon';
 
 // components
-import Button from '../components/Button';
+import Button from '../Button';
 
 
 function FullscreenButton() {

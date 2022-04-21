@@ -16,9 +16,7 @@ import {
   Preloader,
   CallbackProgress,
   RippleClick,
-  KeyboardHelper,
   DevBar,
-  QrCodeTransition,
 } from 'metaeditor/snippets/'
 
 // layouts
@@ -115,8 +113,6 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
       <WelcomeBar />
       <Preloader videoUrl={videoUrl} logoUrl={logoUrl} />
       <RippleClick />
-      <KeyboardHelper />
-      <QrCodeTransition />
 
       {/* Custom components */}
 

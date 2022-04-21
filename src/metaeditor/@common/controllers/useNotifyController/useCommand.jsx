@@ -24,7 +24,7 @@ function useCommand() {
   const notify = useNotify()
 
   const isHiddenCommand = (payload) => {
-    if (['console_command'].includes(payload.command)) {
+    if (payload.command.startsWith('$')) {
       return true;
     }
     return false

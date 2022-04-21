@@ -17,14 +17,8 @@ import Icon from '@mui/material/Icon';
 const size = 15
 
 const RootList = styled.ul(theme => ({
-	position: 'absolute',
-
-	top: theme.spacing(3),
-	right: theme.spacing(3),
-
-
 	width: size * 6,
-	height: size * 4,
+	height: size * 3.5,
 
 	display: 'flex',
 	alignItems: 'flex-start',

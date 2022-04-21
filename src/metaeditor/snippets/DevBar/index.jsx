@@ -23,20 +23,17 @@ import DebugForm from './DebugForm'
 import LogsData from './LogsData/'
 import CommandsList from './CommandsList/'
 
+// actions
+import FullscreenButton from './Actions/FullscreenButton/'
+import VolumeButton from './Actions/VolumeButton'
 
 
-const RootDiv = styled.ul(theme => ({
+const PanelDiv = styled.custom(Box, theme => ({
   position: 'absolute',
   zIndex: theme.zIndex.appBar + 1,
-  top: theme.spacing(2),
-  left: theme.spacing(2),
   pointerEvents: 'all',
   display: 'flex',
-  // width: 'max-content',
-
-  // [theme.breakpoints.down('sm')]: {
-  //   right: theme.spacing(2),
-  // },
+  top: theme.spacing(3),
 }))
 
 function DevBar(props) {
@@ -117,25 +114,33 @@ function DevBar(props) {
     refSystemDialog.current?.open()
   }
 
-  const renderDevBar = () => {
-    if (!show) return;
-
-    return (
-      <Box sx={{ mr: 1 }}>
-
-        {renderDialog()}
-
-        <AppBar handleMenu={handleMenu} />
-
-      </Box>
-    )
+  if (!show) {
+    return <div />
   }
 
   return (
-    <RootDiv>
-      {renderDevBar()}
-      <div id="metaeditor-toolbar" />
-    </RootDiv>
+    <>
+
+      <PanelDiv sx={{ left: theme => theme.spacing(3) }}>
+        {renderDialog()}
+        <AppBar handleMenu={handleMenu} />
+        <Box sx={{ ml: .5, display: 'flex', gap: theme => theme.spacing(.5) }}>
+          <FullscreenButton />
+          <VolumeButton />
+          <div id="metaeditor-toolbar-left" />
+        </Box>
+      </PanelDiv>
+
+      <PanelDiv
+        id="metaeditor-toolbar-right"
+        sx={{
+          right: theme => theme.spacing(3),
+          alignItems: 'center',
+          gap: theme => theme.spacing(2),
+        }}>
+      </PanelDiv>
+
+    </>
   )
 };
 
