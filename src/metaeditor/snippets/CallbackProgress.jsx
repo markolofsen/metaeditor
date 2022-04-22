@@ -56,7 +56,7 @@ function CallbackProgress(props) {
   }));
 
   const handleOpen = (payload) => {
-    if (['console_command'].includes(payload?.type)) return;
+    if (['console_command'].includes(payload?.command)) return;
 
     clearInterval(refInteval.current);
     setProgress(0)

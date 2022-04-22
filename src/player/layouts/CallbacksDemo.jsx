@@ -39,7 +39,7 @@ export default function CallbacksDemo() {
     setDisabled(false)
   }
 
-  if (!player.cls.streamIsActive) {
+  if (!player.state.active) {
     return (<div />)
   }
 
