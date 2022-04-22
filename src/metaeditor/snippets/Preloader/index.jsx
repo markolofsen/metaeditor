@@ -179,15 +179,41 @@ function Preloader({ logoUrl, videoUrl }) {
           );
         }
 
+        const renderLabel = () => {
+          const v = countdown.value
+          let labelsList = [
+            'Streaming server request',
+            'Turning on the server',
+            'Unreal Engine initialization',
+            'Final preparations',
+            'Connecting...',
+          ]
+
+          let index = 0
+
+          if (v < 20) index = 0
+          else if (v < 40) index = 1
+          else if (v < 60) index = 2
+          else if (v < 80) index = 3
+          else index = 4
+
+          const number = `(${index + 1}/${labelsList.length})`
+          const label = labelsList[index]
+
+          return (
+            <div data-helpertext>
+              {number} {label}
+            </div>
+          )
+        }
+
         return (
           <>
             <div data-progress>
               <Progress />
             </div>
 
-            <div data-helpertext>
-              Loading 3D
-            </div>
+            {renderLabel()}
           </>
         )
       }

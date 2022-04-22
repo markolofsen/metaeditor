@@ -101,7 +101,7 @@ function SignalQualityMenu(props) {
 						step={.01}
 						min={.5}
 						max={2}
-						defaultValue={player.state.resolution_multiplier}
+						defaultValue={player.state.settings.quality}
 						onChange={(v) => {
 							player.cls.changeQuality(v)
 						}}

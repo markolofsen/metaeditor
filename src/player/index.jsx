@@ -88,7 +88,6 @@ function PixelWrapper() {
             warnTimeout: 120,
             closeTimeout: 10,
             lockMouse: false,
-            autoPlay: true,
             fakeMouseWithTouches: false,
           }
         }}
