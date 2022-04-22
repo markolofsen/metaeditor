@@ -14,30 +14,14 @@ export default function useApi() {
       return `${STREAM_API_URL}/api/` + route
     }
 
-    async startSessionUuuid(sessionUuid) {
+    async sessionRead(sessionUuid) {
       const url = this.#urlBuilder('streams_provider/session/read/' + sessionUuid)
-
-      return await Request.GET(url).then(res => {
-        if (res.ok) {
-          const { host, port, que, seconds_to_kill, seconds_to_start, status } = res.body.stream_data
-          return { host, port, que, seconds_to_kill, seconds_to_start, status }
-        }
-      }).catch(err => {
-        throw new Error(err);
-      })
+      return await Request.GET(url)
     }
 
-    async getSessionUuid(build_id) {
+    async sessionCreate(build_id) {
       const url = this.#urlBuilder('streams_provider/session/create/')
-
-      return await Request.POST(url, { build_id }).then(res => {
-        if (res.ok) {
-          return res.body.uuid
-        }
-        return false
-      }).catch(err => {
-        throw new Error(err);
-      })
+      return await Request.POST(url, { build_id })
     }
 
     async getMetaeditorData(apiKey) {

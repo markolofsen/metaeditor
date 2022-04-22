@@ -66,19 +66,30 @@ const actions = () => {
       dispatch({ loaded: true, status: 'localhost', host, port })
     }
 
-    async startSessionUuuid(sessionUuid) {
+    async startSessionUuuid(sessionUuid, cb) {
       handleStop()
 
       const requestLoop = async () => {
-        const res = await api.startSessionUuuid(sessionUuid)
-        // const { host, port, que, seconds_to_kill, seconds_to_start, status } = res
 
-        dispatch(res)
+        await api.sessionRead(sessionUuid)
+          .then(res => {
+            if (res.ok) {
+              const { metadata, stream_data } = res.body
+              const { host, port, que, seconds_to_kill, seconds_to_start, status } = stream_data
+              const data = { host, port, que, seconds_to_kill, seconds_to_start, status }
+              dispatch(data)
 
-        if (res?.status === 'active') {
-          clearInterval(refInterval.current)
-          this.onTimeToKill()
-        }
+              if (status === 'active') {
+                clearInterval(refInterval.current)
+                this.onTimeToKill()
+              }
+
+              cb(metadata)
+            }
+          }).catch(err => {
+            throw new Error(err);
+          })
+
       }
 
       dispatch({ loaded: true })
@@ -87,9 +98,15 @@ const actions = () => {
       await requestLoop()
     }
 
-    async getSessionUuid(buildId) {
-      const sessionUuid = await api.getSessionUuid(buildId)
-      return sessionUuid
+    async getSessionData(buildId) {
+      return await api.sessionCreate(buildId).then(res => {
+        if (res.ok) {
+          return res.body
+        }
+        return false
+      }).catch(err => {
+        throw new Error(err);
+      })
     }
 
     async onRestartStream() {

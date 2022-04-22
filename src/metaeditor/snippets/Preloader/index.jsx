@@ -182,8 +182,8 @@ function Preloader({ logoUrl, videoUrl }) {
         const renderLabel = () => {
           const v = countdown.value
           let labelsList = [
-            'Streaming server request',
             'Turning on the server',
+            'Streaming server request',
             'Unreal Engine initialization',
             'Final preparations',
             'Connecting...',
@@ -193,16 +193,16 @@ function Preloader({ logoUrl, videoUrl }) {
 
           if (v < 20) index = 0
           else if (v < 40) index = 1
-          else if (v < 60) index = 2
-          else if (v < 80) index = 3
+          else if (v < 70) index = 2
+          else if (v < 90) index = 3
           else index = 4
 
-          const number = `(${index + 1}/${labelsList.length})`
+          const step = `(${index + 1}/${labelsList.length})`
           const label = labelsList[index]
 
           return (
             <div data-helpertext>
-              {number} {label}
+              {step} {label}
             </div>
           )
         }

@@ -28,10 +28,10 @@ import WelcomeBar from './layouts/WelcomeBar/'
 
 // context
 import { useConnection } from 'metaeditor/context/';
+import { SentimentSatisfiedAltSharp } from '@mui/icons-material';
 
 // config
-const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
-const logoUrl = env.staticUrl('player', 'logo_ue.svg')
+const defaultLogoUrl = env.staticUrl('player', 'logo_ue.svg')
 
 
 function PlayerContent({ autoConnect, setServerData, ...props }) {
@@ -40,7 +40,15 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
   const notifyController = useNotifyController()
   const { showInterface } = useLogicConnect()
 
+  // refs
   const refCallbackProgress = React.useRef(null)
+
+  // states
+  const [metadata, setMetadata] = React.useState({
+    video_url: false,
+    logo_url: false,
+  })
+
 
   React.useEffect(async () => {
 
@@ -51,7 +59,9 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
 
       if (autoConnect) {
         if (router.query.session) {
-          connection.startSessionUuuid(router.query.session)
+          connection.startSessionUuuid(router.query.session, (metadata) => {
+            setMetadata(metadata)
+          })
 
         } else {
 
@@ -60,10 +70,11 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
             return false
           }
 
-          const session = await connection.getSessionUuid(buildId)
+          const session = await connection.getSessionData(buildId)
 
           if (session) {
-            const newQuery = { ...router.query, session }
+
+            const newQuery = { ...router.query, session: session.uuid }
             delete newQuery.build_id
 
             router.push({ pathname: router.pathname, query: newQuery }, undefined, { shallow: true });
@@ -116,7 +127,7 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
       <DevBar />
       <CallbackProgress ref={refCallbackProgress} />
       <WelcomeBar />
-      <Preloader videoUrl={videoUrl} logoUrl={logoUrl} />
+      <Preloader videoUrl={metadata.video_url} logoUrl={metadata.logo_url || defaultLogoUrl} />
       <RippleClick />
 
       {/* Custom components */}
