@@ -78,11 +78,20 @@ function PixelWrapper() {
         }}
         settings={{
           volume: 1,
+          quality: 1,
           connectOnStart: false,
+
           host: serverData.host,
-          port: serverData.port
+          port: serverData.port,
+
+          pixelStreaming: {
+            warnTimeout: 120,
+            closeTimeout: 10,
+            lockMouse: false,
+            autoPlay: true,
+            fakeMouseWithTouches: false,
+          }
         }}
-        quality={1}
         isDev={isDev} >
 
         {(payload) => (

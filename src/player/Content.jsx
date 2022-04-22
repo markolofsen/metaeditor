@@ -30,10 +30,8 @@ import WelcomeBar from './layouts/WelcomeBar/'
 import { useConnection } from 'metaeditor/context/';
 
 // config
-const defaultBuildId = 'car11'
 const videoUrl = 'https://github.com/markolofsen/unrealos_doc/raw/main/.drive/videos/intro.mp4'
 const logoUrl = env.staticUrl('player', 'logo_ue.svg')
-
 
 
 function PlayerContent({ autoConnect, setServerData, ...props }) {
@@ -49,12 +47,20 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
     if (router.isReady) {
 
       connection.setAutoConnect(autoConnect)
+      const buildId = router.query.build_id
 
       if (autoConnect) {
         if (router.query.session) {
           connection.startSessionUuuid(router.query.session)
+
         } else {
-          const session = await connection.getSessionUuid(router.query.build_id || defaultBuildId)
+
+          if (!buildId) {
+            alert('Build ID not specified!')
+            return false
+          }
+
+          const session = await connection.getSessionUuid(buildId)
 
           if (session) {
             const newQuery = { ...router.query, session }
@@ -67,7 +73,6 @@ function PlayerContent({ autoConnect, setServerData, ...props }) {
             alert(errMsg)
             // throw new Error()
           }
-
         }
       }
     }

@@ -40,8 +40,8 @@ const CloseButton = styled.custom(IconButton, theme => ({
   backgroundColor: '#fff',
   border: `solid 2px #000`,
   position: 'absolute',
-  top: theme.spacing(-1),
-  right: theme.spacing(-1),
+  top: theme.spacing(1.5),
+  right: theme.spacing(1.5),
   boxShadow: theme.shadows[5],
   '&:hover': {
     backgroundColor: '#fff',
@@ -77,7 +77,7 @@ function QrCodeTransition() {
           borderRadius: theme => theme.shape.borderRadius + 'px',
         }}>
           <Typography variant="h6" align="center" sx={{ mb: 4, maxWidth: 350, color: '#000' }}>
-            Scan this QR code with your phone to continue browsing on your phone.
+            Scan this QR code to continue browsing on your phone.
           </Typography>
 
           <QrCode

@@ -64,8 +64,6 @@ function moduleExports(phase) {
 	let res = {
 		env: withEnv(phase),
 		trailingSlash: false,
-		// pagesPaths: ['src/pages', 'src/pages2'],
-
 		reactStrictMode: false,
 
 		eslint: {
@@ -84,14 +82,14 @@ function moduleExports(phase) {
 			staticFolder: '/static',
 		},
 
-		exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
-			return {
-				'/': { page: '/' },
-				'/404': { page: '/404' },
-				'/dev': { page: '/dev' },
-				// '/p/hello-nextjs': { page: '/post', query: { title: 'hello-nextjs' } },
-			}
-		},
+		// pagesPaths: ['src/pages', 'src/pages2'],
+		// exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
+		// 	return {
+		// 		'/': { page: '/' },
+		// 		'/404': { page: '/404' },
+		// 		// '/p/hello-nextjs': { page: '/post', query: { title: 'hello-nextjs' } },
+		// 	}
+		// },
 	}
 
 

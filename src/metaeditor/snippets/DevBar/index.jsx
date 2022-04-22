@@ -31,9 +31,18 @@ import VolumeButton from './Actions/VolumeButton'
 const PanelDiv = styled.custom(Box, theme => ({
   position: 'absolute',
   zIndex: theme.zIndex.appBar + 1,
-  pointerEvents: 'all',
+  top: 0,
+  left: 0,
+  right: 0,
   display: 'flex',
-  top: theme.spacing(3),
+  justifyContent: 'space-between',
+
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2),
+  },
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(3),
+  },
 }))
 
 function DevBar(props) {
@@ -119,28 +128,32 @@ function DevBar(props) {
   }
 
   return (
-    <>
+    <PanelDiv>
 
-      <PanelDiv sx={{ left: theme => theme.spacing(3) }}>
-        {renderDialog()}
-        <AppBar handleMenu={handleMenu} />
-        <Box sx={{ ml: .5, display: 'flex', gap: theme => theme.spacing(.5) }}>
-          <FullscreenButton />
-          <VolumeButton />
-          <div id="metaeditor-toolbar-left" />
+      <div>
+        <Box style={{ display: 'flex', pointerEvents: 'all' }}>
+          {renderDialog()}
+          <AppBar handleMenu={handleMenu} />
+          <Box sx={{ ml: .5, display: 'flex', gap: theme => theme.spacing(.5) }}>
+            <FullscreenButton />
+            <VolumeButton />
+            <div id="metaeditor-toolbar-left" />
+          </Box>
         </Box>
-      </PanelDiv>
+      </div>
 
-      <PanelDiv
-        id="metaeditor-toolbar-right"
-        sx={{
-          right: theme => theme.spacing(3),
-          alignItems: 'center',
-          gap: theme => theme.spacing(2),
-        }}>
-      </PanelDiv>
+      <div>
+        <Box
+          id="metaeditor-toolbar-right"
+          style={{ pointerEvents: 'all' }}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: theme => theme.spacing(2),
+          }} />
+      </div>
 
-    </>
+    </PanelDiv>
   )
 };
 
