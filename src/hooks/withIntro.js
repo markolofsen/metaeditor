@@ -5,7 +5,7 @@ import { useSound } from "metalib/common/hooks/";
 
 
 // api
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // context
 import { usePlayer } from 'metaeditor/context/';

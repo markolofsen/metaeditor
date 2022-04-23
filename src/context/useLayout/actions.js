@@ -1,7 +1,7 @@
 import React from "react"
 
 // api
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // context
 import { usePlayer } from 'metaeditor/context/';

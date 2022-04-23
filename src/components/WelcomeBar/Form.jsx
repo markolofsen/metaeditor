@@ -1,5 +1,5 @@
 // env
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // material
 import Button from '@mui/material/Button'

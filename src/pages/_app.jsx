@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // api
-import env from 'src/api/env'
+import env from 'api/env'
 
 // next
 import Head from "next/head";

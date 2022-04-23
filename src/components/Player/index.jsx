@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // api
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // components
 import MetaEditor from 'metaeditor/';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // api
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // styles
 import { styled } from 'metalib/styles/'

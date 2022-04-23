@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 
 // api
-import { env } from 'src/api/'
+import { env } from 'api/'
 
 // libs
 import url from 'url'
