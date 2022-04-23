@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-// api
-import { env } from 'api/'
+// config
+import { env } from 'config/'
 
 // hooks
 import { useMedia } from 'metalib/common/hooks/'

@@ -1,5 +1,5 @@
 // env
-import { env } from 'api/'
+import { env } from 'config/'
 
 // material
 import Button from '@mui/material/Button'
@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 // components
 import { Formik, Fields } from 'metalib/components/Formik/'
 
-// api
+// config
 import { Request } from 'metalib/common/libs/'
 
 

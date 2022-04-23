@@ -1,7 +1,7 @@
 import * as React from "react";
 
-// api
-import env from 'api/env'
+// config
+import { env } from 'config/'
 
 // next
 import Head from "next/head";

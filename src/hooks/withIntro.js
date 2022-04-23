@@ -4,8 +4,8 @@ import React from "react"
 import { useSound } from "metalib/common/hooks/";
 
 
-// api
-import { env } from 'api/'
+// config
+import { env } from 'config/'
 
 // context
 import { usePlayer } from 'metaeditor/context/';

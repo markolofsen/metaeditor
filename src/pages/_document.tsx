@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-// api
-import env from '../api/env'
+// config
+import { env } from 'config/'
 
 // next
 import Document, { Html, Head, Main, NextScript } from 'next/document';

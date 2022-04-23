@@ -1,8 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-// api
-import { env } from 'api/'
+// config
+import { env } from 'config/'
 
 // styles
 import { styled } from 'metalib/styles/'
