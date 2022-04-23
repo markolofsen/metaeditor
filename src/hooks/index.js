@@ -1,9 +1,11 @@
-import { default as useRouter } from './useRouter'
-import { default as useAnalytics } from './useAnalytics'
+import useRouter from './useRouter'
+import useAnalytics from './useAnalytics'
+import withIntro from './withIntro'
 
 export {
   useRouter,
   useAnalytics,
+  withIntro,
 }
 
 export default undefined

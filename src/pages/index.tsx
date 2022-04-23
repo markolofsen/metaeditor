@@ -1,14 +1,12 @@
 import * as React from 'react';
 
-// components
-import Player from 'player/'
+// views
+import Home from 'src/pages.views/home/'
 
-const Home = () => {
-
+const Page = () => {
   return (
-    <Player />
+    <Home />
   )
-
 };
 
-export default Home;
+export default Page;

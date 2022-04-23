@@ -5,6 +5,7 @@ const ConfigClass = new class {
 	constructor() {
 
 		this.PUBLIC_URL = process.env.PUBLIC_URL
+		this.DEV_URL = process.env.DEV_URL
 		this.API_URL = process.env.API_URL
 
 		const isDev = process.env.isDev || process.env.NODE_ENV !== 'production'

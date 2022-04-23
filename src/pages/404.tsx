@@ -7,7 +7,7 @@ import { styled } from 'metalib/styles/'
 import { Button, Typography } from '@mui/material';
 
 // layouts
-import Container from 'layouts/Container'
+import Container from 'src/layouts/Container'
 
 
 const RootList = styled.ul(theme => ({

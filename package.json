@@ -19,7 +19,8 @@
   },
   "workspaces": {
     "packages": [
-      "src/**/**/**/**"
+      "metaeditor/**/**",
+      "src/**/**"
     ],
     "nohoist": []
   },
