@@ -1,13 +1,13 @@
 import React from "react";
 
 // context
-import { usePlayer } from '../../../context/'
+import { usePlayer } from '../../context/'
 
 // hooks
 import useSignal from '../useSignal/'
 
 // hooks
-import { useNotify } from '../../hooks/'
+import { useNotify } from '../../@common/hooks/'
 
 
 

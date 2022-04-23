@@ -4,10 +4,13 @@ import React from "react";
 import { styled } from 'metalib/styles/'
 
 // hooks
-import { useNotify } from "../../hooks/";
+import { useNotify } from "../../@common/hooks/";
+
+// controllers
+import { useTrigger } from '../'
 
 // components
-import JsonEditor from '../../../components/JsonEditor/'
+import JsonEditor from '../../components/JsonEditor/'
 
 
 const ContentDiv = styled.ul(theme => ({
@@ -20,18 +23,7 @@ const ContentDiv = styled.ul(theme => ({
 function useCommand() {
   const notify = useNotify()
 
-  React.useEffect(() => {
-
-    document.addEventListener('metaeditor_command', sendCommand)
-    document.addEventListener('metaeditor_callback', sendCallback)
-
-    return () => {
-      document.removeEventListener('metaeditor_command', sendCommand)
-      document.removeEventListener('metaeditor_callback', sendCallback)
-    };
-  }, []);
-
-  const sendCommand = ({ detail }) => {
+  const onCommand = ({ detail }) => {
 
     const content = renderBody(detail.payload)
     notify.info(content, {
@@ -40,7 +32,7 @@ function useCommand() {
     })
   }
 
-  const sendCallback = ({ detail }) => {
+  const onCallback = ({ detail }) => {
 
     // if (payload?.error) {
     //   notify.error(payload.error, {
@@ -57,6 +49,8 @@ function useCommand() {
     })
   }
 
+  useTrigger({ onCommand, onCallback })
+
   const renderBody = (data) => {
     return (
       <ContentDiv>
@@ -72,11 +66,6 @@ function useCommand() {
       </ContentDiv>
     )
   }
-
-  return {
-    sendCommand,
-    sendCallback,
-  };
 
 }
 

@@ -4,7 +4,7 @@ import React from "react";
 import { format } from 'metalib/common/helpers/'
 
 // context
-import { usePlayer } from '../../../context/';
+import { usePlayer } from '../../context/';
 
 
 function useSignal(props) {

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { usePlayer } from '../context/';
 
 // controllers
-import { useSignal } from '../@common/controllers/'
-import SignalIcon from '../@common/controllers/useSignal/SignalIcon'
+import { useSignal } from '../@controllers/'
+import SignalIcon from '../@controllers/useSignal/SignalIcon'
 
 // material
 import { styled } from 'metalib/styles/'

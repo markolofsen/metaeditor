@@ -7,7 +7,7 @@ import { env } from 'config/'
 import { useConnection } from 'metaeditor/context/';
 
 // controllers
-import { useNotifyController } from 'metaeditor/@common/controllers/'
+import { useNotifyController } from 'metaeditor/@controllers/'
 
 // snippets
 import {

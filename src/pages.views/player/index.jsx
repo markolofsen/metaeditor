@@ -8,7 +8,7 @@ import { useConnection } from 'metaeditor/context/';
 import { useParent } from 'src/context/';
 
 // controllers
-import { useNotifyController } from 'metaeditor/@common/controllers/'
+import { useNotifyController } from 'metaeditor/@controllers/'
 
 // hooks
 import { useRouter } from 'src/hooks/';

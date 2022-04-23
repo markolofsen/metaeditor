@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+// controllers
+import { useTrigger } from '../@controllers/'
+
 // styles
 import { styled } from 'metalib/styles/'
-
 
 // material
 import MuiLinearProgress from '@mui/material/LinearProgress';
@@ -24,27 +26,16 @@ const LinearProgress = styled.custom(MuiLinearProgress, theme => ({
 }))
 
 export default function useCommandLoader() {
-  // const player = usePlayer()
   const refInteval = React.useRef(null)
-
   const [progress, setProgress] = React.useState(-1);
-  // const playerLoaded = player.state.loaded
 
   React.useEffect(() => {
-
-    document.addEventListener('metaeditor_command', handleStart)
-    document.addEventListener('metaeditor_callback', handleStop)
-
     return () => {
-
-      document.removeEventListener('metaeditor_command', handleStart)
-      document.removeEventListener('metaeditor_callback', handleStop)
-
       clearInterval(refInteval.current);
     };
   }, []);
 
-  const handleStop = () => {
+  const onCallback = () => {
     clearInterval(refInteval.current);
     setProgress(100)
 
@@ -53,7 +44,7 @@ export default function useCommandLoader() {
 
   }
 
-  const handleStart = () => {
+  const onCommand = () => {
 
     clearInterval(refInteval.current);
     setProgress(0)
@@ -69,6 +60,8 @@ export default function useCommandLoader() {
       });
     }, 500);
   };
+
+  useTrigger({ onCommand, onCallback })
 
   if (progress === -1) {
     return (<div />);
