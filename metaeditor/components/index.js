@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import PixelStreaming, { usePS, DebugData } from 'pixel-streaming'
-// import PixelStreaming, { usePS, DebugData } from './.pixel-streaming/'
+import PixelStreaming, { usePS, PS, DebugData } from 'pixel-streaming'
+// import PixelStreaming, { usePS, PS, DebugData } from './.pixel-streaming/'
 
 import CarouselItems from './CarouselItems/'
 
@@ -18,7 +18,7 @@ import QrCode from './QrCode/'
 
 
 export {
-    PixelStreaming, usePS, DebugData,
+    PixelStreaming, usePS, PS, DebugData,
 
     CarouselItems,
     MetaDrawer, Card, CardItem,

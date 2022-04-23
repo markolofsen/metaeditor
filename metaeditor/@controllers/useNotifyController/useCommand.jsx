@@ -7,7 +7,7 @@ import { styled } from 'metalib/styles/'
 import { useNotify } from "../../@common/hooks/";
 
 // controllers
-import { useTrigger } from '../'
+import { PS } from "metaeditor/components/";
 
 // components
 import JsonEditor from '../../components/JsonEditor/'
@@ -25,7 +25,7 @@ function useCommand() {
 
   const onCommand = ({ detail }) => {
 
-    const content = renderBody(detail.payload)
+    const content = renderBody(detail)
     notify.info(content, {
       title: detail.command,
       key: undefined, //payload.verification_id,
@@ -42,14 +42,14 @@ function useCommand() {
     //   return;
     // }
 
-    const content = renderBody(detail.payload)
+    const content = renderBody(detail)
     notify.info(content, {
       title: '>> ' + detail.command,
       key: undefined,
     })
   }
 
-  useTrigger({ onCommand, onCallback })
+  PS.useTrigger({ onCommand, onCallback })
 
   const renderBody = (data) => {
     return (

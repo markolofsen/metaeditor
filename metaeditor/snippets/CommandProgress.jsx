@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // controllers
-import { useTrigger } from '../@controllers/'
+import { PS } from '../components/'
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -61,7 +61,7 @@ export default function useCommandLoader() {
     }, 500);
   };
 
-  useTrigger({ onCommand, onCallback })
+  PS.useTrigger({ onCommand, onCallback })
 
   if (progress === -1) {
     return (<div />);
