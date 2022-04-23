@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-// controllers
-import { PS } from '../components/'
+// context
+import { usePlayer } from '../context/';
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -26,6 +26,8 @@ const LinearProgress = styled.custom(MuiLinearProgress, theme => ({
 }))
 
 export default function useCommandLoader() {
+  const player = usePlayer()
+
   const refInteval = React.useRef(null)
   const [progress, setProgress] = React.useState(-1);
 
@@ -61,7 +63,7 @@ export default function useCommandLoader() {
     }, 500);
   };
 
-  PS.useTrigger({ onCommand, onCallback })
+  player.cls.useTrigger({ onCommand, onCallback })
 
   if (progress === -1) {
     return (<div />);

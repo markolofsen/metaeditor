@@ -104,13 +104,4 @@ function CustomizedDialogs(props) {
   );
 }
 
-
-CustomizedDialogs.propTypes = {
-  config: PropTypes.exact({
-    url: PropTypes.string.isRequired,
-    customFields: PropTypes.object.isRequired,
-  }).isRequired,
-};
-
-
 export default CustomizedDialogs

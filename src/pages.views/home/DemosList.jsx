@@ -24,39 +24,23 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Box'
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon'
 
 
-
-const HeaderList = styled.ul(theme => ({
+const IconBox = styled.custom(Box, theme => ({
+  height: '100%',
   display: 'flex',
-  gap: theme.spacing(2),
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    padding: theme.spacing(5, 0),
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(0,0,0,.4)',
+  transition: theme.transitions.create(['all']),
+  '&:hover': {
+    backgroundColor: 'rgba(0,0,0,0)'
   },
-  [theme.breakpoints.up('sm')]: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: theme.spacing(10, 0),
-  },
-  '& > li': {
-    [theme.breakpoints.down('sm')]: {
-      textAlign: 'center',
-    },
-  },
-  '& > [data-li="img"]': {
-    '& img': {
-      width: '100%',
-      maxWidth: 250,
-    },
-  },
-  '& > [data-li="button"]': {
-
-  },
+  '& > .material-icons': {
+    fontSize: '3rem',
+  }
 }))
-
 
 function DemosList() {
   const router = useRouter()
@@ -87,63 +71,43 @@ function DemosList() {
   ]
 
 
-  const renderItems = () => {
-    if (data === false) {
-      return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
-          <CircularProgress size={30} color="inherit" />
-        </Box>
-      )
-    }
-
+  if (data === false) {
     return (
-      <Grid container spacing={6}>
-        {data.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card sx={{ height: '100%' }}>
-              <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref>
-                <CardMedia
-                  component='a'
-                  sx={{ height: '14.5625rem' }} image={item.preview_small} />
-              </Link>
-              <CardContent>
-                <Typography variant='h6' sx={{ marginBottom: 2 }}>
-                  {item.title}
-                </Typography>
-                <Typography variant='body2'>
-                  {item.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+        <CircularProgress size={30} color="inherit" />
+      </Box>
     )
   }
 
-
   return (
-    <Box sx={{ pointerEvents: 'all', pb: 10 }}>
-      <Container maxWidth='lg'>
-
-        <HeaderList>
-          <li data-li="img">
-            <a href="https://metaeditor.io">
-              <img src={env.data.logo_svg.white} />
-            </a>
-          </li>
-          <li data-li="button">
-            <Button component="a" href={env.DEV_URL} variant="outlined" size="large" color='inherit'>
-              Developer Version
-            </Button>
-          </li>
-        </HeaderList>
-
-        {renderItems()}
-
-      </Container>
-    </Box >
+    <Grid container spacing={6}>
+      {data.map((item, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <Card sx={{ height: '100%' }}>
+            <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref>
+              <CardMedia
+                component='a'
+                sx={{ height: '14.5625rem' }}
+                image={item.preview_small}>
+                <IconBox>
+                  <Icon>play_arrow</Icon>
+                </IconBox>
+              </CardMedia>
+            </Link>
+            <CardContent>
+              <Typography variant='h6' sx={{ marginBottom: 2 }}>
+                {item.title}
+              </Typography>
+              <Typography variant='body2'>
+                {item.description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
   )
+
 }
 
 export default DemosList

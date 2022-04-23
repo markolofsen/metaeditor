@@ -259,8 +259,8 @@ function Preloader({ logoUrl, videoUrl }) {
 
 
 Preloader.propTypes = {
-  logoUrl: PropTypes.string,
-  videoUrl: PropTypes.string,
+  logoUrl: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  videoUrl: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default Preloader

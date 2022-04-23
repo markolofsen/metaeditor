@@ -11,18 +11,25 @@ import Button from '@mui/material/Button';
 export default function CallbacksDemo() {
   const player = usePlayer()
   const [disabled, setDisabled] = React.useState(false)
-  const callbackUserSound = player.cls.callbacks.getLast('click_on_door')
 
-  React.useEffect(() => {
-    if (callbackUserSound) {
-      alert('Independent callback')
+  const onCommand = ({ detail }) => {
+    if (detail.command === 'test_command') {
+      alert('Command\n' + JSON.stringify(detail))
     }
-  }, [callbackUserSound])
+  }
+
+  const onCallback = ({ detail }) => {
+    if (detail.command === 'test_command') {
+      alert('Callback\n' + JSON.stringify(detail))
+    }
+  }
+
+  player.cls.useTrigger({ onCommand, onCallback })
 
   const testCommand = async () => {
     setDisabled(true)
-    await player.cmd.emit({
-      command: 'change_color',
+    await player.cls.emitAsync({
+      command: 'test_command',
       request: {
         // The request body should only contain a json object.
         body: { volume: 1 },

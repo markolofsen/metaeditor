@@ -6,8 +6,8 @@ import { styled } from 'metalib/styles/'
 // hooks
 import { useNotify } from "../../@common/hooks/";
 
-// controllers
-import { PS } from "metaeditor/components/";
+// context
+import { usePlayer } from "../../context/";
 
 // components
 import JsonEditor from '../../components/JsonEditor/'
@@ -22,6 +22,7 @@ const ContentDiv = styled.ul(theme => ({
 
 function useCommand() {
   const notify = useNotify()
+  const player = usePlayer()
 
   const onCommand = ({ detail }) => {
 
@@ -49,7 +50,7 @@ function useCommand() {
     })
   }
 
-  PS.useTrigger({ onCommand, onCallback })
+  player.cls.useTrigger({ onCommand, onCallback })
 
   const renderBody = (data) => {
     return (

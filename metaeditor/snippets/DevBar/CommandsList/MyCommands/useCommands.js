@@ -31,7 +31,7 @@ export default function useCommands() {
 
       setStatus('await')
 
-      await player.cmd.emit({
+      await player.cls.emitAsync({
         command: item.slug,
         verification_id: undefined, //item.id,
         initiator: item.is_fake && 'fake',

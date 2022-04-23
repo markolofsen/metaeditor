@@ -17,19 +17,6 @@ const actions = () => {
     payload,
   })
 
-  const commands = new class {
-    constructor() { }
-
-    async emit(payload) {
-      // const { type, value, verification_id, error, fakeResponse } = payload
-      return await PS.cls.emitAsync(payload)
-    }
-
-    // testCommand(value) {
-    //   this.emit({type: 'test_command', value})
-    // }
-  }
-
   const response = new class {
     get state() {
       return PS.state;
@@ -39,9 +26,6 @@ const actions = () => {
     }
     get connector() {
       return PS.connector;
-    }
-    get cmd() {
-      return commands;
     }
   }
 
