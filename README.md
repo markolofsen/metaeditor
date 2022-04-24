@@ -1,10 +1,11 @@
-# MetaEditor — Open Source solution for Unreal Engine. Helps develop Pixel Streaming with React.js.
+# MetaEditor — React.js Pixel Streaming for Unreal Engine
+
+### MetaEditor offers a complete set of tools for professionally developing and running applications with Unreal Engine in browsers.
 
 
-
-> [Pixel Streaming Documentation](http://metaeditor.io/)
-> 
-> By [UnrealOS](https://unrealos.com/)
+* [Pixel Streaming Documentation](http://metaeditor.io/)
+ 
+* [Online demo](https://ps.metaeditor.io/)
 
 
 <p align="center">
