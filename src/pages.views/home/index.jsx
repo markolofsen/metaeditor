@@ -82,7 +82,7 @@ const Home = () => {
             </li>
             <li data-li="button">
               <Link href={getDevUrl()} passHref>
-                <Button component="a" variant="outlined" size="large" color='inherit'>
+                <Button component="a" target="_blank" variant="outlined" size="large" color='inherit'>
                   Developer Version
                 </Button>
               </Link>

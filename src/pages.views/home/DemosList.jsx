@@ -87,6 +87,7 @@ function DemosList() {
             <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref>
               <CardMedia
                 component='a'
+                target="_blank"
                 sx={{ height: '14.5625rem' }}
                 image={item.preview_small}>
                 <IconBox>
