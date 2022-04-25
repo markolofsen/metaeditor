@@ -52,7 +52,7 @@ const RootBox = styled.custom(MuiBox, theme => ({
   flexGrow: 1,
   backgroundColor: 'rgba(0,0,0,1)',
 
-  '&[data-loaded="true"]': {
+  '&[data-active="true"]': {
     pointerEvents: 'none',
     animationName: 'preloader-opacity',
     animationDuration: '2.5s',
@@ -132,13 +132,13 @@ function Preloader({ logoUrl, videoUrl }) {
 
   const renderInner = () => {
 
-    if (player.state.connected && player.state.loaded) {
+    if (player.state.active) {
       return (<div />);
     }
 
     const renderPreloader = () => {
 
-      if (player.connector.accessible && !player.state.stream_connecting) {
+      if (player.connector.accessible && !player.state.stream_connecting && !player.state.loaded) {
         return (
           <ButtonStopped
             onClick={() => {
@@ -242,9 +242,8 @@ function Preloader({ logoUrl, videoUrl }) {
     )
   }
 
-  const playerLoaded = player.state.loaded
   return (
-    <RootBox data-loaded={playerLoaded}>
+    <RootBox data-active={player.state.active}>
       {renderInner()}
     </RootBox>
   )
