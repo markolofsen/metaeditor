@@ -243,7 +243,7 @@ function Preloader({ logoUrl, videoUrl }) {
   }
 
   return (
-    <RootBox data-active={player.state.active}>
+    <RootBox data-active={player.state.loaded}>
       {renderInner()}
     </RootBox>
   )
