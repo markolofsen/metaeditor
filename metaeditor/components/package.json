@@ -1,0 +1,12 @@
+{
+  "name": "@metaeditor/components",
+  "version": "1.0.1",
+  "private": true,
+  "dependencies": {
+    "react-items-carousel": "latest",
+    "react-draggable": "^4.4.4",
+    "react-json-editor-ajrm": "latest",
+    "html-entities": "^2.3.2",
+    "notistack": "^2.0.3"
+  }
+}
