@@ -2,10 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // hooks
-import { useStorage, useParseUrl } from 'metalib/common/hooks/'
-
-// context
-import { useConnection } from 'metaeditor/context/';
+import { useStorage } from 'metalib/common/hooks/'
 
 // material
 import Box from '@mui/material/Box';
@@ -20,33 +17,20 @@ import PreloaderProgress from 'metaeditor/snippets/Preloader/Progress'
 // blocks
 import Form from './Form'
 
+// config
+const STORAGE_KEY = 'WelcomeBar'
 
-function CustomizedDialogs(props) {
-  const connection = useConnection()
-  const parseUrl = useParseUrl()
+
+function CustomizedDialogs() {
+  const storage = useStorage()
   const refDialog = React.useRef(null)
 
-  const storage = useStorage()
-  const storageKey = 'welcome-bar'
-
-  const [mounted, setMounted] = React.useState(false)
-
   React.useEffect(() => {
-
-    if (parseUrl.active && !parseUrl.query?.mode) {
-
-      if (!mounted && connection.state.auto_connect === true) {
-        handleOpen()
-        setMounted(true)
-      }
-    }
-
-  }, [parseUrl.active, connection.state.auto_connect])
+    handleOpen()
+  }, [])
 
   const handleOpen = () => {
-
-    const stored_data = storage.getItem(storageKey, 'local')
-
+    const stored_data = storage.getItem(STORAGE_KEY, 'local')
     if (stored_data !== 'success') {
       setTimeout(() => {
         refDialog.current.open()
@@ -55,7 +39,7 @@ function CustomizedDialogs(props) {
   }
 
   const onSuccess = () => {
-    storage.setItem(storageKey, 'success', 'local')
+    storage.setItem(STORAGE_KEY, 'success', 'local')
     refDialog.current.close()
   }
 
@@ -81,7 +65,6 @@ function CustomizedDialogs(props) {
         <Typography variant="h5" sx={{ mb: 4 }}>
           Enter your details
         </Typography>
-
 
         <Form onSuccess={onSuccess} />
 

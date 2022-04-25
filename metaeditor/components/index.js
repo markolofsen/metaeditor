@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import PixelStreaming, { usePS, DebugData } from 'pixel-streaming'
-// import PixelStreaming, { usePS, DebugData } from './.pixel-streaming/'
+// import PixelStreaming, { usePS, DebugData } from 'pixel-streaming'
+import PixelStreaming, { usePS, DebugData } from './.pixel-streaming/'
 
 import CarouselItems from './CarouselItems/'
 
