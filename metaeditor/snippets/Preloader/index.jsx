@@ -138,16 +138,9 @@ function Preloader({ logoUrl, videoUrl }) {
 
     const renderPreloader = () => {
 
-      const streamAccesible = player.connector.accessible
-      const streamIsConnected = player.state.loaded && player.state.connected
-      const streamIsConnecting = player.state.loaded && !player.state.connected
-      const streamIsActive = streamAccesible && streamIsConnected && !player.state.stream_stopped
-      // const connectOnStart = player.state.settings.connectOnStart && streamIsActive
-
-      if (streamAccesible && !streamIsConnected) {
+      if (player.connector.accessible && !player.state.stream_connecting) {
         return (
           <ButtonStopped
-            disabled={streamIsConnecting}
             onClick={() => {
               player.connector.initConnection()
             }}>
