@@ -4,14 +4,14 @@ import * as React from 'react';
 import useOffline from './useOffline'
 import useSlowConnection from './useSlowConnection'
 import useKillStream from './useKillStream'
-import useCommand from './useCommand'
+import useEventsTrigger from './useEventsTrigger'
 
 
 function useNotifyController() {
   useOffline()
   useSlowConnection()
   useKillStream()
-  useCommand()
+  useEventsTrigger()
 }
 
 export default useNotifyController

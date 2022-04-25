@@ -12,13 +12,13 @@ export default function CallbacksDemo() {
   const player = usePlayer()
   const [disabled, setDisabled] = React.useState(false)
 
-  const onCommand = ({ detail }) => {
+  const onCommand = (detail) => {
     if (detail.command === 'test_command') {
       alert('Command\n' + JSON.stringify(detail))
     }
   }
 
-  const onCallback = ({ detail }) => {
+  const onCallback = (detail) => {
     if (detail.command === 'test_command') {
       alert('Callback\n' + JSON.stringify(detail))
     }

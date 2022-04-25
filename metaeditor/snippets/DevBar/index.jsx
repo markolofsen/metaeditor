@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
-import { useConnection, useSystem } from '../../context/';
+import { usePlayer, useConnection, useSystem } from '../../context/';
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -48,6 +48,7 @@ const PanelDiv = styled.custom(Box, theme => ({
 function DevBar(props) {
   useSystem()
 
+  const player = usePlayer()
   const connection = useConnection()
 
   const refSystemDialog = React.useRef(null)
@@ -61,6 +62,18 @@ function DevBar(props) {
   //   refSystemDialog.current?.open()
   // }, [])
 
+
+  /**
+   * Set devtools from cofnig
+   */
+  const { showDevTools } = player.state.metaSettings
+  React.useEffect(() => {
+    setShow(showDevTools)
+  }, [showDevTools])
+
+  /**
+   * Hotkeys
+   */
   useHotkeys('ctrl+r', async (e, ke) => {
     if (!e.repeat) {
       if (confirm('Do you want to restart the streaming server?')) {

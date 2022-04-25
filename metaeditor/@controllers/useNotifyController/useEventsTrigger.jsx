@@ -20,11 +20,14 @@ const ContentDiv = styled.ul(theme => ({
 
 
 
-function useCommand() {
+export default function useEventsTrigger() {
   const notify = useNotify()
   const player = usePlayer()
 
-  const onCommand = ({ detail }) => {
+  const { notifyCommands, notifyCallbacks } = player.state.metaSettings
+
+  const onCommand = (detail) => {
+    if (!notifyCommands) return
 
     const content = renderBody(detail)
     notify.info(content, {
@@ -33,7 +36,8 @@ function useCommand() {
     })
   }
 
-  const onCallback = ({ detail }) => {
+  const onCallback = (detail) => {
+    if (!notifyCallbacks) return
 
     // if (payload?.error) {
     //   notify.error(payload.error, {
@@ -69,5 +73,3 @@ function useCommand() {
   }
 
 }
-
-export default useCommand

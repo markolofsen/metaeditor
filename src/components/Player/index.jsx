@@ -60,10 +60,8 @@ function Player(props) {
           volume: 1,
           quality: 1,
           connectOnStart: false,
-
           host: parent.state.serverData.host,
           port: parent.state.serverData.port,
-
           pixelStreaming: {
             warnTimeout: 120,
             closeTimeout: 10,
@@ -71,7 +69,12 @@ function Player(props) {
             fakeMouseWithTouches: false,
           }
         }}
-        isDev={isDev}>
+        metaSettings={{
+          isDev,
+          showDevTools: true,
+          notifyCommands: true,
+          notifyCallbacks: true,
+        }}>
 
         {(payload) => (
           <MetaEditorProvider>
