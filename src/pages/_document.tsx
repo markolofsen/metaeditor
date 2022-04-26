@@ -1,12 +1,7 @@
 import * as React from 'react';
 
-<<<<<<< .merge_file_Eo16MI
-// api
-import env from '../api/env'
-=======
 // config
 import { env } from 'config/'
->>>>>>> .merge_file_garBdM
 
 // next
 import Document, { Html, Head, Main, NextScript } from 'next/document';

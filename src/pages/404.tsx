@@ -3,19 +3,11 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 
 // material
-<<<<<<< .merge_file_30ERZr
-import { styled } from 'metaeditor/common/styles/'
-import { Button, Typography } from '@mui/material';
-
-// layouts
-import Container from 'layouts/Container'
-=======
 import { styled } from 'metalib/styles/'
 import { Button, Typography } from '@mui/material';
 
 // layouts
 import Container from 'src/layouts/Container'
->>>>>>> .merge_file_oHPs1a
 
 
 const RootList = styled.ul(theme => ({
