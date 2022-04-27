@@ -57,7 +57,6 @@ function Player(props) {
         settings={{
           volume: 1,
           quality: 1,
-          connectOnStart: false,
           pixelStreaming: {
             warnTimeout: 120,
             closeTimeout: 10,

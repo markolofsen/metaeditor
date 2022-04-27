@@ -138,7 +138,7 @@ function Preloader({ logoUrl, videoUrl }) {
 
     const renderPreloader = () => {
 
-      if (!player.state.stream_connecting && !player.state.loaded) {
+      if (player.state.settings.host && !player.state.stream_connecting && !player.state.loaded) {
         return (
           <ButtonStopped
             onClick={() => {
