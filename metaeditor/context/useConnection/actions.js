@@ -3,8 +3,12 @@ import React from "react"
 // @common
 import { useApi } from '../../@common/hooks/'
 
+// context
+import { usePlayer } from "../usePlayer/";
+
 
 const actions = () => {
+  const player = usePlayer()
   const api = useApi()
   const refInterval = React.useRef(null)
   const refKillInterval = React.useRef(null)
@@ -53,17 +57,9 @@ const actions = () => {
       dispatch({ auto_connect })
     }
 
-    handleConnection({ host, port }) {
-      if (host) {
-        dispatch({ host })
-      }
-      if (port) {
-        dispatch({ port })
-      }
-    }
-
-    manualConnection({ host, port }) {
-      dispatch({ loaded: true, status: 'localhost', host, port })
+    setConnectionData({ host, port }) {
+      if (host) dispatch({ host })
+      if (port) dispatch({ port })
     }
 
     async startSessionUuuid(sessionUuid, { onSuccess, onError }) {
@@ -80,6 +76,7 @@ const actions = () => {
               dispatch(data)
 
               if (status === 'active') {
+                player.cls.setConnection({ host, port })
                 clearInterval(refInterval.current)
                 this.onTimeToKill()
               }

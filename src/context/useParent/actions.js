@@ -16,10 +16,6 @@ const actions = () => {
       this.state = state
     }
 
-    setServerData({ host, port }) {
-      const serverData = { host, port }
-      dispatch({ serverData })
-    }
   }
 
   return cls

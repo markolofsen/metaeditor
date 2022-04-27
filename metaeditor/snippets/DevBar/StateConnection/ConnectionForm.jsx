@@ -59,10 +59,7 @@ function ConnectionForm(props) {
         host: stored_data?.host,
         port: stored_data?.port,
       }
-
-      if (payload.host && payload.port) {
-        connection.manualConnection(payload)
-      }
+      connection.setConnectionData(payload)
     }
 
   }
@@ -79,10 +76,9 @@ function ConnectionForm(props) {
 
   }, [player.state.loaded])
 
-
   const handleInput = key => event => {
     const value = event.target.value
-    connection.handleConnection({ [key]: value })
+    connection.setConnectionData({ [key]: value })
   }
 
   const setDefault = () => {
@@ -90,12 +86,13 @@ function ConnectionForm(props) {
       <a href="#" onClick={(event) => {
         event.preventDefault()
         event.stopPropagation()
-        connection.handleConnection({
+
+        player.cls.initConnection({
           host: 'http://127.0.0.1',
           port: 80,
         })
       }}>
-        Set default: http://127.0.0.1:80
+        Default: http://127.0.0.1:80
       </a>
     );
   }
@@ -109,9 +106,13 @@ function ConnectionForm(props) {
         event.preventDefault()
         event.stopPropagation()
 
-        // initConnection()
-        connection.initConnection()
-        storage.setItem(STORAGE_KEY, connection.state)
+        const data = {
+          host: connection.state.host,
+          port: connection.state.port,
+        }
+        player.cls.initConnection(data)
+        storage.setItem(STORAGE_KEY, data)
+
       }}>
 
         <Box sx={{ flexGrow: 1, pt: 2, pb: 3 }}>

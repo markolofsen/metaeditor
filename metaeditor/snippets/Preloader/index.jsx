@@ -138,11 +138,11 @@ function Preloader({ logoUrl, videoUrl }) {
 
     const renderPreloader = () => {
 
-      if (player.connector.accessible && !player.state.stream_connecting && !player.state.loaded) {
+      if (!player.state.stream_connecting && !player.state.loaded) {
         return (
           <ButtonStopped
             onClick={() => {
-              player.connector.initConnection()
+              player.cls.initConnection()
             }}>
             <Icon>play_arrow</Icon>
           </ButtonStopped>

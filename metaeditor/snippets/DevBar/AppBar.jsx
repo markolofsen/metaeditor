@@ -55,7 +55,7 @@ const ResponsiveAppBar = (props) => {
   const player = usePlayer()
   const connection = useConnection()
 
-  const { state, cls, connector } = player
+  const { state, cls } = player
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -81,7 +81,7 @@ const ResponsiveAppBar = (props) => {
       case 'play':
         res.icon = state.loaded ? 'pause' : 'play_arrow'
         res.onClick = () => {
-          connector.switchConnection()
+          cls.switchConnection()
         }
         // res.disabled = isStreamDisabled
         break;

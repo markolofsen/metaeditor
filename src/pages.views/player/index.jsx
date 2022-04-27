@@ -50,15 +50,7 @@ const PlayerView = ({ query }) => {
 
   React.useEffect(() => {
     load()
-
   }, [session])
-
-  React.useEffect(() => {
-    const { host, port } = connection.state
-    if (host && port) {
-      parent.setServerData({ host, port })
-    }
-  }, [connection.state])
 
   const onSessionError = () => {
     const errMsg = `Session not found!`

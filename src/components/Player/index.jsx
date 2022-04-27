@@ -7,9 +7,9 @@ import { env } from 'config/'
 import MetaEditor from 'metaeditor/';
 
 // context
-import MetaEditorProvider from 'metaeditor/context/';
-import { useParent } from 'src/context/'
+import MetaEditorProvider, { useConnection } from 'metaeditor/context/';
 import LayoutProvider from 'src/context/useLayout'
+
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -27,8 +27,6 @@ const RootDiv = styled.div(theme => ({
 const isDev = env.isDev
 
 function Player(props) {
-  const parent = useParent()
-
   const refMetaEditor = React.useRef(null)
 
   return (
@@ -60,8 +58,6 @@ function Player(props) {
           volume: 1,
           quality: 1,
           connectOnStart: false,
-          host: parent.state.serverData.host,
-          port: parent.state.serverData.port,
           pixelStreaming: {
             warnTimeout: 120,
             closeTimeout: 10,

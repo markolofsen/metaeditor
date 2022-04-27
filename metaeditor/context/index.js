@@ -29,13 +29,13 @@ import SystemProvider, { useSystem } from './useSystem/';
 
 function ContextProvider(props) {
   return (
-    <ConnectionProvider>
-      <PlayerProvider>
+    <PlayerProvider>
+      <ConnectionProvider>
         <SystemProvider>
           {props.children}
         </SystemProvider>
-      </PlayerProvider>
-    </ConnectionProvider>
+      </ConnectionProvider>
+    </PlayerProvider>
   )
 }
 

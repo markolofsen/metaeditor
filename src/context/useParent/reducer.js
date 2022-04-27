@@ -1,8 +1,5 @@
 const initialState = {
-  serverData: {
-    host: undefined,
-    port: undefined,
-  }
+
 };
 
 const KEY = {

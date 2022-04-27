@@ -3,14 +3,15 @@ import React from "react"
 const Context = React.createContext()
 export const usePlayer = () => React.useContext(Context)
 
-// classes
-import actions from './actions'
+// context
+import { usePS } from '../../components/'
+
 
 const Provider = (props) => {
-	const payload = actions();
+	const PS = usePS()
 
 	return (
-		<Context.Provider value={payload}>
+		<Context.Provider value={PS}>
 			{props.children}
 		</Context.Provider>
 	);
