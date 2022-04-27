@@ -5,6 +5,9 @@
   "dependencies": {
     "lodash": "4.17.21",
     "moment": "^2.29.1",
-    "pixel-streaming": "^2.4.0"
+    "pixel-streaming": "^2.4.3"
+  },
+  "peerDependencies": {
+    "metalib": "^1.1.2"
   }
 }
