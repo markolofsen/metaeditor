@@ -24,10 +24,6 @@ import Icon from '@mui/material/Icon';
 // styles
 import { styled } from 'metalib/styles/'
 
-// blocks
-import ConnectionForm from './StateConnection/ConnectionForm'
-
-
 const AppBar = styled.custom(MuiAppBar, theme => ({
   borderRadius: theme.shape.borderRadius,
   width: 'max-content',
@@ -210,8 +206,6 @@ const ResponsiveAppBar = (props) => {
       <Toolbar disableGutters variant="dense">
         {media.up.sm ? renderMenuDesktop() : renderMenuMobile()}
       </Toolbar>
-
-      <ConnectionForm />
 
     </AppBar>
   );

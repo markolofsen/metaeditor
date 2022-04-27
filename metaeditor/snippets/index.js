@@ -8,6 +8,7 @@ import DevBar from './DevBar/'
 import BackPreloader from './BackPreloader'
 import SignalQuality from './SignalQuality'
 import QrCodeTransition from './QrCodeTransition'
+import ConnectionForm from './DevBar/StateConnection/ConnectionForm'
 
 export {
     CommandProgress,
@@ -18,4 +19,5 @@ export {
     BackPreloader,
     SignalQuality,
     QrCodeTransition,
+    ConnectionForm,
 }

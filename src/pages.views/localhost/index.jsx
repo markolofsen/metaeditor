@@ -15,6 +15,7 @@ import {
   RippleClick,
   DevBar,
   CommandProgress,
+  ConnectionForm,
 } from 'metaeditor/snippets/'
 
 // components
@@ -34,9 +35,9 @@ const PlayerView = () => {
   }, [])
 
   return (
-
     <>
       {/* MetaComponents */}
+      <ConnectionForm />
       <DevBar />
       <RippleClick />
       <CommandProgress />
@@ -46,7 +47,7 @@ const PlayerView = () => {
 };
 
 const WithPlayer = (props) => (
-  <Player >
+  <Player>
     <PlayerView {...props} />
   </Player>
 )
