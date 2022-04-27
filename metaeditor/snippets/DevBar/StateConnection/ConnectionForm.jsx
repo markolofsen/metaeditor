@@ -26,6 +26,11 @@ function ConnectionForm(props) {
   const refDialog = React.useRef(null)
   const storage = useStorage()
 
+  const [data, setData] = React.useState({
+    host: 'http://127.0.0.1',
+    port: 80,
+  })
+
   /**
    * The component instance will be extended
    * with whatever you return from the callback passed
@@ -33,32 +38,27 @@ function ConnectionForm(props) {
    */
   React.useImperativeHandle(props.innerRef, () => ({
     open: () => {
-      refDialog.current.open()
+      openOnStart()
     }
   }));
 
 
   React.useEffect(() => {
-
-    if (connection.state.auto_connect === false) {
-      refDialog.current.open()
-      openOnStart()
-    } else if (connection.state.auto_connect === true) {
-      refDialog.current.close()
-    }
-
-  }, [connection.state.auto_connect])
+    openOnStart()
+  }, [])
 
   const openOnStart = () => {
 
+    refDialog.current.open()
+
     // Restore local server data
     const stored_data = storage.getItem(STORAGE_KEY)
-
     if (stored_data) {
       const payload = {
         host: stored_data?.host,
         port: stored_data?.port,
       }
+      setData(payload)
       connection.setConnectionData(payload)
     }
 
@@ -68,17 +68,15 @@ function ConnectionForm(props) {
   // Close dialog
   React.useEffect(() => {
 
-    if (!connection.state.auto_connect) {
-      if (player.state.loaded) {
-        refDialog.current.close()
-      }
+    if (player.state.loaded) {
+      refDialog.current.close()
     }
 
   }, [player.state.loaded])
 
   const handleInput = key => event => {
     const value = event.target.value
-    connection.setConnectionData({ [key]: value })
+    setData(c => ({ ...c, [key]: value }))
   }
 
   const setDefault = () => {
@@ -87,10 +85,12 @@ function ConnectionForm(props) {
         event.preventDefault()
         event.stopPropagation()
 
-        player.cls.initConnection({
+        const payload = {
           host: 'http://127.0.0.1',
           port: 80,
-        })
+        }
+        setData(payload)
+        connection.setConnectionData(payload)
       }}>
         Default: http://127.0.0.1:80
       </a>
@@ -106,13 +106,10 @@ function ConnectionForm(props) {
         event.preventDefault()
         event.stopPropagation()
 
-        const data = {
-          host: connection.state.host,
-          port: connection.state.port,
-        }
-        player.cls.initConnection(data)
         storage.setItem(STORAGE_KEY, data)
+        player.cls.initConnection(data)
 
+        console.error('@@@connection data', data)
       }}>
 
         <Box sx={{ flexGrow: 1, pt: 2, pb: 3 }}>
@@ -126,7 +123,7 @@ function ConnectionForm(props) {
                 label="Host"
                 type="url"
                 placeholder="http://127.0.0.1"
-                value={connection.state.host}
+                value={data.host}
                 onChange={handleInput('host')}
                 helperText={setDefault()}
                 inputProps={{ tabIndex: 1 }}
@@ -141,7 +138,7 @@ function ConnectionForm(props) {
                 label="Port"
                 type="number"
                 placeholder="80"
-                value={connection.state.port}
+                value={data.port}
                 onChange={handleInput('port')}
                 inputProps={{ tabIndex: 2 }} />
 

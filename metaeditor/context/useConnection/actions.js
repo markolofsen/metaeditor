@@ -58,8 +58,7 @@ const actions = () => {
     }
 
     setConnectionData({ host, port }) {
-      if (host) dispatch({ host })
-      if (port) dispatch({ port })
+      dispatch({ host, port })
     }
 
     async startSessionUuuid(sessionUuid, { onSuccess, onError }) {
