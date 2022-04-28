@@ -24,6 +24,7 @@ function PlayerContentDrawer(props) {
   const layout = useLayout()
   const bridge = useBridge()
 
+  const refTimer = React.useRef(null)
   const streamDrawer = layout.state.components.streamDrawer
   const showDrawer = streamDrawer.active && props.show
   const slug = streamDrawer.slug
@@ -31,8 +32,15 @@ function PlayerContentDrawer(props) {
   React.useEffect(() => {
 
     if (showDrawer) {
+      clearTimeout(refTimer.current)
       refMetadrawer.current.open()
+
     } else {
+
+      refTimer.current = setTimeout(() => {
+        bridge.views.default.onClick()
+      }, 300)
+
       refMetadrawer.current.close()
     }
 
@@ -57,7 +65,6 @@ function PlayerContentDrawer(props) {
       anchor="right"
       onClose={() => {
         layout.handleDrawer.close()
-        bridge.views.default.onClick()
       }}
       title={list.hasOwnProperty(slug) && list[slug][0]}
       width={500}>
