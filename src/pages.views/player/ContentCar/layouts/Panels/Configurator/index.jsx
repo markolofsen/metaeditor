@@ -70,9 +70,9 @@ function Panel() {
       <CarouselItems
         image={(item) => item.src}
         onClickItem={(item, index) => {
-          // if (layout.handleDrawer.slug !== item.slug) {
-          item.cmd.onClick()
-          // }
+          if (layout.handleDrawer.slug !== item.slug) {
+            item.cmd.onClick()
+          }
 
           layout.handleDrawer.open(item.slug)
         }}
