@@ -61,8 +61,77 @@ const Chip = styled.custom(MuiChip, theme => ({
 
 
 
+function DesktopVersion({ items }) {
 
-function DesktopVersion() {
+  return (
+    <Portal>
+      <RootDiv>
+
+        <ContentDiv>
+          <Typography variant="h6" sx={{ mr: 3, cursor: 'default' }}>
+            Quick view:
+          </Typography>
+
+          <Stack direction="row" spacing={1}>
+            {items.map((item, index) => (
+              <Chip
+                key={index}
+                label={item.name}
+                variant="outlined"
+                color="default"
+                onClick={() => item.cmd.onClick()} />
+            ))}
+          </Stack>
+
+        </ContentDiv>
+
+      </RootDiv>
+    </Portal>
+  )
+}
+
+
+function MobileVersion({ items }) {
+  const player = usePlayer()
+  // const isDisabled = !player.state.loaded || !player.state.body_clicked
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button
+        onClick={handleClick}
+        // disabled={isDisabled}
+        tooltip="Quick view">
+        <Icon>search</Icon>
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
+        {items.map((item, index) => (
+          <MenuItem key={index} onClick={() => {
+            item.cmd.onClick()
+            handleClose()
+          }}>
+            {item.name}
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>
+  );
+}
+
+export default function QuickNavigation() {
+  const media = useMedia()
   const bridge = useBridge()
 
   const c = bridge.views
@@ -102,81 +171,11 @@ function DesktopVersion() {
   ]
 
   return (
-    <Portal>
-      <RootDiv>
-
-        <ContentDiv>
-          <Typography variant="h6" sx={{ mr: 3, cursor: 'default' }}>
-            Quick view:
-          </Typography>
-
-          <Stack direction="row" spacing={1}>
-            {items.map((item, index) => (
-              <Chip
-                key={index}
-                label={item.name}
-                variant="outlined"
-                color="default"
-                onClick={() => item.cmd.onClick()} />
-            ))}
-          </Stack>
-
-        </ContentDiv>
-
-      </RootDiv>
-    </Portal>
-  )
-}
-
-
-function MobileVersion() {
-  const player = usePlayer()
-  const isDisabled = !player.state.loaded || !player.state.body_clicked
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <div>
-      <Button
-        onClick={handleClick}
-        // disabled={isDisabled}
-        tooltip="Quick view">
-        <Icon>search</Icon>
-      </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        {items.map((item, index) => (
-          <MenuItem key={index} onClick={() => {
-            item.cmd.onClick()
-            handleClose()
-          }}>
-            {item.name}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-  );
-}
-
-export default function QuickNavigation() {
-  const media = useMedia()
-
-  return (
     <div>
       {media.down.lg ? (
-        <MobileVersion />
+        <MobileVersion items={items} />
       ) : (
-        <DesktopVersion />
+        <DesktopVersion items={items} />
       )}
     </div>
   )
