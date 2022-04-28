@@ -21,6 +21,9 @@ import { styled } from 'metalib/styles/'
 // components
 import Button from 'metaeditor/snippets/DevBar/Actions/Button';
 
+// commands
+import useBridge from '../../useBridge'
+
 
 const RootDiv = styled.div(theme => ({
   background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)',
@@ -57,7 +60,47 @@ const Chip = styled.custom(MuiChip, theme => ({
 }))
 
 
+
+
 function DesktopVersion() {
+  const bridge = useBridge()
+
+  const c = bridge.views
+  const items = [
+    {
+      name: 'Intro',
+      cmd: c.default,
+    },
+    {
+      name: 'Front View',
+      cmd: c.front_view,
+    },
+    {
+      name: 'Side view',
+      cmd: c.side_view,
+    },
+    {
+      name: 'Back view',
+      cmd: c.back_view,
+    },
+    {
+      name: 'Wheels',
+      cmd: c.wheels,
+    },
+    {
+      name: 'Interior',
+      cmd: c.seats,
+    },
+    {
+      name: 'Driver',
+      cmd: c.trim,
+    },
+    {
+      name: 'Passenger',
+      cmd: c.passenger,
+    },
+  ]
+
   return (
     <Portal>
       <RootDiv>
@@ -68,13 +111,13 @@ function DesktopVersion() {
           </Typography>
 
           <Stack direction="row" spacing={1}>
-            {menuList.map((item, index) => (
+            {items.map((item, index) => (
               <Chip
                 key={index}
-                label={item.label}
+                label={item.name}
                 variant="outlined"
                 color="default"
-                onClick={() => { }} />
+                onClick={() => item.cmd.onClick()} />
             ))}
           </Stack>
 
@@ -135,15 +178,3 @@ export default function QuickNavigation() {
     </div>
   )
 }
-
-const menuList = [
-  ['Intro'],
-  ['Exterior'],
-  ['Side View'],
-  ['Front View'],
-  ['Wheels'],
-  ['Back View'],
-  ['Driver'],
-  ['Passenger'],
-  ['Interior'],
-].map(([label]) => ({ label }))

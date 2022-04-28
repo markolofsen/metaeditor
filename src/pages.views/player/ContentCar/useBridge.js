@@ -92,5 +92,10 @@ export const commandsObj = {
     trim: '02ce76',
     leather: '36a9c8',
     seats: '36a9c8',
+
+    side_view: 'e85ec4',
+    front_view: 'd94e43',
+    back_view: '0a0b07',
+    passenger: '32bf92',
   }
 }
