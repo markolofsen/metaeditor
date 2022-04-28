@@ -4,8 +4,7 @@ import * as React from 'react';
 import { env } from 'config/'
 
 // context
-import { useConnection } from 'metaeditor/context/';
-import { useParent } from 'src/context/';
+import { useConnection, useSystem } from 'metaeditor/context/';
 
 // controllers
 import { useNotifyController } from 'metaeditor/@controllers/'
@@ -35,8 +34,8 @@ const defaultLogoUrl = env.staticUrl('player', 'logo_ue.svg')
 const PlayerView = ({ query }) => {
   useNotifyController()
 
-  const parent = useParent()
   const router = useRouter()
+  const system = useSystem()
   const connection = useConnection()
 
   const session = query.session || router.query.session
@@ -46,6 +45,7 @@ const PlayerView = ({ query }) => {
   const [metadata, setMetadata] = React.useState({
     video_url: false,
     logo_url: false,
+    api_key: false,
   })
 
   React.useEffect(() => {
@@ -66,6 +66,9 @@ const PlayerView = ({ query }) => {
         onSuccess: (metadata) => {
           setSessionExist(true)
           setMetadata(metadata)
+
+          // Load commands with api_key of project
+          system.cls.loadData(metadata.api_key)
         },
         onError: () => onSessionError(),
       }))

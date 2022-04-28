@@ -47,8 +47,8 @@ const actions = () => {
 
   const cls = new class {
 
-    async loadData() {
-      await api.getMetaeditorData(clsApi.apiKey).then(res => {
+    async loadData(apiKey = false) {
+      await api.getMetaeditorData(apiKey || clsApi.apiKey).then(res => {
         if (res.ok) {
           dispatch({ metaeditor: res.body })
         }
@@ -110,6 +110,10 @@ const actions = () => {
     /**
      * Emit async commands from portal
      */
+    replaceCommands() {
+      dispatch({ metaeditor: commandsres.body })
+    }
+
     async metaEmitAsync(command_uuid) {
       for (let item of state.metaeditor?.commands) {
         if (item.command_uuid === command_uuid) {
@@ -127,6 +131,8 @@ const actions = () => {
         }
 
       }
+
+      console.error(`@@command with uuid ${command_uuid} not found`)
       return false
     }
 
