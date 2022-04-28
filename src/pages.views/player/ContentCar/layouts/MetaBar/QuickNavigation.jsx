@@ -155,9 +155,12 @@ function MobileVersion() {
         open={open}
         onClose={handleClose}
       >
-        {menuList.map((item, index) => (
-          <MenuItem key={index} onClick={handleClose}>
-            {item.label}
+        {items.map((item, index) => (
+          <MenuItem key={index} onClick={() => {
+            item.cmd.onClick()
+            handleClose()
+          }}>
+            {item.name}
           </MenuItem>
         ))}
       </Menu>
