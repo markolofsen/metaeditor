@@ -11,15 +11,18 @@ import BlockTrim from './BlockTrim'
 import BlockLeather from './BlockLeather'
 import BlockSeats from './BlockSeats'
 
-
 // components
 import { MetaDrawer } from 'metaeditor/components/'
+
+// commands
+import useBridge from '../../useBridge'
 
 
 function PlayerContentDrawer(props) {
   const refMetadrawer = React.useRef(null)
 
   const layout = useLayout()
+  const bridge = useBridge()
 
   const streamDrawer = layout.state.components.streamDrawer
   const showDrawer = streamDrawer.active && props.show
@@ -54,6 +57,7 @@ function PlayerContentDrawer(props) {
       anchor="right"
       onClose={() => {
         layout.handleDrawer.close()
+        bridge.views.default.onClick()
       }}
       title={list.hasOwnProperty(slug) && list[slug][0]}
       width={500}>

@@ -8,6 +8,9 @@ import { useApi } from "../../@common/hooks";
 import { useNotify } from "../../@common/hooks/";
 import { useStorage } from "metalib/common/hooks";
 
+// context
+import { usePlayer } from "../usePlayer";
+
 // material
 import Button from '@mui/material/Button';
 
@@ -17,6 +20,7 @@ import packageJson from '../../package.json'
 
 
 const actions = () => {
+  const player = usePlayer()
   const api = useApi()
   const notify = useNotify()
   const storage = useStorage()
@@ -101,6 +105,31 @@ const actions = () => {
       dispatch({ metaeditor: null })
       cls.loadData()
     }
+
+
+    /**
+     * Emit async commands from portal
+     */
+    async metaEmitAsync(command_uuid) {
+      for (let item of state.metaeditor?.commands) {
+        if (item.command_uuid === command_uuid) {
+
+          return await player.cls.emitAsync({
+            command: item.command,
+            request: {
+              body: item.value,
+            },
+
+            // If the callback emulation option is enabled, then the contents of fakeResponse will be returned as response.body
+            fakeResponse: undefined,
+          })
+
+        }
+
+      }
+      return false
+    }
+
   }
 
   return {

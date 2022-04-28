@@ -69,14 +69,14 @@ const actions = () => {
     }
 
     get handleDrawer() {
-      const currentSlug = state.components.streamDrawer.slug
+      const prevSlug = state.components.streamDrawer.slug
       return {
-        slug: currentSlug,
+        slug: prevSlug,
         open: (slug) => {
           this.sounds.click()
 
           dispatchComponent('streamDrawer', { slug: false, active: false })
-          if (slug != currentSlug) {
+          if (slug != prevSlug) {
             setTimeout(() => dispatchComponent('streamDrawer', { slug, active: true }), 300)
           }
         },

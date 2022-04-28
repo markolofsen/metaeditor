@@ -20,6 +20,9 @@ import ButtonConnect from './ButtonConnect'
 // hooks
 import useCommands from './useCommands'
 
+// components
+import { CopyToClipboard } from '../../../../components/'
+
 
 const List = styled.custom(MuiList, theme => ({
   // backgroundColor: 'red'
@@ -98,6 +101,20 @@ export default function CommandsList() {
                   label += ' (emulation)'
                 }
 
+                const getSecondary = () => {
+                  return (
+                    <CopyToClipboard text={item.command_uuid}>
+                      {({ copied, label }) => (
+                        <span>
+                          {copied ? label : (
+                            `${item.slug} #${item.command_uuid}`
+                          )}
+                        </span>
+                      )}
+                    </CopyToClipboard>
+                  )
+                }
+
                 return (
                   <ListItem key={`${index}-${i}`}
                     onClick={() => commands.handleEmit(item)}
@@ -105,7 +122,7 @@ export default function CommandsList() {
                     secondaryAction={
                       iconName ? (<Icon>{iconName}</Icon>) : undefined
                     }>
-                    <ListItemText primary={label} secondary={item.slug} />
+                    <ListItemText primary={label} secondary={getSecondary()} />
                   </ListItem>
                 )
               })}

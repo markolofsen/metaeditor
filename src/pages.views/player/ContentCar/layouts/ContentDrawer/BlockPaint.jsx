@@ -4,27 +4,52 @@ import * as React from 'react';
 import { env } from 'config/'
 
 // context
-import { usePlayer } from 'metaeditor/context/'
-import { useLayout } from 'src/context/'
+import { useSystem, usePlayer } from 'metaeditor/context/'
+// import { useLayout } from 'src/context/'
 
-// material
-import Button from '@mui/material/Button';
+// // material
+// import Button from '@mui/material/Button';
 
 // components
 import { CardItem } from 'metaeditor/components/';
 
+// commands
+import useBridge from '../../useBridge'
 
 
-function DrawerBlock(props) {
-  const player = usePlayer()
-  const layout = useLayout()
+function DrawerBlock() {
+  // const player = usePlayer()
+  // const system = useSystem()
+  // const layout = useLayout()
+  const bridge = useBridge()
 
-  const tmp = ['Color name']
-  const items = Array(5).fill(tmp)
-    .map(([name], index) => ({
-      name,
-      src: env.staticPath('tmp', 'configurator', `paint_${index + 1}.jpg`)
-    }))
+  const c = bridge.paint
+  const items = [
+    {
+      name: 'Red',
+      command_uuid: c.red,
+      cmd: c.red,
+    },
+    {
+      name: 'Black',
+      cmd: c.black,
+    },
+    {
+      name: 'White',
+      cmd: c.white,
+    },
+    {
+      name: 'Metalic',
+      cmd: c.metalic,
+    },
+    {
+      name: 'Blue',
+      cmd: c.blue,
+    },
+  ].map((item, index) => ({
+    ...item,
+    src: env.staticPath('tmp', 'configurator', `paint_${index + 1}.jpg`)
+  }))
 
   return (
     <div>
@@ -33,12 +58,16 @@ function DrawerBlock(props) {
           key={index}
           imageSrc={item.src}
           onClick={() => {
-            const title = item.name + ` #${index}`
-            layout.draggableCard.open(title, (
-              <Button variant="outlined" onClick={() => {
-                player.cmd.testCommand({ item: index })
-              }}>Call</Button>
-            ))
+
+            item.cmd.onClick()
+            // system.clsApi.metaEmitAsync(item.command_uuid)
+
+            // const title = item.name + ` #${index}`
+            // layout.draggableCard.open(title, (
+            //   <Button variant="outlined" onClick={() => {
+            //     player.cmd.testCommand({ item: index })
+            //   }}>Call</Button>
+            // ))
           }}>
           {item.name} #{index}
         </CardItem>

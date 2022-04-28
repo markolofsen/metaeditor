@@ -1,0 +1,9 @@
+{
+  "name": "@components/CopyToClipboard",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react-copy-to-clipboard": "latest"
+  },
+  "devDependencies": {}
+}
