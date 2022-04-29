@@ -15,7 +15,6 @@ import Collapse from '@mui/material/Collapse';
 import AppBar from './AppBar'
 import Panels from './Panels/'
 import ContentDrawer from './ContentDrawer/'
-import CallbacksDemo from './CallbacksDemo'
 
 // player components
 import DraggableCard from 'src/components/DraggableCard'
@@ -86,8 +85,6 @@ function Content(props) {
           <DraggableCard />
         </li>
         <li>
-          <CallbacksDemo />
-
           <ul data-list="bottom">
             <li data-li="panels">
 
