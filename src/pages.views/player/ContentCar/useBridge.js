@@ -18,7 +18,6 @@ export default function useBridge() {
         res[key] = {
           uuid,
           onClick: async () => {
-            console.error('@@@call', uuid)
             return await this._emit(uuid)
           }
         }
