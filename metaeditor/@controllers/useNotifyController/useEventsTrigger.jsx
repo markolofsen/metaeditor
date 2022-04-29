@@ -29,6 +29,11 @@ export default function useEventsTrigger() {
   const onCommand = (detail) => {
     if (!notifyCommands) return
 
+    if (typeof detail.command === 'undefined') {
+      console.error('Command: wrong format', detail);
+      return
+    }
+
     const content = renderBody(detail)
     notify.info(content, {
       title: detail.command,
@@ -38,6 +43,11 @@ export default function useEventsTrigger() {
 
   const onCallback = (detail) => {
     if (!notifyCallbacks) return
+
+    if (typeof detail.command === 'undefined') {
+      console.error('Callback: wrong format', detail);
+      return
+    }
 
     // if (payload?.error) {
     //   notify.error(payload.error, {

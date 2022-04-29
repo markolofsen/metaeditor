@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // context
-import { useLayout } from 'src/context/'
+import { useLayout } from '../../../context/'
 
 // material
 import Typography from '@mui/material/Typography';

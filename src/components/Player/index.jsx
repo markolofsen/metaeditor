@@ -11,7 +11,6 @@ import MetaEditor from 'metaeditor/';
 
 // context
 import MetaEditorProvider, { useConnection } from 'metaeditor/context/';
-import LayoutProvider from 'src/context/useLayout'
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -58,8 +57,18 @@ function Player(props) {
         onClose={(payload) => {
           // console.error('closed', payload);
         }}
-        onProgress={(payload) => {
-          // console.warn('progress', payload);
+        onCommand={(payload) => {
+          console.warn('onCommand', payload);
+          return payload
+        }}
+        onCallback={(payload) => {
+          // console.warn('onCallback', payload);
+
+          if (typeof props.onCallback === 'function') {
+            return props.onCallback(payload)
+          }
+
+          return payload
         }}
         settings={{
           volume: 1,
@@ -80,9 +89,7 @@ function Player(props) {
 
         {(payload) => (
           <MetaEditorProvider>
-            <LayoutProvider>
-              {props.children}
-            </LayoutProvider>
+            {props.children}
           </MetaEditorProvider>
         )}
       </MetaEditor>

@@ -20,11 +20,10 @@ import {
   CommandProgress,
 } from 'metaeditor/snippets/'
 
-// components
-import Player from 'src/components/Player/';
-
 // blocks
 import ContentCar from './ContentCar/'
+import ContentProperty from './ContentProperty/'
+
 import WelcomeBar from 'src/components/WelcomeBar/'
 
 // config
@@ -107,16 +106,13 @@ const PlayerView = ({ query }) => {
       {router.query.view === '1' && (
         <ContentCar />
       )}
+      {router.query.view === '2' && (
+        <ContentProperty />
+      )}
 
     </>
   )
 };
 
-const WithPlayer = (props) => (
-  <Player>
-    <PlayerView {...props} />
-  </Player>
-)
-
-export default WithPlayer;
+export default PlayerView;
 

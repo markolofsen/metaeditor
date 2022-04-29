@@ -4,7 +4,7 @@ import * as React from 'react';
 import { env } from 'config/'
 
 // context
-import { useLayout } from 'src/context/'
+import { useLayout } from '../../../context/'
 
 // styles
 import { styled } from 'metalib/styles/'

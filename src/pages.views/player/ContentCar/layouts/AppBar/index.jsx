@@ -12,7 +12,7 @@ import { MetaData } from 'metaeditor'
 
 // context
 import { useSystem } from 'metaeditor/context/';
-import { useLayout } from 'src/context/';
+import { useLayout } from '../../context/';
 
 // styles
 import { styled } from 'metalib/styles/'
