@@ -11,13 +11,10 @@ import reducer from './reducer'
 
 // hooks
 import { useSound } from 'metalib/common/hooks/'
-import { withIntro } from '../../hooks/'
 
 
 const actions = () => {
   const player = usePlayer()
-  withIntro()
-
   const [state, dispatch_] = React.useReducer(reducer.reducer, reducer.initialState);
 
   const soundClick = useSound(env.staticPath('sounds', 'mouse_click.mp3'))

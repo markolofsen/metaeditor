@@ -48,10 +48,11 @@ const actions = () => {
   const cls = new class {
 
     async loadData(apiKey = false) {
-      await api.getMetaeditorData(apiKey || clsApi.apiKey).then(res => {
+      return await api.getMetaeditorData(apiKey || clsApi.apiKey).then(res => {
         if (res.ok) {
           dispatch({ metaeditor: res.body })
         }
+        return res
       })
     }
 

@@ -64,6 +64,7 @@ const PlayerView = ({ query }) => {
 
       connection.startSessionUuuid(session, ({
         onSuccess: (metadata) => {
+
           setSessionExist(true)
           setMetadata(metadata)
 

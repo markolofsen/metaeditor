@@ -3,13 +3,15 @@ import * as React from 'react';
 // config
 import { env } from 'config/'
 
+// hooks
+import { useSound } from "metalib/common/hooks/";
+
 // components
 import MetaEditor from 'metaeditor/';
 
 // context
 import MetaEditorProvider, { useConnection } from 'metaeditor/context/';
 import LayoutProvider from 'src/context/useLayout'
-
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -28,6 +30,7 @@ const isDev = env.isDev
 
 function Player(props) {
   const refMetaEditor = React.useRef(null)
+  const intro = useSound(env.staticPath('sounds', 'intro.mp3'))
 
   return (
     <RootDiv>
@@ -36,6 +39,10 @@ function Player(props) {
 
       <MetaEditor
         ref={refMetaEditor}
+        onReady={(payload) => {
+          intro.play()
+          // console.warn('ready', payload);
+        }}
         onLoad={(payload) => {
           // console.warn('loaded', payload);
         }}
