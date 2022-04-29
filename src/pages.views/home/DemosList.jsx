@@ -84,8 +84,10 @@ function DemosList() {
     <Grid container spacing={6}>
       {data.map((item, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card sx={{ height: '100%', position: 'relative' }}>
-            <LabelBest />
+          <Card sx={{ height: '100%' }}>
+
+            {item.is_best && (<LabelBest />)}
+
             <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref>
               <CardMedia
                 component='a'
@@ -123,8 +125,8 @@ function LabelBest() {
       style={{
         pointerEvents: 'none',
         position: 'absolute',
-        top: 15,
-        left: 15,
+        marginTop: 15,
+        marginLeft: 15,
       }}
       sx={{ bgcolor: 'success.main', typography: 'button' }}
       label="Best sample" />
