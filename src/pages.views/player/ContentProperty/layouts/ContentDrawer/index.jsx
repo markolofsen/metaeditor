@@ -38,7 +38,7 @@ function PlayerContentDrawer(props) {
     } else {
 
       refTimer.current = setTimeout(() => {
-        bridge.views.default.onClick()
+        // bridge.views.default.onClick()
       }, 300)
 
       refMetadrawer.current.close()

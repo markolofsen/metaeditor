@@ -1,39 +1,46 @@
 import React from 'react';
 
 // context
-import { useBuilding, useLogic } from '../../../context/';
+import { useBuilding, useLogic, useLayout } from '../../../context/';
 
-// material
-import { makeStyles, } from '@mui/styles';
+// styles
+import { styled } from 'metalib/styles/'
 
-// components
-import CarouselItems from 'metaeditor/components/CarouselItems/'
+// player components
+import CarouselItems from 'src/components/CarouselItems'
+
+// hooks
+import useBridge from '../../../useBridge';
 
 // blocks
 // import { PopupAmenity } from '../../popups/'
 
 
-const useStyles = makeStyles((theme) => ({
 
-	cardList: {
-		'& > [data-li="label"]': {
-			display: 'inline',
-			backgroundColor: theme.palette.primary.main,
-			boxShadow: `5px 0 0 ${theme.palette.primary.main}, -5px 0 0 ${theme.palette.primary.main}`,
-		},
-	}
 
-}));
+const ContentDiv = styled.div(theme => ({
+	flex: 1,
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	justifyContent: 'center',
+	...theme.typography.h6,
+	borderLeft: `solid 1px ${theme.palette.divider}`,
+	paddingLeft: theme.spacing(2),
+}))
 
 
 function AmenitiesList(props) {
-	const classes = useStyles();
+	const layout = useLayout()
 	const building = useBuilding();
-	const logic = useLogic();
+	// const logic = useLogic();
+	const bridge = useBridge()
 
+	const current = layout.state.current_event
+	const currentSlug = current.value.slug
 
-	const cmd_data = logic.config.PS.cmd.select_amenity?.data
-	const cmd_slug = cmd_data?.value.slug
+	// const cmd_data = logic.config.PS.cmd.select_amenity?.data
+	// const cmd_slug = cmd_data?.value.slug
 
 	const items = building.state.building_data.amenities
 
@@ -45,35 +52,25 @@ function AmenitiesList(props) {
 			)} */}
 
 			<CarouselItems
+				image={item => item.image}
+				onClickItem={(item, index) => {
+					bridge.amenities.enter(item.slug)
+				}}
+				onSelected={(item, index) => currentSlug === item.slug}
 				numberOfCards={{ xs: 1, md: 2, default: 4 }}
-				infiniteLoop
+				infiniteLoop={false}
 				gutter={10}
 				items={items}>
 				{(item, index) => {
 					return (
-						<ul className={classes.cardList}>
-							<li data-li="label">
-								{item.name}
-							</li>
-						</ul>
+						<ContentDiv key={index}>
+							{item.name}
+							{/* {JSON.stringify(item)} */}
+						</ContentDiv>
 					)
 				}}
 			</CarouselItems>
 
-
-			{/* <CarouselItems
-				variant="simple"
-				backgroundImage={item => item.image}
-				selected={item => item.slug === cmd_slug}
-				onClickItem={item => {
-					logic.config.PS.select_amenity(item.slug)
-				}}
-				items={items}>
-				{({ item, active }) => (
-					
-				)}
-			</CarouselItems>
-			 */}
 		</div>
 	);
 }

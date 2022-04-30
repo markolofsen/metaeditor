@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // material
-import { makeStyles } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 // import IconButton from '@mui/material/IconButton';
 // import Icon from '@mui/material/Icon';
 

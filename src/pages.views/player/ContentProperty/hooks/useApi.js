@@ -1,8 +1,10 @@
+import { env } from 'config/'
 
 // libs
 import { Request } from 'metalib/common/libs/'
 
-const API_URL = process.env.API_URL || `https://api.metaeditor.io`
+// const API_URL = process.env.API_URL || `https://api.metaeditor.io`
+const API_URL = env.isDev ? `http://127.0.0.1:8000` : process.env.API_URL || `https://api.metaeditor.io`
 
 export default function useApi() {
 
@@ -32,19 +34,24 @@ export default function useApi() {
         // },
 
         amenities_card: async ({ slug }) => {
-          return await Request.GET(`amenities/${slug}/card/`);
+          const url = this.urlBuilder(`amenities/${slug}/card/`)
+          return await Request.GET(url);
         },
         surroundings_card: async ({ slug }) => {
-          return await Request.GET(`surroundings/${slug}/card/`);
+          const url = this.urlBuilder(`surroundings/${slug}/card/`)
+          return await Request.GET(url);
         },
         units_card: async ({ slug }) => {
-          return await Request.GET(`unit/${slug}/card/`);
+          const url = this.urlBuilder(`unit/${slug}/card/`)
+          return await Request.GET(url);
         },
         units_search: async (slug, query) => {
-          return await Request.GET(`building/${slug}/units_search/`, query);
+          const url = this.urlBuilder(`building/${slug}/units_search/`)
+          return await Request.GET(url, query);
         },
         units_plans_search: async (slug, query) => {
-          return await Request.GET(`building/${slug}/plans_search/`, query);
+          const url = this.urlBuilder(`building/${slug}/plans_search/`)
+          return await Request.GET(url, query);
         },
       }
     }

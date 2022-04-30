@@ -11,6 +11,11 @@ const initialState = {
     },
   },
   ui_visible: true,
+
+  current_event: {
+    type: '',
+    value: {},
+  },
 };
 
 const KEY = {

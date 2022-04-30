@@ -30,6 +30,21 @@ const actions = () => {
   })
 
 
+  const onCallback = (payload) => {
+    if (payload.type === 'command_verification_new') {
+      // alert('Callback\n' + JSON.stringify(payload))
+      // console.error('@@@', JSON.stringify(payload, null, 4))
+
+      const current_event = payload.payload
+      dispatch({ current_event })
+
+      if (current_event.type === 'enter_amenity') {
+        cls.handleMenu('amenities_overview')
+      }
+    }
+  }
+
+  player.cls.useTrigger({ onCallback })
 
   const cls = new class {
     get state() {

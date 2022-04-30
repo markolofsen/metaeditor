@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// styles
+import { alpha } from 'metalib/styles/'
+
 // material
-import { withStyles, alpha } from '@mui/material/styles';
+import { withStyles } from '@mui/styles';
 import MuiChip from '@mui/material/Chip';
 
 

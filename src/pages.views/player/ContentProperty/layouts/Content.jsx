@@ -83,6 +83,11 @@ function Content(props) {
       <RootList>
         <li data-li="content">
           <DraggableCard />
+          <div style={{ padding: '50px 0 0 300px' }}>
+            <pre>
+              {JSON.stringify(layout.state.current_event, null, 4)}
+            </pre>
+          </div>
         </li>
         <li>
           <ul data-list="bottom">

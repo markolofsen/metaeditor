@@ -136,38 +136,10 @@ export default function QuickNavigation() {
 
   const c = bridge.views
   const items = [
-    {
-      name: 'Intro',
-      cmd: c.default,
-    },
-    {
-      name: 'Front View',
-      cmd: c.front_view,
-    },
-    {
-      name: 'Side view',
-      cmd: c.side_view,
-    },
-    {
-      name: 'Back view',
-      cmd: c.back_view,
-    },
-    {
-      name: 'Wheels',
-      cmd: c.wheels,
-    },
-    {
-      name: 'Interior',
-      cmd: c.seats,
-    },
-    {
-      name: 'Driver',
-      cmd: c.trim,
-    },
-    {
-      name: 'Passenger',
-      cmd: c.passenger,
-    },
+    // {
+    //   name: 'Intro',
+    //   cmd: c.default,
+    // },
   ]
 
   return (

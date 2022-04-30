@@ -1,15 +1,17 @@
 import React from 'react';
 
 // context
-import { useBuilding, useLogic } from '../../../context/';
+import { useBuilding, useLayout } from '../../../context/';
 
 // hooks
 import { useApi } from '../../../hooks/'
+import useBridge from '../../../useBridge';
 
 // material
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
+
 
 // blocks
 // import Dialog from 'metaeditor/components/Dialog/'
@@ -98,24 +100,26 @@ const useStyles = makeStyles((theme) => ({
 function AmenitiesOverview(props) {
 	const api = useApi()
 	const classes = useStyles();
-	const logic = useLogic();
+	const layout = useLayout();
 	const building = useBuilding()
+	const bridge = useBridge()
 
-	const [slug, setSlug] = React.useState(false)
+	// const [slug, setSlug] = React.useState(false)
 	const [data, setData] = React.useState(false)
 
 	const data_building = building.state.building_data.overview
-	const cmd_slug = logic.config.PS.cmd.enter_amenity?.data?.value.slug
+	const current = layout.state.current_event
+	const currentSlug = current.value.slug
+
 
 	React.useEffect(() => {
-		if (cmd_slug && cmd_slug !== slug) {
-			setSlug(cmd_slug)
+		if (currentSlug) {
 			loadData()
 		}
-	}, [cmd_slug])
+	}, [currentSlug])
 
 	const loadData = async () => {
-		await api.vec_overlay.amenities_card({ slug: cmd_slug }).then(res => {
+		await api.vec_overlay.amenities_card({ slug: currentSlug }).then(res => {
 			if (res.status === 200) {
 				setData(res.body)
 			}
@@ -132,7 +136,7 @@ function AmenitiesOverview(props) {
 			<ul className={classes.contentList}>
 				<li data-li="back">
 					<IconButton data-icon onClick={async () => {
-						await logic.config.PS.leave_amenity()
+						await bridge.amenities.leave()
 						setData(false)
 					}}>
 						<Icon>arrow_back</Icon>
