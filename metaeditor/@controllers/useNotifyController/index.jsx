@@ -7,11 +7,9 @@ import useKillStream from './useKillStream'
 import useEventsTrigger from './useEventsTrigger'
 
 
-function useNotifyController() {
+export default function useNotifyController() {
   useOffline()
   useSlowConnection()
   useKillStream()
   useEventsTrigger()
 }
-
-export default useNotifyController

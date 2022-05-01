@@ -24,11 +24,8 @@ export default function useEventsTrigger() {
   const notify = useNotify()
   const player = usePlayer()
 
-  const { notifyCommands, notifyCallbacks } = player.state.metaSettings
-
   const onCommand = (detail) => {
-    if (!notifyCommands) return
-
+    if (window.__ps_state__?.metaSettings?.notifyCommands === false) return
     if (typeof detail.command === 'undefined') {
       console.error('Command: wrong format', detail);
       return
@@ -42,8 +39,7 @@ export default function useEventsTrigger() {
   }
 
   const onCallback = (detail) => {
-    if (!notifyCallbacks) return
-
+    if (window.__ps_state__?.metaSettings?.notifyCallbacks === false) return
     if (typeof detail.command === 'undefined') {
       console.error('Callback: wrong format', detail);
       return

@@ -27,8 +27,10 @@ const RootDiv = styled.div(theme => ({
 
 const isDev = env.isDev
 
+
 function Player(props) {
   const refMetaEditor = React.useRef(null)
+
   const intro = useSound(env.staticPath('sounds', 'intro.mp3'))
 
   return (

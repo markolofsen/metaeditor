@@ -4,7 +4,7 @@ import * as React from 'react';
 import { styled } from 'metalib/styles/'
 
 // context
-import { useSystem } from '../../../../context/'
+import { useSystem, usePlayer } from '../../../../context/'
 
 // material
 import MuiList from '@mui/material/List';
@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 
 // blocks
 import ButtonConnect from './ButtonConnect'
+import SwitchButton from './SwitchButton'
 
 // hooks
 import useCommands from './useCommands'
@@ -58,6 +59,7 @@ const ListItem = styled.custom(MuiListItem, theme => ({
 
 export default function CommandsList() {
   const system = useSystem()
+  const player = usePlayer()
   const commands = useCommands()
 
   const commandsList = system.state.metaeditor?.commands || []
@@ -82,6 +84,25 @@ export default function CommandsList() {
 
       <Box sx={{ mb: 2 }}>
         <ButtonConnect />
+      </Box>
+
+      <Box sx={{ mb: 2 }}>
+
+        <SwitchButton
+          sx={{ mb: 1 }}
+          onChange={(checked) => {
+            player.cls.switchNotificationsCommands()
+          }}
+          value={player.state.metaSettings.notifyCommands}
+          label="Commands notifications" />
+
+        <SwitchButton
+          onChange={(checked) => {
+            player.cls.switchNotificationsCallabacks()
+          }}
+          value={player.state.metaSettings.notifyCallbacks}
+          label="Callbacks notifications" />
+
       </Box>
 
       <List subheader={<li />}>
