@@ -83,8 +83,8 @@ function Player(props) {
         metaSettings={{
           isDev,
           showDevTools: true,
-          notifyCommands: true,
-          notifyCallbacks: true,
+          notifyCommands: isDev,
+          notifyCallbacks: isDev,
         }}>
 
         {(payload) => (
