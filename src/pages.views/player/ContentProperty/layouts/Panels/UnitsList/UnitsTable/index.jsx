@@ -1,19 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
-import { useLogic, useUnits } from '../../../context/';
+import { useCommands, useUnits } from '../../../../context/';
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers'
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 // import Icon from '@mui/material/Icon';
 
 // components
-import DataGrid from 'components/DataGrid/'
+// import DataGrid from '../../../../components/DataGrid/'
 
 // blocks
 import DrawerContent from '../../UnitsOverview/UnitToolbar/DrawerContent/'
@@ -31,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
 
 function UnitsTable(props) {
 	const classes = useStyles();
-	const logic = useLogic();
+	const commands = useCommands();
 	const units = useUnits();
 	const helpers = useHelpers();
 
 	const refDrawerContent = React.useRef(null)
 	const refUnitsTable = React.useRef(null);
 
-	const { appbar_size } = logic.config.state
+	const { appbar_size } = commands.config.state
 	const { current_panel } = units.state
 
 	const offset = (appbar_size?.height || 0) + (units.state.filters.filters_size?.height || 0)
@@ -238,7 +236,7 @@ function UnitsTable(props) {
 		}}>
 			<DrawerContent ref={refDrawerContent} />
 
-			<DataGrid
+			{/* <DataGrid
 				ref={refUnitsTable}
 				loading={false}
 				data={getData()}
@@ -255,7 +253,7 @@ function UnitsTable(props) {
 				}}
 				renderMode="client"
 				mobileView={() => <div />}
-			/>
+			/> */}
 
 		</div>
 	);

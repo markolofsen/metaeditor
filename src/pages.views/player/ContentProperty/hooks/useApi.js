@@ -3,8 +3,8 @@ import { env } from 'config/'
 // libs
 import { Request } from 'metalib/common/libs/'
 
-// const API_URL = process.env.API_URL || `https://api.metaeditor.io`
-const API_URL = env.isDev ? `http://127.0.0.1:8000` : process.env.API_URL || `https://api.metaeditor.io`
+const API_URL = process.env.API_URL || `https://api.metaeditor.io`
+// const API_URL = env.isDev ? `http://127.0.0.1:8000` : process.env.API_URL || `https://api.metaeditor.io`
 
 export default function useApi() {
 
@@ -53,6 +53,46 @@ export default function useApi() {
           const url = this.urlBuilder(`building/${slug}/plans_search/`)
           return await Request.GET(url, query);
         },
+
+        // vec_buildings_form: {
+        //   read: async (slug) => {
+        //     return await cls._api(`/vec/cabinet/building/${slug}/form/`).get();
+        //   },
+        //   update: async (slug, data) => {
+        //     return await cls._api(`/vec/cabinet/building/${slug}/form/`).put(data);
+        //   },
+        // },
+        // vec_unit_form: {
+        //   read: async (unit_id) => {
+        //     return await cls._api(`/vec/cabinet/unit/${unit_id}/form/`).get();
+        //   },
+        //   update: async (unit_id, data) => {
+        //     return await cls._api(`/vec/cabinet/unit/${unit_id}/form/`).put(data);
+        //   },
+        // },
+        // vec_request_form: {
+        //   // read: async () => {
+        //   //   return await cls._api(`/vec/request/unit/`).get();
+        //   // },
+        //   submit: async (unit_key, data) => {
+        //     return await cls._api(`/vec/request/unit/${unit_key}/ `).post(data);
+        //   },
+        // },
+
+        // vec_unit_favorite: {
+        //   list: async () => {
+        //     return await cls._api(`/vec/favorite/units/list/`).get();
+        //   },
+        //   read: async (unit_key) => {
+        //     return await cls._api(`/vec/favorite/unit/${unit_key}/`).get();
+        //   },
+        //   update: async (unit_key) => {
+        //     return await cls._api(`/vec/favorite/unit/${unit_key}/`).put();
+        //   },
+        //   delete: async (unit_key) => {
+        //     return await cls._api(`/vec/favorite/unit/${unit_key}/`).delete();
+        //   },
+        // },
       }
     }
 

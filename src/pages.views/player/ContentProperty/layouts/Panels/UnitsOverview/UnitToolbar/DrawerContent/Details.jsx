@@ -1,25 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // material
-import {
-	makeStyles,
-	lighten,
-	darken,
-} from '@mui/material/styles';
+import { makeStyles, lighten } from 'metalib/styles'
 import Icon from '@mui/material/Icon';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 // components
-import ReadMore from 'components/ReadMore/'
+import ReadMore from '../../../../../components/ReadMore/'
 
 // blocks
 import OrderForm from './OrderForm'
 
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 					display: 'flex',
 					alignItems: 'center',
 					fontSize: theme.typography.body2.fontSize,
-					fontWeight: theme.props.fontWeight.semiBold,
+					// fontWeight: theme.props.fontWeight.semiBold,
 					'& > label': {
 						color: theme.palette.text.secondary,
 						marginRight: theme.spacing(2),

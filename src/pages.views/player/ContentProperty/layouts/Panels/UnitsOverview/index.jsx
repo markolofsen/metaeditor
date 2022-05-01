@@ -1,21 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
-import { useUnits, useLogic } from '../../context/';
+import { useUnits, useCommands } from '../../../context/';
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers'
 
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 // import Typography from '@mui/material/Typography';
 
 // components
-import CarouselItems from '../../components/CarouselItems/'
-import CarouselHeader, { ChipsMenu } from '../../components/CarouselHeader/'
+import CarouselItems from 'src/components/CarouselItems'
+import CarouselHeader, { ChipsMenu } from '../../../components/CarouselHeader'
 
 // blocks
 import UnitToolbar from './UnitToolbar/'
@@ -40,41 +38,43 @@ const useStyles = makeStyles((theme) => ({
 
 function UnitsOverview(props) {
 	const classes = useStyles();
-	const helpers = useHelpers();
 	const units = useUnits();
-	const logic = useLogic();
+	const commands = useCommands();
 
 	const [mounted, setMounted] = React.useState(false)
+
+	// Quick links
+	const cmd_slug = commands.menu.current
+	const unit_slug = units.menu.current
+
+	const data = units.state.data_units_overview
+	const items = data.plan?.interiors || []
+
 
 	React.useEffect(() => {
 
 		// Reboot ui for Portal in UnitToolbar
-		if (logic.config.state.current_menu === 'units_overview') {
+		if (cmd_slug === 'units_overview') {
 			setMounted(true)
 		} else {
-			logic.config.PS.cmd.apartment_interior.reset()
+			// commands.config.PS.cmd.apartment_interior.reset()
 			setMounted(false)
 		}
 
-	}, [logic.config.state.current_menu])
+	}, [cmd_slug])
 
-	// Quick links
-	const cmd_data = logic.config.PS.cmd.apartment_interior?.data
-	const cmd_slug = cmd_data?.value.slug
-	const data = units.state.data_units_overview
-	const items = data.plan?.interiors || []
 
 	const renderHeader = () => {
 
 		const hotspots = data.hotspots || []
-		// const hotspots_data = logic.config.PS.cmd.apartment_interior.data
+		// const hotspots_data = commands.config.PS.cmd.apartment_interior.data
 		// const hotspots_slug = hotspots_data?.value.slug
 
 		const chips_list = hotspots.map((item) => {
 			return {
 				label: item.name,
 				onClick: () => {
-					logic.config.PS.teleport_to_point(item.slug)
+					// commands.config.PS.teleport_to_point(item.slug)
 				},
 				selected: false,
 			}
@@ -100,11 +100,10 @@ function UnitsOverview(props) {
 			{renderHeader()}
 
 			<CarouselItems
-				variant="simple"
-				backgroundImage={item => item.image}
-				selected={item => item.slug === cmd_slug}
+				image={item => item.image}
+				selected={item => item.slug === unit_slug}
 				onClickItem={item => {
-					logic.config.PS.apartment_interior(item.slug)
+					commands.cmd.method.apartment_interior({ slug: item.slug })
 				}}
 				items={items}>
 				{({ item, active }) => (
@@ -113,7 +112,7 @@ function UnitsOverview(props) {
 							{item.name}
 						</li>
 						<li data-li="price">
-							{helpers.custom.toUsd(item.price)}
+							{format.money(item.price)}
 						</li>
 					</ul>
 				)}

@@ -1,23 +1,18 @@
-import React from 'react';
+import * as React from 'react';
+
+// api
+import { useApi } from '../../../hooks/'
 
 // context
-import { useBuilding, useLayout } from '../../../context/';
+import { useData, useCommands } from '../../../context/';
 
 // hooks
-import { useApi } from '../../../hooks/'
-import useBridge from '../../../useBridge';
+import { format } from 'metalib/common/helpers/'
 
 // material
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles'
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
-
-
-// blocks
-// import Dialog from 'metaeditor/components/Dialog/'
-
-// // components
-// import JsonDialog from 'components/JsonDialog/'
 
 
 const TITLE_HEIGHT = 40
@@ -26,6 +21,7 @@ const CONTENT_HEIGHT = 80
 const useStyles = makeStyles((theme) => ({
 
 	rootList: {
+		paddingBottom: theme.spacing(2),
 		display: 'flex',
 		'& > li': {
 			flex: 1,
@@ -98,28 +94,27 @@ const useStyles = makeStyles((theme) => ({
 
 
 function AmenitiesOverview(props) {
+	// const debug = useDebug()
 	const api = useApi()
 	const classes = useStyles();
-	const layout = useLayout();
-	const building = useBuilding()
-	const bridge = useBridge()
+	const commands = useCommands();
+	const dataBuilding = useData()
 
-	// const [slug, setSlug] = React.useState(false)
+	const [slug, setSlug] = React.useState(false)
 	const [data, setData] = React.useState(false)
 
-	const data_building = building.state.building_data.overview
-	const current = layout.state.current_event
-	const currentSlug = current.value.slug
-
+	const overview = dataBuilding.state.building.overview
+	const cmd_slug = commands.amenities.current
 
 	React.useEffect(() => {
-		if (currentSlug) {
+		if (cmd_slug && cmd_slug !== slug) {
+			setSlug(cmd_slug)
 			loadData()
 		}
-	}, [currentSlug])
+	}, [cmd_slug])
 
 	const loadData = async () => {
-		await api.vec_overlay.amenities_card({ slug: currentSlug }).then(res => {
+		await api.vec_overlay.amenities_card({ slug: cmd_slug }).then(res => {
 			if (res.status === 200) {
 				setData(res.body)
 			}
@@ -136,7 +131,9 @@ function AmenitiesOverview(props) {
 			<ul className={classes.contentList}>
 				<li data-li="back">
 					<IconButton data-icon onClick={async () => {
-						await bridge.amenities.leave()
+						commands.cmd.method.leave_amenity.emit()
+						commands.amenities.changeMenu(false)
+						commands.menu.changeMenu('amenities')
 						setData(false)
 					}}>
 						<Icon>arrow_back</Icon>
@@ -164,9 +161,9 @@ function AmenitiesOverview(props) {
 	const renderInfo = () => {
 
 		const list = [
-			['Completion', data_building.build_date],
-			['Starting At', data_building.start_price],
-			['Location', data_building.location],
+			['Completion', overview.build_date],
+			['Starting At', format.money(overview.start_price, '$')],
+			['Location', overview.location],
 		]
 
 		return (
@@ -188,11 +185,10 @@ function AmenitiesOverview(props) {
 		)
 	}
 
+	// debug.add('amenity-data').json(data)
+
 	return (
 		<div>
-
-			{/* <JsonDialog id="amenity-data" data={data} /> */}
-
 			<ul className={classes.rootList}>
 				<li data-li="content">
 					{renderContent()}

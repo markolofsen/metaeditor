@@ -1,29 +1,26 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // context
-import { useUnits, useLogic } from '../../../../context/';
+import { useUnits, useCommands } from '../../../../../context/';
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers'
 
 
 // material
-import {
-	makeStyles,
-	alpha,
-	lighten,
-} from '@mui/material/styles';
+import { makeStyles, lighten, alpha } from 'metalib/styles'
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 
+
 // components
-import ZoomContent from 'components/ZoomContent/'
+import ImageZoom from 'src/components/ImageZoom/'
 
 // blocks
 import FavoriteButton from './FavoriteButton'
-import UniversalButton from '../../../../components/UniversalButton/'
+import UniversalButton from '../../../../../components/UniversalButton/'
 import Details from './Details'
 import DialogForm from '../DialogForm'
 
@@ -130,38 +127,38 @@ const useStyles = makeStyles((theme) => ({
 		}
 	},
 
-	zoomWrapper: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flexDirection: 'column',
-
-		width: '90vmin',
-		height: '90vmin',
-		backgroundColor: theme.palette.background.paper,
-		borderRadius: theme.shape.borderRadius * 3,
-		pointerEvents: 'all',
-		overflow: 'hidden',
-		position: 'relative',
-		padding: theme.spacing(2),
-		'& [data-img]': {
-			width: '90vmin',
-			height: '90vmin',
-		},
-		'& img': {
-			width: '100%'
-		},
-	}
+	// zoomWrapper: {
+	// 	display: 'flex',
+	// 	alignItems: 'center',
+	// 	justifyContent: 'center',
+	// 	flexDirection: 'column',
+	//
+	// 	width: '90vmin',
+	// 	height: '90vmin',
+	// 	backgroundColor: theme.palette.background.paper,
+	// 	borderRadius: theme.shape.borderRadius * 3,
+	// 	pointerEvents: 'all',
+	// 	overflow: 'hidden',
+	// 	position: 'relative',
+	// 	padding: theme.spacing(2),
+	// 	'& [data-img]': {
+	// 		width: '90vmin',
+	// 		height: '90vmin',
+	// 	},
+	// 	'& img': {
+	// 		width: '100%'
+	// 	},
+	// }
 
 }));
 
 
 function DrawerContent(props) {
 	const classes = useStyles();
-	const helpers = useHelpers();
 	const units = useUnits();
-	const logic = useLogic();
+	const commands = useCommands();
 
+	const refImageZoom = React.useRef(null)
 
 	const [open, setOpen] = React.useState(false)
 	const [currentMenu, setCurrentMenu] = React.useState(false)
@@ -190,8 +187,12 @@ function DrawerContent(props) {
 
 	const onEnterUnit = async () => {
 
-		await logic.config.PS.enter_apartment(data.unit_key)
-		logic.config.actions.changeMenu('units_overview')
+		// await commands.config.PS.enter_apartment(data.unit_key)
+		// commands.config.actions.changeMenu('units_overview')
+
+		commands.cmd.method.enter_apartment.emit({ slug: units.menu.current })
+		commands.menu.changeMenu('units_overview')
+		units.menu.changeMenu(false)
 
 		closeDrawer()
 	}
@@ -199,9 +200,9 @@ function DrawerContent(props) {
 	const renderInfo = () => {
 
 		const list = [
-			['Price', helpers.custom.toUsd(data.price)],
+			['Price', format.money(data.price, '$')],
 			['Property Type', data.variant],
-			['Area', helpers.custom.toSqFt(data.square)],
+			['Area', data.square],
 			['Floor', data.floor],
 			['Bedrooms', data.bedrooms],
 			['Bathrooms', data.bathrooms],
@@ -254,13 +255,6 @@ function DrawerContent(props) {
 		)
 	}
 
-	const zoomFloorplan = () => {
-		return (
-			<div className={classes.zoomWrapper2}>
-				<img src={data.image_plan_big} />
-			</div>
-		)
-	}
 
 	const renderButton = (state, label) => {
 		const choosed = currentMenu === state
@@ -277,10 +271,11 @@ function DrawerContent(props) {
 
 	const renderInner = () => {
 
-		const is_unit_overview = logic.config.state.current_menu === 'units_overview'
+		const is_unit_overview = commands.menu.current === 'units_overview'
 
 		return (
 			<div className={classes.root}>
+				<ImageZoom ref={refImageZoom} />
 
 				<ul className={classes.inner}>
 					<li data-li="main">
@@ -289,14 +284,11 @@ function DrawerContent(props) {
 								{renderHeader()}
 							</li>
 							<li data-li="image">
-								<ZoomContent
-									content={zoomFloorplan()}
-									title={data.label}
-									className={classes.zoomWrapper}>
-									<div data-img>
-										<img src={data.image_plan} />
-									</div>
-								</ZoomContent>
+
+								<div data-img onClick={() => refImageZoom.current.open(data.image_plan_big)}>
+									<img src={data.image_plan} />
+								</div>
+
 							</li>
 							<li data-li="actions">
 
@@ -307,6 +299,7 @@ function DrawerContent(props) {
 										</Button>
 									)}
 								</DialogForm>
+
 								{!is_unit_overview && (
 									<Button fullWidth variant="contained" color="secondary" onClick={() => {
 										closeDrawer()

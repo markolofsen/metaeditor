@@ -1,21 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // api
-import ApiClass from 'api/methods/'
+import { useApi } from '../../../../../hooks/'
 
 // hooks
-import { useRouter } from 'hooks/'
+import { useRouter } from 'next/router';
 
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 // import IconButton from '@mui/material/IconButton';
 
 // blocks
-import UniversalButton from '../../../../components/UniversalButton'
+import UniversalButton from '../../../../../components/UniversalButton/'
 
 
 
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function FavoriteButton(props) {
-
+	const api = useApi()
 	const classes = useStyles();
 	const router = useRouter();
 
@@ -41,7 +39,7 @@ function FavoriteButton(props) {
 	// }, [unit_key])
 
 	// const loadData = () => {
-	// 	ApiClass().vec.vec_unit_favorite.read(unit_key).then(res => {
+	// 	ApiClass().streams.real_estate.vec_unit_favorite.read(unit_key).then(res => {
 	// 		if(res.status === 200) {
 	// 			setSelected(true)
 	// 		}
@@ -51,13 +49,13 @@ function FavoriteButton(props) {
 	const handleClick = () => {
 
 		// if(selected) {
-		// 	ApiClass().vec.vec_unit_favorite.delete(unit_key).then(res => {
+		// 	ApiClass().streams.real_estate.vec_unit_favorite.delete(unit_key).then(res => {
 		// 		if(res.status === 200) {
 		// 			setSelected(false)
 		// 		}
 		// 	})
 		// } else {
-		// 	ApiClass().vec.vec_unit_favorite.update(unit_key).then(res => {
+		// 	ApiClass().streams.real_estate.vec_unit_favorite.update(unit_key).then(res => {
 		// 		if(res.status === 200) {
 		// 			setSelected(true)
 		// 		}

@@ -15,9 +15,9 @@ import {
 function PublicBar() {
   return (
     <div>
-      <Portal container={document.getElementById('metaeditor-toolbar-left')}>
+      {/* <Portal container={document.getElementById('metaeditor-toolbar-left')}>
         <QuickNavigation />
-      </Portal>
+      </Portal> */}
       <Portal container={document.getElementById('metaeditor-toolbar-right')}>
         <KeyboardHelper />
         <QrCodeTransition />

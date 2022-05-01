@@ -8,7 +8,6 @@ import actions from './actions'
 
 
 function Provider(props) {
-
   const payload = actions()
 
 	return (

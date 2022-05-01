@@ -25,6 +25,7 @@ const ContentDiv = styled.div(theme => ({
   ...theme.typography.h6,
   borderLeft: `solid 1px ${theme.palette.divider}`,
   paddingLeft: theme.spacing(2),
+  marginLeft: theme.spacing(-2),
 }))
 
 
@@ -68,7 +69,7 @@ function Panel() {
 
     return (
       <CarouselItems
-        image={(item) => item.src}
+        imageIcon={(item) => item.src}
         onClickItem={(item, index) => {
           if (layout.handleDrawer.slug !== item.slug) {
             item.cmd.onClick()

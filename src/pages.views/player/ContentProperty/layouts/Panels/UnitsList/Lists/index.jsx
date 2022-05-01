@@ -1,18 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
 import {
   useUnits,
-} from '../../../context/';
+} from '../../../../context/';
 
 // material
-import {
-  makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 import Icon from '@mui/material/Icon';
 
 // components
-import ContentSlider from '../../../components/ContentSlider/'
+import ContentSlider from 'src/components/ContentSlider'
 
 // blocks
 import ListPlans from './Plans'

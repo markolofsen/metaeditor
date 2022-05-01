@@ -1,26 +1,25 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
 import {
-	useBuilding,
+	useData,
 	useUnits,
-} from '../../../context/';
+} from '../../../../context/';
 
 
 // hooks
-import { useHelpers, useContainerDimensions } from 'hooks/'
+import { useContainerDimensions } from 'metalib/common/hooks/'
+import { format } from 'metalib/common/helpers/'
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
 
 // components
-import SliderInterval from '../../../components/Slider/Interval'
-import Chip from '../../../components/Chip/'
+import SliderInterval from '../../../../components/Slider/Interval'
+import Chip from '../../../../components/Chip/'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,8 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 function UnitsList(props) {
 	const classes = useStyles();
-	const helpers = useHelpers();
-	const building = useBuilding();
+	const dataBuilding = useData();
 	const units = useUnits();
 
 	const refFilters = React.useRef(null);
@@ -74,7 +72,7 @@ function UnitsList(props) {
 		units.filters.setFiltersSize(filtersSize)
 	}, [filtersSize])
 
-	const building_data = building.state.building_data.overview
+	const data = dataBuilding.state.building.overview
 	const { current_panel } = units.state
 
 
@@ -156,8 +154,8 @@ function UnitsList(props) {
 	const renderPriceRange = () => {
 		if (current_panel === 'plans') return;
 
-		const start_price = building_data.start_price
-		const end_price = building_data.end_price
+		const start_price = data.start_price
+		const end_price = data.end_price
 
 		return (
 			<div className={classes.priceRange}>
@@ -167,7 +165,7 @@ function UnitsList(props) {
 					min={start_price}
 					max={end_price}
 					step={10000}
-					format={c => '$ ' + helpers.format.formatNumberShortener(c)}
+					format={c => '$ ' + format.numberShortener(c)}
 				/>
 			</div>
 		)

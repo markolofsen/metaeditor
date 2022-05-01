@@ -1,15 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
-// context
-import { useLogic } from '../../context/';
+// // hooks
+// import { useDebug } from 'hooks/'
 
 // material
-import {
-	makeStyles,
-	useTheme,
-	alpha,
-} from '@mui/material/styles';
+import { alpha } from 'metalib/styles'
+import { makeStyles, useTheme } from '@mui/styles'
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 import Button from '@mui/material/Button';
@@ -17,8 +14,7 @@ import Slide from '@mui/material/Slide';
 import Portal from '@mui/material/Portal';
 
 // components
-import JsonDialog from 'components/JsonDialog/'
-import DraggableObject from 'components/DraggableObject/'
+import DraggableCard from 'src/components/DraggableCard'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		right: 0,//theme.spacing(3),
 		bottom: 0,//theme.spacing(10),
 		pointerEvents: 'none',
-		zIndex: theme.zIndex.modal,
+		zIndex: theme.zIndex.modal - 1,
 	},
 	rootList: {
 		pointerEvents: 'all',
@@ -89,7 +85,6 @@ const useStyles = makeStyles((theme) => ({
 		'& > label': {
 			pointerEvents: 'none',
 			fontSize: theme.typography.body2.fontSize,
-			fontWeight: theme.props.fontWeight.bold,
 		},
 	},
 
@@ -97,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Popup({ show, ...props }) {
+	// const debug = useDebug()
 	const classes = useStyles();
-	const logic = useLogic();
 	const theme = useTheme()
 
 	const handleClose = () => {
@@ -163,21 +158,25 @@ function Popup({ show, ...props }) {
 		)
 	}
 
-	const padding = theme.spacing(2)
+	const padding = 16
+
 	const blockSettings = {
-		defaultPosition: { x: padding, y: padding },
+		defaultPosition: {
+			x: padding,
+			y: padding
+		},
 		onClose: () => { }
 	}
 
+	// debug.add('popup-data').json(props.data)
+
+
 	return (
 		<Portal>
-
-			<JsonDialog id="popup-data" data={props.data} />
-
 			<div className={classes.root}>
-				<DraggableObject handleClass={classes.title} {...blockSettings} show={show}>
+				<DraggableCard handleClass={classes.title} {...blockSettings} show={show}>
 					{({ active }) => renderInner(active)}
-				</DraggableObject>
+				</DraggableCard>
 			</div>
 		</Portal>
 	)

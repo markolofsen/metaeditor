@@ -1,5 +1,6 @@
 const initialState = {
   current_panel: 'plans',
+  current_unit: false,
   data_plans: false,
   data_units: false,
   data_commercial: false,
@@ -8,7 +9,7 @@ const initialState = {
   filters: {
     plan_id: null,
     bedrooms: 0,
-    price_interval: [0, 0],
+    price_interval: [0, 9999999999],
   },
 
   filters_size: false,
@@ -22,15 +23,11 @@ const KEY = {
 
 function reducer(state, action) {
   const { type, payload: anValue } = action;
-  // console.log(type);
+  // console.log(state);
 
   if(type === KEY.UPDATE) {
-    // console.error({anValue});
+    // console.error(anValue);
     return { ...state, ...anValue };
-
-  } else if(type === KEY.SWITCH_PANEL) {
-    const current_panel = anValue
-    return { ...state, current_panel };
 
   } else if(type === KEY.UPDATE_FILTERS) {
     // console.error({anValue});

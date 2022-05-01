@@ -1,76 +1,76 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
-import { useBuilding, useLogic, useLayout } from '../../../context/';
+import { useData, useCommands } from '../../../context/';
 
-// styles
-import { styled } from 'metalib/styles/'
+// material
+import { makeStyles } from '@mui/styles'
+// import Typography from '@mui/material/Typography';
 
-// player components
+// components
 import CarouselItems from 'src/components/CarouselItems'
 
-// hooks
-import useBridge from '../../../useBridge';
-
 // blocks
-// import { PopupAmenity } from '../../popups/'
+import { PopupAmenity } from '../../../popups/'
 
 
+const useStyles = makeStyles((theme) => ({
 
+	cardList: {
+		// height: '100%',
+		// display: 'flex',
+		// flexDirection: 'column',
+		// justifyContent: 'center',
+		'& > [data-li="label"]': {
+			// display: 'inline',
+			// backgroundColor: theme.palette.primary.main,
+			// boxShadow: `5px 0 0 ${theme.palette.primary.main}, -5px 0 0 ${theme.palette.primary.main}`,
+		},
+	}
 
-const ContentDiv = styled.div(theme => ({
-	flex: 1,
-	height: '100%',
-	display: 'flex',
-	flexDirection: 'column',
-	justifyContent: 'center',
-	...theme.typography.h6,
-	borderLeft: `solid 1px ${theme.palette.divider}`,
-	paddingLeft: theme.spacing(2),
-}))
+}));
 
 
 function AmenitiesList(props) {
-	const layout = useLayout()
-	const building = useBuilding();
-	// const logic = useLogic();
-	const bridge = useBridge()
+	const classes = useStyles();
+	const data = useData();
+	const commands = useCommands();
 
-	const current = layout.state.current_event
-	const currentSlug = current.value.slug
 
-	// const cmd_data = logic.config.PS.cmd.select_amenity?.data
-	// const cmd_slug = cmd_data?.value.slug
+	const cmd_slug = commands.menu.current
+	const items = data.state.building.amenities
 
-	const items = building.state.building_data.amenities
+	React.useEffect(() => {
+		if (cmd_slug === 'amenities') {
+			const slugs = items.map((item) => item.slug)
+			commands.cmd.method.filtered_amenities.emit({ slugs })
+		}
+	}, [cmd_slug])
 
 	return (
 		<div>
 
-			{/* {logic.config.state.current_menu === 'amenities' && (
+			{cmd_slug === 'amenities' && (
 				<PopupAmenity />
-			)} */}
+			)}
 
 			<CarouselItems
 				image={item => item.image}
-				onClickItem={(item, index) => {
-					bridge.amenities.enter(item.slug)
+				selected={item => item.slug === commands.amenities.current}
+				onClickItem={item => {
+					commands.amenities.changeMenu(item.slug)
+					commands.cmd.method.select_amenity.emit({ slug: item.slug })
+					commands.cmd.method.move_camera_to_amenity.emit({ slug: item.slug })
 				}}
-				onSelected={(item, index) => currentSlug === item.slug}
-				numberOfCards={{ xs: 1, md: 2, default: 4 }}
-				infiniteLoop={false}
-				gutter={10}
 				items={items}>
-				{(item, index) => {
-					return (
-						<ContentDiv key={index}>
+				{(item, index) => (
+					<ul className={classes.cardList}>
+						<li data-li="label">
 							{item.name}
-							{/* {JSON.stringify(item)} */}
-						</ContentDiv>
-					)
-				}}
+						</li>
+					</ul>
+				)}
 			</CarouselItems>
-
 		</div>
 	);
 }

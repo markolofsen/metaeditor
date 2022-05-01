@@ -1,25 +1,20 @@
-import React from 'react';
+import * as React from 'react';
 
 
 // context
 import {
 	useUnits,
-} from '../../../context/';
+} from '../../../../context/';
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers/'
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 import Icon from '@mui/material/Icon';
 
 // components
-import JsonDialog from 'components/JsonDialog/'
-
-// components
-import CarouselItems from '../../../components/CarouselItems/'
+import CarouselItems from 'src/components/CarouselItems'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& > [data-li="title"]': {
 			fontSize: theme.typography.body2.fontSize,
-			fontWeight: theme.props.fontWeight.semiBold,
 			overflow: 'hidden',
 		},
 		'& [data-li="item"]': {
@@ -64,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 function ListComponent(props) {
 	const classes = useStyles();
 	const units = useUnits()
-	const helpers = useHelpers();
 
 	const data = units.state.data_plans
 
@@ -72,21 +65,19 @@ function ListComponent(props) {
 		return <div />;
 	}
 
+	// debug.add('data-plans').json(data)
+
 	return (
 		<div>
-
-			<JsonDialog id="data-plans" data={data} />
-
 			<CarouselItems
-				variant="twin"
 				image={item => item.image}
-				backgroundSize="contain"
 				selected={item => false}
 				onClickItem={item => {
 					units.filters.setPlanId(item.id)
+					units.menu.changeMenu(false)
 				}}
 				items={data.results}>
-				{({ item, active }) => (
+				{(item, index) => (
 					<ul className={classes.cardList}>
 						<li data-li="title">
 							{item.label}
@@ -96,7 +87,7 @@ function ListComponent(props) {
 								Price from:
 							</label>
 							<span>
-								{helpers.custom.toUsd(item.price_from)}
+								{format.money(item.price_from, '$')}
 							</span>
 						</li>
 						<li>
@@ -106,7 +97,7 @@ function ListComponent(props) {
 										Area:
 									</label>
 									<span>
-										{helpers.custom.toSqFt(item.total.square)}
+										{item.total.square}
 									</span>
 								</li>
 								<li data-li="item">

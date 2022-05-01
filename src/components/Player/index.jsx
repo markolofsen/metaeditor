@@ -60,7 +60,7 @@ function Player(props) {
           // console.error('closed', payload);
         }}
         onCommand={(payload) => {
-          console.warn('onCommand', payload);
+          // console.warn('onCommand', payload);
           return payload
         }}
         onCallback={(payload) => {

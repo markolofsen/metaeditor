@@ -1,10 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // material
-import {
-  makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 

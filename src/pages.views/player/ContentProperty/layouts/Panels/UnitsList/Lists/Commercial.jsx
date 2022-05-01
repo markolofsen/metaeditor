@@ -1,22 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
-import { useLogic, useUnits } from '../../../context/';
+import { useCommands, useUnits } from '../../../../context/';
 
 // hooks
-import { useHelpers } from 'hooks/'
+import { format } from 'metalib/common/helpers/'
 
 // material
-import {
-	makeStyles,
-} from '@mui/material/styles';
+import { makeStyles } from '@mui/styles'
 import Icon from '@mui/material/Icon';
 
 // components
-import JsonDialog from 'components/JsonDialog/'
-
-// components
-import CarouselItems from '../../../components/CarouselItems/'
+import CarouselItems from 'src/components/CarouselItems'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& > [data-li="title"]': {
 			fontSize: theme.typography.body2.fontSize,
-			fontWeight: theme.props.fontWeight.semiBold,
 			overflow: 'hidden',
 		},
 		'& [data-li="item"]': {
@@ -61,11 +55,10 @@ const useStyles = makeStyles((theme) => ({
 function ListComponent(props) {
 	const classes = useStyles();
 	const units = useUnits()
-	const helpers = useHelpers();
-	const logic = useLogic();
+	const commands = useCommands();
 
-	const cmd_data = logic.config.PS.cmd.select_apartment?.data
-	const cmd_slug = cmd_data?.value.slug
+	const cmd_data = false //commands.config.PS.cmd.select_apartment?.data
+	const cmd_slug = units.menu.current
 
 	const data = units.state.data_commercial
 
@@ -73,21 +66,19 @@ function ListComponent(props) {
 		return <div />;
 	}
 
+	// debug.add('data-commercial').json(data)
+
 	return (
 		<div>
 
-			<JsonDialog id="data-commercial" data={data} />
-
 			<CarouselItems
-				variant="twin"
 				image={item => item.image_plan}
-				backgroundSize="contain"
 				selected={item => item.unit_key == cmd_slug}
 				onClickItem={item => {
-					logic.config.PS.select_apartment(item.unit_key)
+					units.menu.changeMenu(item.unit_key)
 				}}
 				items={data.results}>
-				{({ item, active }) => (
+				{(item, index) => (
 					<ul className={classes.cardList}>
 						<li data-li="title">
 							{item.label}
@@ -97,7 +88,7 @@ function ListComponent(props) {
 								Price:
 							</label>
 							<span>
-								{helpers.custom.toUsd(item.price)}
+								{format.money(item.price, '$')}
 							</span>
 						</li>
 						<li>
@@ -107,7 +98,7 @@ function ListComponent(props) {
 										Area:
 									</label>
 									<span>
-										{helpers.custom.toSqFt(item.square)}
+										{item.square}
 									</span>
 								</li>
 								<li data-li="item">

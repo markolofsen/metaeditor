@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 // context
-import { useLayout, useBuilding } from '../../context/'
+import { useLayout, useData } from '../../context/'
 
 // material
 import Box from '@mui/material/Box';
@@ -14,12 +14,12 @@ import OverviewCard from './OverviewCard/'
 import AmenitiesList from './AmenitiesList/'
 import AmenitiesOverview from './AmenitiesOverview/'
 import SurroundingsList from './SurroundingsList/'
-// import UnitsList from './UnitsList/'
-// import UnitsOverview from './UnitsOverview/'
+import UnitsList from './UnitsList/'
+import UnitsOverview from './UnitsOverview/'
 
 function PanelsList() {
   const layout = useLayout();
-  const building = useBuilding();
+  const data = useData();
 
   const list = [
     {
@@ -46,23 +46,23 @@ function PanelsList() {
       container: false,
       noPadding: true,
     },
-    // {
-    //   slug: 'units',
-    //   children: UnitsList,
-    //   container: false,
-    //   noPadding: true,
-    // },
-    // {
-    //   slug: 'units_overview',
-    //   children: UnitsOverview,
-    //   container: false,
-    //   noPadding: true,
-    // },
+    {
+      slug: 'units',
+      children: UnitsList,
+      container: false,
+      noPadding: true,
+    },
+    {
+      slug: 'units_overview',
+      children: UnitsOverview,
+      container: false,
+      noPadding: true,
+    },
   ]
 
   const slug = layout.state.current_menu
 
-  if (!building.state.building_data) {
+  if (!data.state.building) {
     return (<div />)
   }
 

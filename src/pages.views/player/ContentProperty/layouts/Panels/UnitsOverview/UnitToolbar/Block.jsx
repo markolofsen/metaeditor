@@ -1,25 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // context
-import { useUnits, useLogic } from '../../../context/';
+import { useUnits, useCommands } from '../../../../context/';
 
 
 // hooks
-import { useMedia, useHelpers } from 'hooks/'
+import { useMedia } from 'metalib/common/hooks/'
+import { format } from 'metalib/common/helpers/'
 
 // material
-import {
-	makeStyles,
-	alpha,
-} from '@mui/material/styles';
+import { makeStyles, alpha } from 'metalib/styles'
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 import Button from '@mui/material/Button';
 // import Collapse from '@mui/material/Collapse';
 
 // blocks
-import Tooltip from '../../../components/Tooltip'
+import Tooltip from '../../../../components/Tooltip/'
 import DialogForm from './DialogForm'
 
 
@@ -86,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 		'& > [data-li="price"]': {
 			marginRight: theme.spacing(2),
-			fontWeight: theme.props.fontWeight.bold,
+			// fontWeight: theme.props.fontWeight.bold,
 		},
 		'& > [data-li="icon"]': {
 			display: 'flex',
@@ -162,10 +160,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Widget(props) {
 	const classes = useStyles();
-	const helpers = useHelpers();
 	const media = useMedia();
 	const units = useUnits();
-	const logic = useLogic();
+	const commands = useCommands();
 
 	const [show, setShow] = React.useState(false)
 
@@ -191,7 +188,7 @@ function Widget(props) {
 								Area:
 							</label>
 							<span>
-								{helpers.custom.toSqFt(data.square)}
+								{data.square}
 							</span>
 						</li>
 						<li data-li="item">
@@ -233,7 +230,7 @@ function Widget(props) {
 			<li>
 				<Tooltip placement="bottom" value="Back to building">
 					<Button className={classes.button} data-color="primary" onClick={() => {
-						logic.config.actions.changeMenu('units')
+						commands.menu.changeMenu('units')
 					}}>
 						<Icon>arrow_back</Icon>
 					</Button>
@@ -257,7 +254,7 @@ function Widget(props) {
 							{data.label}
 						</li>
 						<li data-li="price">
-							{helpers.custom.toUsd(data.price)}
+							{format.money(data.price, '$')}
 						</li>
 						<li data-li="icon">
 							<Icon>expand_more</Icon>

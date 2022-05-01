@@ -1,45 +1,60 @@
 import React from "react"
 
-// reducers
-import reducer from './reducer'
-
 // context
-import {
-  useBuilding,
-  usePixelStreaming,
-  useLogic,
-} from '../../context/';
+import { useData, useCommands } from '../'
 
 // api
 import { useApi } from '../../hooks/'
 
 
+// reducers
+import reducer from './reducer'
 
-function useUnits() {
+export default function useUnits() {
   const api = useApi()
-  const building = useBuilding();
-  const logic = useLogic();
-
-  const refPrevState = React.useRef(null)
+  const commands = useCommands()
+  const dataBuilding = useData()
 
   const [state, dispatch] = React.useReducer(reducer.reducer, reducer.initialState);
 
-  const ps_state = {} //pixelStreaming.player.state
-  // // const ps_commands = ps_state.commands
+  const DISPATCHER = (payload) => dispatch({
+    type: reducer.KEY.UPDATE,
+    payload,
+  })
 
-  // React.useEffect(() => {
-  //   // ps_state.player.loaded &&
-  //   if (logic.config.state.current_menu === 'units') {
-  //     cls.loadData('plans')
-  //     logic.config.actions.dispatch({ slider_expanded: false })
-  //   }
+  // Preload data
+  React.useEffect(() => {
+    // ps_state.player.loaded &&
+    if (commands.menu.current === 'units') {
+      cls.loadData('plans')
+      DISPATCHER({ slider_expanded: false })
+    }
 
-  // }, [logic.config.state.current_menu])
+  }, [commands.menu.current])
 
+
+  // Load unit overview data
+  React.useEffect(() => {
+    if (state.current_unit) {
+      cls.loadUnitsOverview(menu.current)
+    }
+
+  }, [state.current_unit])
+
+  const menu = new class {
+    get current() {
+      return state.current_unit;
+    }
+
+    changeMenu(current_unit) {
+      commands.cmd.method.enter_apartment.emit({ slug: current_unit })
+      DISPATCHER({ current_unit })
+    }
+  }
 
   const cls = new class {
     constructor() {
-      this.building = building.state.building_slug
+      this.building_slug = dataBuilding.state?.building?.overview?.slug
     }
 
     get payload() {
@@ -50,13 +65,6 @@ function useUnits() {
       };
     }
 
-    dispatch(payload) {
-      dispatch({ type: reducer.KEY.UPDATE, payload })
-    }
-
-    dispatchPanel(current_panel) {
-      dispatch({ type: reducer.KEY.SWITCH_PANEL, payload: current_panel })
-    }
 
     async reloadData() {
       return await this.loadData(state.current_panel)
@@ -64,10 +72,10 @@ function useUnits() {
 
     async loadData(current_panel) {
 
-      // Deselect apartment every time
-      await ps_state.commands.select_apartment.reset()
+      // // Deselect apartment every time
+      // await ps_state.commands.select_apartment.reset()
 
-      this.dispatchPanel(current_panel)
+      DISPATCHER({ current_panel })
 
       if (current_panel === 'plans') {
         await this.loadPlans()
@@ -85,7 +93,7 @@ function useUnits() {
     async applyFiltered(units_slugs) {
       units_slugs = units_slugs.join(',')
       // console.error('@@units_slugs',units_slugs);
-      await ps_state.commands.filtered_units.send(c => ({ units_slugs }))
+      // await ps_state.commands.filtered_units.send(c => ({units_slugs}))
     }
 
     async loadPlans() {
@@ -95,10 +103,10 @@ function useUnits() {
         price_max: undefined,
       }
 
-      await api.vec_overlay.units_plans_search(this.building, payload).then(res => {
+      await api.vec_overlay.units_plans_search(this.building_slug, payload).then(res => {
         if (res.status === 200) {
           const data_plans = res.body
-          this.dispatch({ data_plans })
+          DISPATCHER({ data_plans })
 
           let list = []
           data_plans.results?.map(plan => {
@@ -118,10 +126,10 @@ function useUnits() {
         bedrooms: state.filters.bedrooms,
       }
 
-      await api.vec_overlay.units_search(this.building, payload).then(res => {
+      await api.vec_overlay.units_search(this.building_slug, payload).then(res => {
         if (res.status === 200) {
           const data_units = res.body
-          this.dispatch({ data_units })
+          DISPATCHER({ data_units })
           this.applyFiltered(data_units.results?.map(item => item.unit_key))
         }
       })
@@ -134,10 +142,10 @@ function useUnits() {
         variant: 'commercial',
       }
 
-      await api.vec_overlay.units_search(this.building, payload).then(res => {
+      await api.vec_overlay.units_search(this.building_slug, payload).then(res => {
         if (res.status === 200) {
           const data_commercial = res.body
-          this.dispatch({ data_commercial })
+          DISPATCHER({ data_commercial })
           this.applyFiltered(data_commercial.results?.map(item => item.unit_key))
         }
       })
@@ -146,42 +154,44 @@ function useUnits() {
     async loadUnitsOverview(slug) {
       await api.vec_overlay.units_card({ slug }).then(res => {
         if (res.status === 200) {
-          this.dispatch({ data_units_overview: res.body })
+          DISPATCHER({ data_units_overview: res.body })
         }
       })
     }
 
   }
 
-
   const filters = new class {
     constructor() { }
 
-    dispatch(payload) {
-      dispatch({ type: reducer.KEY.UPDATE_FILTERS, payload })
+    DISPATCHER(payload) {
+      dispatch({
+        type: reducer.KEY.UPDATE_FILTERS,
+        payload,
+      })
     }
 
     setFiltersSize(filters_size) {
-      this.dispatch({ filters_size })
+      DISPATCHER({ filters_size })
     }
 
     setPriceInterval(price_interval) {
-      this.dispatch({ price_interval })
+      this.DISPATCHER({ price_interval })
       cls.reloadData()
     }
 
     setBedrooms(bedrooms) {
-      this.dispatch({ bedrooms: bedrooms })
+      this.DISPATCHER({ bedrooms })
       cls.reloadData()
     }
 
     setPlanId(plan_id) {
-      this.dispatch({ plan_id })
+      this.DISPATCHER({ plan_id })
       cls.loadData('units')
     }
 
     unsetPlanId() {
-      this.dispatch({ plan_id: null })
+      this.DISPATCHER({ plan_id: null })
     }
 
     get getSelectedPlanLabel() {
@@ -190,18 +200,16 @@ function useUnits() {
     }
 
     expandUnits() {
-      const slider_expanded = logic.config.state.slider_expanded ? true : false
-      logic.config.actions.dispatch({ slider_expanded: !slider_expanded })
+      // const slider_expanded = logic.config.state.slider_expanded ? true : false
+      // logic.config.actions.dispatch({slider_expanded: !slider_expanded})
     }
   }
 
-
   return {
     state,
-    cls,
     filters,
+    menu,
+    cls,
   }
+
 };
-
-
-export default useUnits

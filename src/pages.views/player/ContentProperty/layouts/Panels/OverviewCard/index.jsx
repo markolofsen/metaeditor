@@ -1,12 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 
 // context
-import { useBuilding, useLogic } from '../../../context/';
+import { useData, useCommands } from '../../../context/';
 
-// styles
-import { makeStyles } from 'metalib/styles/'
+// hooks
+import { format } from 'metalib/common/helpers/'
 
 // material
+import { makeStyles } from '@mui/styles'
 import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
 
@@ -20,21 +21,29 @@ const CONTENT_HEIGHT = 80
 const useStyles = makeStyles((theme) => ({
 
 	rootList: {
-		display: 'flex',
-		'& > li': {
-			flex: 1,
-		},
-		'& > [data-li="content"]': {
-			paddingRight: theme.spacing(6),
-		},
-		'& > [data-li="info"]': {
-			maxWidth: '30%',
-			minWidth: 300,
+		paddingBottom: theme.spacing(2),
+
+		[theme.breakpoints.up('sm')]: {
+			display: 'flex',
+			'& > li': {
+				flex: 1,
+			},
+			'& > [data-li="content"]': {
+				paddingRight: theme.spacing(6),
+			},
+			'& > [data-li="info"]': {
+				maxWidth: '30%',
+				minWidth: 300,
+			},
 		},
 	},
 	contentList: {
 		display: 'flex',
 		'& > [data-li="image"]': {
+			[theme.breakpoints.down('sm')]: {
+				display: 'none',
+			},
+
 			maxWidth: 200,
 			marginRight: theme.spacing(8),
 			'& > img': {
@@ -50,7 +59,9 @@ const useStyles = makeStyles((theme) => ({
 				},
 				'& > [data-li="description"]': {
 					...theme.typography.body1,
-					minHeight: CONTENT_HEIGHT,
+					[theme.breakpoints.up('sm')]: {
+						minHeight: CONTENT_HEIGHT,
+					},
 				},
 				'& > [data-li="button"]': {
 					marginTop: theme.spacing(2),
@@ -59,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	infoList: {
+		[theme.breakpoints.down('sm')]: {
+			display: 'none',
+		},
 		'& > [data-li="title"]': {
 			...theme.typography.h6,
 			minHeight: TITLE_HEIGHT,
@@ -70,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
 				'& > li': {
 					display: 'flex',
 					marginBottom: theme.spacing(1),
+					...theme.typography.body2,
 					'&:last-child': {
 						marginBottom: 0,
 					},
@@ -90,14 +105,10 @@ const useStyles = makeStyles((theme) => ({
 
 function OverviewCard(props) {
 	const classes = useStyles();
-	const logic = useLogic();
-	const building = useBuilding()
+	const commands = useCommands();
+	const buildingData = useData()
 
-	const data = building.state.building_data.overview
-
-	if (!data) {
-		return <div />
-	}
+	const data = buildingData.state.building.overview
 
 	const renderDialogContent = () => {
 		return (
@@ -159,7 +170,7 @@ function OverviewCard(props) {
 
 		const list = [
 			['Completion', data.build_date],
-			['Starting At', data.start_price],
+			['Starting At', format.money(data.start_price, '$')],
 			['Location', data.location],
 		]
 
@@ -180,7 +191,7 @@ function OverviewCard(props) {
 				</li>
 				<li data-li="button">
 					<Button data-pointer variant="contained" color="secondary" onClick={() => {
-						logic.config.actions.changeMenu('units')
+						commands.menu.changeMenu('units')
 					}}>
 						Select unit
 					</Button>

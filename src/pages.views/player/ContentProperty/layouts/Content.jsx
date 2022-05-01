@@ -14,7 +14,6 @@ import Collapse from '@mui/material/Collapse';
 // layouts
 import AppBar from './AppBar'
 import Panels from './Panels/'
-import ContentDrawer from './ContentDrawer/'
 
 // player components
 import DraggableCard from 'src/components/DraggableCard'
@@ -78,16 +77,14 @@ function Content(props) {
   return (
     <RootDiv data-layout-visible={uiVisibleAll}>
 
-      <ContentDrawer show={uiVisible} />
-
       <RootList>
         <li data-li="content">
           <DraggableCard />
-          <div style={{ padding: '50px 0 0 300px' }}>
+          {/* <div style={{ padding: '50px 0 0 300px' }}>
             <pre>
               {JSON.stringify(layout.state.current_event, null, 4)}
             </pre>
-          </div>
+          </div> */}
         </li>
         <li>
           <ul data-list="bottom">

@@ -1,20 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 // context
 import {
-	useLogic,
-} from '../../../context/';
+	useCommands,
+} from '../../../../context/';
 
 // material
-import {
-	makeStyles,
-	alpha,
-} from '@mui/material/styles';
+import { makeStyles, alpha } from 'metalib/styles'
 import Portal from '@mui/material/Portal';
 
 // components
-import SliderVertical from '../../../components/Slider/Vertical'
+import SliderVertical from '../../../../components/Slider/Vertical'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
 
 function ToolbarUnits(props) {
 	const classes = useStyles();
-	const logic = useLogic();
+	const commands = useCommands();
 
 	const refSliderValue = React.useRef(null)
 	const [value, setValue] = React.useState(.5)
 
-	const bind_value = logic.config.PS.cmd.camera_vertical_bind?.data?.value
+	const bind_value = {} //commands.config.PS.cmd.camera_vertical_bind?.data?.value
 
 
 	React.useEffect(() => {
@@ -60,7 +57,7 @@ function ToolbarUnits(props) {
 
 		clearTimeout(refSliderValue.current)
 		refSliderValue.current = setTimeout(() => {
-			logic.config.PS.camera_vertical_bind(position)
+			// commands.config.PS.camera_vertical_bind(position)
 		}, 500)
 	}
 

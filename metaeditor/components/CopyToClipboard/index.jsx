@@ -48,7 +48,7 @@ function CopyComponent({ text, ...props }) {
 
 
 	return (
-		<div onClick={(event) => {
+		<span onClick={(event) => {
 			event.stopPropagation()
 			event.preventDefault()
 
@@ -61,7 +61,7 @@ function CopyComponent({ text, ...props }) {
 					label: copied ? 'Copied to clipboard' : 'Copy'
 				})}
 			</CopyToClipboard>
-		</div>
+		</span>
 	)
 
 }

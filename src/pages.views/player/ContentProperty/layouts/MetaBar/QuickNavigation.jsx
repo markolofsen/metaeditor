@@ -21,8 +21,6 @@ import { styled } from 'metalib/styles/'
 // components
 import Button from 'metaeditor/snippets/DevBar/Actions/Button';
 
-// commands
-import useBridge from '../../useBridge'
 
 
 const RootDiv = styled.div(theme => ({
@@ -132,9 +130,9 @@ function MobileVersion({ items }) {
 
 export default function QuickNavigation() {
   const media = useMedia()
-  const bridge = useBridge()
 
-  const c = bridge.views
+
+  // const c = bridge.views
   const items = [
     // {
     //   name: 'Intro',

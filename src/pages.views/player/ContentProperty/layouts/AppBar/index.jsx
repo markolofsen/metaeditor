@@ -12,7 +12,7 @@ import { MetaData } from 'metaeditor'
 
 // context
 import { useSystem } from 'metaeditor/context/';
-import { useLayout } from '../../context/';
+import { useLayout, useCommands } from '../../context/';
 
 // styles
 import { styled } from 'metalib/styles/'
@@ -41,6 +41,7 @@ const pages = [
   ['Overview', 'overview'],
   ['Amenities', 'amenities'],
   ['Surroundings', 'surroundings'],
+  ['Units', 'units'],
   // ['Description', 'description'],
   // ['Contacts', 'contacts'],
 ].map(([label, slug]) => ({ label, slug }));
@@ -71,6 +72,7 @@ const MenuButton = styled.custom(MuiButton, theme => ({
 
 const ResponsiveAppBar = () => {
   const system = useSystem()
+  const commands = useCommands()
   const layout = useLayout()
   const media = useMedia();
 
@@ -96,6 +98,8 @@ const ResponsiveAppBar = () => {
 
   const handleMenu = slug => event => {
     layout.handleMenu(slug)
+    // const slug = current_menu === item.slug ? false : item.slug
+    commands.menu.changeMenu(slug)
     handleCloseNavMenu()
   }
 
