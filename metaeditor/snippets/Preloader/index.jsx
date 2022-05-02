@@ -8,17 +8,17 @@ import { usePlayer, useConnection } from '../../context/';
 import { useCountdown } from 'metalib/common/hooks/'
 
 // material
-import MuiBox from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 // styles
 import { styled } from 'metalib/styles/'
 
 // blocks
 import Progress from './Progress'
-import { Typography } from '@mui/material';
 
 
 const LogoDiv = styled.div(theme => ({
@@ -28,7 +28,7 @@ const LogoDiv = styled.div(theme => ({
   },
 }))
 
-const RootBox = styled.custom(MuiBox, theme => ({
+const RootBox = styled.custom(Box, theme => ({
 
   '@keyframes preloader-opacity': {
     from: {
@@ -62,7 +62,7 @@ const RootBox = styled.custom(MuiBox, theme => ({
 
 }))
 
-const ProgressBox = styled.custom(MuiBox, theme => ({
+const ProgressBox = styled.custom(Box, theme => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -73,14 +73,8 @@ const ProgressBox = styled.custom(MuiBox, theme => ({
 
   '& > [data-progress]': {
     width: '20vw',
+    minWidth: 250,
   },
-  '& > [data-helpertext]': {
-    fontSize: 11,
-    textTransform: 'uppercase',
-    marginTop: theme.spacing(3),
-    letterSpacing: '.3em',
-  },
-
 }))
 
 const ButtonStopped = styled.custom(IconButton, theme => ({
@@ -194,9 +188,15 @@ function Preloader({ logoUrl, videoUrl }) {
           const label = labelsList[index]
 
           return (
-            <div data-helpertext>
-              {step} {label}
-            </div>
+            <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} sx={{ p: 3 }}>
+              <Typography variant="caption" align="center" sx={{ mb: 3 }}>
+                We start the server for demonstration. <br />
+                In production, streaming starts in 2-3 seconds.
+              </Typography>
+              <Typography variant="caption" align="center" sx={{ letterSpacing: '.3em' }}>
+                {step} {label}
+              </Typography>
+            </Box>
           )
         }
 

@@ -79,7 +79,7 @@ function Player(props) {
             warnTimeout: 120,
             closeTimeout: 10,
             lockMouse: false,
-            fakeMouseWithTouches: false,
+            fakeMouseWithTouches: true,
           }
         }}
         metaSettings={{

@@ -26,6 +26,7 @@ import CommandsList from './CommandsList/'
 // actions
 import FullscreenButton from './Actions/FullscreenButton/'
 import VolumeButton from './Actions/VolumeButton'
+import InstallPwa from './Actions/InstallPwa'
 
 
 const PanelDiv = styled.custom(Box, theme => ({
@@ -150,6 +151,7 @@ function DevBar(props) {
           <Box sx={{ ml: .5, display: 'flex', gap: theme => theme.spacing(.5) }}>
             <FullscreenButton />
             <VolumeButton />
+            <InstallPwa />
             <div id="metaeditor-toolbar-left" />
           </Box>
         </Box>
