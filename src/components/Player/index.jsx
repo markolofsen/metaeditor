@@ -91,11 +91,13 @@ function Player(props) {
           }
         }}
         metaSettings={{
-          isDev,
           showDevTools: true,
           notifyCommands: isDev,
           notifyCallbacks: isDev,
-        }}>
+        }}
+
+        // Custom
+        isDev={isDev}>
 
         {(payload) => (
           <MetaEditorProvider>

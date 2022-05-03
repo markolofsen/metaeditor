@@ -28,7 +28,7 @@ const MetaEditorContext = React.forwardRef((props, ref) => {
 
     React.useEffect(() => {
 
-        if (props.isDev === false) {
+        if (!props.isDev) {
             unload.activate()
         }
 
