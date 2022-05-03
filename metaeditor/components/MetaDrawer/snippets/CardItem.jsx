@@ -11,10 +11,10 @@ import Card from './Card';
 const ContentList = styled.ul(theme => ({
   display: 'flex',
   padding: 5,
-  minHeight: 100 + (5 * 2),
+  minHeight: 70 + (5 * 2),
   cursor: 'pointer',
   '& > [data-li="image"]': {
-    width: 100,
+    width: 70,
     backgroundColor: 'rgba(0,0,0, .4)',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',

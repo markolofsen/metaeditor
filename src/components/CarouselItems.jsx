@@ -8,12 +8,13 @@ import { CarouselItems } from 'metaeditor/components/'
 
 
 const RootDiv = styled.div(theme => ({
-
   [theme.breakpoints.down('lg')]: {
     padding: theme.spacing(0, 2, 2),
   },
   [theme.breakpoints.up('lg')]: {
     padding: theme.spacing(2, 10),
+    maxWidth: 2200,
+    margin: '0 auto',
   },
 }))
 
@@ -27,7 +28,7 @@ const ItemList = styled.ul(theme => ({
   transition: theme.transitions.create(['background-color', 'border-color', 'border']),
   backgroundColor: 'rgba(0,0,0,.3)',
   // padding: theme.spacing('2px'),
-  minHeight: 110,
+  minHeight: 80,
 
   [theme.breakpoints.up('md')]: {
     backdropFilter: "blur(5px)",
@@ -46,7 +47,7 @@ const ItemList = styled.ul(theme => ({
     borderWidth: 2,
   },
   '& > [data-li-preview]': {
-    width: 100,
+    width: 80,
     overflow: 'hidden',
     borderTopLeftRadius: theme.shape.borderRadius,
     borderBottomLeftRadius: theme.shape.borderRadius,

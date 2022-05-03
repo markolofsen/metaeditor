@@ -3,18 +3,21 @@ import React from "react";
 
 export default function usePWA() {
 
-  const [prompt, setState] = React.useState(null);
+  const [prompt, setPrompt] = React.useState(null);
+  const [isInstalled, setIsInstalled] = React.useState(false);
 
   const promptToInstall = async () => {
-    if (prompt) {
+    if (prompt?.prompt) {
 
       prompt.prompt();
       const { outcome } = await prompt.userChoice;
       if (outcome === 'accepted') {
-        setState(null)
+        setPrompt(null)
       }
 
+      return true
     }
+
     return Promise.reject(
       new Error(
         'Tried installing before browser sent "beforeinstallprompt" event'
@@ -25,16 +28,25 @@ export default function usePWA() {
   React.useEffect(() => {
     const ready = (e) => {
       e.preventDefault();
-      setState(e);
+      setPrompt(e);
+    };
+
+    const onInstall = () => {
+      setIsInstalled(true);
     };
 
     window.addEventListener("beforeinstallprompt", ready);
+    window.addEventListener("appinstalled", onInstall);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", ready);
+      window.removeEventListener("appinstalled", onInstall);
     };
   }, []);
 
-  return [prompt, promptToInstall];
+  return {
+    accessible: prompt && !isInstalled,
+    promptToInstall,
+  }
 
 }

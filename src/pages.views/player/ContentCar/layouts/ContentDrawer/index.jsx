@@ -67,7 +67,7 @@ function PlayerContentDrawer(props) {
         layout.handleDrawer.close()
       }}
       title={list.hasOwnProperty(slug) && list[slug][0]}
-      width={500}>
+      width={400}>
       {renderContent()}
     </MetaDrawer>
   );

@@ -16,9 +16,6 @@ import AppBar from './AppBar'
 import Panels from './Panels/'
 import ContentDrawer from './ContentDrawer/'
 
-// player components
-import DraggableCard from 'src/components/DraggableCard'
-
 
 const RootDiv = styled.div(theme => ({
   '&[data-layout-visible]': {
@@ -65,7 +62,7 @@ const RootList = styled.ul(theme => ({
 }))
 
 
-function Content(props) {
+function Content() {
   const player = usePlayer()
   const layout = useLayout()
 
@@ -82,7 +79,7 @@ function Content(props) {
 
       <RootList>
         <li data-li="content">
-          <DraggableCard />
+
         </li>
         <li>
           <ul data-list="bottom">
@@ -106,12 +103,5 @@ function Content(props) {
     </RootDiv>
   )
 }
-
-Content.propTypes = {
-  // onEmit: PropTypes.object.isRequired,
-};
-
-Content.defaultProps = {
-};
 
 export default Content

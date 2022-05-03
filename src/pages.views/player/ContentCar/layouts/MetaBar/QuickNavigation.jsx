@@ -26,6 +26,7 @@ import useBridge from '../../useBridge'
 
 
 const RootDiv = styled.div(theme => ({
+  pointerEvents: 'none',
   background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)',
   position: 'absolute',
   top: 0,
@@ -34,16 +35,25 @@ const RootDiv = styled.div(theme => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: theme.spacing(3, 0, 10),
-  opacity: .4,
-  transition: theme.transitions.create(['opacity'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-
-  '&:hover': {
-    opacity: 1,
+  paddingTop: theme.spacing(4),
+  '&[data-hover="true"]': {
+    '& > [data-shadow]': {
+      opacity: 1,
+    },
   },
+  '& > [data-shadow]': {
+    background: 'linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 140,
+    opacity: .5,
+    transition: theme.transitions.create(['opacity'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  }
 
 }))
 
@@ -52,23 +62,39 @@ const ContentDiv = styled.div(theme => ({
   alignItems: 'center',
   justifyContent: 'center',
   pointerEvents: 'all',
+  zIndex: 1,
 }))
 
 const Chip = styled.custom(MuiChip, theme => ({
-  borderColor: `rgba(255,255,255, .2)`,
+  border: 0,
+  backgroundColor: 'rgba(0,0,0,.3)',
   pointerEvents: 'all',
+  height: 'auto',
+  '& > .MuiChip-label': {
+    padding: theme.spacing(.7, 1.5),
+  }
 }))
 
 
 
 function DesktopVersion({ items }) {
+  const [hover, setHover] = React.useState(false)
+
+  const handleHover = v => event => {
+    setHover(v)
+  }
 
   return (
     <Portal>
-      <RootDiv>
+      <RootDiv
+        onMouseOver={handleHover(true)}
+        onMouseOut={handleHover(false)}
+        data-hover={hover}>
+
+        <div data-shadow />
 
         <ContentDiv>
-          <Typography variant="h6" sx={{ mr: 3, cursor: 'default' }}>
+          <Typography variant="body2 " sx={{ mr: 2, cursor: 'default', fontWeight: theme => theme.typography.fontWeightMedium }}>
             Quick view:
           </Typography>
 

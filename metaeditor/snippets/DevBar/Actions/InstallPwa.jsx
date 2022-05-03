@@ -11,29 +11,14 @@ import Button from './Button';
 
 
 function InstallPwa() {
-  const [prompt, promptToInstall] = usePWA();
-  const [isVisible, setVisibleState] = React.useState(false);
+  const pwa = usePWA();
 
-  const hide = () => setVisibleState(false);
-
-  React.useEffect(
-    () => {
-      if (prompt) {
-        setVisibleState(true);
-      }
-    },
-    [prompt]
-  );
-
-  if (!isVisible) {
-    return <div />;
+  if (!pwa.accessible) {
+    return <></>
   }
 
   return (
-    <Button onClick={() => {
-      hide()
-      promptToInstall()
-    }} tooltip="Install PWA">
+    <Button onClick={pwa.promptToInstall} tooltip="Install PWA">
       <Icon>
         install_desktop
       </Icon>

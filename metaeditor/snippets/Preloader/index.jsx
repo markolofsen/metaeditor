@@ -188,20 +188,19 @@ function Preloader({ logoUrl, videoUrl }) {
           const label = labelsList[index]
 
           return (
-            <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} sx={{ p: 3 }}>
-              <Typography variant="caption" align="center" sx={{ mb: 3 }}>
-                We start the server for demonstration. <br />
-                In production, streaming starts in 2-3 seconds.
-              </Typography>
-              <Typography variant="caption" align="center" sx={{ letterSpacing: '.3em' }}>
-                {step} {label}
-              </Typography>
-            </Box>
+            <Typography variant="caption" align="center" sx={{ mt: 2, letterSpacing: '.3em' }}>
+              {step} {label}
+            </Typography>
           )
         }
 
         return (
           <>
+            <Typography variant="caption" align="center" sx={{ mb: 2, color: 'text.secondary' }}>
+              We start the server for demonstration. <br />
+              In production, streaming starts in 2-3 seconds.
+            </Typography>
+
             <div data-progress>
               <Progress />
             </div>
