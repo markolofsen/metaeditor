@@ -1,19 +1,19 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-
-// context
-import ContextProvider from './context/'
 
 // layouts
-import Content from './layouts/Content'
-import MetaBar from './layouts/MetaBar/'
+import AppBar from './layouts/AppBar/'
+
 
 function ContentCar() {
+
   return (
-    <ContextProvider>
-      <MetaBar />
-      <Content />
-    </ContextProvider>
+    <div style={{
+      // backgroundColor: '#fff',
+      // height: '100vh',
+    }}>
+
+      <AppBar />
+
+    </div>
   )
 }
 

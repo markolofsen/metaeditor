@@ -22,12 +22,14 @@ import {
 
 // blocks
 import ContentCar from './ContentCar/'
+import ContentCarOld from './ContentCarOld/'
 import ContentProperty from './ContentProperty/'
 
 import WelcomeBar from 'src/components/WelcomeBar/'
 
 // config
 const defaultLogoUrl = env.staticUrl('player', 'logo_ue.svg')
+
 
 
 const PlayerView = ({ query }) => {
@@ -105,6 +107,9 @@ const PlayerView = ({ query }) => {
 
       {router.query.view === '1' && (
         <ContentCar />
+      )}
+      {router.query.view === '3' && (
+        <ContentCarOld />
       )}
       {router.query.view === '2' && (
         <ContentProperty />

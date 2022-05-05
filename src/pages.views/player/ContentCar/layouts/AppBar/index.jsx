@@ -1,288 +1,191 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-
-// config
-import { env } from 'config/'
-
-// hooks
-import { useMedia } from 'metalib/common/hooks/'
-
-// data
-import { MetaData } from 'metaeditor'
-
-// context
-import { useSystem } from 'metaeditor/context/';
-import { useLayout } from '../../context/';
-
-// styles
-import { styled } from 'metalib/styles/'
 
 // material
-import MuiAppBar from '@mui/material/AppBar';
+// import { styled } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Icon from '@mui/material/Icon';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
-import Container from '@mui/material/Container';
-import MuiButton from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import Divider from '@mui/material/Divider';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container'
+import Icon from '@mui/material/Icon'
 
-// blocks
-import HelpPanel from './HelpPanel'
-import { SignalQuality } from 'metaeditor/snippets/'
+// layouts
+import TabsMenu from './TabsMenu/'
 
 
+export default function PrimarySearchAppBar() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-const pages = [
-  ['Configurator', 'configurator'],
-  ['Rendering', 'rendering'],
-  ['Description', 'description'],
-  ['Contacts', 'contacts'],
-].map(([label, slug]) => ({ label, slug }));
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-
-
-
-const AppBar = styled.custom(MuiAppBar, theme => ({
-  // background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 30%, rgba(0,0,0,1) 100%)',
-  background: 'transparent',
-  boxShadow: 'none',
-}))
-
-const MenuButton = styled.custom(MuiButton, theme => ({
-  border: `solid 1px transparent`,
-  padding: theme.spacing(1, 2),
-  '&:hover': {
-    backgroundColor: 'transparent',
-    borderColor: 'rgba(255,255,255,.1)',
-  },
-  '&[data-selected="true"]': {
-    backgroundColor: 'rgba(255,255,255,.05)',
-    borderColor: 'rgba(255,255,255,.1)',
-  }
-}))
-
-
-
-const ResponsiveAppBar = () => {
-  const system = useSystem()
-  const layout = useLayout()
-  const media = useMedia();
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const isMobile = media.down.sm
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
   };
 
-  const handleMenu = slug => event => {
-    layout.handleMenu(slug)
-    handleCloseNavMenu()
-  }
+  // const handleMobileMenuOpen = (event) => {
+  //   setMobileMoreAnchorEl(event.currentTarget);
+  // };
 
-  const isMenuSelected = item => item.slug === layout.state.current_menu
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
 
-  const LibVersion = () => {
-    return (
-      <Box component="small" sx={{ ml: 1, opacity: .5, fontSize: 11 }}>
-        {MetaData.version}
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="error">
+            <Icon>mail</Icon>
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="error">
+            <Icon>notifications_icon</Icon>
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <Icon>account_circle</Icon>
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+
+      <Box sx={{
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        display: { xs: 'block', md: 'none' }
+      }}>
+        <TabsMenu />
       </Box>
-    )
-  }
 
-  const demoLinks = system.state.metaeditor?.links || []
-
-  const settings = [
-    ...demoLinks,
-    [false, false],
-    ['Logout', false],
-  ].map(([label, href]) => ({ label, href }));
-
-  const renderAppBar = () => {
-
-    return (
-      <AppBar position="static">
-        <Container maxWidth={false}>
-          <Toolbar disableGutters>
+      <AppBar position="fixed" color="transparent" sx={{
+        top: 'auto',
+        pb: 1,
+        pt: 5,
+        bottom: 0,
+        boxShadow: 'none',
+        display: { xs: 'none', md: 'flex' },
+        background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0) 100%)',
+      }}>
+        <Container maxWidth="xl">
+          <Toolbar>
+            <IconButton
+              sx={{ mr: 2 }}
+              size="large"
+              edge="start"
+              color="inherit"
+            >
+              <Icon>menu</Icon>
+            </IconButton>
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, cursor: 'default' }}
+              sx={{
+                mr: 5, textTransform: 'uppercase',
+                display: { xs: 'none', sm: 'block' }
+              }}
             >
-              {env.data.siteLogoName}
-              <LibVersion />
+              MetaEditor
             </Typography>
 
-            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <Box>
+              <TabsMenu />
+            </Box>
+
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
+              <IconButton size="large" color="inherit">
+                <Icon>network_wifi</Icon>
+              </IconButton>
+              <IconButton size="large" color="inherit">
+                <Icon>help</Icon>
+              </IconButton>
+
+            </Box>
+            {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
-                onClick={handleOpenNavMenu}
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
                 color="inherit"
               >
-                <Icon>menu</Icon>
+                <MoreIcon />
               </IconButton>
-              <Menu
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {pages.map((item, index) => (
-                  <MenuItem
-                    key={index}
-                    selected={isMenuSelected(item)}
-                    onClick={handleMenu(item.slug)}>
-                    {item.label}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-            >
-              {env.data.siteLogoName}
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-              {pages.map((item, index) => {
-                const selected = isMenuSelected(item)
-                return (
-                  <MenuButton
-                    data-selected={selected}
-                    endIcon={(selected && <Icon>close</Icon>)}
-                    key={index}
-                    onClick={handleMenu(item.slug)}
-                    sx={{ my: 0, mx: 1, color: 'white' }}
-                  >
-                    {item.label}
-                  </MenuButton>
-                )
-              })}
-            </Box>
-
-            <SignalQuality>
-              {(button) => (
-                <Tooltip title="Signal Quality">
-                  <span>
-                    {button}
-                  </span>
-                </Tooltip>
-              )}
-            </SignalQuality>
-
-            <Tooltip title={layout.state.ui_visible ? 'Hide UI' : 'Show UI'}>
-              <span>
-                <IconButton onClick={() => layout.handleUiVisible()}>
-                  <Icon>{layout.state.ui_visible ? 'visibility' : 'visibility_off'}</Icon>
-                </IconButton>
-              </span>
-            </Tooltip>
-
-            {!isMobile && (
-              <HelpPanel>
-                {(onClick) => (
-                  <Tooltip title="Help">
-                    <IconButton onClick={onClick}>
-                      <Icon>help</Icon>
-                    </IconButton>
-                  </Tooltip>
-                )}
-              </HelpPanel>
-            )}
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu}>
-                  <Icon>settings</Icon>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((item, index) => {
-                  if (item.label) {
-                    return (
-                      <MenuItem
-                        key={index}
-                        onClick={() => {
-                          if (item.href) {
-                            handleCloseUserMenu()
-                            window.open(item.href)
-                          }
-                        }}
-                        disabled={!item.href}>
-                        {item.label}
-                      </MenuItem>
-                    )
-                  }
-
-                  return (
-                    <Divider key={index} />
-                  );
-                })}
-              </Menu>
-            </Box>
+            </Box> */}
           </Toolbar>
         </Container>
       </AppBar>
-    );
-  }
-
-  return (
-    <div>
-      {renderAppBar()}
-    </div>
-  )
-};
-
-ResponsiveAppBar.propTypes = {
-  // state: PropTypes.object.isRequired,
-};
-
-ResponsiveAppBar.defaultProps = {
-};
-
-export default ResponsiveAppBar;
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
+  );
+}
