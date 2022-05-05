@@ -21,15 +21,7 @@ import { BackPreloader } from 'metaeditor/snippets/'
 
 
 const RootDiv = styled.div(theme => ({
-
-  // Hack for disabling mobile touches
-  '& #player': {
-    [theme.breakpoints.down('sm')]: {
-      pointerEvents: 'none',
-    },
-  },
-
-  backgroundColor: 'rgba(0,0,0, 1)',
+  backgroundColor: '#000',
   height: 'var(--window-height)',
 }))
 
