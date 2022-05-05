@@ -106,6 +106,7 @@ export default function useBridge() {
 
 const views = {
   default: '906da0',
+  paint: '906da0',
   wheels: 'c13e27',
   trim: '02ce76',
   leather: '36a9c8',
@@ -147,7 +148,7 @@ export const commandsObj = {
   ],
 
   views: [
-    [views.default, 'Paint'],
+    [views.paint, 'Paint'],
     [views.wheels, 'Wheels'],
     [views.trim, 'Trim'],
     [views.leather, 'Leather'],

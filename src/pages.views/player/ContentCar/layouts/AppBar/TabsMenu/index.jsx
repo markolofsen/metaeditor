@@ -8,10 +8,8 @@ import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Popper from '@mui/material/Popper';
-import Typography from '@mui/material/Typography';
 import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
-
 
 // commands
 import useBridge from './useBridge'
@@ -47,27 +45,36 @@ export default function ScrollableTabsButtonVisible() {
 
   const [value, setValue] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const refPoperTimeout = React.useRef(null)
+  const refViewTimeout = React.useRef(null)
 
   const handleChange = (event, item) => {
 
-    const newValue = item.slug
-    setValue(newValue);
+    if (value === item.slug) {
+      setValue(null)
+      setAnchorEl(null);
+      return
+    }
+
+    setValue(item.slug);
     setAnchorEl(event.currentTarget);
 
     clearTimeout(refPoperTimeout.current)
+    clearTimeout(refViewTimeout.current)
+    refViewTimeout.current = setTimeout(() => {
+      item.onClick()
+    }, 300)
 
-    item.onClick()
-    // console.error('@@item', item)
   };
 
   const handleClose = () => {
 
     refPoperTimeout.current = setTimeout(() => {
 
-      if (value !== 'views') {
-        bridge.resetView()
-      }
+      // if (value !== 'views') {
+      //   bridge.resetView()
+      // }
 
       setValue(null)
       setAnchorEl(null);
