@@ -13,7 +13,7 @@ function PublicBar() {
   return (
     <div>
       <Portal container={document.getElementById('metaeditor-toolbar-left')}>
-        ?
+        <></>
       </Portal>
       <Portal container={document.getElementById('metaeditor-toolbar-right')}>
         <KeyboardHelper />
