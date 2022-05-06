@@ -12,9 +12,15 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container'
 import Icon from '@mui/material/Icon'
+import Tooltip from '@mui/material/Tooltip'
 
 // layouts
 import TabsMenu from './TabsMenu/'
+
+// blocks
+import HelpPanel from './HelpPanel'
+import { SignalQuality } from 'metaeditor/snippets/'
+
 
 
 export default function PrimarySearchAppBar() {
@@ -123,15 +129,18 @@ export default function PrimarySearchAppBar() {
         <TabsMenu />
       </Box>
 
-      <AppBar position="fixed" color="transparent" sx={{
-        top: 'auto',
-        pb: 1,
-        pt: 5,
-        bottom: 0,
-        boxShadow: 'none',
-        display: { xs: 'none', md: 'flex' },
-        background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0) 100%)',
-      }}>
+      <AppBar
+        position="fixed"
+        color="transparent"
+        sx={{
+          top: 'auto',
+          pb: 1,
+          pt: 5,
+          bottom: 0,
+          boxShadow: 'none',
+          display: { xs: 'none', md: 'flex' },
+          background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 70%, rgba(0,0,0,0) 100%)',
+        }}>
         <Container maxWidth="xl">
           <Toolbar>
             <IconButton
@@ -161,12 +170,34 @@ export default function PrimarySearchAppBar() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-              <IconButton size="large" color="inherit">
+              {/* <IconButton size="large" color="inherit">
                 <Icon>network_wifi</Icon>
               </IconButton>
               <IconButton size="large" color="inherit">
                 <Icon>help</Icon>
-              </IconButton>
+              </IconButton> */}
+
+              <SignalQuality>
+                {(button) => (
+                  <Tooltip title="Signal Quality">
+                    <span>
+                      {button}
+                    </span>
+                  </Tooltip>
+                )}
+              </SignalQuality>
+
+              <Box sx={{ display: { xs: 'none', md: 'inline-block' } }}>
+                <HelpPanel>
+                  {(onClick) => (
+                    <Tooltip title="Help">
+                      <IconButton size="large" onClick={onClick}>
+                        <Icon >help</Icon>
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                </HelpPanel>
+              </Box>
 
             </Box>
             {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

@@ -6,24 +6,19 @@ import { env } from 'config/'
 // hooks
 import { useSound } from "metalib/common/hooks/";
 
+// material
+import Box from '@mui/material/Box';
+
 // components
 import MetaEditor from 'metaeditor/';
 
 // context
 import MetaEditorProvider, { useConnection } from 'metaeditor/context/';
 
-// styles
-import { styled } from 'metalib/styles/'
-
 // snippets
 import { BackPreloader } from 'metaeditor/snippets/'
 
 
-
-const RootDiv = styled.div(theme => ({
-  backgroundColor: '#000',
-  height: 'var(--window-height)',
-}))
 
 const isDev = env.isDev
 
@@ -34,7 +29,9 @@ function Player(props) {
   const intro = useSound(env.staticPath('sounds', 'intro.mp3'))
 
   return (
-    <RootDiv>
+    <Box style={{
+      height: 'var(--window-height)',
+    }}>
 
       <BackPreloader />
 
@@ -98,7 +95,7 @@ function Player(props) {
         )}
       </MetaEditor>
 
-    </RootDiv>
+    </Box>
   )
 }
 

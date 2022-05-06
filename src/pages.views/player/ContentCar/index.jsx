@@ -1,6 +1,7 @@
 
 // layouts
 import AppBar from './layouts/AppBar/'
+import MetaBar from './layouts/MetaBar/'
 
 
 function ContentCar() {
@@ -11,6 +12,7 @@ function ContentCar() {
       // height: '100vh',
     }}>
 
+      <MetaBar />
       <AppBar />
 
     </div>

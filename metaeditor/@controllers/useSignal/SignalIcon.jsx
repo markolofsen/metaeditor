@@ -12,7 +12,7 @@ import MuiIconButton from '@mui/material/IconButton';
 const IconButton = styled.custom(MuiIconButton, theme => ({
 
 	'&[data-size="small"]': {
-		padding: 8,
+		padding: 12,
 	},
 	'&[data-size="medium"]': {
 		//

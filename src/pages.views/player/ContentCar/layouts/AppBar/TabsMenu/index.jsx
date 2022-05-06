@@ -129,8 +129,9 @@ export default function ScrollableTabsButtonVisible() {
               onMouseEnter={() => clearTimeout(refPoperTimeout.current)}
               onMouseLeave={handleClose}
               sx={{
-                backdropFilter: 'blur(5px)',
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                bgcolor: 'rgba(0,0,0,.8)',
+                backdropFilter: 'blur(2px)',
+                border: theme => `solid 1px ${theme.palette.divider}`,
                 marginBottom: {
                   md: 1,
                 },
@@ -152,7 +153,9 @@ export default function ScrollableTabsButtonVisible() {
     <Box
       sx={{
         flexGrow: 1,
-        bgcolor: 'common.black',
+        bgcolor: 'rgba(0,0,0,.8)',
+        backdropFilter: 'blur(2px)',
+        border: theme => `solid 1px ${theme.palette.divider}`,
         borderRadius: {
           md: 1
         },
