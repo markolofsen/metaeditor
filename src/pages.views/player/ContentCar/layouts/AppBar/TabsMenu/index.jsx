@@ -91,14 +91,21 @@ export default function ScrollableTabsButtonVisible() {
       }
     }
 
+    if (!items) {
+      return false
+    }
+
     return (
       <SubmenuList>
         {items.map((item, index) => (
           <li key={index} onClick={() => {
             item.onClick()
+
             if (getDevice.isMobile) {
+              setValue(null)
               setAnchorEl(null);
             }
+
           }}>
             {item.src ? (
               <img src={item.src} />
@@ -112,6 +119,11 @@ export default function ScrollableTabsButtonVisible() {
 
   const renderPopover = () => {
     const open = Boolean(anchorEl);
+    const items = renderItems()
+
+    if (items === false) {
+      return (<div />)
+    }
 
     return (
       <Popper open={open}
@@ -141,8 +153,7 @@ export default function ScrollableTabsButtonVisible() {
                   md: 1,
                 },
               }}>
-              {/* <Typography sx={{ p: 2 }}>The content of the Popper.</Typography> */}
-              {renderItems()}
+              {items}
             </Paper>
           </Fade>
         )}
