@@ -84,7 +84,7 @@ function DemosList() {
     <Grid container spacing={6}>
       {data.map((item, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', bgcolor: 'rgba(0,0,0,.6)', backdropFilter: 'blur(20px)' }}>
 
             {item.is_best && (<LabelBest />)}
 

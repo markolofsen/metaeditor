@@ -3,6 +3,9 @@ import * as React from 'react';
 // styles
 import { styled } from 'metalib/styles/'
 
+// libs
+import { getDevice } from 'metalib/common/funcs/'
+
 // material
 import Box from '@mui/material/Box';
 import Tabs, { tabsClasses } from '@mui/material/Tabs';
@@ -51,12 +54,6 @@ export default function ScrollableTabsButtonVisible() {
 
   const handleChange = (event, item) => {
 
-    if (value === item.slug) {
-      setValue(null)
-      setAnchorEl(null);
-      return
-    }
-
     setValue(item.slug);
     setAnchorEl(event.currentTarget);
 
@@ -76,7 +73,6 @@ export default function ScrollableTabsButtonVisible() {
       //   bridge.resetView()
       // }
 
-      setValue(null)
       setAnchorEl(null);
 
     }, 500)
@@ -98,7 +94,12 @@ export default function ScrollableTabsButtonVisible() {
     return (
       <SubmenuList>
         {items.map((item, index) => (
-          <li key={index} onClick={() => item.onClick()}>
+          <li key={index} onClick={() => {
+            item.onClick()
+            if (getDevice.isMobile) {
+              setAnchorEl(null);
+            }
+          }}>
             {item.src ? (
               <img src={item.src} />
             ) : ''}
@@ -188,9 +189,17 @@ export default function ScrollableTabsButtonVisible() {
           <Tab
             value={item.slug}
             onMouseEnter={(event) => {
-              handleChange(event, item)
+              if (getDevice.isBrowser) {
+                handleChange(event, item)
+              }
             }}
             onClick={(event) => {
+
+              if (value === item.slug) {
+                setValue(null)
+                return
+              }
+
               handleChange(event, item)
             }}
             onMouseLeave={handleClose}
