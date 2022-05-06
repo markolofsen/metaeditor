@@ -69,7 +69,9 @@ const Home = () => {
   }
 
   return (
-    <>
+    <Box style={{
+      backgoundColor: '#02243D',
+    }}>
       <BackgroundSqaure />
       <Box sx={{ pb: 10 }}>
         <Container maxWidth='lg'>
@@ -94,7 +96,7 @@ const Home = () => {
         </Container>
       </Box >
 
-    </>
+    </Box>
   )
 
 };
