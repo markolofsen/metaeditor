@@ -5,7 +5,8 @@
   "dependencies": {
     "lodash": "4.17.21",
     "moment": "^2.29.1",
-    "pixel-streaming": "^2.4.9"
+    "react-online-hook": "^1.0.4",
+    "pixel-streaming": "^2.5.0"
   },
   "peerDependencies": {
     "metalib": "^1.1.3"
