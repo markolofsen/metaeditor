@@ -1,18 +1,15 @@
 import * as React from 'react';
 
 // material
-// import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container'
 import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
+import Collapse from '@mui/material/Collapse';
 
 // layouts
 import TabsMenu from './TabsMenu/'
@@ -20,102 +17,12 @@ import TabsMenu from './TabsMenu/'
 // blocks
 import HelpPanel from './HelpPanel'
 import { SignalQuality } from 'metaeditor/snippets/'
+import UserMenu from './UserMenu'
 
 
 
-export default function PrimarySearchAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  // const handleMobileMenuOpen = (event) => {
-  //   setMobileMoreAnchorEl(event.currentTarget);
-  // };
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <Icon>mail</Icon>
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <Icon>notifications_icon</Icon>
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Icon>account_circle</Icon>
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
+export default function CustomBar() {
+  const [showTabs, setShowTabs] = React.useState(true)
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -144,12 +51,13 @@ export default function PrimarySearchAppBar() {
         <Container maxWidth="xl">
           <Toolbar>
             <IconButton
+              onClick={() => setShowTabs(c => !c)}
               sx={{ mr: 2 }}
               size="large"
               edge="start"
               color="inherit"
             >
-              <Icon>menu</Icon>
+              <Icon>{showTabs ? 'chevron_left' : 'chevron_right'}</Icon>
             </IconButton>
             <Typography
               variant="h6"
@@ -163,19 +71,12 @@ export default function PrimarySearchAppBar() {
               MetaEditor
             </Typography>
 
-            <Box>
+            <Collapse orientation='horizontal' in={showTabs}>
               <TabsMenu />
-            </Box>
+            </Collapse>
 
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
-              {/* <IconButton size="large" color="inherit">
-                <Icon>network_wifi</Icon>
-              </IconButton>
-              <IconButton size="large" color="inherit">
-                <Icon>help</Icon>
-              </IconButton> */}
+            <Box sx={{ alignItems: 'center', display: { xs: 'none', md: 'flex' } }}>
 
               <SignalQuality>
                 {(button) => (
@@ -199,24 +100,14 @@ export default function PrimarySearchAppBar() {
                 </HelpPanel>
               </Box>
 
+              <UserMenu />
+
             </Box>
-            {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box> */}
+
           </Toolbar>
         </Container>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+
     </Box>
   );
 }

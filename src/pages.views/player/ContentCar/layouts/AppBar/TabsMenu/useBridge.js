@@ -148,14 +148,12 @@ export const commandsObj = {
   ],
 
   views: [
-    [views.paint, 'Paint'],
-    [views.wheels, 'Wheels'],
-    [views.trim, 'Trim'],
-    [views.leather, 'Leather'],
-    [views.seats, 'Seats'],
     [views.side_view, 'Side view'],
     [views.front_view, 'Front view'],
     [views.back_view, 'Back view'],
+    [views.wheels, 'Wheels'],
+    [views.trim, 'Trim'],
     [views.passenger, 'Passenger'],
+    [views.seats, 'Seats'],
   ]
 }
