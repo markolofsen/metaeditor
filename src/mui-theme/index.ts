@@ -16,8 +16,8 @@ import {
 
 
 const defaultColors = {
-  default: '#212637',
-  paper: '#1A1F2E',
+  default: '#0D0D0D',
+  paper: '#1D1D1D',
   borderColor: 'rgba(255,255,255, .1)',
 }
 
@@ -84,7 +84,6 @@ const theme = createTheme({
           touchAction: 'manipulation',
         },
         body: {
-          minHeight: '100vh',
           padding: 0,
           margin: 0,
           fontFamily: ['Montserrat', 'Helvetica', 'Arial', 'sans-serif'].join(', '),

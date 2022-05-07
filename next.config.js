@@ -145,5 +145,5 @@ const SentryWebpackPluginOptions = {
 // ensure that your source maps include changes from all other Webpack plugins
 // module.exports = withSentryConfig(moduleExports, SentryWebpackPluginOptions)
 
-// module.exports = (phase) => moduleExports(phase)
-module.exports = (phase) => withSentryConfig(moduleExports(phase), SentryWebpackPluginOptions)
+module.exports = (phase) => moduleExports(phase)
+// module.exports = (phase) => withSentryConfig(moduleExports(phase), SentryWebpackPluginOptions)

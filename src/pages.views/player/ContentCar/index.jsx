@@ -1,15 +1,20 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
 
 // layouts
-import Content from './layouts/Content'
+import AppBar from './layouts/AppBar/'
 import MetaBar from './layouts/MetaBar/'
 
+
 function ContentCar() {
+
   return (
-    <div>
+    <div style={{
+      // backgroundColor: '#fff',
+      // height: '100vh',
+    }}>
+
       <MetaBar />
-      <Content />
+      <AppBar />
+
     </div>
   )
 }

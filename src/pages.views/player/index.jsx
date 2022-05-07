@@ -4,8 +4,7 @@ import * as React from 'react';
 import { env } from 'config/'
 
 // context
-import { useConnection } from 'metaeditor/context/';
-import { useParent } from 'src/context/';
+import { useConnection, useSystem } from 'metaeditor/context/';
 
 // controllers
 import { useNotifyController } from 'metaeditor/@controllers/'
@@ -21,22 +20,23 @@ import {
   CommandProgress,
 } from 'metaeditor/snippets/'
 
-// components
-import Player from 'src/components/Player/';
-
 // blocks
 import ContentCar from './ContentCar/'
+import ContentCarOld from './ContentCarOld/'
+import ContentProperty from './ContentProperty/'
+
 import WelcomeBar from 'src/components/WelcomeBar/'
 
 // config
 const defaultLogoUrl = env.staticUrl('player', 'logo_ue.svg')
 
 
+
 const PlayerView = ({ query }) => {
   useNotifyController()
 
-  const parent = useParent()
   const router = useRouter()
+  const system = useSystem()
   const connection = useConnection()
 
   const session = query.session || router.query.session
@@ -46,19 +46,12 @@ const PlayerView = ({ query }) => {
   const [metadata, setMetadata] = React.useState({
     video_url: false,
     logo_url: false,
+    api_key: false,
   })
 
   React.useEffect(() => {
     load()
-
   }, [session])
-
-  React.useEffect(() => {
-    const { host, port } = connection.state
-    if (host && port) {
-      parent.setServerData({ host, port })
-    }
-  }, [connection.state])
 
   const onSessionError = () => {
     const errMsg = `Session not found!`
@@ -72,8 +65,12 @@ const PlayerView = ({ query }) => {
 
       connection.startSessionUuuid(session, ({
         onSuccess: (metadata) => {
+
           setSessionExist(true)
           setMetadata(metadata)
+
+          // Load commands with api_key of project
+          system.cls.loadData(metadata.api_key)
         },
         onError: () => onSessionError(),
       }))
@@ -111,16 +108,16 @@ const PlayerView = ({ query }) => {
       {router.query.view === '1' && (
         <ContentCar />
       )}
+      {router.query.view === '3' && (
+        <ContentCarOld />
+      )}
+      {router.query.view === '2' && (
+        <ContentProperty />
+      )}
 
     </>
   )
 };
 
-const WithPlayer = (props) => (
-  <Player>
-    <PlayerView {...props} />
-  </Player>
-)
-
-export default WithPlayer;
+export default PlayerView;
 

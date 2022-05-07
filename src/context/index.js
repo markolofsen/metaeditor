@@ -12,10 +12,9 @@ return (
 
 ***** injection
 // context
-import {useParent, useLayout} from 'src/context/';
+import {useParent} from 'src/context/';
 
 const parent = useParent()
-const layout = useLayout()
 
 */
 
@@ -24,7 +23,6 @@ import React from "react";
 
 // common
 import ParentProvider, { useParent } from './useParent/';
-import LayoutProvider, { useLayout } from './useLayout/';
 
 
 function ContextProvider(props) {
@@ -37,7 +35,6 @@ function ContextProvider(props) {
 
 export {
   useParent,
-  useLayout,
 }
 
 export default ContextProvider

@@ -6,12 +6,9 @@ import { styled } from 'metalib/styles/'
 import MuiAccordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
 
 // components
 import Container from './Container'
-
 
 
 const Accordion = styled.custom(MuiAccordion, theme => ({

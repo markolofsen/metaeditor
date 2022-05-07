@@ -25,6 +25,7 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Box'
 import Icon from '@mui/material/Icon'
+import Chip from '@mui/material/Chip'
 
 
 const IconBox = styled.custom(Box, theme => ({
@@ -83,12 +84,15 @@ function DemosList() {
     <Grid container spacing={6}>
       {data.map((item, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', bgcolor: 'rgba(0,0,0,.6)', backdropFilter: 'blur(20px)' }}>
+
+            {item.is_best && (<LabelBest />)}
+
             <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref>
               <CardMedia
                 component='a'
                 target="_blank"
-                sx={{ height: '14.5625rem' }}
+                sx={{ height: '15rem' }}
                 image={item.preview_small}>
                 <IconBox>
                   <Icon>play_arrow</Icon>
@@ -112,3 +116,19 @@ function DemosList() {
 }
 
 export default DemosList
+
+
+function LabelBest() {
+  return (
+
+    <Chip
+      style={{
+        pointerEvents: 'none',
+        position: 'absolute',
+        marginTop: 15,
+        marginLeft: 15,
+      }}
+      sx={{ bgcolor: 'success.main', typography: 'button' }}
+      label="Best sample" />
+  )
+}

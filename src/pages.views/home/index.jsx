@@ -13,6 +13,7 @@ import { styled } from 'metalib/styles/'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
 // blocks
 import DemosList from './DemosList'
@@ -69,7 +70,14 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div>
+
+      <GlobalStyles styles={{
+        body: {
+          backgroundColor: '#02243D',
+        }
+      }} />
+
       <BackgroundSqaure />
       <Box sx={{ pb: 10 }}>
         <Container maxWidth='lg'>
@@ -94,7 +102,7 @@ const Home = () => {
         </Container>
       </Box >
 
-    </>
+    </div>
   )
 
 };

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useHotkeys } from 'metalib/common/hooks/'
 
 // context
-import { useLayout } from 'src/context/'
+// import { useLayout } from 'src/context/'
 
 // material
 import { styled } from 'metalib/styles/'
@@ -46,19 +46,19 @@ const CardList = styled.ul(theme => ({
 
 
 function DraggableCard(props) {
-  const layout = useLayout()
-  const { data, active } = layout.draggableCard
+  // const layout = useLayout()
+  // const { data, active } = layout.draggableCard
 
   useHotkeys('esc', (e, ke) => {
     if (!e.repeat) {
-      layout.draggableCard.close()
+      // layout.draggableCard.close()
       return;
     }
   }, [])
 
   return (
     <DraggableObject
-      show={active}
+      show={false}
       disabled={false}
       defaultPosition={{
         x: 600,
@@ -71,7 +71,7 @@ function DraggableCard(props) {
               {data?.title}
             </CardHandler>
             <IconButton variant="outlined" onClick={() => {
-              layout.draggableCard.close()
+              // layout.draggableCard.close()
             }}>
               <Icon>close</Icon>
             </IconButton>
