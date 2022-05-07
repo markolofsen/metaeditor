@@ -27,6 +27,7 @@ import CommandsList from './CommandsList/'
 import FullscreenButton from './Actions/FullscreenButton/'
 import VolumeButton from './Actions/VolumeButton'
 import InstallPwa from './Actions/InstallPwa'
+import PlayButton from './Actions/PlayButton'
 
 
 const PanelDiv = styled.custom(Box, theme => ({
@@ -149,6 +150,7 @@ function DevBar(props) {
           {renderDialog()}
           <AppBar handleMenu={handleMenu} />
           <Box sx={{ ml: .5, display: 'flex', gap: theme => theme.spacing(.5) }}>
+            <PlayButton />
             <FullscreenButton />
             <VolumeButton />
             <InstallPwa />

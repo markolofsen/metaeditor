@@ -70,6 +70,11 @@ function Player(props) {
           return payload
         }}
         settings={{
+          lifetime: {
+            intervalSec: 0,
+            maxFps: 30,
+          },
+          resolutionMode: 'console',
           volume: 1,
           quality: 1,
           pixelStreaming: {

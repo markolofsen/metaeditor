@@ -169,6 +169,7 @@ export default function ScrollableTabsButtonVisible() {
               bgcolor: 'rgba(0,0,0,.8)',
               backdropFilter: 'blur(2px)',
               borderTop: theme => `solid 1px ${theme.palette.divider}`,
+              borderRadius: 0,
             }}>
             {items}
           </Paper>
@@ -181,13 +182,7 @@ export default function ScrollableTabsButtonVisible() {
         open={open}
         anchorEl={anchorEl}
         placement="bottom-start"
-        transition
-        sx={{
-          width: {
-            xs: '100%',
-            md: 'auto',
-          },
-        }}>
+        transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} in={showSubmenu} timeout={350}>
             <Paper
@@ -215,7 +210,7 @@ export default function ScrollableTabsButtonVisible() {
       {renderPopover()}
 
       <Tabs
-        value={value}
+        value={value || 'none'}
         // onChange={handleChange}
         variant="scrollable"
         scrollButtons
@@ -234,6 +229,7 @@ export default function ScrollableTabsButtonVisible() {
           },
         }}
       >
+        <Tab value={'none'} sx={{ display: 'none' }} />
         {bridge.menu.map((item, index) => (
           <Tab
             value={item.slug}

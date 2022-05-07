@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 // hooks
 import { useMedia } from 'metalib/common/hooks/';
 
-// context
-import { usePlayer, useConnection } from '../../context/';
-
 // material
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -48,16 +45,9 @@ const MenuButton = styled.custom(Button, theme => ({
 
 const ResponsiveAppBar = (props) => {
   const media = useMedia()
-  const player = usePlayer()
-  const connection = useConnection()
-
-  const { state, cls } = player
-
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const icons = [
-    ['play', 'Play/Stop', 'play_arrow'],
     ['state', 'Data state', 'info'],
     ['debug', 'Debug data', 'tune'],
     ['logs', 'Pixel Streaming logs', 'notifications'],
@@ -71,35 +61,11 @@ const ResponsiveAppBar = (props) => {
       disabled: false,
     }
 
-    // const isStreamDisabled = !state.loaded && state.closed?.code !== 1005
-
-    switch (slug) {
-      case 'play':
-        res.icon = state.loaded ? 'pause' : 'play_arrow'
-        res.onClick = () => {
-          cls.switchConnection()
-        }
-        // res.disabled = isStreamDisabled
-        break;
-
-      // case 'state':
-      // case 'debug':
-      //   res.disabled = isStreamDisabled
-
-    }
-
     return res;
   })
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -156,7 +122,6 @@ const ResponsiveAppBar = (props) => {
                 <IconButton
                   disabled={item.disabled}
                   onClick={() => {
-                    handleCloseNavMenu()
                     item.onClick()
                   }}>
                   <Icon>{item.icon}</Icon>
