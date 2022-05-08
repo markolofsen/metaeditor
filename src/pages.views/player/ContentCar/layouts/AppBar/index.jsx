@@ -11,6 +11,9 @@ import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
 import Collapse from '@mui/material/Collapse';
 
+// bridge
+import useBridge from './useBridge'
+
 // layouts
 import TabsMenu from './TabsMenu/'
 
@@ -22,6 +25,7 @@ import UserMenu from './UserMenu'
 
 
 export default function CustomBar() {
+  const bridge = useBridge()
   const [showTabs, setShowTabs] = React.useState(true)
 
   return (
@@ -68,7 +72,7 @@ export default function CustomBar() {
                 display: { xs: 'none', sm: 'block' }
               }}
             >
-              MetaEditor
+              {bridge.name}
             </Typography>
 
             <Collapse orientation='horizontal' in={showTabs}>

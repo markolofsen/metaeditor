@@ -74,7 +74,7 @@ function Player(props) {
             intervalSec: 0,
             maxFps: 30,
           },
-          resolutionMode: 'console',
+          resolutionMode: 'command',
           volume: 1,
           quality: 1,
           pixelStreaming: {

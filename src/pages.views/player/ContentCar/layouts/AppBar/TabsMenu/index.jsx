@@ -19,8 +19,8 @@ import Fade from '@mui/material/Fade';
 import Collapse from '@mui/material/Collapse';
 import ButtonBase from "@mui/material/ButtonBase";
 
-// commands
-import useBridge from './useBridge'
+// bridge
+import useBridge from '../useBridge'
 
 const RootDiv = styled.div(theme => ({
   flexGrow: 1,
@@ -81,20 +81,22 @@ export default function ScrollableTabsButtonVisible() {
 
   const handleChange = (event, item) => {
 
-    if (value == item.slug) {
+    if (value == item.id) {
       setShowSubmenu(c => !c)
     } else {
       setShowSubmenu(true)
     }
 
 
-    setValue(item.slug);
+    setValue(item.id);
     setAnchorEl(event.currentTarget);
 
     clearTimeout(refPoperTimeout.current)
     clearTimeout(refViewTimeout.current)
     refViewTimeout.current = setTimeout(() => {
-      item.onClick()
+      if (typeof item.onClick === 'function') {
+        item.onClick()
+      }
     }, 300)
 
   };
@@ -119,9 +121,9 @@ export default function ScrollableTabsButtonVisible() {
 
     let items = []
     for (let item of bridge.menu) {
-      if (item.slug === value) {
+      if (item.id === value) {
         // console.error('item', item.items)
-        items = item.items
+        items = item.subitems
         break;
       }
     }
@@ -134,7 +136,10 @@ export default function ScrollableTabsButtonVisible() {
       <SubmenuList>
         {items.map((item, index) => (
           <ButtonBase component="div" key={index} onClick={() => {
-            item.onClick()
+            if (typeof item.onClick === 'function') {
+              item.onClick()
+            }
+
             parent.cls.soundClick()
 
             if (isMediaMobile) {
@@ -145,7 +150,7 @@ export default function ScrollableTabsButtonVisible() {
             {item.src ? (
               <img src={item.src} />
             ) : ''}
-            {item.label}
+            {item.name}
           </ButtonBase>
         ))}
       </SubmenuList>
@@ -210,7 +215,7 @@ export default function ScrollableTabsButtonVisible() {
       {renderPopover()}
 
       <Tabs
-        value={value || 'none'}
+        value={value || bridge.menu[0]?.id}
         // onChange={handleChange}
         variant="scrollable"
         scrollButtons
@@ -229,10 +234,9 @@ export default function ScrollableTabsButtonVisible() {
           },
         }}
       >
-        <Tab value={'none'} sx={{ display: 'none' }} />
         {bridge.menu.map((item, index) => (
           <Tab
-            value={item.slug}
+            value={item.id}
             onClick={(event) => handleChange(event, item)}
             onMouseEnter={(event) => {
               if (getDevice.isBrowser) {
@@ -247,7 +251,7 @@ export default function ScrollableTabsButtonVisible() {
             }}
             sx={{ py: 2, px: 3 }}
             key={index}
-            label={item.label} />
+            label={item.name} />
         ))}
 
       </Tabs>
