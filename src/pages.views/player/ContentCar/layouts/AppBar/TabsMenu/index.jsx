@@ -15,6 +15,7 @@ import Tabs, { tabsClasses } from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Popper from '@mui/material/Popper';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import Fade from '@mui/material/Fade';
 import Collapse from '@mui/material/Collapse';
 import ButtonBase from "@mui/material/ButtonBase";
@@ -24,7 +25,7 @@ import useBridge from '../useBridge'
 
 const RootDiv = styled.div(theme => ({
   flexGrow: 1,
-  backgroundColor: 'rgba(0,0,0,.8)',
+  backgroundColor: 'rgba(0,0,0,.7)',
   backdropFilter: 'blur(2px)',
   borderColor: theme.palette.divider,
   borderStyle: 'solid',
@@ -102,18 +103,9 @@ export default function ScrollableTabsButtonVisible() {
   };
 
   const handleClose = () => {
-
     refPoperTimeout.current = setTimeout(() => {
-
-      // if (value !== 'views') {
-      //   bridge.resetView()
-      // }
-
-      // setAnchorEl(null);
       setShowSubmenu(false)
-
     }, 500)
-
   };
 
 
@@ -135,18 +127,21 @@ export default function ScrollableTabsButtonVisible() {
     return (
       <SubmenuList>
         {items.map((item, index) => (
-          <ButtonBase component="div" key={index} onClick={() => {
-            if (typeof item.onClick === 'function') {
-              item.onClick()
-            }
+          <ButtonBase
+            key={index}
+            component="div"
+            onClick={() => {
+              if (typeof item.onClick === 'function') {
+                item.onClick()
+              }
 
-            parent.cls.soundClick()
+              parent.cls.soundClick()
 
-            if (isMediaMobile) {
-              setShowSubmenu(false)
-            }
+              if (isMediaMobile) {
+                setShowSubmenu(false)
+              }
 
-          }}>
+            }}>
             {item.src ? (
               <img src={item.src} />
             ) : ''}
@@ -168,16 +163,17 @@ export default function ScrollableTabsButtonVisible() {
     if (isMediaMobile) {
       return (
         <Collapse orientation="vertical" in={open} timeout={350}>
-          <Paper
+          <Box
+            style={{
+              backgroundColor: 'transparent',
+            }}
             sx={{
               pointerEvents: 'all',
-              bgcolor: 'rgba(0,0,0,.8)',
-              backdropFilter: 'blur(2px)',
-              borderTop: theme => `solid 1px ${theme.palette.divider}`,
+              borderBottom: theme => `solid 1px ${theme.palette.divider}`,
               borderRadius: 0,
             }}>
             {items}
-          </Paper>
+          </Box>
         </Collapse>
       )
     }
