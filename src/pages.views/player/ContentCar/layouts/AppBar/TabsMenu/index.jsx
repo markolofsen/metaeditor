@@ -142,8 +142,8 @@ export default function ScrollableTabsButtonVisible() {
               }
 
             }}>
-            {item.src ? (
-              <img src={item.src} />
+            {item.preview_small ? (
+              <img src={item.preview_small} />
             ) : ''}
             {item.name}
           </ButtonBase>
