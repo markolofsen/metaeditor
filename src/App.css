@@ -1,0 +1,16 @@
+@import '~rsuite/dist/rsuite.min.css';
+
+body {
+  background-color: #02243D;
+  font-family: "Montserrat";
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul>li {
+  padding: 0
+}
