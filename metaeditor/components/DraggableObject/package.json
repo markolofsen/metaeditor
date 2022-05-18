@@ -1,9 +1,0 @@
-{
-  "name": "@components/DraggableObject",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "react-draggable": "^4.4.4"
-  },
-  "devDependencies": {}
-}

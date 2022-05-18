@@ -1,8 +1,0 @@
-{
-  "name": "@components/DataGrid",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "@mui/x-data-grid": "^5.0.0-beta.6"
-  }
-}
