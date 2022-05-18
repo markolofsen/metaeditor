@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Player, MetaProvider, usePlayer, useSystem, PlayerPropsSchema } from '../lib'
+// libs
+import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
 
 
 const PlayerContext: React.FC<any> = ({ build }: any) => {
@@ -79,9 +80,9 @@ const PlayerContext: React.FC<any> = ({ build }: any) => {
 
 
 const CustomPlayer: React.FC<any> = ({ build }) => (
-  <MetaProvider>
+  <ContextProvider>
     <PlayerContext build={build} />
-  </MetaProvider>
+  </ContextProvider>
 )
 
 export default CustomPlayer

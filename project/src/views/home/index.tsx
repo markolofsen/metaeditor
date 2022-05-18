@@ -2,10 +2,10 @@ import * as React from 'react'
 import { useNavigate } from "react-router-dom";
 
 // config
-import { config } from 'src/package/assets/config';
+import { config } from 'pixel-streaming';
 
 // ui
-import { jss } from "src/components/styled"
+import { jss } from "pixel-streaming"
 import Button from 'rsuite/Button'
 
 // layouts

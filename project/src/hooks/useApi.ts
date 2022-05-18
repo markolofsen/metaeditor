@@ -1,6 +1,6 @@
 
 // hooks
-import { Request } from 'src/package/hooks/useApi/useRequest'
+import { Request } from 'pixel-streaming'
 
 
 export const useApi = () => {

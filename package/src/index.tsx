@@ -1,27 +1,21 @@
-import * as React from 'react'
-
-// ui
-import CustomProvider from 'rsuite/CustomProvider';
-
 // snippets
-import { Player, PlayerPropsSchema } from "./snippets/Player";
+import { PlayerPropsSchema } from "./snippets/Player";
+export type { PlayerPropsSchema }
+export { Player } from "./snippets/Player";
 
 // context
-import { ContextProvider, usePlayer, useSystem } from './context/';
-// import { ContextProvider, usePlayer, useSystem } from './contextTest/';
+export { ContextProvider, usePlayer, useSystem } from './context/';
 
-export {
-  Player,
-  usePlayer,
-  useSystem,
-}
+// components
+export { CustomDrawer } from './components/Drawer';
+export { CustomModal } from './components/Modal';
+export { SvgIcon } from "./components/SvgIcon";
 
-export type { PlayerPropsSchema }
+// styles
+export { jss, media, colors } from "./assets/styled";
 
-export const MetaProvider = (props: any) => (
-  <CustomProvider theme='dark'>
-    <ContextProvider>
-      {props.children}
-    </ContextProvider>
-  </CustomProvider>
-)
+// config
+export { config } from "./assets/config";
+
+// hooks
+export { Request } from './hooks/useApi/useRequest'

@@ -1,6 +1,8 @@
 import React from 'react'
 
-import { Player, PlayerPropsSchema } from '../lib'
+// libs
+import { Player, PlayerPropsSchema } from 'pixel-streaming'
+
 
 const PlayerContext: React.FC<any> = () => {
 

@@ -1,1 +1,0 @@
-export { SvgIcon } from 'src/package/components/SvgIcon'

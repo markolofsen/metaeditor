@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 // ui
-import { jss, colors } from "src/components/styled"
+import { jss, colors } from "pixel-streaming"
 
 
 

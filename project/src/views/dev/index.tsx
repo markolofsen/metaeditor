@@ -1,17 +1,19 @@
 import React from 'react'
 
 // config
-import { config } from 'src/package/assets/config';
+import { config } from 'pixel-streaming';
 
 // ui
-import { jss, media } from "src/components/styled"
+import { jss, media } from "pixel-streaming"
 import Input from 'rsuite/Input';
 import Button from 'rsuite/Button';
 import Message from 'rsuite/Message';
 
-// player
+// libs
+import { ContextProvider, usePlayer } from 'pixel-streaming'
+
+// blocks
 import Player from './Player'
-import { MetaProvider, usePlayer } from '../lib'
 
 
 const useStyles = jss({
@@ -142,9 +144,9 @@ const DevPlayer: React.FC = () => {
 }
 
 const CustomPlayer: React.FC = () => (
-  <MetaProvider>
+  <ContextProvider>
     <DevPlayer />
-  </MetaProvider>
+  </ContextProvider>
 )
 
 export default CustomPlayer

@@ -1,14 +1,14 @@
 import * as React from 'react'
 
 // ui
-import { jss } from 'src/components/styled'
+import { jss } from 'pixel-streaming'
 import Button from 'rsuite/Button'
 import Divider from 'rsuite/Divider';
 import Form from 'rsuite/Form';
 import ButtonToolbar from 'rsuite/ButtonToolbar';
 
 // components
-import { CustomModal } from 'src/components/Modal'
+import { CustomModal } from 'pixel-streaming'
 
 // hook
 import { useApi } from 'src/hooks/useApi';

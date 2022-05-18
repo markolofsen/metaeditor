@@ -8,7 +8,7 @@ export const useFullscreen = () => {
   const [active, setActive] = React.useState(false)
 
   // Hot key
-  useHotkeys('ctrl+f', (e) => {
+  useHotkeys('ctrl+f', (e: any) => {
     if (!e.repeat) {
       cls.open()
       return;

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 // ui
-import { jss, media } from "src/components/styled"
+import { jss, media } from "pixel-streaming"
 
 const useStyles = jss({
   root: {

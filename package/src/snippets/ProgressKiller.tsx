@@ -83,7 +83,7 @@ export const ProgressKiller: React.FC<any> = () => {
                 strokeColor='#fff'
                 percent={contdown.percent}
                 status={'active'} />
-              <div style={{ marginLeft: 10 }}>
+              <div style={{ width: 60 }}>
                 {contdown.time}
               </div>
             </div>

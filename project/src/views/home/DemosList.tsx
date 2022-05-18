@@ -1,20 +1,17 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-// // libs
-// import url from 'url'
-
 // hooks
 import { useApi } from 'src/hooks/useApi';
 
 // ui
-import { jss, colors, media } from 'src/components/styled';
+import { jss, colors, media } from 'pixel-streaming';
 
 // icons
 import GearIcon from '@rsuite/icons/Gear';
 
 // components
-import { SvgIcon } from 'src/components/SvgIcon'
+import { SvgIcon } from 'pixel-streaming'
 
 const useStyles = jss({
   itemList: {
