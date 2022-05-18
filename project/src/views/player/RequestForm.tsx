@@ -30,6 +30,7 @@ const RequestForm: React.FC<any> = () => {
   const api = useApi()
   const storage = useStorage()
 
+  const refTimeout = React.useRef<any>(null)
   const USERDATA = storage.wrapper('USERDATA')
 
   const [disabled, setDisabled] = React.useState<boolean>(false)
@@ -41,12 +42,17 @@ const RequestForm: React.FC<any> = () => {
 
   React.useEffect(() => {
 
-    USERDATA.read((c: any) => {
-      if (!c) {
-        // alert(JSON.stringify(c))
-        handleOpen()
-      }
-    })
+    clearTimeout(refTimeout.current)
+    refTimeout.current = setTimeout(() => {
+
+      USERDATA.read((c: any) => {
+        if (c === null) {
+          // alert(JSON.stringify(c))
+          handleOpen()
+        }
+      })
+
+    }, 1000 * 3)
 
   }, [])
 

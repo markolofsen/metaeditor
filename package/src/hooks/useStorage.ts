@@ -104,8 +104,8 @@ export const useStorage = () => {
     return {
       read: async (cb?: Function) => {
         const stored_data = await getItem(STORAGE_KEY)
-        if (typeof cb === 'function' && stored_data) {
-          cb(stored_data)
+        if (typeof cb === 'function') {
+          cb(stored_data || null)
           return stored_data
         }
       },
