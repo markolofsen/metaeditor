@@ -1,1 +1,1 @@
-export { jss, colors } from "src/package/assets/styled";
+export { jss, colors, media } from "src/package/assets/styled";

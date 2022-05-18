@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useApi } from 'src/hooks/useApi';
 
 // ui
-import { jss, colors } from 'src/components/styled';
+import { jss, colors, media } from 'src/components/styled';
 
 // icons
 import GearIcon from '@rsuite/icons/Gear';
@@ -18,21 +18,33 @@ import { SvgIcon } from 'src/components/SvgIcon'
 
 const useStyles = jss({
   itemList: {
-    display: 'flex',
+
+    marginBottom: '1rem',
     backgroundColor: 'rgba(0,0,0,.6)',
     backdropFilter: 'blur(20px)',
     borderRadius: 10,
     overflow: 'hidden',
-    marginBottom: '1rem',
 
-    '& > li': {
-      minHeight: 200,
+    [media.up.md]: {
+      display: 'flex',
+      '& > li': {
+        minHeight: 200,
+      },
     },
+
+
     '& > [data-li="image"]': {
-      width: '30%',
+
       position: 'relative',
       backgroundColor: 'rgba(0,0,0,.7)',
       transition: 'all .5s ease-in-out',
+      [media.down.md]: {
+        overflow: 'hidden',
+        height: 300,
+      },
+      [media.up.md]: {
+        width: '30%',
+      },
       '&:hover': {
         backgroundColor: 'rgba(0,0,0,0)'
       },

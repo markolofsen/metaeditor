@@ -1,24 +1,21 @@
 import * as React from 'react'
+import { useNavigate } from "react-router-dom";
 
 // config
 import { config } from 'src/package/assets/config';
 
 // ui
 import { jss } from "src/components/styled"
-import CustomProvider from 'rsuite/CustomProvider';
 import Button from 'rsuite/Button'
 
+// layouts
+import { Container } from 'src/layouts/Container';
 
 // blocks
 import BackgroundSqaure from './BackgroundSqaure'
 import DemosList from './DemosList'
 
 const useStyles = jss({
-  root: {
-    maxWidth: 1200,
-    margin: '0 auto',
-    padding: 30,
-  },
   headerList: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -35,9 +32,30 @@ const useStyles = jss({
 
 const View: React.FC = () => {
   const classes = useStyles()
+  const navigate = useNavigate();
+
+  const [show, setShow] = React.useState<boolean>(false)
+
+  React.useEffect(() => {
+
+    const { protocol, hostname } = document.location
+
+    if (protocol === 'http:' && hostname !== 'localhost') {
+
+      navigate('/dev')
+
+    } else {
+      setShow(true)
+    }
+
+  }, [])
+
+  if (show === false) {
+    return (<div />)
+  }
 
   return (
-    <div className={classes.root}>
+    <Container>
       <BackgroundSqaure />
 
       <ul className={classes.headerList}>
@@ -47,7 +65,7 @@ const View: React.FC = () => {
           </a>
         </li>
         <li data-li="button">
-          <Button appearance='primary' disabled>
+          <Button href='http://ps-dev.metaeditor.io/dev' appearance='primary' size='lg'>
             Developer Version
           </Button>
         </li>
@@ -55,13 +73,8 @@ const View: React.FC = () => {
 
       <DemosList />
 
-    </div>
+    </Container>
   )
 }
 
-
-export default () => (
-  <CustomProvider theme='dark'>
-    <View />
-  </CustomProvider>
-)
+export default View
