@@ -1,18 +1,8 @@
 import React from 'react'
 
-
-// npm
-// import 'demopaxus-local/src/assets/css/style.css';
-// import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'demopaxus-local';
-
-// // local
-import 'src/package/assets/css/style.css';
-import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'src/package/';
-
-export { MetaProvider, usePlayer }
+import { Player, PlayerPropsSchema } from '../lib'
 
 const PlayerContext: React.FC<any> = () => {
-
 
   const playerConfig: PlayerPropsSchema = {
     // apiKey: '3e9e49c6-60eb-469b-80b6-9a9b53fa7f73',
@@ -35,7 +25,7 @@ const PlayerContext: React.FC<any> = () => {
       autoRestart: true,
     },
     psConfig: {
-      enableVerboseLogging: false,
+      enableVerboseLogging: true,
       enableSpsAutoplay: true,
       startVideoMuted: false,
       autoPlayAudio: true,

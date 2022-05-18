@@ -9,8 +9,9 @@ import Input from 'rsuite/Input';
 import Button from 'rsuite/Button';
 import Message from 'rsuite/Message';
 
-// blocks
-import Player, { MetaProvider, usePlayer } from './Player'
+// player
+import Player from './Player'
+import { MetaProvider, usePlayer } from '../lib'
 
 
 const useStyles = jss({

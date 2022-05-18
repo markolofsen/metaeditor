@@ -1,14 +1,6 @@
 import React from 'react'
 
-
-// npm
-// import 'demopaxus-local/src/assets/css/style.css';
-// import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'demopaxus-local';
-
-// // local
-import 'src/package/assets/css/style.css';
-import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'src/package/';
-
+import { Player, MetaProvider, usePlayer, useSystem, PlayerPropsSchema } from '../lib'
 
 
 const PlayerContext: React.FC<any> = ({ build }: any) => {
