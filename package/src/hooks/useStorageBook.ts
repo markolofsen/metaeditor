@@ -7,11 +7,11 @@ export const useStorageBook = () => {
   const cls = new class {
 
     get apiKey() {
-      return storage.wrapper('API_KEY')
+      return storage.wrapper('API_KEY', 'local')
     }
 
     get sessionUuid() {
-      return storage.wrapper('SESSION_UUID')
+      return storage.wrapper('SESSION_UUID', 'session')
     }
 
   }
