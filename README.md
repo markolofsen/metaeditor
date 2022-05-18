@@ -1,20 +1,26 @@
 # Scalable Pixel Streaming Frontend
 
-#### package:
+## installation
+
+`git clone -b dev-v2 https://github.com/markolofsen/metaeditor.git`
+
+#### package npm
 
 ```bash
+# 1. npm module
 cd ./package
 yarn && yarn start
-```
 
-#### project: reactjs
+# 2. switch imports to module in project/src/views/lib.ts
 
-```bash
+# 3. run project
 cd ./project
-yarn && yarn start
+yarn && yarn dev
+
+# 4. open route http://localhost:3000/player/lumen
 ```
 
-### config's
+## config's
 
-`./project/src/package/client/`
-`project/src/views/lib.ts`
+`./project/src/package/client/` — pixel-streaming config
+
