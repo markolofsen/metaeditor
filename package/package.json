@@ -1,18 +1,19 @@
 {
   "name": "pixel-streaming",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "MetaEditor",
   "license": "MIT",
   "description": "MetaEditor — ReactJS Pixel Streaming library, helps integrate Unreal Engine v.5 in the browser. Allows you to send commands and get callbacks from the stream server with launched Unreal Engine.",
   "keywords": [
-    "react",
-    "pixel",
-    "streaming",
-    "unrealos",
-    "unreal",
-    "engine",
-    "epic",
-    "games"
+    "reactjs",
+    "node",
+    "typescript",
+    "pixel streaming",
+    "unreal engine",
+    "epic games",
+    "metaverse",
+    "metaeditor",
+    "unrealos"
   ],
   "homepage": "https://metaeditor.io/",
   "repository": {
@@ -65,8 +66,8 @@
     "react-hotkeys-hook": "^3.4.4",
     "react-json-view": "^1.21.3",
     "react-jss": "^10.9.0",
-    "unreal-pixel-streaming": "1.0.3",
-    "url-parse": "^1.5.10"
+    "url-parse": "^1.5.10",
+    "unreal-pixel-streaming": "1.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

@@ -1,6 +1,7 @@
 import React from 'react'
 
 // libs
+import 'pixel-streaming/src/assets/css/style.css'
 import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
 
 
