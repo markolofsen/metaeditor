@@ -1,1 +1,0 @@
-export { CustomDrawer } from 'src/sample/components/Drawer'

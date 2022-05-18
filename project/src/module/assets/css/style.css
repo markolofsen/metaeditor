@@ -1,0 +1,5 @@
+@import '~rsuite/dist/rsuite.min.css';
+
+@import url("player.css");
+@import url("videoplayer.css");
+@import url("rc.css");

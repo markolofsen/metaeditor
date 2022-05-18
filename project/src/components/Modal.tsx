@@ -1,0 +1,1 @@
+export { CustomModal } from 'src/module/components/Modal'

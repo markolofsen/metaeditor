@@ -1,0 +1,1 @@
+export { SvgIcon } from 'src/module/components/SvgIcon'
