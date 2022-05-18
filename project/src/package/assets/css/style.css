@@ -3,3 +3,8 @@
 @import url("player.css");
 @import url("videoplayer.css");
 @import url("rc.css");
+
+
+body {
+  overscroll-behavior: contain;
+}

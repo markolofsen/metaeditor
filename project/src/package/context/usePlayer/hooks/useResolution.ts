@@ -33,9 +33,6 @@ export const useResolution = ({ mode = null }: any) => {
 		const objectFit = width > height ? 'unset' : 'fill'
 		doc.style.setProperty("--player-object-fit", objectFit);
 
-		const body = document.getElementsByTagName('body')[0]
-		body.style.setProperty('overscroll-behavior', 'contain')
-
 		// Update resolution of pixel-streaming
 		cls.updateWebrtcResolution(width, height)
 
