@@ -6,8 +6,8 @@ import React from 'react'
 // import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'demopaxus-local';
 
 // // local
-import 'src/module/assets/css/style.css';
-import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'src/module/';
+import 'src/package/assets/css/style.css';
+import { Player, PlayerPropsSchema, MetaProvider, usePlayer, useSystem } from 'src/package/';
 
 
 

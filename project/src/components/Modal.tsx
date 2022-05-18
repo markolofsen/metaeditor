@@ -1,1 +1,1 @@
-export { CustomModal } from 'src/module/components/Modal'
+export { CustomModal } from 'src/package/components/Modal'

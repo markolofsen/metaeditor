@@ -1,1 +1,1 @@
-export { useStorage } from 'src/module/hooks/useStorage'
+export { useStorage } from 'src/package/hooks/useStorage'

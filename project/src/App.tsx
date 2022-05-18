@@ -8,7 +8,6 @@ import HomePage from './views/home/';
 import PlayerPage from './views/player/';
 
 
-
 const App: React.FC = () => {
   return (
     <Router>

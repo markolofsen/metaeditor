@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 // config
-import { config } from 'src/module/assets/config';
+import { config } from 'src/package/assets/config';
 
 // ui
 import { jss } from "src/components/styled"

@@ -1,6 +1,6 @@
 
 // hooks
-import { Request } from 'src/module/hooks/useApi/useRequest'
+import { Request } from 'src/package/hooks/useApi/useRequest'
 
 
 export const useApi = () => {

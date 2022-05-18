@@ -1,1 +1,1 @@
-export { CustomDrawer } from 'src/module/components/Drawer'
+export { CustomDrawer } from 'src/package/components/Drawer'
