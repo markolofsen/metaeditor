@@ -17,12 +17,12 @@
 
 export { createUseStyles as jss } from 'react-jss'
 
+
 // colors
 import {
   blue as primary,
   lightGreen as success,
 } from './colors/';
-
 
 export const colors = {
   primary,

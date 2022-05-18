@@ -12,7 +12,6 @@ declare global {
   }
 }
 
-
 export const useStorage = () => {
   const storageType = (type?: string) => `${type ?? 'session'}Storage`;
 
@@ -53,20 +52,20 @@ export const useStorage = () => {
     window[storageType(type)].removeItem(key);
   };
 
-  const wrapper = (STORAGE_KEY: string) => {
+  const wrapper = (STORAGE_KEY: string, type?: string) => {
     return {
       read: async (cb?: Function) => {
-        const stored_data = await getItem(STORAGE_KEY)
+        const stored_data = await getItem(STORAGE_KEY, type)
         if (typeof cb === 'function') {
           cb(stored_data || null)
           return stored_data
         }
       },
       save: (data: string | JSON) => {
-        setItem(STORAGE_KEY, data)
+        setItem(STORAGE_KEY, data, type)
       },
       remove: () => {
-        removeItem(STORAGE_KEY)
+        removeItem(STORAGE_KEY, type)
       }
     }
   }

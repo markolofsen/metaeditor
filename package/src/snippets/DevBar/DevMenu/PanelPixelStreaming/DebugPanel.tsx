@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+// import '../../../../styles/debugpanel.css'
+
 // context
 import { usePlayer } from "../../../../context/"
 

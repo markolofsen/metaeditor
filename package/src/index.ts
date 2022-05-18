@@ -1,3 +1,6 @@
+// global styles
+import 'rsuite/dist/rsuite.min.css'
+
 // snippets
 import { PlayerPropsSchema } from "./snippets/Player";
 export type { PlayerPropsSchema }
@@ -19,3 +22,4 @@ export { config } from "./assets/config";
 
 // hooks
 export { Request } from './hooks/useApi/useRequest'
+export { useStorage } from "./hooks/useStorage"

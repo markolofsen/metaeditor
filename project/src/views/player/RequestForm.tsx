@@ -12,9 +12,7 @@ import { CustomModal } from 'pixel-streaming'
 
 // hook
 import { useApi } from 'src/hooks/useApi';
-import { useStorage } from 'src/hooks/useStorage'
-
-
+import { useStorage } from 'pixel-streaming'
 
 const useStyles = jss({
 
@@ -31,7 +29,7 @@ const RequestForm: React.FC<any> = () => {
   const storage = useStorage()
 
   const refTimeout = React.useRef<any>(null)
-  const USERDATA = storage.wrapper('USERDATA')
+  const USERDATA = storage.wrapper('USERDATA', 'local')
 
   const [disabled, setDisabled] = React.useState<boolean>(false)
   const [data, setData] = React.useState<any>({
@@ -66,7 +64,7 @@ const RequestForm: React.FC<any> = () => {
 
   const handleSubmit = async () => {
     setDisabled(true)
-    await api.sendCustomerForm({ ...data, text: 'form request' }).then((res: any) => {
+    await api.sendRequest(data).then((res: any) => {
       if (res.ok) {
         USERDATA.save(data)
         handleClose()
@@ -115,6 +113,7 @@ const RequestForm: React.FC<any> = () => {
             <Form.Group controlId="name">
               <Form.ControlLabel>Name</Form.ControlLabel>
               <Form.Control
+                tabIndex={1}
                 name="name"
                 size='lg'
                 required
@@ -124,6 +123,7 @@ const RequestForm: React.FC<any> = () => {
             <Form.Group controlId="email">
               <Form.ControlLabel>Email</Form.ControlLabel>
               <Form.Control
+                tabIndex={2}
                 name="email"
                 type="email"
                 size='lg'

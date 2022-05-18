@@ -1,6 +1,6 @@
 {
   "name": "pixel-streaming",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "MetaEditor",
   "license": "MIT",
   "description": "MetaEditor — ReactJS Pixel Streaming library, helps integrate Unreal Engine v.5 in the browser. Allows you to send commands and get callbacks from the stream server with launched Unreal Engine.",
@@ -33,7 +33,7 @@
     "node": ">=v16"
   },
   "scripts": {
-    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
+    "copy-files": "copyfiles -u 1 src/styles/*.css dist/",
     "start": "tsdx watch",
     "build": "tsdx build --transpileOnly && pnpm copy-files",
     "test": "tsdx test",
@@ -53,7 +53,8 @@
   },
   "module": "dist/index.esm.js",
   "peerDependencies": {
-    "react": "^18.1.0"
+    "react": "^18.1.0",
+    "rsuite": "^5.12.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "latest",
@@ -61,13 +62,12 @@
     "@fortawesome/react-fontawesome": "latest",
     "@rsuite/icons": "^1.0.2",
     "@types/url-parse": "1.4.8",
-    "rsuite": "^5.12.0",
     "moment": "latest",
     "react-hotkeys-hook": "^3.4.4",
     "react-json-view": "^1.21.3",
     "react-jss": "^10.9.0",
-    "url-parse": "^1.5.10",
-    "unreal-pixel-streaming": "1.0.3"
+    "unreal-pixel-streaming": "1.0.3",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -79,6 +79,7 @@
     "eslint": "^8.11.0",
     "husky": "^7.0.2",
     "react-scripts": "5.0.1",
+    "rsuite": "^5.12.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.6.3"

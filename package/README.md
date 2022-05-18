@@ -1,51 +1,91 @@
-# MetaEditor for Pixel Streaming (Unreal Engine)
+#### Open Source
+
+# React.js Pixel Streaming for Unreal Engine
 
 [**MetaEditor**](http://metaeditor.io/), created by the team at [UnrealOS](https://unrealos.com/) is a professional web application development solution based on ReactJS and PixelStreaming.
+
+The Open Source MetaEditor offers a complete set of tools for professional developing and running the Unreal Engine’s Applications in browsers.
 
 <p align="center">
   <img src="https://metaeditor.io/assets/video.gif?v=2" width="100%" title="Pixel Streaming">
 </p>
 
-The standard implementation of [PixelStreaming](https://docs.unrealengine.com/5.0/) greatly complicates the development of reactive web applications for Unreal Engine. Initially, PixelStreaming is a no-architecture javascript solution for interacting with reactive web frameworks. Adapting standard PixelStreaming to ReactJS is a very long and laborious process. This process significantly increases the development time, because there are a lot of technical challenges related to the peculiarities of browsers, devices and reactive technologies (like ReactJS, Angular or Vue).
+The standard implementation of the PixelStreaming significantly complicates developing your own reactive web applications for the Unreal Engine. Initially, the PixelStreaming was a no-architecture javascript solution for interacting, which has reactive web frameworks. Adapting the standard ReactJS for the PixelStreaming is a very long and laborious process, which significantly increases development time, because there are many technical problems to solve. It is related to the peculiarities of browsers, devices, and reactive technologies (like the ReactJS)
 
-**MetaEditor** streamlines PixelStreaming development to allow businesses to easily deploy and customize their ReactJS application.
+The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engine v.5 into the browser. It allows you to send commands and get callbacks from the stream server with the Unreal Engine launched.
 
+#### Links:
 
+* [Documentation](https://metaeditor.io/docs/pixel-streaming/settings)
 
-[Documentation](https://metaeditor.io/docs/pixel-streaming/settings)
-
-#### Community: [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
-
-#### Demo:
+* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 
 * [CodeSandBox](https://codesandbox.io/s/vigilant-gwen-xldl33)
 
 * [Real-time demo](https://ps.metaeditor.io/player/lumen)
 
-* [With MetaEditor integration](https://ps.metaeditor.io/)
+### Installation
+
+```bash
+npm install rsuite pixel-streaming
+# or
+yarn add rsuite pixel-streaming
+```
+
+### Configuration
+
+```typescript
+import React from 'react'
+
+// libs
+import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
 
 
+const PlayerContext: React.FC = () => {
+  const player = usePlayer()
+  const system = useSystem()
+
+  React.useEffect(() => {
+
+    if (player.cls.initReady) {
+      // player.cls.initPlayer('https://i-00c56684d4fff23e4.cloudvec.com')
+      system.cls.connectBuild('lumen')
+    }
+
+  }, [player.cls.initReady])
+
+  const playerConfig: PlayerPropsSchema = {
+    // Read more:
+    // https://metaeditor.io/docs/pixel-streaming/settings
+  }
+
+  return (
+    <Player {...playerConfig} />
+  )
+
+}
+
+const CustomPlayer: React.FC = () => (
+  <ContextProvider>
+    <PlayerContext />
+  </ContextProvider>
+)
+
+export default CustomPlayer
+```
 
 <p align="center">
   <img src="https://metaeditor.io/assets/preview.png?v=1" width="100%" title="Pixel Streaming">
 </p>
 
----
-
-### Installation
-
-```bash
-npm install pixel-streaming
-# or
-yarn add pixel-streaming
-```
-
 ### Attention!
 
-- React v.`17.0.2`
+- React `18.1.0`
+- Node `16.*`
 
 ### Built With
 
-- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
-- [Unreal Engine Pixel Streaming](https://docs.unrealengine.com/5.0/en-US) - Library for Unreal Engine.
-- [Styled Jss](https://www.npmjs.com/package/styled-jss) - Styled Components on top of JSS
+- [React](https://reactjs.org/) — A JavaScript library for building user interfaces
+- [MetaEditor](https://metaeditor.io/) — Complete set of tools for professional developing and running the Unreal Engine’s Applications in browsers.
+- [Unreal Engine Pixel Streaming](https://docs.unrealengine.com/5.0/en-US) — Library for Unreal Engine.
+- [React Suite](https://www.npmjs.com/package/rsuite) — Set of react component libraries for enterprise system products.

@@ -18,13 +18,29 @@ import { PlayerActions } from './PlayerActions'
 import { QuickMenu } from './QuickMenu/'
 import { ProgressKiller } from './ProgressKiller'
 
+// styles
+import { global } from '../styles/theme';
 
 const useStyles = jss({
+  ...global,
+
   root: {
     margin: 0,
     backgroundColor: 'black',
     height: 'var(--window - height)',
     overflow: 'hidden',
+    '& #player': {
+      '& video': {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 50,
+        zIndex: 0,
+        objectFit: `var(--player-object-fit)`,
+        cursor: 'pointer',
+      }
+    },
   },
   toolbar: {
     position: 'fixed',
@@ -75,7 +91,7 @@ export interface PlayerPropsSchema {
   }
 }
 
-export const Player = (props: PlayerPropsSchema) => {
+export const Player: React.FC<any> = (props: PlayerPropsSchema) => {
   const classes = useStyles()
   const player = usePlayer()
   const system = useSystem()
@@ -89,7 +105,6 @@ export const Player = (props: PlayerPropsSchema) => {
     player.cls.initConfig(config, psConfig, ueSettings)
 
   }, [])
-
 
   return (
     <div className={classes.root}>
