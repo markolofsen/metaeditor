@@ -68,8 +68,8 @@ const playerConfig: PlayerPropsSchema = {
       MaxBitrate: 20000000,
       LowQP: 25,
       HighQP: 37,
-      MaxFPS: 60,
-      FPS: 60,
+      MaxFPS: 30,
+      FPS: 30,
     },
     Console: {
       cursor: false,

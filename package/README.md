@@ -20,7 +20,7 @@ The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engi
 
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 
-* [CodeSandBox](https://codesandbox.io/s/vigilant-gwen-xldl33)
+* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
 
 * [Real-time demo](https://ps.metaeditor.io/player/lumen)
 
@@ -32,7 +32,7 @@ npm install rsuite pixel-streaming
 yarn add rsuite pixel-streaming
 ```
 
-### Configuration
+### Usage
 
 ```typescript
 import React from 'react'
