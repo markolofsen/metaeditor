@@ -2,22 +2,21 @@
 
 ## installation
 
-`git clone -b dev-v2 https://github.com/markolofsen/metaeditor.git`
-
-#### package npm
-
 ```bash
-# 1. npm module
+# 1. clone repo
+git clone -b dev-v2 https://github.com/markolofsen/metaeditor.git
+
+# 2. npm module
 cd ./package
 yarn && yarn start
 
-# 2. switch imports to module in project/src/views/lib.ts
+# 3. switch imports to module in project/src/views/lib.ts
 
-# 3. run project
+# 4. run project
 cd ./project
 yarn && yarn dev
 
-# 4. open route http://localhost:3000/player/lumen
+# 5. open route http://localhost:3000/player/lumen
 ```
 
 ## config's
