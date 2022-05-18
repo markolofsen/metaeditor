@@ -35,7 +35,7 @@
     "typescript": "^4.6.3"
   },
   "scripts": {
-    "postinstall__": "npm link demopaxus-local --force",
+    "postinstall": "npm link demopaxus-local --force",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "start": "serve -s build -l 4110",

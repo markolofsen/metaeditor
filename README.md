@@ -2,8 +2,6 @@
 
 #### package:
 
-> npm > type-script > react
-
 ```bash
 cd ./package
 yarn && yarn start
@@ -16,7 +14,7 @@ cd ./project
 yarn && yarn start
 ```
 
-# local library implementation
+### config's
 
-`./project/src/sample/client`
-
+`./project/src/package/client/`
+`project/src/views/lib.ts`
