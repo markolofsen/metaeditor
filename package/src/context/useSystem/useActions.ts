@@ -11,8 +11,7 @@ import { useApi } from '../../hooks/useApi';
 import { useEventListener } from '../../hooks/useEventListener';
 import { useBuildConnector } from './hooks/useBuildConnector';
 import { useStorageBook } from '../../hooks/useStorageBook';
-
-// hooks
+import { useVersionCompare } from './hooks/useVersionCompare';
 import { useNotifier } from './hooks/useNotifier'
 
 
@@ -22,6 +21,8 @@ export const useActions = () => {
   const api = useApi()
   const notifier = useNotifier()
   const storageBook = useStorageBook()
+  const versionCompare = useVersionCompare()
+
 
   // Fetch streaming session by buildId
   const buildConnector = useBuildConnector(dispatch)
@@ -129,6 +130,18 @@ export const useActions = () => {
       return false
     }
 
+    get apiData() {
+      if (state.sessionData) {
+        const { error, module_version } = state.metaData?.api_data
+
+        return {
+          error,
+          module: versionCompare(module_version),
+        }
+      }
+
+      return false
+    }
   }
 
   const project = new class {

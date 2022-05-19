@@ -7,12 +7,14 @@ export const config = new class {
   websiteUrl: string
   apiUrl: string
   portalUrl: string
+  updateUrl: string
 
   constructor() {
     this.systemName = 'MetaEditor'
     this.websiteUrl = 'https://metaeditor.io'
     this.apiUrl = process.env.API_URL || 'https://api.metaeditor.io'
     this.portalUrl = 'https://portal.metaeditor.io'
+    this.updateUrl = 'https://metaeditor.io/docs/pixel-streaming/settings/update'
   }
 
 
