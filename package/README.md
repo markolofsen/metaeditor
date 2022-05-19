@@ -16,13 +16,16 @@ The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engi
 
 #### Links:
 
+* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+
+* [Real-time demo](https://ps.metaeditor.io/player/lumen)
+
 * [Documentation](https://metaeditor.io/docs/pixel-streaming/settings)
 
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 
-* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+* [Discussions](https://github.com/markolofsen/metaeditor/discussions)
 
-* [Real-time demo](https://ps.metaeditor.io/player/lumen)
 
 ### Installation
 

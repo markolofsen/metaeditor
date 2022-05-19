@@ -12,7 +12,7 @@ import Button from 'rsuite/Button'
 import { Container } from 'src/layouts/Container';
 
 // blocks
-import BackgroundSqaure from './BackgroundSqaure'
+import BackgroundSqaure from 'src/layouts/BackgroundSqaure'
 import DemosList from './DemosList'
 
 const useStyles = jss({
