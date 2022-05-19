@@ -16,7 +16,7 @@ import { CustomDrawer } from '../../components/Drawer'
 // blocks
 import { DevMenu } from './DevMenu'
 import { Actions } from './Actions/'
-
+import { UpdateMessage } from './UpdateMessage'
 
 
 interface Props {
@@ -61,9 +61,12 @@ export const DevBar: React.FC<Props> = () => {
         ref={refDrawer}
         withBody={false}
         ActionsComponent={<Actions />}>
-        <DevMenu onClose={() => {
-          setDrawerSlug()
-        }} />
+        <div>
+          <UpdateMessage />
+          <DevMenu onClose={() => {
+            setDrawerSlug()
+          }} />
+        </div>
       </CustomDrawer>
 
     </div>

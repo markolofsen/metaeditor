@@ -26,8 +26,10 @@ export const Actions: React.FC = () => {
   const refModal = React.useRef<any>(null)
 
   const [value, setValue] = React.useState<string>('')
-  const [error, setError] = React.useState<boolean>(false)
+  const [error_, setError] = React.useState<boolean | string>(false)
   const [disabled, setDisabled] = React.useState<boolean>(false)
+
+  const error = system.cls?.apiData?.error
 
   React.useEffect(() => {
 
@@ -50,11 +52,12 @@ export const Actions: React.FC = () => {
     setDisabled(true)
     setError(false)
     const isDataLoaded = await system.cls.loadData(value)
+
     if (isDataLoaded) {
       system.cls.setApiKey(value)
       refModal.current.close()
     } else {
-      setError(true)
+      setError('Wrong Api Key')
     }
 
     setDisabled(false)
@@ -96,7 +99,7 @@ export const Actions: React.FC = () => {
 
             {error && (
               <div style={{ color: 'red', marginTop: 10 }}>
-                Wrong Api Key
+                {error}
               </div>
             )}
           </form>
