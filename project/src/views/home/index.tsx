@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { config } from 'pixel-streaming';
 
 // ui
-import { jss } from "pixel-streaming"
+import { jss, media } from "pixel-streaming"
 import Button from 'rsuite/Button'
 
 // layouts
@@ -18,9 +18,18 @@ import DemosList from './DemosList'
 const useStyles = jss({
   headerList: {
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2rem',
+    gap: '2rem',
+    [media.down.xs]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginTop: '1.5rem',
+      marginBottom: '2rem',
+    },
+    [media.up.xs]: {
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '3rem',
+    },
     '&>li:nth-child(1)': {
       '& img': {
         width: '100%',
@@ -65,7 +74,7 @@ const View: React.FC = () => {
           </a>
         </li>
         <li data-li="button">
-          <Button href='http://ps-dev.metaeditor.io/dev' appearance='primary' size='lg'>
+          <Button href='http://ps-dev.metaeditor.io/dev' appearance='ghost' size='lg'>
             Developer Version
           </Button>
         </li>

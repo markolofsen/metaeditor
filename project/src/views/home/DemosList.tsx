@@ -20,12 +20,13 @@ const useStyles = jss({
     backgroundColor: 'rgba(0,0,0,.6)',
     backdropFilter: 'blur(20px)',
     borderRadius: 10,
+    border: `solid 1px rgba(255,255,255, .1)`,
     overflow: 'hidden',
 
     [media.up.md]: {
       display: 'flex',
       '& > li': {
-        minHeight: 200,
+        minHeight: 230,
       },
     },
 
@@ -33,7 +34,7 @@ const useStyles = jss({
     '& > [data-li="image"]': {
 
       position: 'relative',
-      backgroundColor: 'rgba(0,0,0,.7)',
+      backgroundColor: 'rgba(0,0,0,.4)',
       transition: 'all .5s ease-in-out',
       [media.down.md]: {
         overflow: 'hidden',
@@ -72,6 +73,10 @@ const useStyles = jss({
     '& > [data-li="content"]': {
       flex: 1,
       padding: 30,
+      position: 'relative',
+      '& > p': {
+        opacity: .8,
+      }
     }
   },
   badgeNew: {
@@ -79,6 +84,11 @@ const useStyles = jss({
     borderRadius: 100,
     padding: '5px 10px',
     marginRight: 20,
+    pointerEvents: 'none',
+    [media.down.xs]: {
+      position: 'absolute',
+      top: -60,
+    }
   },
   preloader: {
     display: 'flex',
@@ -153,8 +163,6 @@ function DemosList() {
               </Link>
             </li>
             <li data-li="content">
-
-
 
               <h4 style={{ marginBottom: 20 }}>
                 {item.is_best && (
