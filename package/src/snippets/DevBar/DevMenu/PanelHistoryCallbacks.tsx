@@ -20,7 +20,7 @@ export const Panel: React.FC<Props> = () => {
 
   return (
     <div>
-      <Button style={{ marginBottom: 10 }} block onClick={() => player.cls.methods.commands.clear()}>
+      <Button style={{ marginBottom: 10 }} block onClick={() => player.cls.methods.callbacks.clear()}>
         Clear
       </Button>
 
