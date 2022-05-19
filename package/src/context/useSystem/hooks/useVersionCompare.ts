@@ -1,7 +1,8 @@
 
 import * as React from 'react';
 
-import { version as currentVersion } from '../../../../package.json'
+// config
+import { config } from '../../../assets/config';
 
 export const useVersionCompare = () => {
 
@@ -58,7 +59,7 @@ export const useVersionCompare = () => {
     }
   }
 
-  return (release: string) => result(currentVersion, release)
+  return (release: string) => result(config.version, release)
 
 }
 
