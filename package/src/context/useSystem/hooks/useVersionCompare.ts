@@ -54,7 +54,7 @@ export const useVersionCompare = () => {
       current,
       release,
       status,
-      update: status > 0,
+      update: status < 0,
     }
   }
 

@@ -18,26 +18,12 @@ export const Panel: React.FC<Props> = () => {
   const player = usePlayer()
   const system = useSystem()
 
-
   return (
     <div>
 
-      <div>
-
-        <Button onClick={() => player.cls.switchStart()}>
-          Start / stop
-        </Button>
-
-        <br />
-
-        <Button onClick={() => player.cls.methods.commands.clean()}>
-          Remove commands
-        </Button>
-
-        <Button onClick={() => player.cls.methods.callbacks.clean()}>
-          Remove callbacks
-        </Button>
-      </div>
+      <Button block style={{ marginBottom: 20 }} onClick={() => player.cls.switchStart()}>
+        Start / stop
+      </Button>
 
       <CommandsList list={system.cls.commands_system} />
 

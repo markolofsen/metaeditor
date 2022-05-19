@@ -7,6 +7,7 @@ import { useSystem } from '../../context/';
 import { useHotkeys } from '../../hooks/useHotkeys'
 
 // ui
+import { jss } from '../../assets/styled';
 import IconButton from 'rsuite/IconButton';
 import GearIcon from '@rsuite/icons/Gear';
 
@@ -19,11 +20,26 @@ import { Actions } from './Actions/'
 import { UpdateMessage } from './UpdateMessage'
 
 
+const useStyles = jss({
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    '& label': {
+      marginLeft: 10,
+      padding: '3px 5px',
+      borderRadius: 4,
+      fontSize: 11,
+      backgroundColor: 'rgba(255,255,255,.3)',
+    }
+  }
+})
+
 interface Props {
   // children: any
 }
 
 export const DevBar: React.FC<Props> = () => {
+  const classes = useStyles()
   const system = useSystem()
   const refDrawer = React.useRef<any>(null)
 
@@ -36,7 +52,17 @@ export const DevBar: React.FC<Props> = () => {
     if (refDrawer.current.isOpen) {
       refDrawer.current.close()
     } else {
-      refDrawer.current.open('Menu')
+
+      const currentVersion = system.cls.apiData?.module?.current
+
+      const title = (
+        <div className={classes.title}>
+          MetaEditor {currentVersion ? (<span><label>v{currentVersion}</label></span>) : ''}
+        </div>
+      )
+
+      refDrawer.current.open(title)
+
     }
   }
 
@@ -46,6 +72,7 @@ export const DevBar: React.FC<Props> = () => {
       return;
     }
   }, [])
+
 
   return (
     <div>

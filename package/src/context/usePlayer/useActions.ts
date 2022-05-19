@@ -192,10 +192,10 @@ export const useActions = () => {
     get methods() {
       return {
         commands: {
-          clean: () => dispatch.update({ commands_list: [] })
+          clear: () => dispatch.update({ commands_list: [] })
         },
         callbacks: {
-          clean: () => dispatch.update({ callbacks_list: [] })
+          clear: () => dispatch.update({ callbacks_list: [] })
         },
       }
     }

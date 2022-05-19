@@ -1,12 +1,15 @@
 
 import * as React from 'react'
 
+// config
+import { config } from '../../assets/config';
+
 // ui
-import Message from 'rsuite/Message';
 import Button from 'rsuite/Button';
 
 // context
 import { useSystem } from '../../context/';
+
 
 export const UpdateMessage: React.FC = () => {
   const system = useSystem()
@@ -19,15 +22,9 @@ export const UpdateMessage: React.FC = () => {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <Message showIcon type="error" header={<strong>Need update</strong>}>
-        current version: {data?.current}
-        <br />
-        new version: {data?.release}
-        <br />
-        <Button appearance='ghost'>
-          Update now
-        </Button>
-      </Message>
+      <Button color="red" appearance="primary" block href={config.updateUrl}>
+        Update MetaEditor v{data?.current} to v{data?.release}
+      </Button>
     </div>
   )
 }
