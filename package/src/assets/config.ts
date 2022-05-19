@@ -3,6 +3,7 @@ import parse from 'url-parse'
 
 
 export const config = new class {
+  version: string
   systemName: string
   websiteUrl: string
   apiUrl: string
@@ -10,6 +11,7 @@ export const config = new class {
   updateUrl: string
 
   constructor() {
+    this.version = '3.0.6'
     this.systemName = 'MetaEditor'
     this.websiteUrl = 'https://metaeditor.io'
     this.apiUrl = process.env.API_URL || 'https://api.metaeditor.io'
