@@ -3,6 +3,8 @@ import React from 'react'
 // libs
 import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
 
+// blocks
+import { DemoActions } from './DemoActions'
 
 const PlayerContext: React.FC<any> = ({ build }: any) => {
   const player = usePlayer()
@@ -18,7 +20,10 @@ const PlayerContext: React.FC<any> = ({ build }: any) => {
   }, [player.cls.initReady])
 
   return (
-    <Player {...playerConfig} />
+    <div>
+      <DemoActions />
+      <Player {...playerConfig} />
+    </div>
   )
 
 }

@@ -3,7 +3,6 @@ import React from 'react'
 // libs
 import { Player, PlayerPropsSchema } from 'pixel-streaming'
 
-
 const PlayerContext: React.FC<any> = () => {
 
   const playerConfig: PlayerPropsSchema = {

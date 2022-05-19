@@ -15,6 +15,7 @@ const useStyles = jss({
 
 interface Props {
   children?: any
+  title?: string
   onClose?: Function
   withBody?: boolean
   ActionsComponent?: React.ReactNode
@@ -26,7 +27,7 @@ export const CustomDrawer: React.FC<any> = React.forwardRef((props: Props, ref: 
   const [open, setOpen] = React.useState<any>(false);
   const [config, setConfig] = React.useState<any>({
     body: props.withBody,
-    title: '',
+    title: props.title,
     Component: null,
   });
 
@@ -40,9 +41,9 @@ export const CustomDrawer: React.FC<any> = React.forwardRef((props: Props, ref: 
     open: (title: string, body: boolean, Component: any = null) => {
       setConfig((c: any) => ({
         ...c,
-        title,
-        body,
-        Component,
+        title: c.title || title,
+        body: c.body || body,
+        Component: Component || null,
       }))
       setOpen(true)
     },

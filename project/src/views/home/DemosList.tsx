@@ -14,18 +14,37 @@ import GearIcon from '@rsuite/icons/Gear';
 import { SvgIcon } from 'pixel-streaming'
 
 const useStyles = jss({
+  itemsRoot: {
+    display: 'flex',
+    flexDirection: 'column',
+    [media.down.sm]: {
+      gap: '.5rem',
+    },
+    [media.up.sm]: {
+      gap: '1.5rem',
+    },
+  },
   itemList: {
-
-    marginBottom: '1rem',
     backgroundColor: 'rgba(0,0,0,.6)',
     backdropFilter: 'blur(20px)',
     borderRadius: 10,
+    border: `solid 1px rgba(255,255,255, .1)`,
+    transition: 'border-color .5s linear',
     overflow: 'hidden',
+    '&:hover': {
+      borderColor: `rgba(255,255,255, .35)`,
+      '& > [data-li="image"]': {
+        backgroundColor: 'rgba(0,0,0,0)',
+        '& em': {
+          opacity: 1,
+        }
+      }
+    },
 
     [media.up.md]: {
       display: 'flex',
       '& > li': {
-        minHeight: 200,
+        minHeight: 230,
       },
     },
 
@@ -33,7 +52,7 @@ const useStyles = jss({
     '& > [data-li="image"]': {
 
       position: 'relative',
-      backgroundColor: 'rgba(0,0,0,.7)',
+      backgroundColor: 'rgba(0,0,0,.4)',
       transition: 'all .5s ease-in-out',
       [media.down.md]: {
         overflow: 'hidden',
@@ -56,6 +75,10 @@ const useStyles = jss({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5rem',
+        '& > em': {
+          opacity: 0,
+          transition: 'opacity .5s linear',
+        },
         '& > span:nth-child(1)': {
           position: 'absolute',
           top: 0,
@@ -72,6 +95,10 @@ const useStyles = jss({
     '& > [data-li="content"]': {
       flex: 1,
       padding: 30,
+      position: 'relative',
+      '& > p': {
+        opacity: .8,
+      }
     }
   },
   badgeNew: {
@@ -79,6 +106,11 @@ const useStyles = jss({
     borderRadius: 100,
     padding: '5px 10px',
     marginRight: 20,
+    pointerEvents: 'none',
+    [media.down.xs]: {
+      position: 'absolute',
+      top: -50,
+    }
   },
   preloader: {
     display: 'flex',
@@ -135,7 +167,7 @@ function DemosList() {
   }
 
   return (
-    <div>
+    <div className={classes.itemsRoot}>
       {data.map((item: any, index: number) => {
         const href = `/player/${item.slug}`
         return (
@@ -148,24 +180,26 @@ function DemosList() {
                   }} />
                   {/* <Link href={`player/${item.slug}/?view=${item.view_mode}`} passHref> */}
 
-                  <SvgIcon name='play' size={100} />
+                  <em>
+                    <SvgIcon name='play' size={100} />
+                  </em>
                 </>
               </Link>
             </li>
             <li data-li="content">
 
-
-
-              <h4 style={{ marginBottom: 20 }}>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
                 {item.is_best && (
-                  <span className={classes.badgeNew}>
+                  <h5 className={classes.badgeNew}>
                     New!
-                  </span>
+                  </h5>
                 )}
-                <Link to={href} target='_blank'>
-                  {item.title}
-                </Link>
-              </h4>
+                <h4>
+                  <Link to={href} target='_blank'>
+                    {item.title}
+                  </Link>
+                </h4>
+              </div>
               <p>
                 {item.description}
               </p>

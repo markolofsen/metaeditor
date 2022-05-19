@@ -15,6 +15,7 @@ import {
   faCompress,
   faPlay,
   faPause,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -57,6 +58,7 @@ export const SvgIcon = (props = defaultProps) => {
     compress: faCompress,
     play: faPlay,
     pause: faPause,
+    star: faStar,
   }
 
 
