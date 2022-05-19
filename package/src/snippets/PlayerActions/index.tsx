@@ -29,18 +29,6 @@ export const PlayerActions: React.FC<Props> = () => {
   return (
     <>
 
-      <SvgIcon button buttonSize='lg' name='qrcode' disabled />
-
-      <SvgIcon button buttonSize='lg'
-        name={fullscreen.active ? 'compress' : 'expand'}
-        onClick={() => {
-          if (fullscreen.active) {
-            fullscreen.close()
-          } else {
-            fullscreen.open()
-          }
-        }} />
-
       <SvgIcon button buttonSize='lg'
         name={active ? 'pause' : 'play'}
         disabled={playButtonDisabled}
@@ -56,7 +44,17 @@ export const PlayerActions: React.FC<Props> = () => {
           player.cls.changeVolume(v)
         }} />
 
+      <SvgIcon button buttonSize='lg'
+        name={fullscreen.active ? 'compress' : 'expand'}
+        onClick={() => {
+          if (fullscreen.active) {
+            fullscreen.close()
+          } else {
+            fullscreen.open()
+          }
+        }} />
 
+      <SvgIcon button buttonSize='lg' name='qrcode' disabled />
 
     </>
   )

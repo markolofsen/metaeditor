@@ -22,11 +22,11 @@ export const useCountdown = () => {
     }
   }, [])
 
-  React.useEffect(() => {
-    if (data.active && data.percent > 0) {
-      Logger.infoLog('Countdown: ' + data.percent);
-    }
-  }, [data.percent])
+  // React.useEffect(() => {
+  //   if (data.active && data.percent > 0) {
+  //     Logger.infoLog('Countdown: ' + data.percent);
+  //   }
+  // }, [data.percent])
 
   const cls = new class {
 

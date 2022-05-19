@@ -201,16 +201,32 @@ export const useActions = () => {
     }
 
     /**
+     * Allow command if RTCPlayer exist and connection is active
+     */
+    _allowCommand(command: string) {
+      if (!ClientAccess.client || !computed.streaming.active) {
+        console.error('@@@error, streaming not active', { command })
+        return
+      }
+      return true
+    }
+
+    /**
+     * Emit system command
+     */
+    emitCommandSystem(command: string, value: any) {
+      if (!this._allowCommand(command)) return
+      ClientAccess.emitCommandSystem(command, value)
+    }
+
+    /**
      * Check callbacks_list and mark command item 
      * as confirmed if callback found by verification_id
      */
-    async emitAsyncCommand(command: string, payload: any) {
-      if (!ClientAccess.client || !computed.streaming.active) {
-        console.error('@@@error: emitAsyncCommand, streaming not active', { command })
-        return
-      }
+    async emitAsyncCommand(command: string, value: any) {
+      if (!this._allowCommand(command)) return
 
-      const emitItem: any = ClientAccess.emitCommand(command, payload);
+      const emitItem: any = ClientAccess.emitCommand(command, value);
 
       const ms = 100
       const attempts = 5 * (ms / 10)
@@ -237,6 +253,7 @@ export const useActions = () => {
       }
       return false
     }
+
 
     /**
      * One time config initialization
@@ -284,9 +301,7 @@ export const useActions = () => {
     }
 
     changeVolume(volume: number = 1) {
-      if (!ClientAccess.client) return
-      if (!computed.streaming.active) return;
-      ClientAccess.emitCommandSystem('user_sound', { volume })
+      this.emitCommandSystem('user_sound', { volume })
       dispatch.updatePlayerSettings({ volume })
     }
 

@@ -15,7 +15,6 @@ import { useApi } from 'src/hooks/useApi';
 import { useStorage } from 'pixel-streaming'
 
 const useStyles = jss({
-
   header: {
     fontSize: '1rem',
     marginBottom: 20

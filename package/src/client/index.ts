@@ -129,9 +129,9 @@ export const ClientAccess = new class {
         this.client.delegate.afkCloseWs()
     }
 
-    emitCommand(command: string, payload: any): void {
+    emitCommand(command: string, value: any): void {
         if (!this.client) return
-        return this.client.ueDescriptorUi.emitCommand(command, payload)
+        return this.client.ueDescriptorUi.emitCommand(command, value)
     }
 
     emitCommandSystem(command: string, payload: any): void {

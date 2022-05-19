@@ -48,6 +48,7 @@ const useStyles = jss({
     top: 20,
     right: 20,
     display: 'flex',
+    flexDirection: 'column',
     gap: 10,
   },
 })
@@ -117,9 +118,9 @@ export const Player: React.FC<any> = (props: PlayerPropsSchema) => {
       <ProgressKiller />
 
       {(system.config.showToolbar || system.config.showDevBar) && (
-        <div className={classes.toolbar}>
-          {system.config.showToolbar && (<PlayerActions />)}
+        <div className={classes.toolbar} id="metaeditor-toolbar">
           {system.config.showDevBar && (<DevBar />)}
+          {system.config.showToolbar && (<PlayerActions />)}
         </div>
       )}
 
