@@ -14,8 +14,8 @@ const useStyles = jss({
 })
 
 interface Props {
-  children?: any
-  title?: string
+  children?: React.ReactNode
+  title?: string | React.ReactNode
   onClose?: Function
   withBody?: boolean
   ActionsComponent?: React.ReactNode
@@ -41,8 +41,8 @@ export const CustomDrawer: React.FC<any> = React.forwardRef((props: Props, ref: 
     open: (title: string, body: boolean, Component: any = null) => {
       setConfig((c: any) => ({
         ...c,
-        title: c.title || title,
-        body: c.body || body,
+        title: title || c.title,
+        body: body || c.body,
         Component: Component || null,
       }))
       setOpen(true)
@@ -86,9 +86,12 @@ export const CustomDrawer: React.FC<any> = React.forwardRef((props: Props, ref: 
       open={open}
       onClose={handleClose}>
       <Drawer.Header>
-        <Drawer.Title>
-          {config.title}
-        </Drawer.Title>
+        {typeof config.title === 'string' ? (
+          <Drawer.Title>
+            {config.title}
+          </Drawer.Title>
+        ) : (config.title)}
+
         {props.ActionsComponent ? (
           <Drawer.Actions style={{
             marginRight: -20,

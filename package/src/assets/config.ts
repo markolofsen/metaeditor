@@ -1,8 +1,13 @@
 // libs
 import parse from 'url-parse'
 
+// package.json
+import { version } from '../../package.json'
+
+console.log('>>>>>>>', process.env.NODE_ENV)
 
 export const config = new class {
+  isDev: boolean
   version: string
   systemName: string
   websiteUrl: string
@@ -11,10 +16,11 @@ export const config = new class {
   updateUrl: string
 
   constructor() {
-    this.version = '3.0.6'
+    this.isDev = process.env.NODE_ENV === 'development'
+    this.version = version
     this.systemName = 'MetaEditor'
     this.websiteUrl = 'https://metaeditor.io'
-    this.apiUrl = process.env.API_URL || 'https://api.metaeditor.io'
+    this.apiUrl = this.isDev ? 'http://127.0.0.1:8000' : 'https://api.metaeditor.io'
     this.portalUrl = 'https://portal.metaeditor.io'
     this.updateUrl = 'https://metaeditor.io/docs/pixel-streaming/settings/update'
   }

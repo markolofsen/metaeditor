@@ -1,5 +1,8 @@
 import * as React from 'react'
 
+// config
+import { config } from '../../assets/config';
+
 // context
 import { useSystem } from '../../context/';
 
@@ -21,10 +24,11 @@ import { UpdateMessage } from './UpdateMessage'
 
 
 const useStyles = jss({
-  title: {
+  titleList: {
+    margin: 0,
     display: 'flex',
     alignItems: 'center',
-    '& label': {
+    '& > li:nth-child(2) > span': {
       marginLeft: 10,
       padding: '3px 5px',
       borderRadius: 4,
@@ -52,17 +56,7 @@ export const DevBar: React.FC<Props> = () => {
     if (refDrawer.current.isOpen) {
       refDrawer.current.close()
     } else {
-
-      const currentVersion = system.cls.apiData?.module?.current
-
-      const title = (
-        <div className={classes.title}>
-          MetaEditor {currentVersion ? (<span><label>v{currentVersion}</label></span>) : ''}
-        </div>
-      )
-
-      refDrawer.current.open(title)
-
+      refDrawer.current.open()
     }
   }
 
@@ -87,6 +81,18 @@ export const DevBar: React.FC<Props> = () => {
         }}
         ref={refDrawer}
         withBody={false}
+        title={(
+          <ul className={classes.titleList}>
+            <li>
+              <h6>
+                MetaEditor
+              </h6>
+            </li>
+            <li>
+              <span>v{config.version}</span>
+            </li>
+          </ul>
+        )}
         ActionsComponent={<Actions />}>
         <div>
           <UpdateMessage />
