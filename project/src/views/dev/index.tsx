@@ -146,6 +146,9 @@ const DevPlayer: React.FC = () => {
               <Button type="submit" appearance='primary' size='lg'>
                 Connect
               </Button>
+
+              Can't connect? — Instruction
+
             </form>
           </li>
         </ul>

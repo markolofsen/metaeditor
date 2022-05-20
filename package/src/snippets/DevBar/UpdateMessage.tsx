@@ -22,8 +22,8 @@ export const UpdateMessage: React.FC = () => {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <Button color="red" appearance="primary" block href={config.updateUrl}>
-        Update MetaEditor v{data?.current} to v{data?.release}
+      <Button color="red" appearance="primary" block href={config.updateUrl} target="_blank">
+        Update MetaEditor to v{data?.release}
       </Button>
     </div>
   )
