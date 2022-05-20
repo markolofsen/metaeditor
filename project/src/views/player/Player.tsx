@@ -41,7 +41,7 @@ const playerConfig: PlayerPropsSchema = {
       placement: 'topStart',
     },
     videoUrl: null,
-    issuesUrl: 'https://metaeditor.io/feature-requests/',
+    issuesUrl: 'https://github.com/markolofsen/metaeditor/discussions',
   },
   config: {
     secondsToKill: 60 * 5,
