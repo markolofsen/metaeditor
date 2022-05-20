@@ -87,9 +87,9 @@ export const useResolution = ({ mode = null }: any) => {
 				// emitCons('PixelStreaming.WebRTC.StartBitrate 20000000')
 				// emitCons('PixelStreaming.Encoder.RateControl ConstQP')
 
-				if (ui) {
-					ui.sendUpdateVideoStreamSize(width, height)
-				}
+				// if (ui) {
+				// 	ui.sendUpdateVideoStreamSize(width, height)
+				// }
 
 				// client.emitConsole(`PixelStreaming.Capturer.UseBackBufferSize 0`)
 				// client.emitConsole(`PixelStreaming.Capturer.CaptureSize ${width}x${height}`)

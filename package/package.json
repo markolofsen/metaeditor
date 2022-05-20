@@ -1,6 +1,6 @@
 {
   "name": "pixel-streaming",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "author": "MetaEditor",
   "license": "MIT",
   "description": "MetaEditor — ReactJS Pixel Streaming library, helps integrate Unreal Engine v.5 in the browser. Allows you to send commands and get callbacks from the stream server with launched Unreal Engine.",
