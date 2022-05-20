@@ -4,7 +4,6 @@ import parse from 'url-parse'
 // package.json
 import { version } from '../../package.json'
 
-console.log('>>>>>>>', process.env.NODE_ENV)
 
 export const config = new class {
   isDev: boolean
