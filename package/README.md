@@ -20,7 +20,7 @@ The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engi
 
 * [Real-time demo](https://ps.metaeditor.io/player/lumen)
 
-* [Documentation](https://metaeditor.io/docs/pixel-streaming/settings/installation)
+* [Documentation](https://metaeditor.io/docs/metaeditor/installation)
 
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 
