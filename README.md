@@ -16,7 +16,7 @@ The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engi
 
 #### Links:
 
-* [Documentation](https://metaeditor.io/docs/pixel-streaming/settings)
+* [Documentation](https://metaeditor.io/docs)
 
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 
