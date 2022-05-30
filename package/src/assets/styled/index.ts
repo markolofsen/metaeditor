@@ -29,6 +29,14 @@ export const colors = {
   success,
 }
 
+interface MediaSizes {
+  xs: number
+  sm: number
+  md: number
+  lg: number
+  xl: number
+}
+
 export const media = new class {
 
   /*
@@ -41,32 +49,43 @@ export const media = new class {
   },
   */
 
-  min: Function
-  max: Function
+  sizes: MediaSizes
+  getMin: Function
+  getMax: Function
 
   constructor() {
-    this.min = (int: number) => `@media (min-width: ${int}px)`
-    this.max = (int: number) => `@media (max-width: ${int}px)`
+    this.getMax = (int: number) => `@media (max-width: ${int}px)`
+    this.getMin = (int: number) => `@media (min-width: ${int}px)`
+
+    this.sizes = {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    }
+
   }
 
   // {xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536}
 
   get down() {
     return {
-      xs: this.max(600),
-      sm: this.max(900),
-      md: this.max(1200),
-      lg: this.max(1536),
-      // xl: this.max(1536),
+      xs: this.getMax(this.sizes.sm),
+      sm: this.getMax(this.sizes.md),
+      md: this.getMax(this.sizes.lg),
+      lg: this.getMax(this.sizes.xl),
+      // xl: this.getMax(this.sizes.xl),
     };
   }
+
   get up() {
     return {
-      xs: this.min(0),
-      sm: this.min(600),
-      md: this.min(900),
-      lg: this.min(1200),
-      xl: this.max(1536),
+      xs: this.getMin(this.sizes.xs),
+      sm: this.getMin(this.sizes.sm),
+      md: this.getMin(this.sizes.md),
+      lg: this.getMin(this.sizes.lg),
+      xl: this.getMin(this.sizes.xl),
     };
   }
 }
