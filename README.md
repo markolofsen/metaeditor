@@ -37,6 +37,9 @@ yarn add rsuite pixel-streaming
 ```typescript
 import React from 'react'
 
+// global styles
+import 'rsuite/dist/rsuite.min.css'
+
 // libs
 import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
 
