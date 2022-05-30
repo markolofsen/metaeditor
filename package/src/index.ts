@@ -1,5 +1,3 @@
-// global styles
-import 'rsuite/dist/rsuite.min.css'
 
 // snippets
 import { PlayerPropsSchema } from "./snippets/Player";

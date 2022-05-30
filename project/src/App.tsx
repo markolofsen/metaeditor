@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+// global styles
+import 'rsuite/dist/rsuite.min.css'
 import './App.css';
 
 // ui
