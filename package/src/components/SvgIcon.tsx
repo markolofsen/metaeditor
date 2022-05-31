@@ -46,7 +46,7 @@ const defaultProps: PropsSchema = {
   size: 20,
 }
 
-export const SvgIcon = (props = defaultProps) => {
+export const SvgIcon: React.FC<PropsSchema> = (props: PropsSchema = defaultProps) => {
   const { size, name } = props
   const classes = useStyles({ size })
 

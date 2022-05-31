@@ -43,7 +43,29 @@ export const useBuildConnector = (dispatch: any) => {
 
     async start(buildId: string) {
       setBuildId(buildId)
-      await this.waitSessionData(buildId)
+
+      if (!this.urlSessionExist) {
+        await this.waitSessionData(buildId)
+      }
+    }
+
+    get urlSessionExist() {
+      const params = decodeURI(window.location.search)
+        .replace('?', '')
+        .split('&')
+        .map(param => param.split('='))
+        .reduce((values: any, [key, value]) => {
+          values[key] = value
+          return values
+        }, {})
+
+      if (params?.session) {
+        setSessionUuid(params.session)
+        storageBook.sessionUuid.save(params.session)
+        return true
+      }
+
+      return false
     }
 
     async waitSessionData(buildId: string) {
@@ -54,7 +76,6 @@ export const useBuildConnector = (dispatch: any) => {
           return
         }
       })
-
 
       await api.sessionCreate(buildId).then(async res => {
         if (res.ok) {

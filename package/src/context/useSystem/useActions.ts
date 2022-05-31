@@ -114,12 +114,20 @@ export const useActions = () => {
       return false
     }
 
+    get sharedUrl() {
+      if (!this.sessionData) return false
+      const sessionUuid: string = this.sessionData?.uuid
+      const { protocol, host, pathname } = document.location
+      return `${protocol}//${host}${pathname}?session=${sessionUuid}`
+    }
+
     get sessionData() {
 
       if (state.sessionData) {
-        const { stream_data } = state.sessionData
+        const { stream_data, uuid } = state.sessionData
 
         return {
+          uuid,
           streamingUrl: stream_data.host,
           status: stream_data.status,
           secondsToStart: stream_data.seconds_to_start,
