@@ -6,7 +6,15 @@ import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from
 // blocks
 import { DemoActions } from './DemoActions'
 
-const PlayerContext: React.FC<any> = ({ build, showQuickMenu }: any) => {
+interface Props {
+  build: string
+  showQuickMenu?: boolean
+  consoleMode?: 'console' | 'command'
+}
+
+const PlayerContext: React.FC<Props> = (props: Props) => {
+  const { build, showQuickMenu, consoleMode } = props
+
   const player = usePlayer()
   const system = useSystem()
 
@@ -20,7 +28,14 @@ const PlayerContext: React.FC<any> = ({ build, showQuickMenu }: any) => {
   }, [player.cls.initReady])
 
   let config = playerConfig
-  config.metaConfig.showQuickMenu = showQuickMenu
+
+  if (typeof showQuickMenu === 'boolean') {
+    config.metaConfig.showQuickMenu = showQuickMenu
+  }
+
+  if (typeof consoleMode === 'string') {
+    config.ueSettings.Console.mode = consoleMode
+  }
 
   return (
     <div>
@@ -80,16 +95,19 @@ const playerConfig: PlayerPropsSchema = {
       FPS: 30,
     },
     Console: {
-      mode: 'console', // 'command'
+      mode: 'command', // 'console'
       cursor: false,
-      hudSats: true,
+      hudSats: false,
     }
   }
 }
 
-const CustomPlayer: React.FC<any> = ({ build, showQuickMenu }) => (
+const CustomPlayer: React.FC<any> = ({ build, showQuickMenu, consoleMode }: Props) => (
   <ContextProvider>
-    <PlayerContext build={build} showQuickMenu={showQuickMenu} />
+    <PlayerContext
+      build={build}
+      showQuickMenu={showQuickMenu}
+      consoleMode={consoleMode} />
   </ContextProvider>
 )
 

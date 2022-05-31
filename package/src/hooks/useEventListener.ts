@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export const useEventListener = (eventName: string, handler: Function, element = document) => {
+export const useEventListener = (eventName: string, handler: Function, element: any = document) => {
   // Create a ref that stores handler
   const savedHandler = React.useRef<any>();
   // Update ref.current value if handler changes.

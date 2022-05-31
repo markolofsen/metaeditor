@@ -14,13 +14,12 @@ const Page: React.FC = () => {
   }
 
 
-  let config = {
-    showQuickMenu: true
-  }
+  let config: any = {}
 
   const isToronto = build.search('toronto') !== -1
   if (isToronto) {
     config.showQuickMenu = false
+    config.consoleMode = 'console'
   }
 
   return (

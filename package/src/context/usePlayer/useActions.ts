@@ -86,7 +86,7 @@ export const useActions = () => {
   /**
    * Resolution adapter
    */
-  const resolution = useResolution()
+  const resolution = useResolution(state.ueSettings.onStart?.Console)
 
   /**
    * Auto restart
@@ -139,7 +139,7 @@ export const useActions = () => {
       unload.activate()
 
       // Apply current resolution
-      resolution.resize(state.ueSettings.onStart)
+      resolution.resize()
 
     } else {
       unload.deactivate()
