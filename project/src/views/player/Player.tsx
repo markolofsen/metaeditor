@@ -27,6 +27,17 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
 
   }, [player.cls.initReady])
 
+  // Disable cursor
+  React.useEffect(() => {
+
+    if (player.computed.streaming.active) {
+      player.cls.emitCommandSystem('cursor', { enabled: false })
+    }
+
+  }, [player.computed.streaming.active])
+
+
+
   let config = playerConfig
 
   if (typeof showQuickMenu === 'boolean') {
