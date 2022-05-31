@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 // blocks
 import RequestForm from './RequestForm';
 import Player from './Player'
+import TorontoActions from './TorontoActions'
 
 const Page: React.FC = () => {
   const { build } = useParams();
@@ -12,10 +13,25 @@ const Page: React.FC = () => {
     return (<div />)
   }
 
+
+  let config = {
+    showQuickMenu: true
+  }
+
+  const isToronto = build.search('toronto') !== -1
+  if (isToronto) {
+    config.showQuickMenu = false
+  }
+
   return (
     <div>
       <RequestForm />
-      <Player build={build} />
+
+      {isToronto && (
+        <TorontoActions />
+      )}
+
+      <Player build={build} {...config} />
     </div>
   )
 }

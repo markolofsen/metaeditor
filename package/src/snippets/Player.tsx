@@ -86,6 +86,7 @@ export interface PlayerPropsSchema {
     Encoder: client.Encoder,
     WebRTC: client.WebRTC,
     Console: {
+      mode: 'console' | 'command',
       cursor: boolean,
       hudSats: boolean,
     }
