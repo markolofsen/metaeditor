@@ -33,9 +33,6 @@ export const useActions = () => {
   useEventListener(Ev.webrtcStatus.key, (payload: any) => eventHandler.eventWebrtcStatus(payload));
   useEventListener(Ev.ueInitialSettings.key, (payload: any) => eventHandler.eventUeSettingsInitial(payload));
 
-  // resolution adapter
-  const resolution = useResolution({ mode: 'command' })
-
   // prompt before unload
   const unload = useUnload((e: any) => {
     e.preventDefault();
@@ -84,6 +81,12 @@ export const useActions = () => {
    * Apply Unreal Engine Settings on start
    */
   useUnrealSettings(state, computed.streaming.active)
+
+
+  /**
+   * Resolution adapter
+   */
+  const resolution = useResolution()
 
   /**
    * Auto restart
@@ -136,7 +139,7 @@ export const useActions = () => {
       unload.activate()
 
       // Apply current resolution
-      resolution.resize()
+      resolution.resize(state.ueSettings.onStart)
 
     } else {
       unload.deactivate()

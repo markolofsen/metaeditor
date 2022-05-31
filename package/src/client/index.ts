@@ -131,16 +131,19 @@ export const ClientAccess = new class {
 
     emitCommand(command: string, value: any): void {
         if (!this.client) return
+        Logger.verboseLog(`emitCommand()\n` + JSON.stringify({ command, value }, null, 4))
         return this.client.ueDescriptorUi.emitCommand(command, value)
     }
 
     emitCommandSystem(command: string, payload: any): void {
         if (!this.client) return
+        Logger.verboseLog(`emitCommandSystem()\n` + JSON.stringify({ command, payload }, null, 4))
         return this.client.ueDescriptorUi.emitCommandSystem(command, payload)
     }
 
     emitConsole(payload: string): void {
         if (!this.client) return
+        Logger.verboseLog(`EmitConsole()\n` + JSON.stringify(payload, null, 4))
         return this.client.ueDescriptorUi.emitConsole(payload)
     }
 
@@ -156,6 +159,7 @@ export const ClientAccess = new class {
 
     restartStreamAutomaticity(): void {
         if (!this.client) return
+        Logger.verboseLog(`restartStreamAutomaticity()`)
         this.client.iWebRTCController.restartStreamAutomaticity();
     }
 

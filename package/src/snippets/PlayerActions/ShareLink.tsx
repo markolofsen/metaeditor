@@ -58,7 +58,7 @@ export const ShareLink = () => {
           <InputGroup size='lg'>
             <Input
               readOnly={true}
-              defaultValue={sharedUrl}
+              defaultValue={sharedUrl || ''}
             />
             <InputGroup.Button onClick={() => copy.text(sharedUrl)}>
               <CopyIcon />

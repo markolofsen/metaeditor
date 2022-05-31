@@ -54,6 +54,7 @@ const PlayerContext: React.FC<any> = () => {
         FPS: 60,
       },
       Console: {
+        mode: 'console', // 'command'
         cursor: true,
         hudSats: true,
       }

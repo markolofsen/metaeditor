@@ -6,7 +6,7 @@ import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from
 // blocks
 import { DemoActions } from './DemoActions'
 
-const PlayerContext: React.FC<any> = ({ build }: any) => {
+const PlayerContext: React.FC<any> = ({ build, showQuickMenu }: any) => {
   const player = usePlayer()
   const system = useSystem()
 
@@ -19,10 +19,13 @@ const PlayerContext: React.FC<any> = ({ build }: any) => {
 
   }, [player.cls.initReady])
 
+  let config = playerConfig
+  config.metaConfig.showQuickMenu = showQuickMenu
+
   return (
     <div>
       <DemoActions />
-      <Player {...playerConfig} />
+      <Player {...config} />
     </div>
   )
 
@@ -77,15 +80,16 @@ const playerConfig: PlayerPropsSchema = {
       FPS: 30,
     },
     Console: {
+      mode: 'console', // 'command'
       cursor: false,
       hudSats: true,
     }
   }
 }
 
-const CustomPlayer: React.FC<any> = ({ build }) => (
+const CustomPlayer: React.FC<any> = ({ build, showQuickMenu }) => (
   <ContextProvider>
-    <PlayerContext build={build} />
+    <PlayerContext build={build} showQuickMenu={showQuickMenu} />
   </ContextProvider>
 )
 

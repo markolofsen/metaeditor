@@ -3,9 +3,10 @@ import * as React from 'react';
 import { ClientAccess } from '../../../client/'
 
 
-export const useResolution = ({ mode = null }: any) => {
+export const useResolution = () => {
 
 	const refTimer = React.useRef<any>(null)
+	const refUeSettings = React.useRef<any>(null)
 
 	// Initialize state with undefined width/height so server and client renders match
 	const [state, setState] = React.useState<any>({
@@ -13,9 +14,8 @@ export const useResolution = ({ mode = null }: any) => {
 		height: 0,
 	});
 
-
 	// Handler to call on window resize
-	function handleResize() {
+	const handleResize = () => {
 
 		// Set window width/height to state
 
@@ -38,6 +38,7 @@ export const useResolution = ({ mode = null }: any) => {
 
 	}
 
+
 	React.useEffect(() => {
 
 		// Add event listener
@@ -46,9 +47,9 @@ export const useResolution = ({ mode = null }: any) => {
 		// Call handler right away so state gets updated with initial window size
 		handleResize();
 
-
 		// Remove event listener on cleanup
 		return () => window.removeEventListener("resize", handleResize);
+
 	}, []); // Empty array ensures that effect is only run on mount
 
 
@@ -56,7 +57,8 @@ export const useResolution = ({ mode = null }: any) => {
 	const cls = new class {
 
 		// will be called after the stream activation
-		resize() {
+		resize(ueSettings: {}) {
+			refUeSettings.current = ueSettings
 			handleResize()
 		}
 
@@ -65,35 +67,32 @@ export const useResolution = ({ mode = null }: any) => {
 
 			clearTimeout(refTimer.current)
 
-			// const emitCons = (payload: any) => ClientAccess.emitConsole(payload)
+			const emitConsole = (payload: any) => ClientAccess.emitConsole(payload)
 			const emitCmd = (command: string, payload: any) => ClientAccess.emitCommandSystem(command, payload)
-
 
 			refTimer.current = setTimeout(() => {
 
 				// https://docs.unrealengine.com/5.0/en-US/unreal-engine-pixel-streaming-reference/
 
-				const ui = ClientAccess.client
 				// if (ui) ui.sendEncoderMinQP(-1)
-
-
-				// // Whether to hide the UE application cursor.
-				// emitCons('PixelStreaming.HideCursor true')
-
-				// // Whether to show PixelStreaming stats on the in-game HUD.
-				// emitCons('PixelStreaming.HudStats true')
 
 				// emitCons('PixelStreaming.Encoder.MinQP -1')
 				// emitCons('PixelStreaming.WebRTC.StartBitrate 20000000')
 				// emitCons('PixelStreaming.Encoder.RateControl ConstQP')
 
-				// if (ui) {
-				// 	ui.sendUpdateVideoStreamSize(width, height)
-				// }
+				const RTCPlayer = ClientAccess.client
+				const { mode, cursor, hudSats } = refUeSettings.current?.console
 
-				// client.emitConsole(`PixelStreaming.Capturer.UseBackBufferSize 0`)
-				// client.emitConsole(`PixelStreaming.Capturer.CaptureSize ${width}x${height}`)
-				// client.emitConsole(`r.SetRes ${window.innerWidth}x${window.innerHeight}f`)
+				// Whether to hide the UE application cursor.
+				if (typeof cursor === 'boolean') {
+					emitConsole(`PixelStreaming.HudStats ${cursor.toString()}`)
+				}
+
+				// Whether to show PixelStreaming stats on the in-game HUD.
+				if (typeof hudSats === 'boolean') {
+					emitConsole(`PixelStreaming.HudStats ${hudSats.toString()}`)
+				}
+
 
 				switch (mode) {
 
@@ -103,10 +102,13 @@ export const useResolution = ({ mode = null }: any) => {
 						break
 
 					// Set resolution by native console method
-					case 'console' && ui:
-						ui.sendUpdateVideoStreamSize(width, height)
-						// emitCons('PixelStreaming.Capturer.UseBackBufferSize 0')
-						// emitCons(`PixelStreaming.Capturer.CaptureSize ${width}x${height}`)
+					case 'console':
+						if (RTCPlayer) {
+							RTCPlayer.ueDescriptorUi.sendUpdateVideoStreamSize(width, height)
+						}
+						// emitConsole(`r.SetRes ${width}x${height}f`)
+						// emitConsole('PixelStreaming.Capturer.UseBackBufferSize 0')
+						// emitConsole(`PixelStreaming.Capturer.CaptureSize ${width}x${height}`)
 						break
 				}
 
