@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import { ClientAccess } from '../../../client/'
 
+// hooks
+import { useEventListener } from '../../../hooks/useEventListener';
 
-export const useResolution = () => {
+
+export const useResolution = (ConsoleSettings: any) => {
 
 	const refTimer = React.useRef<any>(null)
-	const refUeSettings = React.useRef<any>(null)
 
 	// Initialize state with undefined width/height so server and client renders match
 	const [state, setState] = React.useState<any>({
@@ -38,27 +40,13 @@ export const useResolution = () => {
 
 	}
 
-
-	React.useEffect(() => {
-
-		// Add event listener
-		window.addEventListener("resize", handleResize);
-
-		// Call handler right away so state gets updated with initial window size
-		handleResize();
-
-		// Remove event listener on cleanup
-		return () => window.removeEventListener("resize", handleResize);
-
-	}, []); // Empty array ensures that effect is only run on mount
-
+	useEventListener('resize', handleResize, window)
 
 
 	const cls = new class {
 
 		// will be called after the stream activation
-		resize(ueSettings: {}) {
-			refUeSettings.current = ueSettings
+		resize() {
 			handleResize()
 		}
 
@@ -81,20 +69,21 @@ export const useResolution = () => {
 				// emitCons('PixelStreaming.Encoder.RateControl ConstQP')
 
 				const RTCPlayer = ClientAccess.client
-				const { mode, cursor, hudSats } = refUeSettings.current?.console
+
+				if (!ConsoleSettings) return
+
 
 				// Whether to hide the UE application cursor.
-				if (typeof cursor === 'boolean') {
-					emitConsole(`PixelStreaming.HudStats ${cursor.toString()}`)
+				if (typeof ConsoleSettings.cursor === 'boolean') {
+					emitConsole(`PixelStreaming.HudStats ${ConsoleSettings.cursor.toString()}`)
 				}
 
 				// Whether to show PixelStreaming stats on the in-game HUD.
-				if (typeof hudSats === 'boolean') {
-					emitConsole(`PixelStreaming.HudStats ${hudSats.toString()}`)
+				if (typeof ConsoleSettings.hudSats === 'boolean') {
+					emitConsole(`PixelStreaming.HudStats ${ConsoleSettings.hudSats.toString()}`)
 				}
 
-
-				switch (mode) {
+				switch (ConsoleSettings.mode) {
 
 					// Set resolution to metaplugin
 					case 'command':
