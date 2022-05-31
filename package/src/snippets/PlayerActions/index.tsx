@@ -9,6 +9,10 @@ import { SvgIcon } from '../../components/SvgIcon'
 // hooks
 import { useFullscreen } from './useFullscreen'
 
+// blocks
+import { ShareLink } from './ShareLink'
+
+
 interface Props {
   // children: any
 }
@@ -23,8 +27,6 @@ export const PlayerActions: React.FC<Props> = () => {
 
   const volume = player.state.playerSettings.volume
   const volumeOff = typeof volume === 'number' && volume <= 0
-
-
 
   return (
     <>
@@ -54,7 +56,7 @@ export const PlayerActions: React.FC<Props> = () => {
           }
         }} />
 
-      <SvgIcon button buttonSize='lg' name='qrcode' disabled />
+      <ShareLink />
 
     </>
   )
