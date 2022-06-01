@@ -290,12 +290,10 @@ export const useActions = () => {
     }
 
     streamingConnect() {
-      if (!ClientAccess.client) return
       ClientAccess.connect()
     }
 
     streamingStop() {
-      if (!ClientAccess.client) return
       ClientAccess.close()
     }
 
@@ -303,8 +301,30 @@ export const useActions = () => {
       computed.streaming.active ? this.streamingStop() : this.streamingConnect()
     }
 
+    clientCb(cb: Function) {
+      const client = ClientAccess.client
+      if (client) cb(client)
+    }
+
     changeVolume(volume: number = 1) {
-      this.emitCommandSystem('user_sound', { volume })
+
+      this.clientCb((cl: any) => {
+        if (!cl.videoPlayerController.audioElement) {
+          cl.videoPlayerController.PlayAudioTrack()
+          volume = 1
+        } else {
+
+          if (volume > 0) {
+            cl.videoPlayerController.audioElement.play()
+          } else if (volume === 0) {
+            cl.videoPlayerController.audioElement.pause()
+          }
+
+          cl.videoPlayerController.audioElement.volume = volume
+        }
+      })
+
+      // this.emitCommandSystem('user_sound', { volume })
       dispatch.updatePlayerSettings({ volume })
     }
 

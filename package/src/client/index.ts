@@ -117,14 +117,20 @@ export const ClientAccess = new class {
         return RTCPlayer
     }
 
+    clientCb(cb: Function) {
+        if (this.client) cb(this.client)
+    }
+
     connect(): void {
-        if (!this.client) return
-        this.client.delegate.afkConnect()
+        this.clientCb((cl: any) => {
+            cl.delegate.afkConnect()
+        })
     }
 
     close(): void {
-        if (!this.client) return
-        this.client.afkLogic.closeWebSocket()
+        this.clientCb((cl: any) => {
+            cl.afkLogic.closeWebSocket()
+        })
     }
 
     emitCommand(command: string, value: any): void {
@@ -156,9 +162,11 @@ export const ClientAccess = new class {
     // }
 
     restartStreamAutomaticity(): void {
-        if (!this.client) return
         Logger.verboseLog(`restartStreamAutomaticity()`)
-        this.client.iWebRTCController.restartStreamAutomaticity();
+
+        this.clientCb((cl: any) => {
+            cl.iWebRTCController.restartStreamAutomaticity();
+        })
     }
 
 
