@@ -1,16 +1,21 @@
 import * as React from 'react'
 
 // ui
-import { jss } from '../assets/styled';
+import { jss, media } from '../assets/styled';
 import Drawer from 'rsuite/Drawer';
 
 
 const useStyles = jss({
+  header: {
+    [media.down.xs]: {
+      marginTop: 40,
+    },
+  },
   container: {
     overflow: 'auto',
     pointerEvents: 'all',
     maxHeight: 'calc(100vh - 77px)',
-  }
+  },
 })
 
 interface Props {
@@ -85,7 +90,7 @@ export const CustomDrawer: React.FC<any> = React.forwardRef((props: Props, ref: 
       backdrop={false}
       open={open}
       onClose={handleClose}>
-      <Drawer.Header>
+      <Drawer.Header className={classes.header}>
         {typeof config.title === 'string' ? (
           <Drawer.Title>
             {config.title}

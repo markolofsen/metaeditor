@@ -10,7 +10,7 @@ import { useSystem } from '../../context/';
 import { useHotkeys } from '../../hooks/useHotkeys'
 
 // ui
-import { jss } from '../../assets/styled';
+import { jss, media } from '../../assets/styled';
 import IconButton from 'rsuite/IconButton';
 import GearIcon from '@rsuite/icons/Gear';
 

@@ -4,22 +4,20 @@
 
 ```bash
 # 1. clone repo
+git clone https://github.com/markolofsen/metaeditor.git
+
+# or clone dev version
 git clone -b dev-v2 https://github.com/markolofsen/metaeditor.git
 
 # 2. npm module
 cd ./package
 yarn && yarn start
 
-# 3. switch imports to module in project/src/views/lib.ts
-
 # 4. run project
 cd ./project
-yarn && yarn dev
+yarn
+yarn symlink
+yarn dev
 
-# 5. open route http://localhost:3000/player/lumen
+# 5. open http://localhost:3000
 ```
-
-## config's
-
-`./project/src/package/client/` — pixel-streaming config
-
