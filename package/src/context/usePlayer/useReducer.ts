@@ -23,7 +23,7 @@ const initialState: any = {
     onStart: null,
   },
   playerSettings: {
-    volume: null,
+    volume: 1,
   },
   webrtcData: {
     status: null,
