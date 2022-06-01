@@ -29,7 +29,6 @@ const PlayerContext: React.FC<any> = () => {
       enableVerboseLogging: true,
       enableSpsAutoplay: true,
       startVideoMuted: false,
-      autoPlayAudio: true,
       controlScheme: 1,
       suppressBrowserKeys: true,
       fakeMouseWithTouches: true,

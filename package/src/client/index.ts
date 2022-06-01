@@ -23,7 +23,6 @@ export interface psConfigSchema {
     enableVerboseLogging: boolean,
     enableSpsAutoplay: boolean,
     startVideoMuted: boolean,
-    autoPlayAudio: boolean,
     controlScheme: client.ControlSchemeType,
     suppressBrowserKeys: boolean,
     fakeMouseWithTouches: boolean,
@@ -73,7 +72,6 @@ export class ClientClass implements ClientBase {
 
             config.enableSpsAutoplay = getCfg('enableSpsAutoplay', true)
             config.startVideoMuted = getCfg('startVideoMuted', false)
-            config.autoPlayAudio = getCfg('autoPlayAudio', true)
             config.controlScheme = getCfg('controlScheme', client.ControlSchemeType.HoveringMouse)
             config.suppressBrowserKeys = getCfg('suppressBrowserKeys', true)
             config.fakeMouseWithTouches = getCfg('fakeMouseWithTouches', true)
@@ -126,7 +124,7 @@ export const ClientAccess = new class {
 
     close(): void {
         if (!this.client) return
-        this.client.delegate.afkCloseWs()
+        this.client.afkLogic.closeWebSocket()
     }
 
     emitCommand(command: string, value: any): void {
@@ -165,3 +163,4 @@ export const ClientAccess = new class {
 
 
 }
+

@@ -39,7 +39,7 @@ export const useStreamKiller = (dispatch: any, streamingActive: boolean, config:
         refInterval.current = setInterval(() => {
           refIntervalSec.current -= 1
           dispatch.updateConfig({ secondsToKillLeft: refIntervalSec.current })
-          Logger.verboseLog('Seconds to kill: ' + refIntervalSec.current);
+          // Logger.verboseLog('Seconds to kill: ' + refIntervalSec.current);
         }, 1000)
 
         refTimer.current = setTimeout(() => {
