@@ -81,7 +81,6 @@ const playerConfig: PlayerPropsSchema = {
     enableVerboseLogging: false,
     enableSpsAutoplay: true,
     startVideoMuted: false,
-    autoPlayAudio: false,
     controlScheme: 1,
     suppressBrowserKeys: true,
     fakeMouseWithTouches: true,

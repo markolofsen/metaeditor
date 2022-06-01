@@ -52,7 +52,7 @@ export const useActions = () => {
         initialized: ch(_s_.initialized),
         active: ch(_s_.active),
         activation: ch(_s_.activation),
-        diconnected: ch(_s_.diconnected),
+        disconnected: ch(_s_.disconnected),
         stopped: ch(_s_.stopped),
         error: ch(_s_.error),
         autoplaySupport: state.webrtcData.autoplaySupport,
@@ -61,9 +61,9 @@ export const useActions = () => {
 
       // For overlays
 
-      res._inProgress = res.empty || res.activation || res.diconnected
+      res._inProgress = res.empty || res.activation || res.disconnected
       res._allowPlay = ((res.initialized || res.stopped) && res.autoplaySupport !== true) || res.stopped
-      res._playError = res.diconnected || res.error
+      res._playError = res.disconnected || res.error
       res._allowOverlay = !res.active
       res._isPending = res.status === 'pending'
 

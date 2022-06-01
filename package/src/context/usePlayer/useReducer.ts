@@ -105,7 +105,7 @@ function reducer(state: any, action: any) {
 
     // Show errorCode only in cases when status is error||disconnected
     const status = EventsClass.webrtcStatusList
-    if (![status.diconnected, status.error].includes(anValue?.status)) {
+    if (![status.disconnected, status.error].includes(anValue?.status)) {
       anValue.errorCode = null
     }
 
