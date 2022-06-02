@@ -21,3 +21,5 @@ export { config } from "./assets/config";
 // hooks
 export { Request } from './hooks/useApi/useRequest'
 export { useStorage } from "./hooks/useStorage"
+export { useMedia } from "./hooks/useMedia"
+

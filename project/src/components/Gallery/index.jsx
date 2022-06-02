@@ -10,14 +10,19 @@ import getUuid from 'uuid-by-string'
 
 const GOLDENRATIO = 1.61803398875
 
-export default function App({ images }) {
+export default function App({ images, ...props }) {
+
+  const onChange = (v) => {
+    props.onChange(v)
+  }
+
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
       <color attach="background" args={['#191920']} />
       <fog attach="fog" args={['#191920', 0, 15]} />
       <Environment preset="city" />
       <group position={[0, -0.5, 0]}>
-        <Frames images={images} />
+        <Frames images={images} onChange={onChange} />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
           <planeGeometry args={[50, 50]} />
           <MeshReflectorMaterial
@@ -38,9 +43,11 @@ export default function App({ images }) {
   )
 }
 
-function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
+function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), ...props }) {
   const ref = useRef()
   const clicked = useRef()
+  const item = useRef()
+
   const [, params] = useRoute('/item/:id')
   const [, setLocation] = useLocation()
   useEffect(() => {
@@ -63,15 +70,22 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
       ref={ref}
       onClick={(e) => {
         e.stopPropagation()
-        // if (clicked.current === e.object) {
-        //   setLocation('/')
-        // } else {
-        //   setLocation('/item/' + e.object.name)
-        // }
-        setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name)
+        if (clicked.current === e.object) {
+          props.onChange(false)
+          setLocation('/')
+        } else {
+          props.onChange(item.current)
+          setLocation('/item/' + e.object.name)
+        }
+        // setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name)
       }}
-      onPointerMissed={() => setLocation('/')}>
-      {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
+      onPointerMissed={() => {
+        props.onChange(false)
+        setLocation('/')
+      }}>
+      {images.map((props) => <Frame
+        onClick={() => item.current = props}
+        key={props.url} {...props} /> /* prettier-ignore */)}
     </group>
   )
 }
