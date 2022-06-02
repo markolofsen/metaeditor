@@ -104,6 +104,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
     frame.current.material.color.lerp(c.set(hovered ? 'orange' : 'white'), 0.1)
   })
 
+
   return (
     <group {...props}>
       <mesh
@@ -119,6 +120,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           <meshBasicMaterial toneMapped={false} fog={false} />
         </mesh>
         <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
+
       </mesh>
       {/* <RoundedBox args={[1, 1, 1]} radius={0.05} smoothness={4}>
         <meshPhongMaterial color="#f3f3f3" wireframe />
