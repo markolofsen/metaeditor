@@ -104,7 +104,7 @@ const View: React.FC = () => {
                     {selected?.data?.title}
                   </h5>
                   <p>
-                    {selected?.data?.description.substr(0, 100)}
+                    {selected?.data?.description.substr(0, 100)}...
                   </p>
 
                   <div style={{ height: 20 }} />
