@@ -72,16 +72,16 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), .
         e.stopPropagation()
         if (clicked.current === e.object) {
           props.onChange(false)
-          setLocation('/')
+          // setLocation('/')
         } else {
           props.onChange(item.current)
-          setLocation('/item/' + e.object.name)
+          // setLocation('/item/' + e.object.name)
         }
         // setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name)
       }}
       onPointerMissed={() => {
         props.onChange(false)
-        setLocation('/')
+        // setLocation('/')
       }}>
       {images.map((props) => <Frame
         onClick={() => item.current = props}
