@@ -78,7 +78,7 @@ const View: React.FC = () => {
   }, [])
 
   const loadData = async () => [
-    await api.getDemosGallery().then(res => {
+    await api.getDemosGallery().then((res) => {
       if (res.ok) {
         setData(res.body)
       }
