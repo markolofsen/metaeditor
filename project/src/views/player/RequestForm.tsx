@@ -1,5 +1,8 @@
 import * as React from 'react'
 
+// config
+import { config } from 'src/assets/config';
+
 // ui
 import { jss } from 'pixel-streaming'
 import Button from 'rsuite/Button'
@@ -39,6 +42,17 @@ const RequestForm: React.FC<any> = () => {
 
   React.useEffect(() => {
 
+    if (!config.isDev) {
+      hadleStart()
+    }
+
+    return () => {
+      clearTimeout(refTimeout.current)
+    }
+
+  }, [])
+
+  const hadleStart = () => {
     clearTimeout(refTimeout.current)
     refTimeout.current = setTimeout(() => {
 
@@ -50,8 +64,7 @@ const RequestForm: React.FC<any> = () => {
       })
 
     }, 1000 * 3)
-
-  }, [])
+  }
 
   const handleOpen = () => {
     refCustomModal.current.open()

@@ -15,6 +15,10 @@ export const useApi = () => {
       return Request.GET('/cabinet/builds_demos/list/')
     }
 
+    getDemosGallery() {
+      return Request.GET('/cabinet/builds_demos/gallery/')
+    }
+
   }
 
   return cls

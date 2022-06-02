@@ -8,12 +8,10 @@ import { DemoActions } from './DemoActions'
 
 interface Props {
   build: string
-  showQuickMenu?: boolean
-  consoleMode?: 'console' | 'command'
 }
 
 const PlayerContext: React.FC<Props> = (props: Props) => {
-  const { build, showQuickMenu, consoleMode } = props
+  const { build } = props
 
   const player = usePlayer()
   const system = useSystem()
@@ -37,21 +35,33 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
   }, [player.computed.streaming.active])
 
 
+  // Update config from MetaAPI
+  React.useEffect(() => {
+    if (system.project.config) {
+      let cfg = playerConfig
 
-  let config = playerConfig
+      const { menu, ue_console_mode, ue_control_scheme, ue_sound } = system.project.config
 
-  if (typeof showQuickMenu === 'boolean') {
-    config.metaConfig.showQuickMenu = showQuickMenu
-  }
+      cfg.metaConfig.showQuickMenu = menu
+      cfg.ueSettings.Console.mode = ue_console_mode
+      cfg.psConfig.controlScheme = ue_control_scheme
 
-  if (typeof consoleMode === 'string') {
-    config.ueSettings.Console.mode = consoleMode
-  }
+      cfg.psConfig.startVideoMuted = !ue_sound
+
+      const { config, psConfig, ueSettings } = cfg
+
+      player.cls.streamingStop()
+      player.cls.initConfig(config, psConfig, ueSettings)
+      player.cls.streamingConnect()
+
+    }
+
+  }, [system.project.config])
 
   return (
     <div>
       <DemoActions />
-      <Player {...config} />
+      <Player {...playerConfig} />
     </div>
   )
 
@@ -112,12 +122,9 @@ const playerConfig: PlayerPropsSchema = {
   }
 }
 
-const CustomPlayer: React.FC<any> = ({ build, showQuickMenu, consoleMode }: Props) => (
+const CustomPlayer: React.FC<any> = ({ build }: Props) => (
   <ContextProvider>
-    <PlayerContext
-      build={build}
-      showQuickMenu={showQuickMenu}
-      consoleMode={consoleMode} />
+    <PlayerContext build={build} />
   </ContextProvider>
 )
 

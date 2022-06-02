@@ -13,14 +13,7 @@ const Page: React.FC = () => {
     return (<div />)
   }
 
-
-  let config: any = {}
-
   const isToronto = build.search('toronto') !== -1
-  if (isToronto) {
-    config.showQuickMenu = false
-    config.consoleMode = 'console'
-  }
 
   return (
     <div>
@@ -30,7 +23,7 @@ const Page: React.FC = () => {
         <TorontoActions />
       )}
 
-      <Player build={build} {...config} />
+      <Player build={build} />
     </div>
   )
 }

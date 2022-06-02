@@ -10,6 +10,7 @@ import CustomProvider from 'rsuite/CustomProvider';
 
 // views
 import HomePage from './views/home/';
+import GalleryPage from './views/gallery/';
 import PlayerPage from './views/player/';
 import DevPage from './views/dev/';
 
@@ -20,6 +21,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/player/:build" element={<PlayerPage />} />
           <Route path="/dev" element={<DevPage />} />
           <Route path="*" element={<HomePage />} />
