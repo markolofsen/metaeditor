@@ -164,6 +164,10 @@ export const useActions = () => {
     get menu() {
       return state.metaData?.menu || []
     }
+
+    get config() {
+      return state.metaData?.project?.info?.config || false
+    }
   }
 
   const config = new class {

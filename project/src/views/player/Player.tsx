@@ -8,24 +8,24 @@ import { DemoActions } from './DemoActions'
 
 interface Props {
   build: string
-  showQuickMenu?: boolean
-  consoleMode?: 'console' | 'command'
 }
 
 const PlayerContext: React.FC<Props> = (props: Props) => {
-  const { build, showQuickMenu, consoleMode } = props
+  const { build } = props
 
   const player = usePlayer()
   const system = useSystem()
 
+  const [config, setConfig] = React.useState<any>(false)
+
   React.useEffect(() => {
 
-    if (player.cls.initReady) {
+    if (config && player.cls.initReady) {
       // player.cls.initPlayer('https://i-00c56684d4fff23e4.cloudvec.com')
       system.cls.connectBuild(build)
     }
 
-  }, [player.cls.initReady])
+  }, [config, player.cls.initReady])
 
   // Disable cursor
   React.useEffect(() => {
@@ -37,15 +37,27 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
   }, [player.computed.streaming.active])
 
 
+  // Update config from MetaAPI
+  React.useEffect(() => {
 
-  let config = playerConfig
+    if (system.project.config && !config) {
+      let cfg = playerConfig
 
-  if (typeof showQuickMenu === 'boolean') {
-    config.metaConfig.showQuickMenu = showQuickMenu
-  }
+      const { menu, ue_console_mode, ue_control_scheme, ue_sound } = system.project.config
 
-  if (typeof consoleMode === 'string') {
-    config.ueSettings.Console.mode = consoleMode
+      cfg.metaConfig.showQuickMenu = menu
+      cfg.ueSettings.Console.mode = ue_console_mode
+      cfg.psConfig.controlScheme = ue_control_scheme
+      cfg.psConfig.startVideoMuted = !ue_sound
+
+      setConfig(cfg)
+    }
+
+
+  }, [system.project.config])
+
+  if (!config) {
+    return (<div />)
   }
 
   return (
@@ -112,12 +124,9 @@ const playerConfig: PlayerPropsSchema = {
   }
 }
 
-const CustomPlayer: React.FC<any> = ({ build, showQuickMenu, consoleMode }: Props) => (
+const CustomPlayer: React.FC<any> = ({ build }: Props) => (
   <ContextProvider>
-    <PlayerContext
-      build={build}
-      showQuickMenu={showQuickMenu}
-      consoleMode={consoleMode} />
+    <PlayerContext build={build} />
   </ContextProvider>
 )
 

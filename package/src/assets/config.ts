@@ -22,7 +22,7 @@ export const config = new class {
 
     this.apiUrl = 'https://api.metaeditor.io'
     if (this.isDev) {
-      // this.apiUrl = 'http://127.0.0.1:8000'
+      this.apiUrl = 'http://127.0.0.1:8000'
     }
 
     this.portalUrl = 'https://portal.metaeditor.io'
