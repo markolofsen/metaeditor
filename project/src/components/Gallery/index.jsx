@@ -105,6 +105,16 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   })
 
 
+  useEffect(() => {
+    fetch(url, {
+      mode: 'cors',
+      credentials: 'include'
+    }).then(res => {
+      console.log('@@@res', res)
+    })
+
+  }, [])
+
   return (
     <group {...props}>
       <mesh
