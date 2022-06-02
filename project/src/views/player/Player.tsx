@@ -16,16 +16,14 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
   const player = usePlayer()
   const system = useSystem()
 
-  const [config, setConfig] = React.useState<any>(false)
-
   React.useEffect(() => {
 
-    if (config && player.cls.initReady) {
+    if (player.cls.initReady) {
       // player.cls.initPlayer('https://i-00c56684d4fff23e4.cloudvec.com')
       system.cls.connectBuild(build)
     }
 
-  }, [config, player.cls.initReady])
+  }, [player.cls.initReady])
 
   // Disable cursor
   React.useEffect(() => {
@@ -39,8 +37,7 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
 
   // Update config from MetaAPI
   React.useEffect(() => {
-
-    if (system.project.config && !config) {
+    if (system.project.config) {
       let cfg = playerConfig
 
       const { menu, ue_console_mode, ue_control_scheme, ue_sound } = system.project.config
@@ -48,22 +45,23 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
       cfg.metaConfig.showQuickMenu = menu
       cfg.ueSettings.Console.mode = ue_console_mode
       cfg.psConfig.controlScheme = ue_control_scheme
+
       cfg.psConfig.startVideoMuted = !ue_sound
 
-      setConfig(cfg)
+      const { config, psConfig, ueSettings } = cfg
+
+      player.cls.streamingStop()
+      player.cls.initConfig(config, psConfig, ueSettings)
+      player.cls.streamingConnect()
+
     }
 
-
   }, [system.project.config])
-
-  if (!config) {
-    return (<div />)
-  }
 
   return (
     <div>
       <DemoActions />
-      <Player {...config} />
+      <Player {...playerConfig} />
     </div>
   )
 

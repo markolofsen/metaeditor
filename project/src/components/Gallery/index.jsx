@@ -65,6 +65,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), .
     state.camera.position.lerp(p, 0.025)
     state.camera.quaternion.slerp(q, 0.025)
   })
+
+
   return (
     <group
       ref={ref}
@@ -105,15 +107,6 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   })
 
 
-  useEffect(() => {
-    fetch(url, {
-      mode: 'cors',
-      credentials: 'include'
-    }).then(res => {
-      console.log('@@@res', res)
-    })
-
-  }, [])
 
   return (
     <group {...props}>
@@ -130,7 +123,6 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           <meshBasicMaterial toneMapped={false} fog={false} />
         </mesh>
         <Image raycast={() => null} ref={image} position={[0, 0, 0.7]} url={url} />
-
       </mesh>
       {/* <RoundedBox args={[1, 1, 1]} radius={0.05} smoothness={4}>
         <meshPhongMaterial color="#f3f3f3" wireframe />
