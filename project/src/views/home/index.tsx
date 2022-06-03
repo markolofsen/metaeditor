@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { useNavigate } from "react-router-dom";
 
 // config
 import { config } from 'pixel-streaming';
+
+// hooks
+import { useRouter } from 'src/hooks/useRouter';
 
 // ui
 import { jss, media } from "pixel-streaming"
@@ -36,13 +38,18 @@ const useStyles = jss({
         width: '100%',
         maxWidth: 170,
       }
+    },
+    '& > [data-li="actions"]': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: 10,
     }
   }
 })
 
 const View: React.FC = () => {
   const classes = useStyles()
-  const navigate = useNavigate();
+  const router = useRouter()
 
   const [show, setShow] = React.useState<boolean>(false)
 
@@ -51,8 +58,7 @@ const View: React.FC = () => {
     const { protocol, hostname } = document.location
 
     if (protocol === 'http:' && hostname !== 'localhost') {
-
-      navigate('/dev')
+      router.push.dev()
 
     } else {
       setShow(true)
@@ -74,7 +80,12 @@ const View: React.FC = () => {
             <img src='/static/logo_white.svg' />
           </a>
         </li>
-        <li data-li="button">
+        <li data-li="actions">
+          <Button
+            onClick={() => router.push.gallery()}
+            appearance='primary' color='red' size='lg'>
+            3D gallery
+          </Button>
           <Button href='http://ps-dev.metaeditor.io/dev' appearance='ghost' size='lg'>
             Developer Version
           </Button>

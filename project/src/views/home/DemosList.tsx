@@ -18,10 +18,10 @@ const useStyles = jss({
     display: 'flex',
     flexDirection: 'column',
     [media.down.sm]: {
-      gap: '.5rem',
+      gap: '.5em',
     },
     [media.up.sm]: {
-      gap: '1.5rem',
+      gap: '1.5em',
     },
   },
   itemList: {

@@ -34,30 +34,6 @@ const PlayerContext: React.FC<Props> = (props: Props) => {
 
   }, [player.computed.streaming.active])
 
-
-  // Update config from MetaAPI
-  React.useEffect(() => {
-    if (system.project.config) {
-      let cfg = playerConfig
-
-      const { menu, ue_console_mode, ue_control_scheme, ue_sound } = system.project.config
-
-      cfg.metaConfig.showQuickMenu = menu
-      cfg.ueSettings.Console.mode = ue_console_mode
-      cfg.psConfig.controlScheme = ue_control_scheme
-
-      cfg.psConfig.startVideoMuted = !ue_sound
-
-      const { config, psConfig, ueSettings } = cfg
-
-      player.cls.streamingStop()
-      player.cls.initConfig(config, psConfig, ueSettings)
-      player.cls.streamingConnect()
-
-    }
-
-  }, [system.project.config])
-
   return (
     <div>
       <DemoActions />
