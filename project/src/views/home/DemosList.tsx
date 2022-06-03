@@ -17,24 +17,26 @@ const useStyles = jss({
   itemsRoot: {
     display: 'flex',
     flexDirection: 'column',
-    [media.down.sm]: {
-      gap: '.5em',
-    },
-    [media.up.sm]: {
-      gap: '1.5em',
-    },
+    '& > ul': {
+      [media.down.sm]: {
+        marginBottom: '.5em',
+      },
+      [media.up.sm]: {
+        marginBottom: '1.5em',
+      },
+    }
   },
   itemList: {
-    backgroundColor: 'rgba(0,0,0,.6)',
     backdropFilter: 'blur(20px)',
     borderRadius: 10,
+    backgroundColor: 'rgba(0,0,0,.2)',
     border: `solid 1px rgba(255,255,255, .1)`,
     transition: 'border-color .5s linear',
     overflow: 'hidden',
     '&:hover': {
       borderColor: `rgba(255,255,255, .35)`,
       '& > [data-li="image"]': {
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: 'rgba(0,0,0,.6)',
         '& em': {
           opacity: 1,
         }
@@ -52,7 +54,7 @@ const useStyles = jss({
     '& > [data-li="image"]': {
 
       position: 'relative',
-      backgroundColor: 'rgba(0,0,0,.4)',
+
       transition: 'all .5s ease-in-out',
       [media.down.md]: {
         overflow: 'hidden',
@@ -62,7 +64,7 @@ const useStyles = jss({
         width: '30%',
       },
       '&:hover': {
-        backgroundColor: 'rgba(0,0,0,0)'
+        backgroundColor: 'rgba(0,0,0,.4)',
       },
       '& a': {
         color: '#ffffff',
