@@ -98,7 +98,8 @@ export const Player: React.FC<any> = (props: PlayerPropsSchema) => {
   const player = usePlayer()
   const system = useSystem()
 
-  const { apiKey, metaConfig, config, psConfig, ueSettings } = props
+  let { apiKey, metaConfig, config, psConfig, ueSettings } = props
+  const [inited, setInited] = React.useState(false)
 
   React.useEffect(() => {
 
@@ -107,6 +108,26 @@ export const Player: React.FC<any> = (props: PlayerPropsSchema) => {
     player.cls.initConfig(config, psConfig, ueSettings)
 
   }, [])
+
+  /**
+   * Enrich config from system context
+   */
+  React.useEffect(() => {
+
+    if (inited === false && system.project.config) {
+
+      const { menu, ue_console_mode, ue_control_scheme, ue_sound } = system.project.config
+      system.cls.initMetaConfig({ showQuickMenu: menu })
+      ueSettings.Console.mode = ue_console_mode
+      psConfig.controlScheme = ue_control_scheme
+      psConfig.startVideoMuted = !ue_sound
+
+      setInited(true)
+      player.cls.initConfig(config, psConfig, ueSettings)
+    }
+
+  }, [system.project.config])
+
 
   return (
     <div className={classes.root}>

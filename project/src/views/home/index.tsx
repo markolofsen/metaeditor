@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useNavigate } from "react-router-dom";
 
 // config
 import { config } from 'pixel-streaming';
@@ -83,9 +82,7 @@ const View: React.FC = () => {
         </li>
         <li data-li="actions">
           <Button
-            onClick={() => {
-              router.push.gallery()
-            }}
+            onClick={() => router.push.gallery()}
             appearance='primary' color='red' size='lg'>
             3D gallery
           </Button>

@@ -11,7 +11,7 @@ const initialState: any = {
   metaData: null,
   metaConfig: {
     showToolbar: true,
-    showQuickMenu: true,
+    showQuickMenu: false,
     showDevBar: true,
     showOverlay: true,
     notifications: {

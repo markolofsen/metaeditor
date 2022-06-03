@@ -24,6 +24,8 @@ export const useActions = () => {
   const [state, dispatch, eventHandler] = useDispatch()
   const [initReady, setInitReady] = React.useState<any>(false)
 
+  const refTimeoutConfig = React.useRef<any>(null) //hack
+
   // pixel-streaming events
   useEventListener(Ev.mouseAction.key, (payload: any) => eventHandler.eventMouse(payload));
 
@@ -172,7 +174,6 @@ export const useActions = () => {
     }
   }, [sessionData])
 
-
   /**
    * Wrapper for Client
    */
@@ -267,7 +268,8 @@ export const useActions = () => {
       dispatch.updateUeSettingsOnStart(ueSettings)
 
       // Delay for saving configs
-      setTimeout(() => setInitReady(true), 300)
+      clearTimeout(refTimeoutConfig.current)
+      refTimeoutConfig.current = setTimeout(() => setInitReady(true), 300)
     }
 
     // Handle player initialization
