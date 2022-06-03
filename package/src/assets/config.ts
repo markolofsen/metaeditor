@@ -1,8 +1,10 @@
+import * as React from 'react'
+
 // libs
 import parse from 'url-parse'
 
 // package.json
-import { version } from '../../package.json'
+import packageJson from '../../package.json'
 
 
 export const config = new class {
@@ -16,7 +18,7 @@ export const config = new class {
 
   constructor() {
     this.isDev = process.env.NODE_ENV === 'development'
-    this.version = version
+    this.version = packageJson.version
     this.systemName = 'MetaEditor'
     this.websiteUrl = 'https://metaeditor.io'
 

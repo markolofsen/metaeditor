@@ -1,3 +1,4 @@
+import * as React from 'react'
 
 import * as client from 'unreal-pixel-streaming'
 

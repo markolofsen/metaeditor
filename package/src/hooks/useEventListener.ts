@@ -1,5 +1,10 @@
 import * as React from 'react'
 
+
+export const dispatchEvent = (eventName: string, payload: unknown, element: any = document) => {
+  element.dispatchEvent(new CustomEvent(eventName, payload));
+}
+
 export const useEventListener = (eventName: string, handler: Function, element: any = document) => {
   // Create a ref that stores handler
   const savedHandler = React.useRef<any>();

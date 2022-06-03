@@ -14,6 +14,7 @@
 // 
 // <div className={classes.root} />
 
+import * as React from 'react'
 
 export { createUseStyles as jss } from 'react-jss'
 

@@ -1,3 +1,4 @@
+import * as React from 'react'
 
 // snippets
 import { PlayerPropsSchema } from "./snippets/Player";
@@ -22,4 +23,3 @@ export { config } from "./assets/config";
 export { Request } from './hooks/useApi/useRequest'
 export { useStorage } from "./hooks/useStorage"
 export { useMedia } from "./hooks/useMedia"
-
