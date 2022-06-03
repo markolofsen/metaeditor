@@ -62,7 +62,7 @@ const PlayerContext: React.FC = () => {
 
   const playerConfig: PlayerPropsSchema = {
     // Read more:
-    // https://metaeditor.io/docs/pixel-streaming/settings
+    // https://metaeditor.io/docs/metaeditor/installation
   }
 
   return (
