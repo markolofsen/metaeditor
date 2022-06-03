@@ -25,21 +25,22 @@ const useStyles = jss({
     display: 'flex',
     justifyContent: 'center',
     pointerEvents: 'none',
-    // transition: 'opacity .3s ease-in-out',
-    // '&[data-show="false"]': {
-    //   opacity: 0,
-    // },
+    transition: 'top .3s ease-in-out',
+    '&[data-show="true"]': {
+      top: '5vh',
+    },
     '& > img': {
       width: 300,
-    }
+    },
+
   },
   popover: {
     // backgroundColor: 'red',
     position: 'absolute',
-    top: 0,
+    // top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: '10vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,21 +48,22 @@ const useStyles = jss({
     pointerEvents: 'none',
 
     '& [data-inner]': {
-      marginTop: '30vh',
-      width: 300,
+      // marginTop: '30vh',
+      width: 400 - 30,
       backgroundColor: 'black',
       boxShadow: '0 0 30px 0 rgba(0,0,0,.4)',
-      border: `solid 1px rgba(255,255,255, .1)`,
+      border: `solid 2px rgba(255,255,255, .3)`,
       color: '#fff',
       padding: 20,
       borderRadius: 10,
+      transition: 'height .3s ease-in-out',
+
       '&[data-show="true"]': {
         pointerEvents: 'all',
       }
     }
   },
   gallery: {
-    paddingTop: '20vh',
     height: '100%',
   }
 })
@@ -90,7 +92,7 @@ const View: React.FC = () => {
   return (
     <div className={classes.root}>
 
-      <div className={classes.logo}>
+      <div className={classes.logo} data-show={showPopover}>
         <img src="/static/logo_demos.svg" />
       </div>
 
@@ -104,7 +106,7 @@ const View: React.FC = () => {
                     {selected?.data?.title}
                   </h5>
                   <p>
-                    {selected?.data?.description.substr(0, 100)}...
+                    {selected?.data?.description.substr(0, 500)}
                   </p>
 
                   <div style={{ height: 20 }} />

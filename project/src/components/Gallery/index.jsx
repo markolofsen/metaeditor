@@ -18,8 +18,8 @@ export default function App({ images, ...props }) {
 
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
-      <color attach="background" args={['#191920']} />
-      <fog attach="fog" args={['#191920', 0, 15]} />
+      <color attach="background" args={['#3498ff']} />
+      <fog attach="fog" args={['#3498ff', 0, 15]} />
       <Environment preset="city" />
       <group position={[0, -0.5, 0]}>
         <Frames images={images} onChange={onChange} />
@@ -74,16 +74,20 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3(), .
         e.stopPropagation()
         if (clicked.current === e.object) {
           props.onChange(false)
-          // setLocation('/')
+          setLocation('/')
         } else {
-          props.onChange(item.current)
-          // setLocation('/item/' + e.object.name)
+
+          if (item.current?.data?.slug) {
+            props.onChange(item.current)
+            setLocation('/item/' + e.object.name)
+          }
+
         }
         // setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name)
       }}
       onPointerMissed={() => {
         props.onChange(false)
-        // setLocation('/')
+        setLocation('/')
       }}>
       {images.map((props) => <Frame
         onClick={() => item.current = props}
@@ -100,12 +104,15 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   const name = getUuid(url)
   useCursor(hovered)
   useFrame((state) => {
-    image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2
-    image.current.scale.x = THREE.MathUtils.lerp(image.current.scale.x, 0.85 * (hovered ? 0.85 : 1), 0.1)
-    image.current.scale.y = THREE.MathUtils.lerp(image.current.scale.y, 0.9 * (hovered ? 0.905 : 1), 0.1)
-    frame.current.material.color.lerp(c.set(hovered ? 'orange' : 'white'), 0.1)
+    image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 5) / 2
+    // image.current.scale.x = THREE.MathUtils.lerp(image.current.scale.x, 0.85 * (hovered ? 0.85 : 1), 0.1)
+    // image.current.scale.y = THREE.MathUtils.lerp(image.current.scale.y, 0.9 * (hovered ? 0.905 : 1), 0.1)
+    // frame.current.material.color.lerp(c.set(hovered ? '#3498ff' : 'white'), 0.1)
   })
 
+
+  // nginx hack
+  url = url.replace('api.', 'ps.')
 
 
   return (
@@ -117,8 +124,8 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         scale={[1, 1, 0.05]}
         position={[0, GOLDENRATIO / 2, 0]}>
         <boxGeometry />
-        <meshStandardMaterial color="#151515" metalness={0.5} roughness={0.5} envMapIntensity={2} />
-        <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>
+        <meshStandardMaterial color="#1142A1" metalness={0.5} roughness={0.5} envMapIntensity={2} />
+        <mesh ref={frame} raycast={() => null} scale={[0, 0, 0]} position={[0, 0, 0.2]}>
           <boxGeometry />
           <meshBasicMaterial toneMapped={false} fog={false} />
         </mesh>
