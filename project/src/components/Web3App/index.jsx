@@ -11,7 +11,7 @@ function getLibrary(provider) {
 }
 
 
-export const Web3App = React.forwardRef((props, ref) => {
+export const Web3App = React.forwardRef((props: any, ref) => {
   const [account, setAccount] = React.useState();
   const [contactList, setContactList] = React.useState();
   const [contacts, setContacts] = React.useState([]);
