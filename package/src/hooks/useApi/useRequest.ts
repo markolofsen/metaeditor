@@ -10,6 +10,8 @@
 })
  */
 
+import * as React from 'react'
+
 // config
 import { config } from '../../assets/config'
 

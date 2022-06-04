@@ -180,6 +180,12 @@ export const useActions = () => {
     get showDevBar() {
       return state.metaConfig.showDevBar
     }
+    get helpers() {
+      return {
+        keyboard: state.metaConfig.helpers.keyboard
+      }
+    }
+
     get showOverlay() {
       return state.metaConfig.showOverlay
     }

@@ -12,6 +12,7 @@ import { useFullscreen } from './useFullscreen'
 // blocks
 import { ShareLink } from './ShareLink'
 import { VolumeButton } from './VolumeButton'
+import { Helpers } from './Helpers/'
 
 interface Props {
   // children: any
@@ -47,6 +48,8 @@ export const PlayerActions: React.FC<Props> = () => {
         }} />
 
       <ShareLink />
+
+      <Helpers.KeyboardHelper />
 
     </>
   )

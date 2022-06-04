@@ -269,7 +269,9 @@ export const useActions = () => {
 
       // Delay for saving configs
       clearTimeout(refTimeoutConfig.current)
-      refTimeoutConfig.current = setTimeout(() => setInitReady(true), 300)
+      refTimeoutConfig.current = setTimeout(() => {
+        setInitReady(true)
+      }, 300)
     }
 
     // Handle player initialization

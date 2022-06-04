@@ -104,7 +104,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
   const name = getUuid(url)
   useCursor(hovered)
   useFrame((state) => {
-    image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 5) / 2
+    image.current.material.zoom = 2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 1) / 2
     // image.current.scale.x = THREE.MathUtils.lerp(image.current.scale.x, 0.85 * (hovered ? 0.85 : 1), 0.1)
     // image.current.scale.y = THREE.MathUtils.lerp(image.current.scale.y, 0.9 * (hovered ? 0.905 : 1), 0.1)
     // frame.current.material.color.lerp(c.set(hovered ? '#3498ff' : 'white'), 0.1)

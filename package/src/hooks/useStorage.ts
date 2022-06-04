@@ -5,6 +5,8 @@
 //   removeItem: (key: string, type?: StorageType) => void;
 // };
 
+import * as React from 'react'
+
 // declarations
 declare global {
   interface Window {

@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { NativeDOMDelegate } from "./NativeDOMDelegate";
 import * as client from 'unreal-pixel-streaming'
 

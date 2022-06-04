@@ -14,7 +14,7 @@
     "rsuite": "^5.12.0",
     "url-parse": "^1.5.10",
     "web-vitals": "^2.1.4",
-    "pixel-streaming": "3.3.5"
+    "pixel-streaming": "3.3.6"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -22,8 +22,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
-    "eslint": "^8.11.0",
-    "react-scripts": "^5.0.1",
+    "eslint": "^7.11.0",
+    "react-scripts": "^4.0.3",
     "typescript": "^4.6.3"
   },
   "scripts": {

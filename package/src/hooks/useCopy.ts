@@ -1,5 +1,4 @@
-
-// hooks
+import * as React from 'react'
 
 export const useCopy = () => {
 

@@ -16,6 +16,11 @@ import {
   faPlay,
   faPause,
   faStar,
+  faSquareCaretLeft,
+  faSquareCaretRight,
+  faSquareCaretUp,
+  faSquareCaretDown,
+  faQuestion,
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -32,8 +37,10 @@ const useStyles = jss({
   }
 })
 
+type INames = string | 'question' | 'volumeOn' | 'volumeOff' | 'expand' | 'qrcode' | 'compress' | 'play' | 'pause' | 'star' | 'arrowLeft' | 'arrowRight' | 'arrowUp' | 'arrowDown'
+
 interface PropsSchema {
-  name: string
+  name: INames
   size?: number
   button?: boolean
   buttonSize?: TypeAttributes.Size
@@ -42,7 +49,7 @@ interface PropsSchema {
 }
 
 const defaultProps: PropsSchema = {
-  name: '',
+  name: 'volumeOn',
   size: 20,
 }
 
@@ -59,6 +66,11 @@ export const SvgIcon: React.FC<PropsSchema> = (props: PropsSchema = defaultProps
     play: faPlay,
     pause: faPause,
     star: faStar,
+    arrowLeft: faSquareCaretLeft,
+    arrowRight: faSquareCaretRight,
+    arrowUp: faSquareCaretUp,
+    arrowDown: faSquareCaretDown,
+    question: faQuestion,
   }
 
 

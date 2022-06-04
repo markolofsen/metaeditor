@@ -26,5 +26,6 @@ function App() {
 }
 */
 
+import * as React from 'react'
 
 export { useHotkeys } from 'react-hotkeys-hook';
