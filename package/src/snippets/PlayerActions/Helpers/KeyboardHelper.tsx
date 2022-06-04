@@ -67,7 +67,7 @@ export const KeyboardHelper = () => {
       ['Move up', 'W', 'arrowUp'],
       ['Move down', 'S', 'arrowDown'],
       ['Move left', 'A', 'arrowLeft'],
-      ['Move left', 'D', 'arrowRight'],
+      ['Move right', 'D', 'arrowRight'],
     ].map(([label, key, icon]) => ({ label, key, icon }))
 
     return (
