@@ -8,8 +8,8 @@ import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../mui/theme';
-import createEmotionCache from '../mui/createEmotionCache';
+import theme from '../theme/theme';
+import createEmotionCache from '../theme/createEmotionCache';
 
 
 

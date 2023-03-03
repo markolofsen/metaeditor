@@ -1,5 +1,5 @@
 import "rsuite/dist/rsuite.min.css";
-import { MetaProvider, MetaPlayer } from 'metaeditor4'
+import { MetaProvider, MetaPlayer } from 'pixel-streaming'
 
 export default function Page() {
 
