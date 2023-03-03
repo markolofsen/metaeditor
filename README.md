@@ -1,94 +1,77 @@
-#### Open Source
+# Pixel Streaming Reactjs plugin for Unreal Engine 5.2
 
-# React.js Pixel Streaming for Unreal Engine
+## Installation
+Install with npm:
+```shell
+npm install rsuite pixel-streaming --save
+```
 
-[**MetaEditor**](http://metaeditor.io/), created by the team at [UnrealOS](https://unrealos.com/) is a professional web application development solution based on ReactJS and PixelStreaming.
-
-The Open Source MetaEditor offers a complete set of tools for professional developing and running the Unreal Engine’s Applications in browsers.
-
-<p align="center">
-  <img src="https://metaeditor.io/assets/video.gif?v=2" width="100%" title="Pixel Streaming">
-</p>
-
-The standard implementation of the PixelStreaming significantly complicates developing your own reactive web applications for the Unreal Engine. Initially, the PixelStreaming was a no-architecture javascript solution for interacting, which has reactive web frameworks. Adapting the standard ReactJS for the PixelStreaming is a very long and laborious process, which significantly increases development time, because there are many technical problems to solve. It is related to the peculiarities of browsers, devices, and reactive technologies (like the ReactJS)
-
-The [MetaEditor.io](https://metaeditor.io/) helps to integrate the Unreal Engine v.5 into the browser. It allows you to send commands and get callbacks from the stream server with the Unreal Engine launched.
-
-#### Links:
-
-* [Documentation](https://metaeditor.io/docs)
-
-* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
-
-* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
-
-* [Real-time demo](https://ps.metaeditor.io/player/lumen)
-
-### Installation
-
-```bash
-npm install rsuite pixel-streaming
-# or
+Install with yarn:
+```shell
 yarn add rsuite pixel-streaming
 ```
 
-### Usage
+## Usage
 
 ```typescript
-import React from 'react'
+import "rsuite/dist/rsuite.min.css";
+import { MetaProvider, MetaPlayer } from 'metaeditor4'
 
-// global styles
-import 'rsuite/dist/rsuite.min.css'
-
-// libs
-import { Player, ContextProvider, usePlayer, useSystem, PlayerPropsSchema } from 'pixel-streaming'
-
-
-const PlayerContext: React.FC = () => {
-  const player = usePlayer()
-  const system = useSystem()
-
-  React.useEffect(() => {
-
-    if (player.cls.initReady) {
-      // player.cls.initPlayer('https://i-00c56684d4fff23e4.cloudvec.com')
-      system.cls.connectBuild('lumen')
-    }
-
-  }, [player.cls.initReady])
-
-  const playerConfig: PlayerPropsSchema = {
-    // Read more:
-    // https://metaeditor.io/docs/metaeditor/installation
-  }
+export default function Page() {
 
   return (
-    <Player {...playerConfig} />
-  )
-
+    <MetaProvider>
+      <MetaPlayer
+        showPreloader
+        showToolbar
+        psHost='wss://ps1.unrealos.com'
+        autoPlay={false}
+        autoConnect
+        startMuted
+        hoveringMouse
+        fakeMouseWithTouches
+        matchViewportRes
+      />
+    </MetaProvider>
+  );
 }
-
-const CustomPlayer: React.FC = () => (
-  <ContextProvider>
-    <PlayerContext />
-  </ContextProvider>
-)
-
-export default CustomPlayer
 ```
+
+## Links:
+
+* [Documentation](https://metaeditor.io/docs)
+* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
+* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+
+
+
+## About Pixel Streaming for Unreal Engine
+
+Pixel streaming is a powerful technology that enables remote rendering and streaming of real-time 3D graphics to any device, anywhere in the world. It has many applications, including online gaming, remote work, and virtual events. However, setting up a pixel streaming environment can be challenging, especially for those who are not familiar with complex server configurations and network setups.
+
+This library provides a simple and easy-to-use solution for streaming real-time 3D content over the internet. It allows users to set up a pixel streaming server with just a few clicks, and then stream the content to any device with a compatible web browser.
+
+The Pixel Streaming Plugin for Unreal Engine can save developers a significant amount of time and effort when it comes to configuring a pixel streaming environment. This is because the library comes with pre-built configurations and settings that work out of the box, meaning developers don't need to spend time tinkering with complex server configurations or network setups.
+
+One of the key benefits of using the Pixel Streaming Plugin is that it eliminates the need for users to install any additional software or plugins on their devices. All they need is a compatible web browser and an internet connection, and they can access the streaming content from anywhere in the world.
+
 
 <p align="center">
   <img src="https://metaeditor.io/assets/preview.png?v=1" width="100%" title="Pixel Streaming">
 </p>
 
 ### Attention!
-
 - React `18.1.0`
 - Node `16.*`
 
 ### Built With
-
-- [React](https://reactjs.org/) — A JavaScript library for building user interfaces
+- [React](https://reactjs.org/) — A JavaScript library for building user interfaces
 - [MetaEditor](https://metaeditor.io/) — Complete set of tools for professional developing and running the Unreal Engine’s Applications in browsers.
-- [Unreal Engine Pixel Streaming](https://docs.unrealengine.com/5.0/en-US) — Library for Unreal Engine.
-- [React Suite](https://www.npmjs.com/package/rsuite) — Set of react component libraries for enterprise system products.
+- [Unreal Engine Pixel Streaming](https://docs.unrealengine.com/5.1/en-US/pixel-streaming-in-unreal-engine/) — Library for Unreal Engine.
+- [React Suite](https://www.npmjs.com/package/rsuite) — Set of react component libraries for enterprise system products.
+
+## Thank you!
+[Github profile](https://github.com/markolofsen)
+
+## License
+Pixel Streaming for React.js is licensed under the [MIT License](https://github.com/markolofsen/metaeditor/blob/main/LICENSE.md).
