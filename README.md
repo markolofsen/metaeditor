@@ -1,4 +1,5 @@
 # Pixel Streaming Reactjs plugin for Unreal Engine 5.2
+
 ## Installation
 Install with npm:
 ```shell
@@ -8,13 +9,11 @@ Install with yarn:
 ```shell
 yarn add rsuite pixel-streaming
 ```
+
 ## Usage
 ```typescript
 import "rsuite/dist/rsuite.min.css";
 import { MetaProvider, MetaPlayer, Hooks } from 'pixel-streaming'
-
-// snippets
-import Controls from './Controls'
 
 const PlayerView = () => {
   const actions = Hooks.actions()
@@ -58,6 +57,7 @@ export default function AppHOC() {
 * [Documentation](https://metaeditor.io/docs)
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 * [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+
 ## About Pixel Streaming for Unreal Engine
 Pixel streaming is a powerful technology that enables remote rendering and streaming of real-time 3D graphics to any device, anywhere in the world. It has many applications, including online gaming, remote work, and virtual events. However, setting up a pixel streaming environment can be challenging, especially for those who are not familiar with complex server configurations and network setups.
 This library provides a simple and easy-to-use solution for streaming real-time 3D content over the internet. It allows users to set up a pixel streaming server with just a few clicks, and then stream the content to any device with a compatible web browser.
@@ -66,15 +66,19 @@ One of the key benefits of using the Pixel Streaming Plugin is that it eliminate
 <p align="center">
   <img src="https://metaeditor.io/assets/preview.png?v=1" width="100%" title="Pixel Streaming">
 </p>
+
 ### Attention!
 - React `18.1.0`
 - Node `16.*`
+
 ### Built With
 - [React](https://reactjs.org/) — A JavaScript library for building user interfaces
 - [MetaEditor](https://metaeditor.io/) — Complete set of tools for professional developing and running the Unreal Engine’s Applications in browsers.
 - [Unreal Engine Pixel Streaming](https://docs.unrealengine.com/5.1/en-US/pixel-streaming-in-unreal-engine/) — Library for Unreal Engine.
 - [React Suite](https://www.npmjs.com/package/rsuite) — Set of react component libraries for enterprise system products.
+
 ## Thank you!
 [Github profile](https://github.com/markolofsen)
+
 ## License
 Pixel Streaming for React.js is licensed under the [MIT License](https://github.com/markolofsen/metaeditor/blob/main/LICENSE.md).
