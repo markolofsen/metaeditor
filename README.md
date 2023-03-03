@@ -1,3 +1,4 @@
+
 # Pixel Streaming Reactjs plugin for Unreal Engine 5.2
 
 ## Installation
@@ -13,37 +14,43 @@ yarn add rsuite pixel-streaming
 ## Usage
 ```typescript
 import "rsuite/dist/rsuite.min.css";
-import { MetaProvider, MetaPlayer, Hooks } from 'pixel-streaming'
+import { ButtonGroup, Button } from "rsuite";
+import { MetaProvider, MetaPlayer, Hooks } from "pixel-streaming";
 
 const PlayerView = () => {
-  const actions = Hooks.actions()
-  
+  const actions = Hooks.actions();
+
   return (
     <MetaPlayer
       debugMode
       showToolbar
-      psHost='ws://127.0.0.1:80'
+      psHost="ws://127.0.0.1:80"
       autoPlay={false}
       autoConnect
       startMuted
       hoveringMouse
       fakeMouseWithTouches
-      matchViewportRes>
-
-      <button onClick={() => {
-        actions.emitUi({ action: 'ui_command' }, { debug: false })
-      }}>
-        Send action
-      </button>
-      <button onClick={() => {
-        actions.emitSys({ action: 'system_command' }, { debug: true })
-      }}>
-        Send command
-      </button>
-      
+      matchViewportRes
+    >
+      <ButtonGroup>
+        <Button
+          onClick={() => {
+            actions.emitUi({ action: "ui_command" }, { debug: true });
+          }}
+        >
+          Send action
+        </Button>
+        <Button
+          onClick={() => {
+            actions.emitSys({ action: "system_command" }, { debug: false });
+          }}
+        >
+          Send command
+        </Button>
+      </ButtonGroup>
     </MetaPlayer>
   );
-}
+};
 
 export default function AppHOC() {
   return (
