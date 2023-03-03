@@ -3,7 +3,7 @@
 ## Installation
 Install with npm:
 ```shell
-npm install rsuite pixel-streaming --save
+npm install rsuite@5.28.1 pixel-streaming --save
 ```
 
 Install with yarn:
@@ -24,7 +24,7 @@ export default function Page() {
       <MetaPlayer
         showPreloader
         showToolbar
-        psHost='wss://ps1.unrealos.com'
+        psHost='ws://127.0.0.1:80'
         autoPlay={false}
         autoConnect
         startMuted
