@@ -1,23 +1,26 @@
 import "rsuite/dist/rsuite.min.css";
-import { MetaProvider, MetaPlayer } from 'pixel-streaming'
+import { MetaProvider, MetaEditor } from 'pixel-streaming'
 
 // snippets
 import Controls from './Controls'
 
 const PlayerView = () => {
   return (
-    <MetaPlayer
+    <MetaEditor
       debugMode
       showToolbar
       psHost='wss://ps1.unrealos.com'
-      autoPlay={false}
-      autoConnect
-      startMuted
-      hoveringMouse
-      fakeMouseWithTouches
-      matchViewportRes>
+      psConfig={{
+        // https://metaeditor.io/docs/metaeditor/settings/player
+        autoPlay: false,
+        autoConnect: true,
+        startMuted: true,
+        hoveringMouse: true,
+        fakeMouseWithTouches: true,
+        matchViewportRes: true,
+      }}>
       <Controls />
-    </MetaPlayer>
+    </MetaEditor>
   );
 }
 
