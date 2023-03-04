@@ -11,6 +11,12 @@ Install with yarn:
 yarn add rsuite pixel-streaming
 ```
 
+## Links:
+* [Documentation](https://metaeditor.io/docs)
+* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
+* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+
+
 ## Usage
 ```typescript
 import "rsuite/dist/rsuite.min.css";
@@ -60,10 +66,7 @@ export default function AppHOC() {
   );
 }
 ```
-## Links:
-* [Documentation](https://metaeditor.io/docs)
-* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
-* [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
+
 
 ## About Pixel Streaming for Unreal Engine
 Pixel streaming is a powerful technology that enables remote rendering and streaming of real-time 3D graphics to any device, anywhere in the world. It has many applications, including online gaming, remote work, and virtual events. However, setting up a pixel streaming environment can be challenging, especially for those who are not familiar with complex server configurations and network setups.

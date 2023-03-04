@@ -12,7 +12,7 @@ export default function Controls() {
   return (
     <ButtonGroup>
       <Button variant='contained' onClick={() => {
-        actions.emitUi({ action: 'ui_command' }, { debug: false })
+        actions.emitUi({ action: 'ui_command' }, { debug: true })
       }}>
         Send action
       </Button>
