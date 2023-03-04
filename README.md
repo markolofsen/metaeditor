@@ -21,40 +21,24 @@ yarn add rsuite pixel-streaming
 ```typescript
 import "rsuite/dist/rsuite.min.css";
 import { ButtonGroup, Button } from "rsuite";
-import { MetaProvider, MetaPlayer, Hooks } from "pixel-streaming";
+import { MetaProvider, MetaEditor, Hooks } from "pixel-streaming";
 
 const PlayerView = () => {
-  const actions = Hooks.actions();
+  const { emitUi } = Hooks.actions();
 
   return (
-    <MetaPlayer
+    <MetaEditor
       debugMode
       showToolbar
       psHost="ws://127.0.0.1:80"
-      autoPlay={false}
-      autoConnect
-      startMuted
-      hoveringMouse
-      fakeMouseWithTouches
-      matchViewportRes
+      psConfig={{
+        // https://metaeditor.io/docs/metaeditor/settings/player
+      }}
     >
-      <ButtonGroup>
-        <Button
-          onClick={() => {
-            actions.emitUi({ action: "ui_command" }, { debug: true });
-          }}
-        >
-          Send action
-        </Button>
-        <Button
-          onClick={() => {
-            actions.emitSys({ action: "system_command" }, { debug: false });
-          }}
-        >
-          Send command
-        </Button>
-      </ButtonGroup>
-    </MetaPlayer>
+      <Button onClick={() => emitUi({ action: "ui_command" })}>
+        Send action
+      </Button>
+    </MetaEditor>
   );
 };
 
