@@ -1,3 +1,12 @@
-import Player from 'src/components/Player'
 
-export default Player
+// components
+import ConnectionForm from 'src/components/ConnectionForm'
+
+export default function Page() {
+
+  return (
+    <div>
+      <ConnectionForm />
+    </div>
+  )
+}

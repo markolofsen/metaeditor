@@ -9,8 +9,9 @@ import Document, {
 } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import theme, { roboto } from '../theme/theme';
-import createEmotionCache from '../theme/createEmotionCache';
+// import theme, { roboto } from '../theme/theme';
+import theme, { roboto } from 'src/@core/theme';
+import createEmotionCache from 'src/@core/theme/createEmotionCache';
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: EmotionJSX.Element[];

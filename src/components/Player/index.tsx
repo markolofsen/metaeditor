@@ -4,12 +4,16 @@ import { MetaProvider, MetaEditor } from 'pixel-streaming'
 // snippets
 import Controls from './Controls'
 
-const PlayerView = () => {
+
+interface Props {
+  psHost: string
+}
+const PlayerView = (props: Props) => {
   return (
     <MetaEditor
       debugMode
       showToolbar
-      psHost='wss://ps1.unrealos.com'
+      psHost={props.psHost}
       psConfig={{
         // https://metaeditor.io/docs/metaeditor/settings/player
         autoPlay: false,
@@ -24,10 +28,10 @@ const PlayerView = () => {
   );
 }
 
-export default function AppHOC() {
+export default function AppHOC(props: Props) {
   return (
     <MetaProvider>
-      <PlayerView />
+      <PlayerView {...props} />
     </MetaProvider>
   );
 }
