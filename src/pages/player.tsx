@@ -12,7 +12,10 @@ export default function Page() {
 
   React.useEffect(() => {
     if (!router.isReady) return
-    setAddress(router.query.ss as string)
+    const psHost = router.query.ss as string
+    if (psHost) {
+      setAddress(psHost)
+    }
   }, [router.isReady])
 
   if (!router.isReady) return null
