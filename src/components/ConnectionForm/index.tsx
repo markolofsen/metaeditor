@@ -1,42 +1,70 @@
 import * as React from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 // mui
 import { Box, Divider, Container, Typography } from "@mui/material"
-import { TextField, Button, Stack } from '@mui/material';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import InputAdornment from '@mui/material/InputAdornment';
+import { TextField, InputAdornment, Button, Stack } from '@mui/material';
+import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 
+// libs
+import { PlayerConfigProps } from 'pixel-streaming'
 
 // configs
 import project from "src/configs/project"
+import defaultConfig from 'src/components/Player/defaultConfig'
+
+// blocks
+import ConfigForm from './ConfigForm'
+
 
 export default function ConnectionForm() {
-  const router = useRouter()
+
+  const router = useRouter();
 
   // states
   const [address, setAddress] = React.useState('test.domain.com')
   const [localhost, setLocalhost] = React.useState(true)
+  const [config, setConfig] = React.useState<PlayerConfigProps>(defaultConfig)
+
+  React.useEffect(() => {
+    const playerConfig = localStorage.getItem('playerConfig')
+    if (playerConfig) {
+      const config = JSON.parse(playerConfig) as PlayerConfigProps
+
+      if (config.psHost.includes('127.0.0.1')) {
+        setLocalhost(true)
+      } else {
+        setLocalhost(false)
+      }
+
+      setConfig(config)
+    }
+  }, [])
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const href = `/player?ss=${getAddress}`
-    router.push(href)
+
+    const mergeConfig: PlayerConfigProps = {
+      ...config,
+      psHost,
+    }
+
+    localStorage.setItem('playerConfig', JSON.stringify(mergeConfig))
+    router.push(`/player?ss=${psHost}`)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress(e.target.value)
   }
 
-  const getAddress = (() => {
+  const psHost = (() => {
     if (localhost) {
       return 'ws://127.0.0.1:80'
     }
     return 'wss://' + address
   })()
 
+  // render
   return (
     <Container sx={{
       py: 10
@@ -44,11 +72,13 @@ export default function ConnectionForm() {
       <Typography variant="h3" component="h1">
         {project.name} v{project.version}
       </Typography>
+
       <Box sx={{
         py: 5
       }}>
         <Divider />
       </Box>
+
       <div>
 
         <Stack spacing={2} direction="column" component="form" onSubmit={handleSubmit}>
@@ -58,7 +88,7 @@ export default function ConnectionForm() {
               onChange={(e: any, checked: boolean) => {
                 setLocalhost(checked)
               }}
-              control={<Switch defaultChecked />} label="Use localhost" />
+              control={<Switch checked={localhost} />} label="Use localhost" />
           </FormGroup>
 
           {!localhost && (
@@ -79,8 +109,17 @@ export default function ConnectionForm() {
           )}
 
           <Typography variant="body2" sx={{ py: 2 }}>
-            <strong>Address:</strong> {getAddress}
+            <strong>Pixel Streaming Host:</strong> {psHost}
           </Typography>
+
+          <ConfigForm config={config} setConfig={setConfig} />
+
+
+          <Box sx={{
+            py: 5
+          }}>
+            <Divider />
+          </Box>
 
           <div>
             <Button

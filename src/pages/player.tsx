@@ -1,25 +1,50 @@
 import * as React from 'react'
-import { useRouter } from 'next/router'
+
+// libs
+import { PlayerConfigProps } from 'pixel-streaming'
 
 // components
 import Player from 'src/components/Player'
+import defaultConfig from 'src/components/Player/defaultConfig'
 
 export default function Page() {
-  const router = useRouter()
 
-  // states
-  const [address, setAddress] = React.useState('ws://127.0.0.1:80')
+  const [mounted, setMounted] = React.useState(false)
+  const [config, setConfig] = React.useState<PlayerConfigProps>(defaultConfig)
 
   React.useEffect(() => {
-    if (!router.isReady) return
-    setAddress(router.query.ss as string)
-  }, [router.isReady])
+    let cfg = localStorage.getItem('playerConfig')
+    if (cfg) {
+      const jsonConfig = JSON.parse(cfg)
 
-  if (!router.isReady) return null
+      const mergedConfig: PlayerConfigProps = {
+        ...defaultConfig,
+        ...jsonConfig,
+      }
+
+      // alert(JSON.stringify(mergedConfig, null, 2))
+      setConfig(mergedConfig)
+    }
+
+    setMounted(true)
+
+  }, [])
+
+  // return (
+  //   <div>
+  //     <pre>
+  //       {JSON.stringify(config, null, 2)}
+  //     </pre>
+  //   </div>
+  // )
+
+  if (!mounted) {
+    return (<div />)
+  }
 
   return (
     <div>
-      <Player psHost={address} />
+      <Player config={config} />
     </div>
   )
 }

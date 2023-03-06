@@ -1,28 +1,27 @@
 import "rsuite/dist/rsuite.min.css";
-import { MetaProvider, MetaEditor } from 'pixel-streaming'
+import { MetaProvider, MetaEditor, PlayerConfigProps } from 'pixel-streaming'
 
 // snippets
 import Controls from './Controls'
 
+// configs
+import defaultConfig from './defaultConfig'
 
 interface Props {
-  psHost: string
+  config: PlayerConfigProps
 }
-const PlayerView = (props: Props) => {
+
+const PlayerView = ({ config }: Props) => {
+
+  const newConfig: PlayerConfigProps = {
+    ...defaultConfig,
+    ...config,
+  }
+
+  // alert(JSON.stringify(newConfig, null, 2))
+
   return (
-    <MetaEditor
-      debugMode
-      showToolbar
-      psHost={props.psHost}
-      psConfig={{
-        // https://metaeditor.io/docs/metaeditor/settings/player
-        autoPlay: false,
-        autoConnect: false,
-        startMuted: true,
-        hoveringMouse: true,
-        fakeMouseWithTouches: true,
-        matchViewportRes: true,
-      }}>
+    <MetaEditor {...newConfig}>
       <Controls />
     </MetaEditor>
   );
