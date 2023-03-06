@@ -18,6 +18,8 @@ const PlayerView = ({ config }: Props) => {
     ...config,
   }
 
+  // alert(JSON.stringify(newConfig, null, 2))
+
   return (
     <MetaEditor {...newConfig}>
       <Controls />

@@ -17,10 +17,13 @@ export default function Page() {
     if (cfg) {
       const jsonConfig = JSON.parse(cfg)
 
-      setConfig({
+      const mergedConfig: PlayerConfigProps = {
         ...defaultConfig,
         ...jsonConfig,
-      })
+      }
+
+      // alert(JSON.stringify(mergedConfig, null, 2))
+      setConfig(mergedConfig)
     }
 
     setMounted(true)
