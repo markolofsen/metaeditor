@@ -16,7 +16,7 @@ yarn add rsuite pixel-streaming
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 * [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
 * [Sample with Nextjs](https://github.com/markolofsen/metaeditor)
-
+* [Download Signaling Server](https://github.com/markolofsen/metaeditor/releases/tag/signaling-server)
 
 ## Usage
 ```typescript

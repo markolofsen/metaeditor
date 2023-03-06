@@ -13,7 +13,7 @@ const PlayerView = () => {
       psConfig={{
         // https://metaeditor.io/docs/metaeditor/settings/player
         autoPlay: false,
-        autoConnect: true,
+        autoConnect: false,
         startMuted: true,
         hoveringMouse: true,
         fakeMouseWithTouches: true,
