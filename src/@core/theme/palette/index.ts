@@ -2,10 +2,11 @@
 import { PaletteMode } from '@mui/material'
 import { Skin, ThemeColor } from '../types'
 
-// import {
-//   blue as primary,
-//   green as secondary,
-// } from '@mui/material/colors';
+import { darken } from '@mui/material';
+import {
+  blue as primary,
+  green as secondary,
+} from '@mui/material/colors';
 
 const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) => {
   // ** Vars
@@ -36,7 +37,7 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
     if (skin === 'bordered' && mode === 'light') {
       return whiteColor
     } else if (skin === 'bordered' && mode === 'dark') {
-      return '#312D4B'
+      return darken(primary[900], .85) //'#312D4B'
     } else if (mode === 'light') {
       return '#F4F5FA'
     } else return '#28243D'
@@ -62,9 +63,9 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
       white: whiteColor
     },
     primary: {
-      light: '#9E69FD',
-      main: '#9155FD',
-      dark: '#804BDF',
+      light: primary[400], //'#9E69FD',
+      main: primary[600], //'#9155FD',
+      dark: primary[800], //'#804BDF',
       contrastText: whiteColor
     },
     secondary: {
@@ -120,7 +121,7 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
     },
     divider: `rgba(${mainColor}, 0.12)`,
     background: {
-      paper: mode === 'light' ? whiteColor : '#312D4B',
+      paper: mode === 'light' ? whiteColor : primary[900], //'#312D4B',
       default: defaultBgColor()
     },
     action: {
