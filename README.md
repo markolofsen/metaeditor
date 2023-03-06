@@ -15,7 +15,7 @@ yarn add rsuite pixel-streaming
 * [Documentation](https://metaeditor.io/docs)
 * [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
 * [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
-* [Sample with Nextjs](https://github.com/markolofsen/metaeditor)
+* [Sample with Nextjs](https://github.com/markolofsen/metaeditor/blob/main/INSTALLATION.md)
 * [Online Player](https://player.metaeditor.io)
 * [Download Signaling Server](https://github.com/markolofsen/metaeditor/releases/tag/signaling-server)
 

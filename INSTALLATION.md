@@ -1,4 +1,4 @@
-# Scalable Pixel Streaming Frontend
+# Pixel Streaming with Nextjs
 
 ## installation
 
@@ -9,14 +9,9 @@ git clone https://github.com/markolofsen/metaeditor.git
 # or clone dev version
 git clone -b dev https://github.com/markolofsen/metaeditor.git
 
-# 2. npm module
-cd ./package
+# 2. Installation
+cd ./metaeditor
 yarn && yarn start
 
-# 4. run project
-cd ./project
-yarn
-yarn dev
-
-# 5. open http://localhost:3000
+# 3. open http://localhost:3000
 ```
