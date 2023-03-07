@@ -1,6 +1,6 @@
-// mui
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
+
+// components
+import Carousel from 'src/components/Carousel'
 
 // libs
 import { Hooks } from 'pixel-streaming';
@@ -9,18 +9,16 @@ import { Hooks } from 'pixel-streaming';
 export default function Controls() {
   const actions = Hooks.actions()
 
+  const items = Array.from(Array(10).keys()).map((item) => ({
+    src: 'https://fakeimg.pl/350x230/282828/eae0d0/?retina=1&text=MetaEditor',
+    title: `Item ${item}`,
+    onClick: () => {
+      actions.emitUi({ action: 'ui_command' }, { debug: true })
+      // actions.emitSys({ action: 'system_command' }, { debug: true })
+    }
+  }))
+
   return (
-    <ButtonGroup>
-      <Button variant='contained' onClick={() => {
-        actions.emitUi({ action: 'ui_command' }, { debug: true })
-      }}>
-        Send action
-      </Button>
-      <Button variant='contained' onClick={() => {
-        actions.emitSys({ action: 'system_command' }, { debug: true })
-      }}>
-        Send command
-      </Button>
-    </ButtonGroup>
+    <Carousel items={items} />
   )
 }
