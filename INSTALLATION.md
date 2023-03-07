@@ -11,7 +11,7 @@ git clone -b dev https://github.com/markolofsen/metaeditor.git
 
 # 2. Installation
 cd ./metaeditor
-yarn && yarn start
+yarn && yarn dev
 
 # 3. open http://localhost:3000
 ```

@@ -3,7 +3,7 @@ import { PlayerConfigProps } from 'pixel-streaming'
 
 
 const defaultConfig: PlayerConfigProps = {
-  debugMode: true,
+  debugMode: 'on',
   showToolbar: true,
   psHost: '',
   psConfig: {
