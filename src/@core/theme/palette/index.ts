@@ -5,7 +5,7 @@ import { Skin, ThemeColor } from '../types'
 import { darken } from '@mui/material';
 import {
   blue as primary,
-  green as secondary,
+  // green as secondary,
 } from '@mui/material/colors';
 
 const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) => {

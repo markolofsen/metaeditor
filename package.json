@@ -34,7 +34,7 @@
   "workspaces": {
     "packages": [
       "src/@core/**",
-      "src/components/**"
+      "src/components/**/**"
     ],
     "nohoist": []
   }
