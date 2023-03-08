@@ -15,6 +15,7 @@ import defaultConfig from 'src/components/Player/defaultConfig'
 
 // blocks
 import ConfigForm from './ConfigForm'
+import EmbedSample from './EmbedSample'
 
 
 export default function ConnectionForm() {
@@ -31,10 +32,14 @@ export default function ConnectionForm() {
     if (playerConfig) {
       const config = JSON.parse(playerConfig) as PlayerConfigProps
 
-      if (config.psHost.includes('127.0.0.1')) {
-        setLocalhost(true)
-      } else {
-        setLocalhost(false)
+      if (config.psHost) {
+        if (config.psHost.includes('127.0.0.1')) {
+          setLocalhost(true)
+        } else {
+          const ss = config.psHost.split('://').slice(-1)[0]
+          setAddress(ss)
+          setLocalhost(false)
+        }
       }
 
       setConfig(config)
@@ -43,11 +48,6 @@ export default function ConnectionForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const mergeConfig: PlayerConfigProps = {
-      ...config,
-      psHost,
-    }
 
     localStorage.setItem('playerConfig', JSON.stringify(mergeConfig))
     router.push(`/player?ss=${psHost}`)
@@ -63,6 +63,11 @@ export default function ConnectionForm() {
     }
     return 'wss://' + address
   })()
+
+  const mergeConfig: PlayerConfigProps = {
+    ...config,
+    psHost,
+  }
 
   // render
   return (
@@ -114,21 +119,20 @@ export default function ConnectionForm() {
 
           <ConfigForm config={config} setConfig={setConfig} />
 
-
           <Box sx={{
-            py: 5
+            py: 10
           }}>
             <Divider />
-          </Box>
-
-          <div>
             <Button
               type="submit"
               size="large"
               variant="contained">
               Connect
             </Button>
-          </div>
+          </Box>
+
+          <EmbedSample config={mergeConfig} />
+
         </Stack>
 
 

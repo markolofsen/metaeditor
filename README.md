@@ -30,8 +30,8 @@ const PlayerView = () => {
 
   return (
     <MetaEditor
-      debugMode
-      showToolbar
+      debugMode="on"
+      showToolbar={true}
       psHost="ws://127.0.0.1:80"
       psConfig={{
         // https://metaeditor.io/docs/metaeditor/settings/player
