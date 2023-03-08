@@ -16,33 +16,26 @@ export default function Page() {
   const [mounted, setMounted] = React.useState(false)
   const [config, setConfig] = React.useState<PlayerConfigProps>(defaultConfig)
 
-  const applyConfig = (cfg: object) => {
-    const mergedConfig: PlayerConfigProps = {
-      ...defaultConfig,
-      ...cfg,
-    }
-
-    // alert(JSON.stringify(mergedConfig, null, 2))
-    setConfig(mergedConfig)
-  }
-
   React.useEffect(() => {
     if (!router.isReady) return
 
+    let newCfg: PlayerConfigProps = defaultConfig
+
     let cfg = localStorage.getItem('playerConfig')
     if (cfg) {
-      const jsonConfig = JSON.parse(cfg)
-      applyConfig(jsonConfig)
-
-    } else {
-      const psHost = router.query.ss
-      if (psHost) {
-        applyConfig({
-          psHost,
-        })
+      newCfg = {
+        ...newCfg,
+        ...JSON.parse(cfg),
       }
     }
 
+    const psHost = router.query.ss
+    if (psHost) {
+      newCfg.psHost = psHost
+    }
+
+    // alert(JSON.stringify(mergedConfig, null, 2))
+    setConfig(newCfg)
     setMounted(true)
 
   }, [router.isReady])
