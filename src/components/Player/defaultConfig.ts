@@ -5,7 +5,7 @@ import { PlayerConfigProps } from 'pixel-streaming'
 const defaultConfig: PlayerConfigProps = {
   debugMode: 'on',
   showToolbar: true,
-  psHost: '',
+  psHost: 'ws://127.0.0.1:80',
   psConfig: {
     // https://metaeditor.io/docs/metaeditor/settings/player
     autoPlay: false,
