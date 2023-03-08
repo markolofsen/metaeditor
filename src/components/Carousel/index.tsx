@@ -1,33 +1,36 @@
-import * as React from "react";
+// mui
+import { styled, lighten } from '@mui/system';
+import { ButtonBase } from "@mui/material";
 
 // libs
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 
-interface CarouselItem {
-  src: string
-  title: string
-  onClick: () => void
-}
+const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
+  borderRadius: theme.shape.borderRadius,
+  width: '100%',
+  backgroundColor: theme.palette.background.paper,
+  transition: theme.transitions.create(['background-color']),
+  overflow: 'hidden',
+  '&:hover': {
+    backgroundColor: lighten(theme.palette.background.paper, .05),
+  },
+  '& > *': {
+    width: '100%',
+  }
+}));
+
 interface Props {
-  items: CarouselItem[]
+  items: JSX.Element[]
 }
 
 export default function Slider({ items }: Props) {
 
-  // const list = Array.from(Array(10).keys()).map((item) => ({
-  //   src: 'https://fakeimg.pl/350x230/282828/eae0d0/?retina=1&text=MetaEditor',
-  //   title: `Item ${item}`,
-  //   onClick: () => {
-  //     alert('!')
-  //   }
-  // }))
-
   return (
     <Splide options={{
       rewind: true,
-      perPage: 5,
+      perPage: 6,
       gap: '1rem',
       // height: 230,
       pagination: false,
@@ -35,10 +38,15 @@ export default function Slider({ items }: Props) {
         bottom: 0,
       },
       breakpoints: {
+        1200: {
+          perPage: 4,
+          gap: '.7rem',
+          // height: '10rem',
+        },
         640: {
           perPage: 2,
           gap: '.7rem',
-          height: '10rem',
+          // height: '10rem',
         },
         // 480: {
         //   perPage: 1,
@@ -49,14 +57,7 @@ export default function Slider({ items }: Props) {
     }}>
       {items.map((item, index) => (
         <SplideSlide key={index}>
-          <img
-            onClick={item.onClick}
-            style={{
-              cursor: 'pointer',
-              width: '100%',
-            }}
-            src={item.src}
-            alt={item.title} />
+          <Card children={item} />
         </SplideSlide>
       ))}
 

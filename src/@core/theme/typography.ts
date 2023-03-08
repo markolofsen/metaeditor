@@ -16,12 +16,12 @@ const systemFont = [
 
 const heading: TypographyStyleOptions = {
   fontFamily: ['Nunito Sans', ...systemFont].join(','),
-  fontWeight: 700,
+  fontWeight: 600,
 };
 
 export const typography: ThemeOptions['typography'] = {
   fontFamily: ['Nunito Sans', ...systemFont].join(','),
-  fontWeightBold: 800,
+  fontWeightBold: 600,
   h1: {
     ...heading,
     fontSize: 40,

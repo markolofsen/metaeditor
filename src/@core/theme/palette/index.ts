@@ -2,7 +2,6 @@
 import { PaletteMode } from '@mui/material'
 import { Skin, ThemeColor } from '../types'
 
-import { darken } from '@mui/material';
 import {
   blue as primary,
   // green as secondary,
@@ -37,7 +36,7 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
     if (skin === 'bordered' && mode === 'light') {
       return whiteColor
     } else if (skin === 'bordered' && mode === 'dark') {
-      return darken(primary[900], .85) //'#312D4B'
+      return '#161616'
     } else if (mode === 'light') {
       return '#F4F5FA'
     } else return '#28243D'
@@ -121,7 +120,7 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
     },
     divider: `rgba(${mainColor}, 0.12)`,
     background: {
-      paper: mode === 'light' ? whiteColor : primary[900], //'#312D4B',
+      paper: mode === 'light' ? whiteColor : '#1F1F1F',
       default: defaultBgColor()
     },
     action: {
