@@ -22,6 +22,7 @@ const ToolsList = styled('ul')(({ theme }: any) => ({
   padding: 0,
 
   position: 'fixed',
+  top: '1rem',
   right: '1rem',
 
   display: 'flex',
@@ -56,9 +57,7 @@ export default function UserBar() {
   const isMuted = stream.state.playerConfig?.psConfig.startMuted
 
   return (
-    <ToolsList sx={{
-      top: fullescreen.active ? '1rem' : '3rem',
-    }}>
+    <ToolsList>
       <li>
         <IconButton
           sx={{ cursor: 'pointer' }}
