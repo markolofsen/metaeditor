@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 // libs
 import { PlayerConfigProps } from 'pixel-streaming'
 
-// components
-import Player from 'src/components/Player'
-import defaultConfig from 'src/components/Player/defaultConfig'
+// snippets
+import Player from 'src/snippets/Player'
+import defaultConfig from 'src/snippets/Player/defaultConfig'
 
 export default function Page() {
 

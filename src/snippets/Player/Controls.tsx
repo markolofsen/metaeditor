@@ -10,7 +10,6 @@ import Carousel from 'src/components/Carousel'
 // libs
 import { Hooks } from 'pixel-streaming';
 
-
 const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
   height: 150,
   display: 'flex',
@@ -18,8 +17,9 @@ const Card = styled((props: any) => <ButtonBase component="div" {...props} />)((
   justifyContent: 'center',
 }));
 
-
 export default function Controls() {
+
+  // hooks
   const actions = Hooks.actions()
 
   const items = Array.from(Array(10).keys()).map((item) => {
@@ -40,6 +40,8 @@ export default function Controls() {
   })
 
   return (
-    <Carousel items={items} />
+    <div>
+      <Carousel items={items} />
+    </div>
   )
 }

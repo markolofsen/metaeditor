@@ -1,7 +1,11 @@
+// libs
 import "rsuite/dist/rsuite.min.css";
 import { MetaProvider, MetaEditor, PlayerConfigProps } from 'pixel-streaming'
 
 // snippets
+import UserBar from 'src/snippets/UserBar'
+
+// blocks
 import Controls from './Controls'
 
 // configs
@@ -22,7 +26,10 @@ const PlayerView = ({ config }: Props) => {
 
   return (
     <MetaEditor {...newConfig}>
-      <Controls />
+      <>
+        <UserBar />
+        <Controls />
+      </>
     </MetaEditor>
   );
 }

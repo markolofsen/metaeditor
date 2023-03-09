@@ -12,12 +12,14 @@ yarn add rsuite pixel-streaming
 ```
 
 ## Links:
-* [Documentation](https://metaeditor.io/docs)
-* [Discord App](https://discordapp.com/invite/eGHKuQ3BHM)
+* [Online Player](https://player.metaeditor.io)
 * [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
 * [Sample with Nextjs](https://github.com/markolofsen/metaeditor/blob/main/INSTALLATION.md)
-* [Online Player](https://player.metaeditor.io)
-* [Download Signalling Server](https://github.com/markolofsen/metaeditor/releases/tag/signaling-server)
+* [Signalling Server App](https://github.com/markolofsen/metaeditor/releases/tag/signaling-server)
+* [Plugin for Unreal Engine](https://github.com/markolofsen/metaplugin-pixel-streaming)
+* [Documentation](https://metaeditor.io/docs)
+* [Discord Community](https://discordapp.com/invite/eGHKuQ3BHM)
+
 
 ## Usage
 ```typescript
