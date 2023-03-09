@@ -31,7 +31,7 @@ export default function Page() {
 
     const psHost = router.query.ss
     if (psHost) {
-      newCfg.psHost = psHost
+      newCfg.psHost = psHost as string
     }
 
     // alert(JSON.stringify(mergedConfig, null, 2))
