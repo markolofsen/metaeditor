@@ -2,6 +2,8 @@
 
 ## installation
 
+* [Make Fork!](https://github.com/markolofsen/metaeditor/fork)
+
 ```bash
 # 1. clone repo
 git clone https://github.com/markolofsen/metaeditor.git

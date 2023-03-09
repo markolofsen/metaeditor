@@ -14,7 +14,7 @@ yarn add rsuite pixel-streaming
 ## Links:
 * [Online Player](https://player.metaeditor.io)
 * [CodeSandBox](https://codesandbox.io/s/pixel-streaming-react-xldl33)
-* [Sample with Nextjs](https://github.com/markolofsen/metaeditor/blob/main/INSTALLATION.md)
+* [Nextjs Sample](https://github.com/markolofsen/metaeditor/blob/main/INSTALLATION.md)
 * [Signalling Server App](https://github.com/markolofsen/metaeditor/releases/tag/signaling-server)
 * [Plugin for Unreal Engine](https://github.com/markolofsen/metaplugin-pixel-streaming)
 * [Documentation](https://metaeditor.io/docs)
