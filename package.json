@@ -22,7 +22,8 @@
     "react": "latest",
     "react-dom": "latest",
     "rsuite": "^5.28.1",
-    "pixel-streaming": "latest"
+    "pixel-streaming": "latest",
+    "react-full-screen": "^1.1.1"
   },
   "devDependencies": {
     "@types/node": "latest",

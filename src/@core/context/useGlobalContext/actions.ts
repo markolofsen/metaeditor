@@ -4,17 +4,26 @@ import * as React from 'react'
 import { Reducer, KEYS } from './reducer'
 import { initialState, StateProps } from './initial'
 
+// libs
+import { useFullScreenHandle, FullScreenHandle } from "react-full-screen";
 
 const actions = () => {
 
-  // ** States
+  // states
   const [state, dispatch]: [StateProps, any] = React.useReducer(Reducer, initialState)
+
+  // hooks
+  const fullescreenHandle = useFullScreenHandle();
 
   // ** Classes
   const cls = new class {
 
     get state() {
       return state
+    }
+
+    get fullescreenHandle() {
+      return fullescreenHandle
     }
 
     dispatch(payload: unknown) {
@@ -30,7 +39,7 @@ const actions = () => {
 }
 
 export interface ActionProps {
-
+  fullescreenHandle: FullScreenHandle
 }
 
 export default actions

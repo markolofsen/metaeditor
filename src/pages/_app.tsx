@@ -14,6 +14,12 @@ import createEmotionCache from 'src/@core/theme/createEmotionCache';
 import theme from "src/@core/theme/";
 // import theme from '../theme/theme';
 
+// context
+import ContextProvider from 'src/@core/context';
+
+// layout
+import RootLayout from 'src/@core/layouts/RootLayout';
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -30,11 +36,15 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ContextProvider>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <RootLayout>
+            <Component {...pageProps} />
+          </RootLayout>
+        </ThemeProvider>
+      </ContextProvider>
     </CacheProvider>
   );
 }

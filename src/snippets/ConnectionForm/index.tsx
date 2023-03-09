@@ -11,7 +11,7 @@ import { PlayerConfigProps } from 'pixel-streaming'
 
 // configs
 import project from "src/configs/project"
-import defaultConfig from 'src/components/Player/defaultConfig'
+import defaultConfig from '../Player/defaultConfig'
 
 // blocks
 import ConfigForm from './ConfigForm'

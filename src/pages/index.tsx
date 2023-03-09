@@ -1,6 +1,6 @@
 
-// components
-import ConnectionForm from 'src/components/ConnectionForm'
+// snippets
+import ConnectionForm from 'src/snippets/ConnectionForm'
 
 export default function Page() {
 
