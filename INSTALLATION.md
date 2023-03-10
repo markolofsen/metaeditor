@@ -1,8 +1,8 @@
 # Pixel Streaming with Nextjs
 
-## installation
+[Make Fork!](https://github.com/markolofsen/metaeditor/fork)
 
-* [Make Fork!](https://github.com/markolofsen/metaeditor/fork)
+### Manual installation
 
 ```bash
 # 1. clone repo

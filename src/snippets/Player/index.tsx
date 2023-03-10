@@ -7,9 +7,11 @@ import UserBar from 'src/snippets/UserBar'
 
 // blocks
 import Controls from './Controls'
+import Preloader from './Preloader'
 
 // configs
 import defaultConfig from './defaultConfig'
+
 
 interface Props {
   config: PlayerConfigProps
@@ -25,12 +27,15 @@ const PlayerView = ({ config }: Props) => {
   // alert(JSON.stringify(newConfig, null, 2))
 
   return (
-    <MetaEditor {...newConfig}>
-      <>
-        <UserBar />
-        <Controls />
-      </>
-    </MetaEditor>
+    <>
+      <MetaEditor {...newConfig}>
+        <>
+          <Preloader />
+          <UserBar />
+          <Controls />
+        </>
+      </MetaEditor>
+    </>
   );
 }
 

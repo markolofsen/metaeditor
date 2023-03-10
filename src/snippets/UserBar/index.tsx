@@ -6,6 +6,7 @@ import { useGlobalContext } from "src/@core/context";
 import { styled } from '@mui/system';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import Portal from '@mui/material/Portal';
 
 // libs
 import { Context, Hooks } from "pixel-streaming";
@@ -86,20 +87,21 @@ export default function UserBar() {
   ]
 
   return (
-    <ToolsList>
-      {list.map((item, index) => (
-        <li key={index}>
-          <Tooltip title={item.title} placement="left">
-            <IconButton
-              disabled={disabled}
-              onClick={item.onClick}
-              color="inherit">
-              {item.icon}
-            </IconButton>
-          </Tooltip>
-        </li>
-      ))}
-    </ToolsList>
-
+    <Portal container={window.player?.rootElement}>
+      <ToolsList>
+        {list.map((item, index) => (
+          <li key={index}>
+            <Tooltip title={item.title} placement="left">
+              <IconButton
+                disabled={disabled}
+                onClick={item.onClick}
+                color="inherit">
+                {item.icon}
+              </IconButton>
+            </Tooltip>
+          </li>
+        ))}
+      </ToolsList>
+    </Portal>
   )
 }
