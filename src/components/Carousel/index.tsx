@@ -1,5 +1,5 @@
 // mui
-import { styled, lighten } from '@mui/system';
+import { styled, alpha, lighten } from '@mui/system';
 import { ButtonBase } from "@mui/material";
 
 // libs
@@ -10,11 +10,15 @@ import '@splidejs/react-splide/css';
 const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
   borderRadius: theme.shape.borderRadius,
   width: '100%',
-  backgroundColor: theme.palette.background.paper,
-  transition: theme.transitions.create(['background-color']),
+
+  transition: theme.transitions.create(['background-color', 'border-color']),
   overflow: 'hidden',
+  border: `solid 1px rgba(255,255,255, .2)`,
+  backgroundColor: 'rgba(0,0,0,.2)',
+  backdropFilter: 'blur(4px)',
   '&:hover': {
-    backgroundColor: lighten(theme.palette.background.paper, .05),
+    borderColor: 'rgba(255,255,255, .5)',
+    backgroundColor: 'rgba(0,0,0,1)',
   },
   '& > *': {
     width: '100%',

@@ -14,6 +14,9 @@ interface Project {
     buy: string
     signalingServer: string
   }
+  images: {
+    background: string
+  }
 }
 
 const pkgName = 'pixel-streaming'
@@ -30,6 +33,9 @@ const project: Project = {
     support: 'https://unrealos.com/p/contacts/',
     buy: 'https://unrealos.com/apps/metaeditor/',
     signalingServer: 'https://github.com/markolofsen/metaeditor/releases/tag/signaling-server',
+  },
+  images: {
+    background: '/images/bg.jpg',
   }
 }
 
