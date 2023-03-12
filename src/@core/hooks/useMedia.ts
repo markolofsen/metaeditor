@@ -40,7 +40,6 @@ function demo() {
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 
-
 interface MediaItem {
 	xs: boolean
 	sm: boolean
@@ -48,6 +47,7 @@ interface MediaItem {
 	lg: boolean
 	xl: boolean
 	xxl: boolean
+	[key: string]: boolean
 }
 
 interface MediaDict {
@@ -59,20 +59,27 @@ interface MediaDict {
 export const useMedia = () => {
 	// const theme: ThemedProps = useTheme();
 
-	const getMedia = () => {
-		const res: { [key: string]: any } = {
-			up: {},
-			down: {},
-			only: {}
-		}
-		for (const i of ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']) {
-			res.up[i] = useMediaQuery((theme: any) => theme.breakpoints.up(i))
-			res.down[i] = useMediaQuery((theme: any) => theme.breakpoints.down(i))
-			res.only[i] = useMediaQuery((theme: any) => theme.breakpoints.only(i))
-		}
+	const matches = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 
-		return res as MediaDict
+	const chunks: MediaItem = {
+		xs: false,
+		sm: false,
+		md: false,
+		lg: false,
+		xl: false,
+		xxl: false,
 	}
 
-	return getMedia()
+	const res: MediaDict = {
+		up: chunks,
+		down: chunks,
+		only: chunks,
+	}
+	for (const i of matches) {
+		res.up[i] = useMediaQuery((theme: any) => theme.breakpoints.up(i)) as boolean
+		res.down[i] = useMediaQuery((theme: any) => theme.breakpoints.down(i)) as boolean
+		res.only[i] = useMediaQuery((theme: any) => theme.breakpoints.only(i)) as boolean
+	}
+
+	return res as MediaDict
 }
