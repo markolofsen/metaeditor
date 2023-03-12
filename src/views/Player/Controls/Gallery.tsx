@@ -43,16 +43,14 @@ export default function Controls() {
   return (
     <div>
       <Carousel
-        perPage={3}
+        perPage={5}
         gap={0}
         breakpoints={{
           1200: {
-            perPage: 2,
-            gap: '.7rem',
+            perPage: 3,
           },
           640: {
             perPage: 1,
-            gap: '.7rem',
           },
         }}
         items={items} />

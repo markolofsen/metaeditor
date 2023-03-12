@@ -7,6 +7,12 @@ import { Splide, SplideSlide, Options } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 
+const RootDiv = styled('div')(({ theme }: any) => ({
+  '& .splide__arrow:disabled': {
+    display: 'none'
+  }
+}))
+
 const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
   // borderRadius: theme.shape.borderRadius,
   width: '100%',
@@ -22,7 +28,7 @@ const Card = styled((props: any) => <ButtonBase component="div" {...props} />)((
   // },
   '& > *': {
     width: '100%',
-  }
+  },
 }));
 
 interface Props extends Options {
@@ -32,40 +38,42 @@ interface Props extends Options {
 export default function Slider({ items, ...props }: Props) {
 
   return (
-    <Splide options={{
-      rewind: true,
-      perPage: 6,
-      gap: '1rem',
-      // height: 230,
-      pagination: false,
-      padding: {
-        bottom: 0,
-      },
-      breakpoints: {
-        1200: {
-          perPage: 4,
-          gap: '.7rem',
-          // height: '10rem',
+    <RootDiv>
+      <Splide options={{
+        rewind: true,
+        perPage: 6,
+        gap: '1rem',
+        // height: 230,
+        pagination: false,
+        padding: {
+          bottom: 0,
         },
-        640: {
-          perPage: 2,
-          gap: '.7rem',
-          // height: '10rem',
+        breakpoints: {
+          1200: {
+            perPage: 4,
+            gap: '.7rem',
+            // height: '10rem',
+          },
+          640: {
+            perPage: 2,
+            gap: '.7rem',
+            // height: '10rem',
+          },
+          // 480: {
+          //   perPage: 1,
+          //   gap: '.7rem',
+          //   height: '15rem',
+          // },
         },
-        // 480: {
-        //   perPage: 1,
-        //   gap: '.7rem',
-        //   height: '15rem',
-        // },
-      },
-      ...props,
-    }}>
-      {items.map((item, index) => (
-        <SplideSlide key={index}>
-          <Card children={item} />
-        </SplideSlide>
-      ))}
+        ...props,
+      }}>
+        {items.map((item, index) => (
+          <SplideSlide key={index}>
+            <Card children={item} />
+          </SplideSlide>
+        ))}
 
-    </Splide>
+      </Splide>
+    </RootDiv>
   );
 }
