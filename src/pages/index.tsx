@@ -1,6 +1,6 @@
 
 // snippets
-import ConnectionForm from 'src/snippets/ConnectionForm'
+import ConnectionForm from 'src/layouts/ConnectionForm'
 
 export default function Page() {
 

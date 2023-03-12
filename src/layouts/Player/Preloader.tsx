@@ -11,7 +11,7 @@ import { Typography, Button, IconButton, Portal } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-// hooks
+// libs
 import { Hooks } from 'pixel-streaming'
 
 
