@@ -1,0 +1,15 @@
+{
+  "name": "@components/IconifyIcon",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@iconify/react": "4.0.0"
+  },
+  "devDependencies": {
+    "@iconify/iconify": "3.0.0",
+    "@iconify/json": "2.1.131",
+    "@iconify/tools": "2.1.1",
+    "@iconify/types": "2.0.0",
+    "@iconify/utils": "2.0.1"
+  }
+}

@@ -5,16 +5,17 @@ import { Typography } from '@mui/material'
 import { ButtonBase } from "@mui/material";
 
 // components
-import Carousel from 'src/components/Carousel'
+import Carousel from 'src/@core/components/Carousel'
 
 // libs
 import { Hooks } from 'pixel-streaming';
 
 const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
-  height: 150,
+  height: 90,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderRight: `1px solid ${theme.palette.divider}`,
 }));
 
 export default function Controls() {
@@ -24,7 +25,7 @@ export default function Controls() {
 
   const items = Array.from(Array(10).keys()).map((item) => {
 
-    const title = `Item ${item}`
+    const title = `Option ${item + 1}`
 
     return (
       <Card
@@ -32,7 +33,7 @@ export default function Controls() {
           actions.emitUi({ action: 'ui_command' }, { debug: true })
           // actions.emitSys({ action: 'system_command' }, { debug: true })
         }}>
-        <Typography variant="h6">
+        <Typography variant="caption">
           {title}
         </Typography>
       </Card>
@@ -41,7 +42,20 @@ export default function Controls() {
 
   return (
     <div>
-      <Carousel items={items} />
+      <Carousel
+        perPage={3}
+        gap={0}
+        breakpoints={{
+          1200: {
+            perPage: 2,
+            gap: '.7rem',
+          },
+          640: {
+            perPage: 1,
+            gap: '.7rem',
+          },
+        }}
+        items={items} />
     </div>
   )
 }

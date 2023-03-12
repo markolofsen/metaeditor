@@ -2,8 +2,8 @@
 import "rsuite/dist/rsuite.min.css";
 import { MetaProvider, MetaEditor, PlayerConfigProps } from 'pixel-streaming'
 
-// snippets
-import UserBar from 'src/snippets/UserBar'
+// layouts
+import UserBar from 'src/layouts/UserBar'
 
 // blocks
 import Controls from './Controls'
