@@ -61,24 +61,15 @@ export const useMedia = () => {
 
 	const matches = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 
-	const chunks: MediaItem = {
-		xs: false,
-		sm: false,
-		md: false,
-		lg: false,
-		xl: false,
-		xxl: false,
-	}
-
-	const res: MediaDict = {
-		up: chunks,
-		down: chunks,
-		only: chunks,
+	const res: MediaDict | any = {
+		up: {},
+		down: {},
+		only: {},
 	}
 	for (const i of matches) {
-		res.up[i] = useMediaQuery((theme: any) => theme.breakpoints.up(i)) as boolean
-		res.down[i] = useMediaQuery((theme: any) => theme.breakpoints.down(i)) as boolean
-		res.only[i] = useMediaQuery((theme: any) => theme.breakpoints.only(i)) as boolean
+		res.up[i] = useMediaQuery((theme: any) => theme.breakpoints.up(i))
+		res.down[i] = useMediaQuery((theme: any) => theme.breakpoints.down(i))
+		res.only[i] = useMediaQuery((theme: any) => theme.breakpoints.only(i))
 	}
 
 	return res as MediaDict

@@ -2,7 +2,11 @@ import * as React from 'react';
 
 // mui
 import { styled } from '@mui/system';
+import { Box, Collapse, Button } from '@mui/material';
 import ClickAwayListener from '@mui/base/ClickAwayListener';
+
+// icons
+import MenuIcon from '@mui/icons-material/Menu';
 
 // hooks
 import { useMedia } from 'src/@core/hooks/useMedia'
@@ -49,6 +53,12 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
 
 }))
 
+const IconButtonMenu = styled(Button)(({ theme }: any) => ({
+  backgroundColor: 'rgba(0,0,0,.5)',
+  backdropFilter: 'blur(4px)',
+  borderRadius: theme.shape.borderRadius * 1.2,
+  border: `1px solid ${theme.palette.divider}`,
+}))
 
 export default function Controls() {
 
@@ -58,32 +68,48 @@ export default function Controls() {
   // states
   const [show, setShow] = React.useState(true)
 
+  React.useEffect(() => {
+    setShow(media.down.sm ? false : true)
+  }, [media.down.sm])
+
   return (
     <ClickAwayListener
-
       onClickAway={() => {
         if (media.down.sm) {
           setShow(false)
         }
       }}>
+      <Box sx={{
+        padding: '1rem',
+        pointerEvents: 'none',
+        '& > *': {
+          pointerEvents: 'all',
+        }
+      }}>
+        {!show && (
+          <IconButtonMenu
+            size='large'
+            color="inherit"
+            startIcon={<MenuIcon />}
+            onClick={() => {
+              setShow(true)
+            }}>
+            Menu
+          </IconButtonMenu>
+        )}
 
-      <RootDiv
-        onMouseEnter={() => {
-          setShow(true)
-        }}
-        onTouchStart={() => {
-          setShow(true)
-        }}
-        sx={{
-          opacity: show ? 1 : .5
-        }}>
-        <li data-li="menu">
-          <MainMenu />
-        </li>
-        <li data-li="gallery">
-          <Gallery />
-        </li>
-      </RootDiv>
+        <Collapse in={show}>
+          <RootDiv>
+            <li data-li="menu">
+              <MainMenu />
+            </li>
+            <li data-li="gallery">
+              <Gallery />
+            </li>
+          </RootDiv>
+
+        </Collapse>
+      </Box>
     </ClickAwayListener>
   )
 }
