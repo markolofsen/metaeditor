@@ -60,7 +60,7 @@ export default function UserBar() {
 
   // render
   const isMuted = stream.state.playerConfig?.psConfig.startMuted
-  const disabled = !stream.isWebrtcConnected
+  const show = stream.isWebrtcConnected
 
   const list = [
     {
@@ -86,6 +86,8 @@ export default function UserBar() {
     },
   ]
 
+  if (!show) return null
+
   return (
     <Portal container={window.player?.rootElement}>
       <ToolsList>
@@ -93,7 +95,6 @@ export default function UserBar() {
           <li key={index}>
             <Tooltip title={item.title} placement="left">
               <IconButton
-                disabled={disabled}
                 onClick={item.onClick}
                 color="inherit">
                 {item.icon}
