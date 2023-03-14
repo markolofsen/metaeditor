@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+// context
+import { useGlobalContext } from 'src/@core/context';
+
 // mui
 import { styled } from '@mui/system';
 import { Box, Collapse, Button } from '@mui/material';
@@ -32,8 +35,9 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
   },
   [theme.breakpoints.up("md")]: {
     display: 'flex',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
+
 
   '& > [data-li="menu"]': {
     [theme.breakpoints.up("md")]: {
@@ -43,9 +47,8 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
   },
   '& > [data-li="gallery"]': {
     flex: 1,
-    borderRadius: theme.shape.borderRadius,
-    border: `1px solid ${theme.palette.divider}`,
     overflow: 'hidden',
+    borderRadius: theme.shape.borderRadius,
     [theme.breakpoints.down("md")]: {
       marginBottom: theme.spacing(3),
     },
@@ -66,15 +69,26 @@ const IconButtonMenu = styled(Button)(({ theme }: any) => ({
 
 export default function Controls() {
 
+  // context
+  const globalContext = useGlobalContext()
+
   // hooks
   const media = useMedia()
 
   // states
   const [show, setShow] = React.useState(true)
+  const [collapsed, setCollapsed] = React.useState(true)
 
   React.useEffect(() => {
     setShow(media.down.sm ? false : true)
   }, [media.down.sm])
+
+  React.useEffect(() => {
+    setCollapsed(false)
+    setTimeout(() => {
+      setCollapsed(true)
+    }, 300)
+  }, [globalContext.state.bottomMenuIndex])
 
   return (
     <ClickAwayListener
@@ -107,7 +121,15 @@ export default function Controls() {
               <MainMenu />
             </li>
             <li data-li="gallery">
-              <Gallery />
+              <Collapse in={collapsed}>
+                <Box sx={{
+                  borderRadius: theme => theme.shape.borderRadius + 'px',
+                  border: '1px solid',
+                  borderColor: 'divider',
+                }}>
+                  <Gallery />
+                </Box>
+              </Collapse>
             </li>
           </RootDiv>
 

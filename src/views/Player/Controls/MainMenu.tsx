@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+// context
+import { useGlobalContext } from 'src/@core/context';
+
 // mui
 import { styled } from '@mui/system';
 import { Typography } from '@mui/material';
@@ -22,6 +25,7 @@ const CardItem = styled((props: any) => <ButtonBase component="div" {...props} /
   padding: theme.spacing(4, 6),
   borderRadius: theme.shape.borderRadius,
   transition: theme.transitions.create(['background-color']),
+
   // ':not(:last-child)': {
   //   borderRight: `1px solid ${theme.palette.divider}`,
   // },
@@ -58,10 +62,14 @@ const CardItem = styled((props: any) => <ButtonBase component="div" {...props} /
 
 export default function MainMenu() {
 
-  const [activeIndex, setActiveIndex] = React.useState(-1)
+  // context
+  const globalContext = useGlobalContext()
+
+  // states
+  const activeIndex = globalContext.state.bottomMenuIndex
 
   const handleMenuClick = (index: number) => {
-    setActiveIndex(index)
+    globalContext.handleMenu(index)
   }
 
   // render

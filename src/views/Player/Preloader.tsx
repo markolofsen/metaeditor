@@ -5,7 +5,7 @@ import project from 'src/configs/project';
 
 // mui
 import { styled } from '@mui/system';
-import { Typography, Button, IconButton, Portal } from '@mui/material';
+import { Paper, Typography, Button, IconButton, Portal } from '@mui/material';
 
 // icons
 import CircularProgress from '@mui/material/CircularProgress';
@@ -50,12 +50,6 @@ const Background = styled('div')(({ theme }: any) => ({
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
 
-}))
-
-const ErrorDiv = styled('div')(({ theme }: any) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
 }))
 
 const LoaderDiv = styled('div')(({ theme }: any) => ({
@@ -106,8 +100,21 @@ const WebrtcError = () => {
   const preloader = Hooks.preloader()
 
   return (
-    <ErrorDiv>
+    <Paper
+      variant='outlined'
+      sx={{
+        backgroundColor: 'rgba(0,0,0,.7)',
+        backdropFilter: 'blur(4px)',
+        p: 10,
+        textAlign: 'center',
+      }}>
+
       <Typography variant="h5" align="center" sx={{ mb: 5 }}>
+        This player is not connected to the video stream. <br />
+        To connect, you need to run Unreal Engine + Signaling Server.
+      </Typography>
+
+      <Typography variant="subtitle2" align="center" sx={{ mb: 5 }}>
         {preloader.webrtcErrorHeader}
       </Typography>
       <Button
@@ -117,7 +124,8 @@ const WebrtcError = () => {
         variant="contained">
         Restart
       </Button>
-    </ErrorDiv>
+
+    </Paper>
   )
 }
 
