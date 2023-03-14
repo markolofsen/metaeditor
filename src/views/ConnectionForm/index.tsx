@@ -31,12 +31,12 @@ export default function ConnectionForm() {
     const playerConfig = localStorage.getItem('playerConfig')
     if (playerConfig) {
       const config = JSON.parse(playerConfig) as PlayerConfigProps
-
       if (config.psHost) {
-        if (config.psHost.includes('127.0.0.1')) {
+        const configHost = decodeURIComponent(config.psHost)
+        if (configHost.includes('127.0.0.1')) {
           setLocalhost(true)
         } else {
-          const ss = config.psHost.split('://').slice(-1)[0]
+          const ss = configHost.split('://').slice(-1)[0]
           setAddress(ss)
           setLocalhost(false)
         }
@@ -50,7 +50,7 @@ export default function ConnectionForm() {
     e.preventDefault()
 
     localStorage.setItem('playerConfig', JSON.stringify(mergeConfig))
-    router.push(`/player?ss=${psHost}`)
+    router.push(`/player?ss=${mergeConfig.psHost}`)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +66,7 @@ export default function ConnectionForm() {
 
   const mergeConfig: PlayerConfigProps = {
     ...config,
-    psHost,
+    psHost: encodeURIComponent(psHost),
   }
 
   // render

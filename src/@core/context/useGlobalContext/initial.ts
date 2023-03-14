@@ -1,10 +1,9 @@
 
 // Types
 export interface StateProps {
-  // context: types.UserContextData
-  // activeOrderData: ActiveOrderData | false | null
+  bottomMenuIndex: number
 }
 
 export const initialState: StateProps = {
-
+  bottomMenuIndex: 0
 }

@@ -1,6 +1,6 @@
 // mui
-import { styled, alpha, lighten } from '@mui/system';
-import { ButtonBase } from "@mui/material";
+import { styled } from '@mui/system';
+// import { Box } from "@mui/material";
 
 // libs
 import { Splide, SplideSlide, Options } from '@splidejs/react-splide';
@@ -10,26 +10,13 @@ import '@splidejs/react-splide/css';
 const RootDiv = styled('div')(({ theme }: any) => ({
   '& .splide__arrow:disabled': {
     display: 'none'
+  },
+  '& .splide__slide': {
+    '& > *': {
+      width: '100%'
+    }
   }
 }))
-
-const Card = styled((props: any) => <ButtonBase component="div" {...props} />)(({ theme }: any) => ({
-  // borderRadius: theme.shape.borderRadius,
-  width: '100%',
-
-  // transition: theme.transitions.create(['background-color', 'border-color']),
-  // overflow: 'hidden',
-  // border: `solid 1px rgba(255,255,255, .2)`,
-  // backgroundColor: 'rgba(0,0,0,.2)',
-  // backdropFilter: 'blur(4px)',
-  // '&:hover': {
-  //   borderColor: 'rgba(255,255,255, .5)',
-  //   backgroundColor: 'rgba(0,0,0,1)',
-  // },
-  '& > *': {
-    width: '100%',
-  },
-}));
 
 interface Props extends Options {
   items: JSX.Element[]
@@ -69,7 +56,7 @@ export default function Slider({ items, ...props }: Props) {
       }}>
         {items.map((item, index) => (
           <SplideSlide key={index}>
-            <Card children={item} />
+            {item}
           </SplideSlide>
         ))}
 

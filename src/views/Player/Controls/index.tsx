@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+// context
+import { useGlobalContext } from 'src/@core/context';
+
 // mui
 import { styled } from '@mui/system';
 import { Box, Collapse, Button } from '@mui/material';
@@ -23,13 +26,18 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
 
   backgroundColor: 'rgba(0,0,0,.5)',
   backdropFilter: 'blur(4px)',
-  borderRadius: theme.shape.borderRadius * 1.2,
-  border: `1px solid ${theme.palette.divider}`,
+  // borderRadius: theme.shape.borderRadius * 1.2,
+  borderTop: `1px solid ${theme.palette.divider}`,
 
+  [theme.breakpoints.down("md")]: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+  },
   [theme.breakpoints.up("md")]: {
     display: 'flex',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
+
 
   '& > [data-li="menu"]': {
     [theme.breakpoints.up("md")]: {
@@ -39,11 +47,10 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
   },
   '& > [data-li="gallery"]': {
     flex: 1,
-    borderRadius: theme.shape.borderRadius,
-    border: `1px solid ${theme.palette.divider}`,
     overflow: 'hidden',
+    borderRadius: theme.shape.borderRadius,
     [theme.breakpoints.down("md")]: {
-      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.up("md")]: {
       flex: 1,
@@ -62,15 +69,26 @@ const IconButtonMenu = styled(Button)(({ theme }: any) => ({
 
 export default function Controls() {
 
+  // context
+  const globalContext = useGlobalContext()
+
   // hooks
   const media = useMedia()
 
   // states
   const [show, setShow] = React.useState(true)
+  const [collapsed, setCollapsed] = React.useState(true)
 
   React.useEffect(() => {
     setShow(media.down.sm ? false : true)
   }, [media.down.sm])
+
+  React.useEffect(() => {
+    setCollapsed(false)
+    setTimeout(() => {
+      setCollapsed(true)
+    }, 300)
+  }, [globalContext.state.bottomMenuIndex])
 
   return (
     <ClickAwayListener
@@ -79,32 +97,39 @@ export default function Controls() {
           setShow(false)
         }
       }}>
-      <Box sx={{
-        padding: '1rem',
-        pointerEvents: 'none',
-        '& > *': {
-          pointerEvents: 'all',
-        }
-      }}>
+      <Box data-click={false}>
         {!show && (
-          <IconButtonMenu
-            size='large'
-            color="inherit"
-            startIcon={<MenuIcon />}
-            onClick={() => {
-              setShow(true)
-            }}>
-            Menu
-          </IconButtonMenu>
+          <Box sx={{
+            padding: '1rem'
+          }}>
+            <IconButtonMenu
+              data-click={true}
+              size='large'
+              color="inherit"
+              startIcon={<MenuIcon />}
+              onClick={() => {
+                setShow(true)
+              }}>
+              Menu
+            </IconButtonMenu>
+          </Box>
         )}
 
         <Collapse in={show}>
-          <RootDiv>
+          <RootDiv data-click={true}>
             <li data-li="menu">
               <MainMenu />
             </li>
             <li data-li="gallery">
-              <Gallery />
+              <Collapse in={collapsed}>
+                <Box sx={{
+                  borderRadius: theme => theme.shape.borderRadius + 'px',
+                  border: '1px solid',
+                  borderColor: 'divider',
+                }}>
+                  <Gallery />
+                </Box>
+              </Collapse>
             </li>
           </RootDiv>
 

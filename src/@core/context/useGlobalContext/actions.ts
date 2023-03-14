@@ -33,13 +33,21 @@ const actions = () => {
       })
     }
 
+    handleMenu(bottomMenuIndex: number) {
+      this.dispatch({
+        bottomMenuIndex,
+      })
+    }
+
   }
 
   return cls
 }
 
 export interface ActionProps {
+  state: StateProps
   fullescreenHandle: FullScreenHandle
+  handleMenu: (bottomMenuIndex: number) => void
 }
 
 export default actions
