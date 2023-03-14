@@ -28,7 +28,7 @@ const PlayerView = () => {
     <MetaEditor
       debugMode="${config.debugMode}"
       showToolbar={${config.showToolbar}}
-      psHost="${config.psHost}"
+      psHost="${decodeURIComponent(config.psHost)}"
       psConfig={${JSON.stringify(config.psConfig, null, 4).replace(/(?:\r\n|\r|\n)/g, '\n    ')}}>
       <Button onClick={() => emitUi({ action: "ui_command" })}>
         Send action

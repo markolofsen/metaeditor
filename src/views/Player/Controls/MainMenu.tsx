@@ -39,6 +39,9 @@ const CardItem = styled((props: any) => <ButtonBase component="div" {...props} /
     fontSize: '1.8rem',
     color: theme.palette.text.secondary,
     marginBottom: theme.spacing(1),
+    [theme.breakpoints.down("lg")]: {
+      fontSize: '1.3rem',
+    },
   },
   '& > h5': {
     transition: theme.transitions.create(['color']),
@@ -47,6 +50,9 @@ const CardItem = styled((props: any) => <ButtonBase component="div" {...props} /
     ...theme.typography.caption,
     color: theme.palette.text.secondary,
     textTransform: 'uppercase',
+    [theme.breakpoints.down("lg")]: {
+      fontSize: '.7rem',
+    },
   }
 }))
 
@@ -105,25 +111,25 @@ export default function MainMenu() {
         gap={0}
         breakpoints={{
           1400: {
-            perPage: 4,
+            perPage: 5,
             gap: 0,
           },
           1200: {
-            perPage: 3,
+            perPage: 4,
             gap: 0,
           },
           900: {
-            perPage: 5,
+            perPage: 6,
             gap: 0,
           },
           640: {
             perPage: 4,
             gap: 0,
           },
-          430: {
-            perPage: 3,
-            gap: 0,
-          },
+          // 430: {
+          //   perPage: 4,
+          //   gap: 0,
+          // },
         }}
         items={items} />
     </MenuList>

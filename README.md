@@ -15,8 +15,6 @@ yarn && yarn dev
 yarn start
 ```
 
-## 
-
 
 ## Links
 

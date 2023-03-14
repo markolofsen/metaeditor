@@ -23,9 +23,13 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
 
   backgroundColor: 'rgba(0,0,0,.5)',
   backdropFilter: 'blur(4px)',
-  borderRadius: theme.shape.borderRadius * 1.2,
-  border: `1px solid ${theme.palette.divider}`,
+  // borderRadius: theme.shape.borderRadius * 1.2,
+  borderTop: `1px solid ${theme.palette.divider}`,
 
+  [theme.breakpoints.down("md")]: {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+  },
   [theme.breakpoints.up("md")]: {
     display: 'flex',
     alignItems: 'center',
@@ -43,7 +47,7 @@ const RootDiv = styled('ul')(({ theme }: any) => ({
     border: `1px solid ${theme.palette.divider}`,
     overflow: 'hidden',
     [theme.breakpoints.down("md")]: {
-      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.up("md")]: {
       flex: 1,
@@ -79,27 +83,26 @@ export default function Controls() {
           setShow(false)
         }
       }}>
-      <Box sx={{
-        padding: '1rem',
-        pointerEvents: 'none',
-        '& > *': {
-          pointerEvents: 'all',
-        }
-      }}>
+      <Box data-click={false}>
         {!show && (
-          <IconButtonMenu
-            size='large'
-            color="inherit"
-            startIcon={<MenuIcon />}
-            onClick={() => {
-              setShow(true)
-            }}>
-            Menu
-          </IconButtonMenu>
+          <Box sx={{
+            padding: '1rem'
+          }}>
+            <IconButtonMenu
+              data-click={true}
+              size='large'
+              color="inherit"
+              startIcon={<MenuIcon />}
+              onClick={() => {
+                setShow(true)
+              }}>
+              Menu
+            </IconButtonMenu>
+          </Box>
         )}
 
         <Collapse in={show}>
-          <RootDiv>
+          <RootDiv data-click={true}>
             <li data-li="menu">
               <MainMenu />
             </li>
