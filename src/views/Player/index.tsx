@@ -1,6 +1,9 @@
+import * as React from 'react';
+
 // libs
 import "rsuite/dist/rsuite.min.css";
 import { MetaProvider, MetaEditor, PlayerConfigProps } from 'pixel-streaming'
+import type { IApplication } from 'pixel-streaming'
 
 // layouts
 import UserBar from './UserBar'
@@ -19,6 +22,8 @@ interface Props {
 
 const PlayerView = ({ config }: Props) => {
 
+  const refPlayer = React.useRef(null)
+
   const newConfig: PlayerConfigProps = {
     ...defaultConfig,
     ...config,
@@ -26,9 +31,18 @@ const PlayerView = ({ config }: Props) => {
 
   // alert(JSON.stringify(newConfig, null, 2))
 
+  const handleLoad = (app: IApplication) => {
+    console.log('@'.repeat(30))
+    console.log('app', app)
+    console.log(refPlayer.current)
+  }
+
   return (
     <>
-      <MetaEditor {...newConfig}>
+      <MetaEditor
+        {...newConfig}
+        ref={refPlayer}
+        onLoad={handleLoad}>
         <>
           <Preloader />
           <UserBar />
