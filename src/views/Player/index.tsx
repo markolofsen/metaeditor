@@ -30,7 +30,6 @@ const PlayerView = ({ config }: Props) => {
   // hooks
   const actions = Hooks.actions()
   const events = Hooks.events()
-  const listener = Hooks.listener()
 
   const handleLoad = () => {
     console.log('@'.repeat(30))
@@ -39,7 +38,6 @@ const PlayerView = ({ config }: Props) => {
     console.dir(stream)
     console.dir(actions)
     console.dir(events)
-    console.dir(listener)
   }
 
   // render
