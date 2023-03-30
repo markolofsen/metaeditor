@@ -17,26 +17,40 @@ export default function EmbedSample({ config }: Props) {
   const copy = useCopy()
 
   const preview = `
+import * as React from "react";
 import "rsuite/dist/rsuite.min.css";
 import { Button } from "rsuite";
-import { MetaProvider, MetaEditor, Hooks, IApplication } from "pixel-streaming";
+import { MetaProvider, MetaEditor, Hooks, Context } from 'pixel-streaming'
 
 const PlayerView = () => {
   const refPlayer = React.useRef(null)
-  const { emitUi } = Hooks.actions();
+  
+  // context
+  const global = Context.global()
+  const stream = Context.stream()
+
+  // hooks
+  const actions = Hooks.actions()
+  const events = Hooks.events()
+  const listener = Hooks.listener()
 
   return (
     <MetaEditor
       ref={refPlayer}
       debugMode="${config.debugMode}"
       showToolbar={${config.showToolbar}}
-      onLoad={(app: IApplication) => {
+      onLoad={() => {
         console.log('@'.repeat(30))
-        console.log('app', app)
+        console.dir(refPlayer.current)
+        console.dir(global) 
+        console.dir(stream)
+        console.dir(actions)
+        console.dir(events)
+        console.dir(listener)
       }}
       psHost="${decodeURIComponent(config.psHost)}"
       psConfig={${JSON.stringify(config.psConfig, null, 4).replace(/(?:\r\n|\r|\n)/g, '\n    ')}}>
-      <Button onClick={() => emitUi({ action: "ui_command" })}>
+      <Button onClick={() => actions.emitUi({ action: "ui_command" })}>
         Send action
       </Button>
     </MetaEditor>
