@@ -31,8 +31,6 @@ const PlayerView = () => {
 
   // hooks
   const actions = Hooks.actions()
-  const events = Hooks.events()
-  const listener = Hooks.listener()
 
   return (
     <MetaEditor
@@ -45,8 +43,6 @@ const PlayerView = () => {
         console.dir(global) 
         console.dir(stream)
         console.dir(actions)
-        console.dir(events)
-        console.dir(listener)
       }}
       psHost="${decodeURIComponent(config.psHost)}"
       psConfig={${JSON.stringify(config.psConfig, null, 4).replace(/(?:\r\n|\r|\n)/g, '\n    ')}}>

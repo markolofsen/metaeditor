@@ -1,6 +1,6 @@
 {
   "name": "metaeditor-nextjs",
-  "version": "4.0.20",
+  "version": "4.3.10",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -20,8 +20,8 @@
     "@mui/material": "latest",
     "@next/font": "latest",
     "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "rsuite": "^5.28.1",
     "pixel-streaming": "latest",
     "react-full-screen": "^1.1.1"
