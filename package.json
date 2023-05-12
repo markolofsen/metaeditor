@@ -12,7 +12,7 @@
     "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js"
   },
   "engines": {
-    "node": ">=16.15.0 < 16.17.0"
+    "node": ">=v16.20.0"
   },
   "dependencies": {
     "@emotion/cache": "latest",
