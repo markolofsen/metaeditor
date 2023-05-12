@@ -32,7 +32,7 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "typescript": "latest"
+    "typescript": "^4.9.4"
   },
   "workspaces": {
     "packages": [
