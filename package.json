@@ -11,9 +11,6 @@
     "symlink": "npm link ../metaeditor_src/pixel-streaming",
     "build:icons": "tsc -b src/iconify-bundle && node src/iconify-bundle/bundle-icons-react.js"
   },
-  "engines": {
-    "node": ">=v16.20.0"
-  },
   "dependencies": {
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
@@ -31,8 +28,8 @@
   },
   "devDependencies": {
     "@types/node": "latest",
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "typescript": "latest"
