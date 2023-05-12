@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
+    "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "typescript": "latest"
@@ -39,8 +40,5 @@
       "src/@core/components/**/**"
     ],
     "nohoist": []
-  },
-  "resolutions": {
-    "**/@types/react": "16.4.14"
   }
 }
