@@ -41,6 +41,6 @@
     "nohoist": []
   },
   "resolutions": {
-    "**/@types/react": "18.1.0"
+    "**/@types/react": "16.4.14"
   }
 }
