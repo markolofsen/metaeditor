@@ -1,0 +1,5 @@
+{
+    "version": 2,
+    "buildCommand": "yarn build:vercel",
+    "installCommand": "yarn install"
+}

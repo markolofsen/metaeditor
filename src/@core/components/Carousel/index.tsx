@@ -19,7 +19,7 @@ const RootDiv = styled('div')(({ theme }: any) => ({
 }))
 
 interface Props extends Options {
-  items: JSX.Element[]
+  items: React.ReactNode[];
 }
 
 export default function Slider({ items, ...props }: Props) {

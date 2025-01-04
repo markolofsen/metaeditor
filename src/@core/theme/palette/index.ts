@@ -44,8 +44,8 @@ const DefaultPalette = (mode: PaletteMode, skin: Skin, themeColor: ThemeColor) =
 
   return {
     customColors: {
-      dark: darkColor,
-      main: mainColor,
+      // dark: darkColor,
+      // main: mainColor,
       light: lightColor,
       primaryGradient: primaryGradient(),
       bodyBg: mode === 'light' ? '#F4F5FA' : '#28243D', // Same as palette.background.default but doesn't consider bordered skin

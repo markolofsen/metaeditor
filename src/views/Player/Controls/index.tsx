@@ -6,7 +6,7 @@ import { useGlobalContext } from 'src/@core/context';
 // mui
 import { styled } from '@mui/system';
 import { Box, Collapse, Button } from '@mui/material';
-import ClickAwayListener from '@mui/base/ClickAwayListener';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 // icons
 import MenuIcon from '@mui/icons-material/Menu';

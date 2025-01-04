@@ -8,7 +8,7 @@ const Context = React.createContext({} as ActionProps)
 export const useGlobalContext = () => React.useContext(Context)
 
 interface Props {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 const Provider = (props: Props) => {
